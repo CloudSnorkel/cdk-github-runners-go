@@ -1,9 +1,10 @@
 # GitHub Self-Hosted Runners CDK Constructs
 
-[![NPM](https://img.shields.io/npm/v/@cloudsnorkel/cdk-github-runners/?label=npm+cdk)](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
-[![PyPI](https://img.shields.io/pypi/v/@cloudsnorkel/cdk-github-runners?label=pypi+cdk)](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
-[![Maven Central](https://img.shields.io/maven-central/v/com.cloudsndorkel/cdk.github.runners.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.cloudnsorkel%22%20AND%20a:%22cdk.github.runners%22)
-[![Build](https://github.com/CloudSnorkel/cdk-github-runners/workflows/Build/badge.svg)](https://github.com/projen/projen/actions/workflows/build.yml)
+[![NPM](https://img.shields.io/npm/v/@cloudsnorkel/cdk-github-runners?label=npm+cdk&logo=npm)](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
+[![PyPI](https://img.shields.io/pypi/v/@cloudsnorkel/cdk-github-runners?label=pypi+cdk&logo=pypi)](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
+[![Maven Central](https://img.shields.io/maven-central/v/com.cloudsndorkel/cdk.github.runners.svg?label=Maven%20Central&logo=java)](https://search.maven.org/search?q=g:%22com.cloudnsorkel%22%20AND%20a:%22cdk.github.runners%22)
+[![Go](https://img.shields.io/github/v/tag/CloudSnorkel/cdk-github-runners?color=red&label=go&logo=go)](https://github.com/CloudSnorkel/cdk-github-runners-go/tree/main/cloudsnorkelcdkgithubrunners)
+[![Release](https://github.com/CloudSnorkel/cdk-github-runners/actions/workflows/release.yml/badge.svg)](https://github.com/CloudSnorkel/cdk-github-runners/actions/workflows/release.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/CloudSnorkel/cdk-github-runners/blob/main/LICENSE)
 
 Use this CDK construct to create ephemeral [self-hosted GitHub runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) on-demand inside your AWS account.
@@ -45,6 +46,7 @@ You can also create your own provider by implementing [`IRunnerProvider`](API.md
    1. [Python](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
    2. [TypeScript or JavaScript](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
    3. [Java](https://search.maven.org/search?q=g:%22com.cloudnsorkel%22%20AND%20a:%22cdk.github.runners%22)
+   4. [Go](https://github.com/CloudSnorkel/cdk-github-runners-go/tree/main/cloudsnorkelcdkgithubrunners)
 3. Use [`GitHubRunners`](API.md#CodeBuildRunner) construct in your code (starting with defaults is fine)
 4. Deploy your stack
 5. Look for the status command output similar to `aws --region us-east-1 lambda invoke --function-name status-XYZ123 status.json`
