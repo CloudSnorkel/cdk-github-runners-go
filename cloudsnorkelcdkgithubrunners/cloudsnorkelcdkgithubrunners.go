@@ -21,6 +21,8 @@ import (
 // GitHub Actions runner provider using CodeBuild to execute the actions.
 //
 // Creates a project that gets started for each job.
+//
+// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
 type CodeBuildRunner interface {
 	constructs.Construct
@@ -28,24 +30,27 @@ type CodeBuildRunner interface {
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
-	// The principal to grant permissions to.
+	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// GitHub Actions label associated with this runner provider.
+	// Label associated with this provider.
 	// Experimental.
 	Label() *string
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// CodeBuild project hosting the runner.
 	// Experimental.
 	Project() awscodebuild.Project
-	// Security group associated with runners.
+	// Security group attached to the task.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
-	// VPC network in which runners will be placed.
+	// VPC used for hosting the project.
 	// Experimental.
 	Vpc() awsec2.IVpc
-	// Generate step function tasks that execute the runner.
+	// Generate step function task(s) to start a new runner.
+	//
+	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// Returns a string representation of this construct.
@@ -241,37 +246,45 @@ type CodeBuildRunnerProps struct {
 // GitHub Actions runner provider using Fargate to execute the actions.
 //
 // Creates a task definition with a single container that gets started for each job.
+//
+// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
 type FargateRunner interface {
 	constructs.Construct
 	IRunnerProvider
+	// Whether task will have a public IP.
 	// Experimental.
 	AssignPublicIp() *bool
+	// Cluster hosting the task hosting the runner.
 	// Experimental.
 	Cluster() awsecs.Cluster
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
+	// Container definition hosting the runner.
 	// Experimental.
 	Container() awsecs.ContainerDefinition
-	// The principal to grant permissions to.
+	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// GitHub Actions label associated with this runner provider.
+	// Label associated with this provider.
 	// Experimental.
 	Label() *string
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Security group associated with runners.
+	// Security group attached to the task.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
+	// Fargate task hosting the runner.
 	// Experimental.
 	Task() awsecs.FargateTaskDefinition
-	// VPC network in which runners will be placed.
+	// VPC used for hosting the task.
 	// Experimental.
 	Vpc() awsec2.IVpc
-	// Generate step function tasks that execute the runner.
+	// Generate step function task(s) to start a new runner.
+	//
+	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// Returns a string representation of this construct.
@@ -457,6 +470,7 @@ func (f *jsiiProxy_FargateRunner) ToString() *string {
 	return returns
 }
 
+// Properties for FargateRunner.
 // Experimental.
 type FargateRunnerProps struct {
 	// The number of days log events are kept in CloudWatch Logs.
@@ -470,6 +484,8 @@ type FargateRunnerProps struct {
 	// Experimental.
 	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// Assign public IP to the runner task.
+	//
+	// Make sure the task will have access to GitHub. A public IP might be required unless you have NAT gateway.
 	// Experimental.
 	AssignPublicIp *bool `field:"optional" json:"assignPublicIp" yaml:"assignPublicIp"`
 	// Existing Fargate cluster to use.
@@ -526,9 +542,51 @@ type FargateRunnerProps struct {
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 
+// Create all the required infrastructure to provide self-hosted GitHub runners.
+//
+// It creates a webhook, secrets, and a step function to orchestrate all runs. Secrets are not automatically filled. See README.md for instructions on how to setup GitHub integration.
+//
+// By default, this will create a runner provider of each available type with the defaults. This is good enough for the initial setup stage when you just want to get GitHub integration working.
+//
+// ```typescript
+// new GitHubRunners(stack, 'runners', {});
+// ```
+//
+// Usually you'd want to configure the runner providers so the runners can run in a certain VPC or have certain permissions.
+//
+// ```typescript
+// const vpc = ec2.Vpc.fromLookup(stack, 'vpc', { vpcId: 'vpc-1234567' });
+// const runnerSg = new ec2.SecurityGroup(stack, 'runner security group', { vpc: vpc });
+// const dbSg = ec2.SecurityGroup.fromSecurityGroupId(stack, 'database security group', 'sg-1234567');
+// const bucket = new s3.Bucket(stack, 'runner bucket');
+//
+// // create a custom CodeBuild provider
+// const myProvider = new CodeBuildRunner(
+//    stack, 'codebuild runner',
+//    {
+//       label: 'my-codebuild',
+//       vpc: vpc,
+//       securityGroup: runnerSg,
+//    },
+// );
+// // grant some permissions to the provider
+// bucket.grantReadWrite(myProvider);
+// dbSg.connections.allowFrom(runnerSg, ec2.Port.tcp(3306), 'allow runners to connect to MySQL database');
+//
+// // create the runner infrastructure
+// new GitHubRunners(
+//    stack,
+//    'runners',
+//    {
+//      providers: [myProvider],
+//      defaultProviderLabel: 'my-codebuild',
+//    }
+// );
+// ```.
 // Experimental.
 type GitHubRunners interface {
 	constructs.Construct
+	// Default provider as set by {@link GitHubRunnersProps.defaultProviderLabel}.
 	// Experimental.
 	DefaultProvider() IRunnerProvider
 	// The tree node.
@@ -536,8 +594,10 @@ type GitHubRunners interface {
 	Node() constructs.Node
 	// Experimental.
 	Props() *GitHubRunnersProps
+	// Configured runner providers.
 	// Experimental.
 	Providers() *[]IRunnerProvider
+	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
 	// Returns a string representation of this construct.
@@ -659,20 +719,31 @@ func (g *jsiiProxy_GitHubRunners) ToString() *string {
 	return returns
 }
 
-// Properties of the GitHubRunners.
+// Properties for GitHubRunners.
 // Experimental.
 type GitHubRunnersProps struct {
+	// Label of default provider in case the workflow job doesn't specify any known label.
+	//
+	// A provider with that label must be configured.
 	// Experimental.
 	DefaultProviderLabel *string `field:"optional" json:"defaultProviderLabel" yaml:"defaultProviderLabel"`
+	// List of runner providers to use.
+	//
+	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
 }
 
+// Interface for all runner providers.
+//
+// Implementations create all required resources and return a step function task that starts those resources from {@link getStepFunctionTask}.
 // Experimental.
 type IRunnerProvider interface {
 	awsec2.IConnectable
 	awsiam.IGrantable
 	// Generate step function tasks that execute the runner.
+	//
+	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// GitHub Actions label associated with this runner provider.
@@ -758,6 +829,8 @@ func (j *jsiiProxy_IRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 // GitHub Actions runner provider using Lambda to execute the actions.
 //
 // Creates a Docker-based function that gets executed for each job.
+//
+// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
 type LambdaRunner interface {
 	constructs.Construct
@@ -765,24 +838,27 @@ type LambdaRunner interface {
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
+	// The function hosting the GitHub runner.
 	// Experimental.
 	Function() awslambda.Function
-	// The principal to grant permissions to.
+	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// GitHub Actions label associated with this runner provider.
+	// Label associated with this provider.
 	// Experimental.
 	Label() *string
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Security group associated with runners.
+	// Security group attached to the function.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
-	// VPC network in which runners will be placed.
+	// VPC used for hosting the function.
 	// Experimental.
 	Vpc() awsec2.IVpc
-	// Generate step function tasks that execute the runner.
+	// Generate step function task(s) to start a new runner.
+	//
+	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// Returns a string representation of this construct.
@@ -980,6 +1056,7 @@ type LambdaRunnerProps struct {
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 
+// Common properties for all runner providers.
 // Experimental.
 type RunnerProviderProps struct {
 	// The number of days log events are kept in CloudWatch Logs.
@@ -994,20 +1071,37 @@ type RunnerProviderProps struct {
 	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 }
 
+// Workflow job parameters as parsed from the webhook event. Pass these into your runner executor and run something like:.
+//
+// ```sh
+// ./config.sh --unattended --url "https://${GITHUB_DOMAIN}/${OWNER}/${REPO}" --token "${RUNNER_TOKEN}" --ephemeral --work _work --labels "${RUNNER_LABEL}" --name "${RUNNER_NAME}" --disableupdate
+// ```
+//
+// All parameters are specified as step function paths and therefore must be used only in step function task parameters.
 // Experimental.
 type RunnerRuntimeParameters struct {
+	// Path to GitHub domain.
+	//
+	// Most of the time this will be github.com but for self-hosted GitHub instances, this will be different.
 	// Experimental.
 	GithubDomainPath *string `field:"required" json:"githubDomainPath" yaml:"githubDomainPath"`
+	// Path to repostiroy owner name.
 	// Experimental.
 	OwnerPath *string `field:"required" json:"ownerPath" yaml:"ownerPath"`
+	// Path to repository name.
 	// Experimental.
 	RepoPath *string `field:"required" json:"repoPath" yaml:"repoPath"`
+	// Path to desired runner name.
+	//
+	// We specifically set the name to make troubleshooting easier.
 	// Experimental.
 	RunnerNamePath *string `field:"required" json:"runnerNamePath" yaml:"runnerNamePath"`
+	// Path to runner token used to register token.
 	// Experimental.
 	RunnerTokenPath *string `field:"required" json:"runnerTokenPath" yaml:"runnerTokenPath"`
 }
 
+// Defines desired GitHub Actions runner version.
 // Experimental.
 type RunnerVersion interface {
 	// Experimental.
@@ -1056,6 +1150,7 @@ func NewRunnerVersion_Override(r RunnerVersion, version *string) {
 	)
 }
 
+// Use the latest version available at the time the runner provider image is built.
 // Experimental.
 func RunnerVersion_Latest() RunnerVersion {
 	_init_.Initialize()
@@ -1072,6 +1167,9 @@ func RunnerVersion_Latest() RunnerVersion {
 	return returns
 }
 
+// Use a specific version.
+// See: https://github.com/actions/runner/releases
+//
 // Experimental.
 func RunnerVersion_Specific(version *string) RunnerVersion {
 	_init_.Initialize()
@@ -1092,13 +1190,23 @@ func RunnerVersion_Specific(version *string) RunnerVersion {
 // Experimental.
 type Secrets interface {
 	constructs.Construct
+	// Authentication secret for GitHub containing either app details or personal authentication token.
+	//
+	// This secret is used to register runners and
+	// cancel jobs when the runner fails to start.
+	//
+	// This secret is meant to be edited by the user after being created.
 	// Experimental.
 	Github() awssecretsmanager.Secret
+	// GitHub app private key. Not needed when using personal authentication tokens.
+	//
+	// This secret is meant to be edited by the user after being created.
 	// Experimental.
 	GithubPrivateKey() awssecretsmanager.Secret
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// Webhook secret used to confirm events are coming from GitHub and nowhere else.
 	// Experimental.
 	Webhook() awssecretsmanager.Secret
 	// Returns a string representation of this construct.

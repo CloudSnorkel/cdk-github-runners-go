@@ -21,9 +21,11 @@ Self-hosted runners in AWS are useful when:
 * You want to pre-install some software for your actions
 * You want to provide some basic AWS API access ([aws-actions/configure-aws-credentials](https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions) has more security controls)
 
+Ephemeral runners are the [recommended way by GitHub](https://docs.github.com/en/actions/hosting-your-own-runners/autoscaling-with-self-hosted-runners#using-ephemeral-runners-for-autoscaling) for auto-scaling, and they make sure all jobs run with a clean image. Runners are started on-demand. You don't pay unless a job is running.
+
 ## API
 
-See [API.md](API.md) for full interface documentation.
+Documentation of available constructs and their interface is available on [Constructs Hub](https://constructs.dev/packages/@cloudsnorkel/cdk-github-runners/) in all supported programming languages.
 
 ## Providers
 
@@ -32,12 +34,12 @@ A runner provider creates compute resources on-demand and uses [actions/runner](
 | Provider  | Time limit               | vCPUs                    | RAM                               | Storage                      | sudo | Docker |
 |-----------|--------------------------|--------------------------|-----------------------------------|------------------------------|------|--------|
 | CodeBuild | 8 hours (default 1 hour) | 2 (default), 4, 8, or 72 | 3gb (default), 7gb, 15gb or 145gb | 50gb to 824gb (default 64gb) | ✔    | ✔     |
-| Fargate   | Unlimited                | 0.25 to 4 (default 1)    | 512mb to 30gb (default 2gb)       | 20gb to 200gb (default 25gb) | ✔    | TBD    |
+| Fargate   | Unlimited                | 0.25 to 4 (default 1)    | 512mb to 30gb (default 2gb)       | 20gb to 200gb (default 25gb) | ✔    | ❌    |
 | Lambda    | 15 minutes               | 1 to 6 (default 2)       | 128mb to 10gb (default 2gb)       | Up to 10gb (default 10gb)    | ❌    | ❌     |
 
 The best provider to use mostly depends on your current infrastructure. When in doubt, CodeBuild is always a good choice. Execution history and logs are easy to view, and it has no restrictive limits unless you need to run for more than 8 hours.
 
-You can also create your own provider by implementing [`IRunnerProvider`](API.md#IRunnerProvider).
+You can also create your own provider by implementing `IRunnerProvider`.
 
 ## Installation
 
@@ -72,7 +74,7 @@ You can also create your own provider by implementing [`IRunnerProvider`](API.md
       ```
       dotnet add package CloudSnorkel.Cdk.Github.Runners
       ```
-3. Use [`GitHubRunners`](API.md#CodeBuildRunner) construct in your code (starting with defaults is fine)
+3. Use `GitHubRunners` construct in your code (starting with default arguments is fine)
 4. Deploy your stack
 5. Look for the status command output similar to `aws --region us-east-1 lambda invoke --function-name status-XYZ123 status.json`
 6. Execute the status command (you may need to specify `--profile` too) and open the resulting `status.json` file
@@ -83,7 +85,7 @@ You can also create your own provider by implementing [`IRunnerProvider`](API.md
 
 ## Customizing
 
-The default providers configured by [`GitHubRunners`](API.md#CodeBuildRunner) are useful for testing but probably not too much for actual production work. They run in the default VPC or no VPC and have no added IAM permissions. You would usually want to configure the providers yourself.
+The default providers configured by [`GitHubRunners`](https://constructs.dev/packages/@cloudsnorkel/cdk-github-runners/v/0.0.11/api/GitHubRunners?lang=typescript) are useful for testing but probably not too much for actual production work. They run in the default VPC or no VPC and have no added IAM permissions. You would usually want to configure the providers yourself.
 
 For example:
 
