@@ -1200,7 +1200,7 @@ type Secrets interface {
 	Github() awssecretsmanager.Secret
 	// GitHub app private key. Not needed when using personal authentication tokens.
 	//
-	// This secret is meant to be edited by the user after being created.
+	// This secret is meant to be edited by the user after being created. It is separate than the main GitHub secret because inserting private keys into JSON is hard.
 	// Experimental.
 	GithubPrivateKey() awssecretsmanager.Secret
 	// The tree node.
