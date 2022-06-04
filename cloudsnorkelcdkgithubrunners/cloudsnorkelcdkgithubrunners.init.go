@@ -149,6 +149,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "github", GoGetter: "Github"},
 			_jsii_.MemberProperty{JsiiProperty: "githubPrivateKey", GoGetter: "GithubPrivateKey"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "setup", GoGetter: "Setup"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberProperty{JsiiProperty: "webhook", GoGetter: "Webhook"},
 		},

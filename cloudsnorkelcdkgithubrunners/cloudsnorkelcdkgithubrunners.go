@@ -1206,6 +1206,11 @@ type Secrets interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// Setup secret used to authenticate user for our setup wizard.
+	//
+	// Should be empty after setup has been completed.
+	// Experimental.
+	Setup() awssecretsmanager.Secret
 	// Webhook secret used to confirm events are coming from GitHub and nowhere else.
 	// Experimental.
 	Webhook() awssecretsmanager.Secret
@@ -1244,6 +1249,16 @@ func (j *jsiiProxy_Secrets) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Secrets) Setup() awssecretsmanager.Secret {
+	var returns awssecretsmanager.Secret
+	_jsii_.Get(
+		j,
+		"setup",
 		&returns,
 	)
 	return returns
