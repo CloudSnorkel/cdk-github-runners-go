@@ -276,6 +276,9 @@ type FargateRunner interface {
 	// Security group attached to the task.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
+	// Use spot pricing for Fargate tasks.
+	// Experimental.
+	Spot() *bool
 	// Fargate task hosting the runner.
 	// Experimental.
 	Task() awsecs.FargateTaskDefinition
@@ -373,6 +376,16 @@ func (j *jsiiProxy_FargateRunner) SecurityGroup() awsec2.ISecurityGroup {
 	_jsii_.Get(
 		j,
 		"securityGroup",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_FargateRunner) Spot() *bool {
+	var returns *bool
+	_jsii_.Get(
+		j,
+		"spot",
 		&returns,
 	)
 	return returns
@@ -537,6 +550,12 @@ type FargateRunnerProps struct {
 	// Security Group to assign to the task.
 	// Experimental.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Use Fargate spot capacity provider to save money.
+	//
+	// * Runners may fail to start due to missing capacity.
+	// * Runners might be stopped prematurely with spot pricing.
+	// Experimental.
+	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
 	// VPC to launch the runners in.
 	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
@@ -579,16 +598,12 @@ type FargateRunnerProps struct {
 //    'runners',
 //    {
 //      providers: [myProvider],
-//      defaultProviderLabel: 'my-codebuild',
 //    }
 // );
 // ```.
 // Experimental.
 type GitHubRunners interface {
 	constructs.Construct
-	// Default provider as set by {@link GitHubRunnersProps.defaultProviderLabel}.
-	// Experimental.
-	DefaultProvider() IRunnerProvider
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -608,16 +623,6 @@ type GitHubRunners interface {
 // The jsii proxy struct for GitHubRunners
 type jsiiProxy_GitHubRunners struct {
 	internal.Type__constructsConstruct
-}
-
-func (j *jsiiProxy_GitHubRunners) DefaultProvider() IRunnerProvider {
-	var returns IRunnerProvider
-	_jsii_.Get(
-		j,
-		"defaultProvider",
-		&returns,
-	)
-	return returns
 }
 
 func (j *jsiiProxy_GitHubRunners) Node() constructs.Node {
@@ -722,11 +727,6 @@ func (g *jsiiProxy_GitHubRunners) ToString() *string {
 // Properties for GitHubRunners.
 // Experimental.
 type GitHubRunnersProps struct {
-	// Label of default provider in case the workflow job doesn't specify any known label.
-	//
-	// A provider with that label must be configured.
-	// Experimental.
-	DefaultProviderLabel *string `field:"optional" json:"defaultProviderLabel" yaml:"defaultProviderLabel"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
