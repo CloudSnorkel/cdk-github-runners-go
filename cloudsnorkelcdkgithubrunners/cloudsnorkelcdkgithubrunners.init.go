@@ -8,6 +8,42 @@ import (
 
 func init() {
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.Architecture",
+		reflect.TypeOf((*Architecture)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "is", GoMethod: "Is"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
+		func() interface{} {
+			return &jsiiProxy_Architecture{}
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
+		reflect.TypeOf((*CodeBuildImageBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addFiles", GoMethod: "AddFiles"},
+			_jsii_.MemberMethod{JsiiMethod: "addPolicyStatement", GoMethod: "AddPolicyStatement"},
+			_jsii_.MemberMethod{JsiiMethod: "addPostBuildCommand", GoMethod: "AddPostBuildCommand"},
+			_jsii_.MemberMethod{JsiiMethod: "addPreBuildCommand", GoMethod: "AddPreBuildCommand"},
+			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "props", GoGetter: "Props"},
+			_jsii_.MemberMethod{JsiiMethod: "setBuildArg", GoMethod: "SetBuildArg"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_CodeBuildImageBuilder{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IImageBuilder)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilderProps",
+		reflect.TypeOf((*CodeBuildImageBuilderProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
 		reflect.TypeOf((*CodeBuildRunner)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -66,7 +102,6 @@ func init() {
 		reflect.TypeOf((*GitHubRunners)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "props", GoGetter: "Props"},
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
 			_jsii_.MemberProperty{JsiiProperty: "secrets", GoGetter: "Secrets"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
@@ -80,6 +115,16 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.GitHubRunnersProps",
 		reflect.TypeOf((*GitHubRunnersProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.IImageBuilder",
+		reflect.TypeOf((*IImageBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+		},
+		func() interface{} {
+			return &jsiiProxy_IImageBuilder{}
+		},
 	)
 	_jsii_.RegisterInterface(
 		"@cloudsnorkel/cdk-github-runners.IRunnerProvider",
@@ -124,6 +169,21 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProps",
 		reflect.TypeOf((*LambdaRunnerProps)(nil)).Elem(),
 	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		reflect.TypeOf((*Os)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "is", GoMethod: "Is"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
+		func() interface{} {
+			return &jsiiProxy_Os{}
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.RunnerImage",
+		reflect.TypeOf((*RunnerImage)(nil)).Elem(),
+	)
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerProviderProps",
 		reflect.TypeOf((*RunnerProviderProps)(nil)).Elem(),
@@ -157,6 +217,14 @@ func init() {
 			j := jsiiProxy_Secrets{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			return &j
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
+		reflect.TypeOf((*StaticRunnerImage)(nil)).Elem(),
+		nil, // no members
+		func() interface{} {
+			return &jsiiProxy_StaticRunnerImage{}
 		},
 	)
 }

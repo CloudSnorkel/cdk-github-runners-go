@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscodebuild"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsecr"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
@@ -17,6 +18,321 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
+
+// CPU architecture enum for an image.
+// Experimental.
+type Architecture interface {
+	// Experimental.
+	Name() *string
+	// Checks if the given architecture is the same as this one.
+	// Experimental.
+	Is(arch Architecture) *bool
+}
+
+// The jsii proxy struct for Architecture
+type jsiiProxy_Architecture struct {
+	_ byte // padding
+}
+
+func (j *jsiiProxy_Architecture) Name() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"name",
+		&returns,
+	)
+	return returns
+}
+
+
+func Architecture_ARM64() Architecture {
+	_init_.Initialize()
+	var returns Architecture
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Architecture",
+		"ARM64",
+		&returns,
+	)
+	return returns
+}
+
+func Architecture_X86_64() Architecture {
+	_init_.Initialize()
+	var returns Architecture
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Architecture",
+		"X86_64",
+		&returns,
+	)
+	return returns
+}
+
+func (a *jsiiProxy_Architecture) Is(arch Architecture) *bool {
+	var returns *bool
+
+	_jsii_.Invoke(
+		a,
+		"is",
+		[]interface{}{arch},
+		&returns,
+	)
+
+	return returns
+}
+
+// An image builder that uses CodeBuild to build Docker images pre-baked with all the GitHub Actions runner requirements.
+//
+// Builders can be used with runner providers.
+//
+// Each builder re-runs automatically at a set interval to make sure the images contain the latest versions of everything.
+//
+// You can create an instance of this construct to customize the image used to spin-up runners. Each provider has its own requirements for what an image should do. That's why they each provide their own Dockerfile.
+//
+// For example, to set a specific runner version, rebuild the image every 2 weeks, and add a few packages for the Fargate provider, use:
+//
+// ```
+// const builder = new CodeBuildImageBuilder(this, 'Builder', {
+//      dockerfilePath: FargateProvider.LINUX_X64_DOCKERFILE_PATH,
+//      runnerVersion: RunnerVersion.specific('2.293.0'),
+//      rebuildInterval: Duration.days(14),
+// });
+// builder.setBuildArg('EXTRA_PACKAGES', 'nginx xz-utils');
+// new FargateProvider(this, 'Fargate provider', {
+//      label: 'customized-fargate',
+//      imageBuilder: builder,
+// });
+// ```.
+// Experimental.
+type CodeBuildImageBuilder interface {
+	constructs.Construct
+	IImageBuilder
+	// The tree node.
+	// Experimental.
+	Node() constructs.Node
+	// Experimental.
+	Props() *CodeBuildImageBuilderProps
+	// Uploads a folder to the build server at a given folder name.
+	// Experimental.
+	AddFiles(sourcePath *string, destName *string)
+	// Add a policy statement to the builder to access resources required to the image build.
+	// Experimental.
+	AddPolicyStatement(statement awsiam.PolicyStatement)
+	// Adds a command that runs after `docker build` and `docker push`.
+	// Experimental.
+	AddPostBuildCommand(command *string)
+	// Adds a command that runs before `docker build`.
+	// Experimental.
+	AddPreBuildCommand(command *string)
+	// Called by IRunnerProvider to finalize settings and create the image builder.
+	// Experimental.
+	Bind() *RunnerImage
+	// Adds a build argument for Docker.
+	//
+	// See the documentation for the Dockerfile you're using for a list of supported build arguments.
+	// Experimental.
+	SetBuildArg(name *string, value *string)
+	// Returns a string representation of this construct.
+	// Experimental.
+	ToString() *string
+}
+
+// The jsii proxy struct for CodeBuildImageBuilder
+type jsiiProxy_CodeBuildImageBuilder struct {
+	internal.Type__constructsConstruct
+	jsiiProxy_IImageBuilder
+}
+
+func (j *jsiiProxy_CodeBuildImageBuilder) Node() constructs.Node {
+	var returns constructs.Node
+	_jsii_.Get(
+		j,
+		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_CodeBuildImageBuilder) Props() *CodeBuildImageBuilderProps {
+	var returns *CodeBuildImageBuilderProps
+	_jsii_.Get(
+		j,
+		"props",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewCodeBuildImageBuilder(scope constructs.Construct, id *string, props *CodeBuildImageBuilderProps) CodeBuildImageBuilder {
+	_init_.Initialize()
+
+	j := jsiiProxy_CodeBuildImageBuilder{}
+
+	_jsii_.Create(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewCodeBuildImageBuilder_Override(c CodeBuildImageBuilder, scope constructs.Construct, id *string, props *CodeBuildImageBuilderProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
+		[]interface{}{scope, id, props},
+		c,
+	)
+}
+
+// Checks if `x` is a construct.
+//
+// Returns: true if `x` is an object created from a class which extends `Construct`.
+// Deprecated: use `x instanceof Construct` instead.
+func CodeBuildImageBuilder_IsConstruct(x interface{}) *bool {
+	_init_.Initialize()
+
+	var returns *bool
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
+		"isConstruct",
+		[]interface{}{x},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) AddFiles(sourcePath *string, destName *string) {
+	_jsii_.InvokeVoid(
+		c,
+		"addFiles",
+		[]interface{}{sourcePath, destName},
+	)
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) AddPolicyStatement(statement awsiam.PolicyStatement) {
+	_jsii_.InvokeVoid(
+		c,
+		"addPolicyStatement",
+		[]interface{}{statement},
+	)
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) AddPostBuildCommand(command *string) {
+	_jsii_.InvokeVoid(
+		c,
+		"addPostBuildCommand",
+		[]interface{}{command},
+	)
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) AddPreBuildCommand(command *string) {
+	_jsii_.InvokeVoid(
+		c,
+		"addPreBuildCommand",
+		[]interface{}{command},
+	)
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) Bind() *RunnerImage {
+	var returns *RunnerImage
+
+	_jsii_.Invoke(
+		c,
+		"bind",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) SetBuildArg(name *string, value *string) {
+	_jsii_.InvokeVoid(
+		c,
+		"setBuildArg",
+		[]interface{}{name, value},
+	)
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) ToString() *string {
+	var returns *string
+
+	_jsii_.Invoke(
+		c,
+		"toString",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+// Properties for CodeBuildImageBuilder construct.
+// Experimental.
+type CodeBuildImageBuilderProps struct {
+	// Path to Dockerfile to be built.
+	//
+	// It can be a path to a Dockerfile, a folder containing a Dockerfile, or a zip file containing a Dockerfile.
+	// Experimental.
+	DockerfilePath *string `field:"required" json:"dockerfilePath" yaml:"dockerfilePath"`
+	// Image architecture.
+	// Experimental.
+	Architecture Architecture `field:"optional" json:"architecture" yaml:"architecture"`
+	// The type of compute to use for this build.
+	//
+	// See the {@link ComputeType} enum for the possible values.
+	// Experimental.
+	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
+	// Removal policy for logs of image builds.
+	//
+	// If deployment fails on the custom resource, try setting this to `RemovalPolicy.RETAIN`. This way the CodeBuild logs can still be viewed, and you can see why the build failed.
+	//
+	// We try to not leave anything behind when removed. But sometimes a log staying behind is useful.
+	// Experimental.
+	LogRemovalPolicy awscdk.RemovalPolicy `field:"optional" json:"logRemovalPolicy" yaml:"logRemovalPolicy"`
+	// The number of days log events are kept in CloudWatch Logs.
+	//
+	// When updating
+	// this property, unsetting it doesn't remove the log retention policy. To
+	// remove the retention policy, set the value to `INFINITE`.
+	// Experimental.
+	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
+	// Image OS.
+	// Experimental.
+	Os Os `field:"optional" json:"os" yaml:"os"`
+	// Schedule the image to be rebuilt every given interval.
+	//
+	// Useful for keeping the image up-do-date with the latest GitHub runner version and latest OS updates.
+	//
+	// Set to zero to disable.
+	// Experimental.
+	RebuildInterval awscdk.Duration `field:"optional" json:"rebuildInterval" yaml:"rebuildInterval"`
+	// Version of GitHub Runners to install.
+	// Experimental.
+	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
+	// Security Group to assign to this instance.
+	// Experimental.
+	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Where to place the network interfaces within the VPC.
+	// Experimental.
+	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
+	// The number of minutes after which AWS CodeBuild stops the build if it's not complete.
+	//
+	// For valid values, see the timeoutInMinutes field in the AWS
+	// CodeBuild User Guide.
+	// Experimental.
+	Timeout awscdk.Duration `field:"optional" json:"timeout" yaml:"timeout"`
+	// VPC to launch the runners in.
+	// Experimental.
+	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
+}
 
 // GitHub Actions runner provider using CodeBuild to execute the actions.
 //
@@ -180,6 +496,28 @@ func CodeBuildRunner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
+func CodeBuildRunner_LINUX_ARM64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"LINUX_ARM64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
+func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"LINUX_X64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
 func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
 	var returns awsstepfunctions.IChainable
 
@@ -215,14 +553,16 @@ type CodeBuildRunnerProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Version of GitHub Runners to install.
-	// Experimental.
-	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// The type of compute to use for this build.
 	//
 	// See the {@link ComputeType} enum for the possible values.
 	// Experimental.
 	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
+	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
+	//
+	// A user named `runner` is expected to exist with access to Docker-in-Docker.
+	// Experimental.
+	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
 	// Experimental.
 	Label *string `field:"optional" json:"label" yaml:"label"`
@@ -457,6 +797,28 @@ func FargateRunner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
+func FargateRunner_LINUX_ARM64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"LINUX_ARM64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
+func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"LINUX_X64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
 func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
 	var returns awsstepfunctions.IChainable
 
@@ -493,9 +855,6 @@ type FargateRunnerProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Version of GitHub Runners to install.
-	// Experimental.
-	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// Assign public IP to the runner task.
 	//
 	// Make sure the task will have access to GitHub. A public IP might be required unless you have NAT gateway.
@@ -528,6 +887,21 @@ type FargateRunnerProps struct {
 	// NOTE: This parameter is only supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
 	// Experimental.
 	EphemeralStorageGiB *float64 `field:"optional" json:"ephemeralStorageGiB" yaml:"ephemeralStorageGiB"`
+	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
+	//
+	// A user named `runner` is expected to exist.
+	//
+	// The entry point should start GitHub runner. For example:
+	//
+	// ```
+	// #!/bin/bash
+	// set -e -u -o pipefail
+	//
+	// /home/runner/config.sh --unattended --url "https://${GITHUB_DOMAIN}/${OWNER}/${REPO}" --token "${RUNNER_TOKEN}" --ephemeral --work _work --labels "${RUNNER_LABEL}" --disableupdate --name "${RUNNER_NAME}"
+	// /home/runner/run.sh
+	// ```.
+	// Experimental.
+	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
 	// Experimental.
 	Label *string `field:"optional" json:"label" yaml:"label"`
@@ -607,8 +981,6 @@ type GitHubRunners interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Experimental.
-	Props() *GitHubRunnersProps
 	// Configured runner providers.
 	// Experimental.
 	Providers() *[]IRunnerProvider
@@ -630,16 +1002,6 @@ func (j *jsiiProxy_GitHubRunners) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_GitHubRunners) Props() *GitHubRunnersProps {
-	var returns *GitHubRunnersProps
-	_jsii_.Get(
-		j,
-		"props",
 		&returns,
 	)
 	return returns
@@ -732,6 +1094,42 @@ type GitHubRunnersProps struct {
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
+}
+
+// Interface for constructs that build an image that can be used in {@link IRunnerProvider}.
+//
+// Anything that ends up with an ECR repository containing a Docker image that runs GitHub self-hosted runners can be used. A simple implementation could even point to an existing image and nothing else.
+//
+// It's important that the specified image tag be available at the time the repository is available. Providers usually assume the image is ready and will fail if it's not.
+//
+// The image can be further updated over time manually or using a schedule as long as it is always written to the same tag.
+// Experimental.
+type IImageBuilder interface {
+	// ECR repository containing the image.
+	//
+	// This method can be called multiple times if the image is bound to multiple providers. Make sure you cache the image when implementing or return an error if this builder doesn't support reusing images.
+	//
+	// Returns: image.
+	// Experimental.
+	Bind() *RunnerImage
+}
+
+// The jsii proxy for IImageBuilder
+type jsiiProxy_IImageBuilder struct {
+	_ byte // padding
+}
+
+func (i *jsiiProxy_IImageBuilder) Bind() *RunnerImage {
+	var returns *RunnerImage
+
+	_jsii_.Invoke(
+		i,
+		"bind",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
 }
 
 // Interface for all runner providers.
@@ -988,6 +1386,28 @@ func LambdaRunner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
+func LambdaRunner_LINUX_ARM64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.LambdaRunner",
+		"LINUX_ARM64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
+func LambdaRunner_LINUX_X64_DOCKERFILE_PATH() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.LambdaRunner",
+		"LINUX_X64_DOCKERFILE_PATH",
+		&returns,
+	)
+	return returns
+}
+
 func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
 	var returns awsstepfunctions.IChainable
 
@@ -1023,12 +1443,16 @@ type LambdaRunnerProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Version of GitHub Runners to install.
-	// Experimental.
-	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// The size of the function’s /tmp directory in MiB.
 	// Experimental.
 	EphemeralStorageSize awscdk.Size `field:"optional" json:"ephemeralStorageSize" yaml:"ephemeralStorageSize"`
+	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
+	//
+	// The default command (`CMD`) should be `["runner.handler"]` which points to an included `runner.js` with a function named `handler`. The function should start the GitHub runner.
+	// See: https://github.com/CloudSnorkel/cdk-github-runners/tree/main/src/providers/docker-images/lambda
+	//
+	// Experimental.
+	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
 	// Experimental.
 	Label *string `field:"optional" json:"label" yaml:"label"`
@@ -1056,6 +1480,88 @@ type LambdaRunnerProps struct {
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 
+// OS enum for an image.
+// Experimental.
+type Os interface {
+	// Experimental.
+	Name() *string
+	// Checks if the given OS is the same as this one.
+	// Experimental.
+	Is(os Os) *bool
+}
+
+// The jsii proxy struct for Os
+type jsiiProxy_Os struct {
+	_ byte // padding
+}
+
+func (j *jsiiProxy_Os) Name() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"name",
+		&returns,
+	)
+	return returns
+}
+
+
+func Os_LINUX() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX",
+		&returns,
+	)
+	return returns
+}
+
+func Os_WINDOWS() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"WINDOWS",
+		&returns,
+	)
+	return returns
+}
+
+func (o *jsiiProxy_Os) Is(os Os) *bool {
+	var returns *bool
+
+	_jsii_.Invoke(
+		o,
+		"is",
+		[]interface{}{os},
+		&returns,
+	)
+
+	return returns
+}
+
+// Experimental.
+type RunnerImage struct {
+	// Architecture of the image.
+	// Experimental.
+	Architecture Architecture `field:"required" json:"architecture" yaml:"architecture"`
+	// Image digest for providers that need to know the digest like Lambda.
+	//
+	// WARNING: the digest might change when the builder automatically rebuilds the image on a schedule. Do not expect for this digest to stay the same between deploys.
+	// Experimental.
+	ImageDigest *string `field:"required" json:"imageDigest" yaml:"imageDigest"`
+	// ECR repository containing the image.
+	// Experimental.
+	ImageRepository awsecr.IRepository `field:"required" json:"imageRepository" yaml:"imageRepository"`
+	// Static image tag where the image will be pushed.
+	// Experimental.
+	ImageTag *string `field:"required" json:"imageTag" yaml:"imageTag"`
+	// OS type of the image.
+	// Experimental.
+	Os Os `field:"required" json:"os" yaml:"os"`
+}
+
 // Common properties for all runner providers.
 // Experimental.
 type RunnerProviderProps struct {
@@ -1066,9 +1572,6 @@ type RunnerProviderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Version of GitHub Runners to install.
-	// Experimental.
-	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 }
 
 // Workflow job parameters as parsed from the webhook event. Pass these into your runner executor and run something like:.
@@ -1327,6 +1830,82 @@ func (s *jsiiProxy_Secrets) ToString() *string {
 		s,
 		"toString",
 		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+// Helper class with methods to use static images that are built outside the context of this project.
+// Experimental.
+type StaticRunnerImage interface {
+}
+
+// The jsii proxy struct for StaticRunnerImage
+type jsiiProxy_StaticRunnerImage struct {
+	_ byte // padding
+}
+
+// Experimental.
+func NewStaticRunnerImage() StaticRunnerImage {
+	_init_.Initialize()
+
+	j := jsiiProxy_StaticRunnerImage{}
+
+	_jsii_.Create(
+		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
+		nil, // no parameters
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewStaticRunnerImage_Override(s StaticRunnerImage) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
+		nil, // no parameters
+		s,
+	)
+}
+
+// Create a builder from an existing Docker Hub image.
+//
+// The image must already have GitHub Actions runner installed. You are responsible to update it and remove it when done.
+//
+// We create a CodeBuild image builder behind the scenes to copy the image over to ECR. This helps avoid Docker Hub rate limits and prevent failures.
+// Experimental.
+func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, image *string, architecture Architecture, os Os) IImageBuilder {
+	_init_.Initialize()
+
+	var returns IImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
+		"fromDockerHub",
+		[]interface{}{scope, id, image, architecture, os},
+		&returns,
+	)
+
+	return returns
+}
+
+// Create a builder (that doesn't actually build anything) from an existing image in an existing repository.
+//
+// The image must already have GitHub Actions runner installed. You are responsible to update it and remove it when done.
+// Experimental.
+func StaticRunnerImage_FromEcrRepository(repository awsecr.IRepository, tag *string, architecture Architecture, os Os) IImageBuilder {
+	_init_.Initialize()
+
+	var returns IImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
+		"fromEcrRepository",
+		[]interface{}{repository, tag, architecture, os},
 		&returns,
 	)
 
