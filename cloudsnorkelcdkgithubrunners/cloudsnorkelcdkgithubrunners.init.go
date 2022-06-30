@@ -22,6 +22,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
 		reflect.TypeOf((*CodeBuildImageBuilder)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addExtraCertificates", GoMethod: "AddExtraCertificates"},
 			_jsii_.MemberMethod{JsiiMethod: "addFiles", GoMethod: "AddFiles"},
 			_jsii_.MemberMethod{JsiiMethod: "addPolicyStatement", GoMethod: "AddPolicyStatement"},
 			_jsii_.MemberMethod{JsiiMethod: "addPostBuildCommand", GoMethod: "AddPostBuildCommand"},

@@ -111,6 +111,11 @@ type CodeBuildImageBuilder interface {
 	Node() constructs.Node
 	// Experimental.
 	Props() *CodeBuildImageBuilderProps
+	// Add extra trusted certificates. This helps deal with self-signed certificates for GitHub Enterprise Server.
+	//
+	// All first party Dockerfiles support this. Others may not.
+	// Experimental.
+	AddExtraCertificates(path *string)
 	// Uploads a folder to the build server at a given folder name.
 	// Experimental.
 	AddFiles(sourcePath *string, destName *string)
@@ -206,6 +211,14 @@ func CodeBuildImageBuilder_IsConstruct(x interface{}) *bool {
 	)
 
 	return returns
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) AddExtraCertificates(path *string) {
+	_jsii_.InvokeVoid(
+		c,
+		"addExtraCertificates",
+		[]interface{}{path},
+	)
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddFiles(sourcePath *string, destName *string) {
@@ -942,20 +955,20 @@ type FargateRunnerProps struct {
 // By default, this will create a runner provider of each available type with the defaults. This is good enough for the initial setup stage when you just want to get GitHub integration working.
 //
 // ```typescript
-// new GitHubRunners(stack, 'runners', {});
+// new GitHubRunners(this, 'runners');
 // ```
 //
 // Usually you'd want to configure the runner providers so the runners can run in a certain VPC or have certain permissions.
 //
 // ```typescript
-// const vpc = ec2.Vpc.fromLookup(stack, 'vpc', { vpcId: 'vpc-1234567' });
-// const runnerSg = new ec2.SecurityGroup(stack, 'runner security group', { vpc: vpc });
-// const dbSg = ec2.SecurityGroup.fromSecurityGroupId(stack, 'database security group', 'sg-1234567');
-// const bucket = new s3.Bucket(stack, 'runner bucket');
+// const vpc = ec2.Vpc.fromLookup(this, 'vpc', { vpcId: 'vpc-1234567' });
+// const runnerSg = new ec2.SecurityGroup(this, 'runner security group', { vpc: vpc });
+// const dbSg = ec2.SecurityGroup.fromSecurityGroupId(this, 'database security group', 'sg-1234567');
+// const bucket = new s3.Bucket(this, 'runner bucket');
 //
 // // create a custom CodeBuild provider
 // const myProvider = new CodeBuildRunner(
-//    stack, 'codebuild runner',
+//    this, 'codebuild runner',
 //    {
 //       label: 'my-codebuild',
 //       vpc: vpc,
@@ -968,7 +981,7 @@ type FargateRunnerProps struct {
 //
 // // create the runner infrastructure
 // new GitHubRunners(
-//    stack,
+//    this,
 //    'runners',
 //    {
 //      providers: [myProvider],
@@ -1089,11 +1102,56 @@ func (g *jsiiProxy_GitHubRunners) ToString() *string {
 // Properties for GitHubRunners.
 // Experimental.
 type GitHubRunnersProps struct {
+	// Allow management functions to run in public subnets.
+	//
+	// Lambda Functions in a public subnet can NOT access the internet.
+	// Experimental.
+	AllowPublicSubnet *bool `field:"optional" json:"allowPublicSubnet" yaml:"allowPublicSubnet"`
+	// Path to a directory containing a file named certs.pem containing any additional certificates required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
+	//
+	// You may also want to use custom images for your runner providers that contain the same certificates. See {@link CodeBuildImageBuilder.addCertificates}.
+	//
+	// ```typescript
+	// const imageBuilder = new CodeBuildImageBuilder(this, 'Image Builder with Certs', {
+	//      dockerfilePath: CodeBuildRunner.LINUX_X64_DOCKERFILE_PATH,
+	// });
+	// imageBuilder.addExtraCertificates('path-to-my-extra-certs-folder');
+	//
+	// const provider = new CodeBuildRunner(this, 'CodeBuild', {
+	//      imageBuilder: imageBuilder,
+	// });
+	//
+	// new GitHubRunners(
+	//    this,
+	//    'runners',
+	//    {
+	//      providers: [provider],
+	//      extraCertificates: 'path-to-my-extra-certs-folder',
+	//    }
+	// );
+	// ```.
+	// Experimental.
+	ExtraCertificates *string `field:"optional" json:"extraCertificates" yaml:"extraCertificates"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
+	// Security group attached to all management functions.
+	//
+	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
+	// Experimental.
+	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// VPC used for all management functions.
+	//
+	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
+	// Experimental.
+	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
+	// VPC subnets used for all management functions.
+	//
+	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
+	// Experimental.
+	VpcSubnets *awsec2.SubnetSelection `field:"optional" json:"vpcSubnets" yaml:"vpcSubnets"`
 }
 
 // Interface for constructs that build an image that can be used in {@link IRunnerProvider}.
