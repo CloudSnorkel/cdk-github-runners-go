@@ -51,12 +51,12 @@ You can also create your own provider by implementing `IRunnerProvider`.
 1. Confirm you're using CDK v2
 2. Install the appropriate package
 
-   1. [Python](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
+   1. [Python](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
 
       ```
       pip install cloudsnorkel.cdk-github-runners
       ```
-   2. [TypeScript or JavaScript](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
+   2. [TypeScript or JavaScript](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
 
       ```
       npm i @cloudsnorkel/cdk-github-runners
@@ -96,7 +96,7 @@ The default providers configured by `GitHubRunners` are useful for testing but p
 
 For example:
 
-```typescript
+```go
 let vpc: ec2.Vpc;
 let runnerSg: ec2.SecurityGroup;
 let dbSg: ec2.SecurityGroup;
@@ -120,7 +120,7 @@ new GitHubRunners(this, 'runners', {
 
 Another way to customize runners is by modifying the image used to spin them up. The image contains the [runner](https://github.com/actions/runner), any required dependencies, and integration code with the provider. You may choose to customize this image by adding more packages, for example.
 
-```typescript
+```go
 const myBuilder = new CodeBuildImageBuilder(this, 'image builder', {
    dockerfilePath: FargateProvider.LINUX_X64_DOCKERFILE_PATH,
    runnerVersion: RunnerVersion.specific('2.291.0'),
@@ -129,7 +129,7 @@ const myBuilder = new CodeBuildImageBuilder(this, 'image builder', {
 myBuilder.setBuildArg('EXTRA_PACKAGES', 'nginx xz-utils');
 
 const myProvider = new FargateProvider(this, 'fargate runner', {
-   label: 'my-codebuild',
+   label: 'customized-fargate',
    vpc: vpc,
    securityGroup: runnerSg,
 });
@@ -147,7 +147,7 @@ name: self-hosted example
 on: push
 jobs:
   self-hosted:
-    runs-on: [self-hosted, my-codebuild]
+    runs-on: [self-hosted, customized-fargate]
     steps:
       - run: echo hello world
 ```
