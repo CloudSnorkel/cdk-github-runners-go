@@ -13,7 +13,7 @@ import (
 	constructs "github.com/aws/constructs-go/constructs/v10/jsii"
 )
 
-//go:embed cloudsnorkel-cdk-github-runners-0.3.2.tgz
+//go:embed cloudsnorkel-cdk-github-runners-0.4.0.tgz
 var tarball []byte
 
 // Initialize loads the necessary packages in the @jsii/kernel to support the enclosing module.
@@ -24,5 +24,5 @@ func Initialize() {
 	constructs.Initialize()
 
 	// Load this library into the kernel
-	_jsii_.Load("@cloudsnorkel/cdk-github-runners", "0.3.2", tarball)
+	_jsii_.Load("@cloudsnorkel/cdk-github-runners", "0.4.0", tarball)
 }
