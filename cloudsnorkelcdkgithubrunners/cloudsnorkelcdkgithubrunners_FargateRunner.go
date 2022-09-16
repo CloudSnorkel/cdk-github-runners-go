@@ -199,6 +199,9 @@ func (j *jsiiProxy_FargateRunner) Vpc() awsec2.IVpc {
 func NewFargateRunner(scope constructs.Construct, id *string, props *FargateRunnerProps) FargateRunner {
 	_init_.Initialize()
 
+	if err := validateNewFargateRunnerParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_FargateRunner{}
 
 	_jsii_.Create(
@@ -228,6 +231,9 @@ func NewFargateRunner_Override(f FargateRunner, scope constructs.Construct, id *
 func FargateRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateFargateRunner_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -263,6 +269,9 @@ func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 }
 
 func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := f.validateGetStepFunctionTaskParameters(parameters); err != nil {
+		panic(err)
+	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(

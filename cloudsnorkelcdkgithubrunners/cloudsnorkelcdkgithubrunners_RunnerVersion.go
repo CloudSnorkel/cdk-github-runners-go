@@ -33,6 +33,9 @@ func (j *jsiiProxy_RunnerVersion) Version() *string {
 func NewRunnerVersion(version *string) RunnerVersion {
 	_init_.Initialize()
 
+	if err := validateNewRunnerVersionParameters(version); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_RunnerVersion{}
 
 	_jsii_.Create(
@@ -79,6 +82,9 @@ func RunnerVersion_Latest() RunnerVersion {
 func RunnerVersion_Specific(version *string) RunnerVersion {
 	_init_.Initialize()
 
+	if err := validateRunnerVersion_SpecificParameters(version); err != nil {
+		panic(err)
+	}
 	var returns RunnerVersion
 
 	_jsii_.StaticInvoke(

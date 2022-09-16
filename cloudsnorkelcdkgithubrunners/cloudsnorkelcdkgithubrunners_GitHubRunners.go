@@ -106,6 +106,9 @@ func (j *jsiiProxy_GitHubRunners) Secrets() Secrets {
 func NewGitHubRunners(scope constructs.Construct, id *string, props *GitHubRunnersProps) GitHubRunners {
 	_init_.Initialize()
 
+	if err := validateNewGitHubRunnersParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_GitHubRunners{}
 
 	_jsii_.Create(
@@ -135,6 +138,9 @@ func NewGitHubRunners_Override(g GitHubRunners, scope constructs.Construct, id *
 func GitHubRunners_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateGitHubRunners_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(

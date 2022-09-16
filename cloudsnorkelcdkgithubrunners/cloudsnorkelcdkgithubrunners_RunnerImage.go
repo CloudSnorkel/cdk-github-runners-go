@@ -20,13 +20,6 @@ type RunnerImage struct {
 	// OS type of the image.
 	// Experimental.
 	Os Os `field:"required" json:"os" yaml:"os"`
-	// Image digest for providers that need to know the digest like Lambda.
-	//
-	// If the digest is not specified, imageTag must always point to a new tag on update. If not, the build may try to use the old image.
-	//
-	// WARNING: the digest might change when the builder automatically rebuilds the image on a schedule. Do not expect for this digest to stay the same between deploys.
-	// Experimental.
-	ImageDigest *string `field:"optional" json:"imageDigest" yaml:"imageDigest"`
 	// Log group where image builds are logged.
 	// Experimental.
 	LogGroup awslogs.LogGroup `field:"optional" json:"logGroup" yaml:"logGroup"`

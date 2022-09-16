@@ -55,6 +55,9 @@ func Architecture_X86_64() Architecture {
 }
 
 func (a *jsiiProxy_Architecture) Is(arch Architecture) *bool {
+	if err := a.validateIsParameters(arch); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.Invoke(

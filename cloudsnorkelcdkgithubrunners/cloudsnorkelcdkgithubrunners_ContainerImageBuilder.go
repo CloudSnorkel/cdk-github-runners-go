@@ -20,7 +20,7 @@ import (
 //
 // Each builder re-runs automatically at a set interval to make sure the images contain the latest versions of everything.
 //
-// You can create an instance of this construct to customize the image used to spin-up runners. Some runner providers may require custom components. Check the runner provider documentation. The default components work with CodeBuild.
+// You can create an instance of this construct to customize the image used to spin-up runners. Some runner providers may require custom components. Check the runner provider documentation. The default components work with CodeBuild and Fargate.
 //
 // For example, to set a specific runner version, rebuild the image every 2 weeks, and add a few packages for the Fargate provider, use:
 //
@@ -29,7 +29,7 @@ import (
 //      runnerVersion: RunnerVersion.specific('2.293.0'),
 //      rebuildInterval: Duration.days(14),
 // });
-// new CodeBuildRunner(this, 'Fargate provider', {
+// new CodeBuildRunner(this, 'CodeBuild provider', {
 //      label: 'windows-codebuild',
 //      imageBuilder: builder,
 // });
@@ -227,6 +227,9 @@ func (j *jsiiProxy_ContainerImageBuilder) SubnetId() *string {
 func NewContainerImageBuilder(scope constructs.Construct, id *string, props *ContainerImageBuilderProps) ContainerImageBuilder {
 	_init_.Initialize()
 
+	if err := validateNewContainerImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_ContainerImageBuilder{}
 
 	_jsii_.Create(
@@ -256,6 +259,9 @@ func NewContainerImageBuilder_Override(c ContainerImageBuilder, scope constructs
 func ContainerImageBuilder_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateContainerImageBuilder_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -269,6 +275,9 @@ func ContainerImageBuilder_IsConstruct(x interface{}) *bool {
 }
 
 func (c *jsiiProxy_ContainerImageBuilder) AddComponent(component ImageBuilderComponent) {
+	if err := c.validateAddComponentParameters(component); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addComponent",
@@ -277,6 +286,9 @@ func (c *jsiiProxy_ContainerImageBuilder) AddComponent(component ImageBuilderCom
 }
 
 func (c *jsiiProxy_ContainerImageBuilder) AddExtraCertificates(path *string) {
+	if err := c.validateAddExtraCertificatesParameters(path); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addExtraCertificates",
@@ -298,6 +310,9 @@ func (c *jsiiProxy_ContainerImageBuilder) Bind() *RunnerImage {
 }
 
 func (c *jsiiProxy_ContainerImageBuilder) PrependComponent(component ImageBuilderComponent) {
+	if err := c.validatePrependComponentParameters(component); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"prependComponent",

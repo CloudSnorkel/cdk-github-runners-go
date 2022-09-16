@@ -103,6 +103,9 @@ func (j *jsiiProxy_Secrets) Webhook() awssecretsmanager.Secret {
 func NewSecrets(scope constructs.Construct, id *string) Secrets {
 	_init_.Initialize()
 
+	if err := validateNewSecretsParameters(scope, id); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_Secrets{}
 
 	_jsii_.Create(
@@ -132,6 +135,9 @@ func NewSecrets_Override(s Secrets, scope constructs.Construct, id *string) {
 func Secrets_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateSecrets_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(

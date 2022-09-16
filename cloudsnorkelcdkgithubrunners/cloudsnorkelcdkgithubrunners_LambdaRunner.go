@@ -147,6 +147,9 @@ func (j *jsiiProxy_LambdaRunner) Vpc() awsec2.IVpc {
 func NewLambdaRunner(scope constructs.Construct, id *string, props *LambdaRunnerProps) LambdaRunner {
 	_init_.Initialize()
 
+	if err := validateNewLambdaRunnerParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_LambdaRunner{}
 
 	_jsii_.Create(
@@ -176,6 +179,9 @@ func NewLambdaRunner_Override(l LambdaRunner, scope constructs.Construct, id *st
 func LambdaRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateLambdaRunner_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -211,6 +217,9 @@ func LambdaRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 }
 
 func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := l.validateGetStepFunctionTaskParameters(parameters); err != nil {
+		panic(err)
+	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(

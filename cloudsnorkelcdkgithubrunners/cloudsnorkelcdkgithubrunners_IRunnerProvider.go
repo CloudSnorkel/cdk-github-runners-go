@@ -45,6 +45,9 @@ type jsiiProxy_IRunnerProvider struct {
 }
 
 func (i *jsiiProxy_IRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := i.validateGetStepFunctionTaskParameters(parameters); err != nil {
+		panic(err)
+	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(

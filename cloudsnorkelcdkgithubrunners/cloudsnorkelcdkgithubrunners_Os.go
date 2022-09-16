@@ -55,6 +55,9 @@ func Os_WINDOWS() Os {
 }
 
 func (o *jsiiProxy_Os) Is(os Os) *bool {
+	if err := o.validateIsParameters(os); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.Invoke(

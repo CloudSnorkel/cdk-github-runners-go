@@ -102,6 +102,9 @@ func (j *jsiiProxy_CodeBuildImageBuilder) Props() *CodeBuildImageBuilderProps {
 func NewCodeBuildImageBuilder(scope constructs.Construct, id *string, props *CodeBuildImageBuilderProps) CodeBuildImageBuilder {
 	_init_.Initialize()
 
+	if err := validateNewCodeBuildImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_CodeBuildImageBuilder{}
 
 	_jsii_.Create(
@@ -131,6 +134,9 @@ func NewCodeBuildImageBuilder_Override(c CodeBuildImageBuilder, scope constructs
 func CodeBuildImageBuilder_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateCodeBuildImageBuilder_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -144,6 +150,9 @@ func CodeBuildImageBuilder_IsConstruct(x interface{}) *bool {
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddExtraCertificates(path *string) {
+	if err := c.validateAddExtraCertificatesParameters(path); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addExtraCertificates",
@@ -152,6 +161,9 @@ func (c *jsiiProxy_CodeBuildImageBuilder) AddExtraCertificates(path *string) {
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddFiles(sourcePath *string, destName *string) {
+	if err := c.validateAddFilesParameters(sourcePath, destName); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addFiles",
@@ -160,6 +172,9 @@ func (c *jsiiProxy_CodeBuildImageBuilder) AddFiles(sourcePath *string, destName 
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddPolicyStatement(statement awsiam.PolicyStatement) {
+	if err := c.validateAddPolicyStatementParameters(statement); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addPolicyStatement",
@@ -168,6 +183,9 @@ func (c *jsiiProxy_CodeBuildImageBuilder) AddPolicyStatement(statement awsiam.Po
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddPostBuildCommand(command *string) {
+	if err := c.validateAddPostBuildCommandParameters(command); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addPostBuildCommand",
@@ -176,6 +194,9 @@ func (c *jsiiProxy_CodeBuildImageBuilder) AddPostBuildCommand(command *string) {
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) AddPreBuildCommand(command *string) {
+	if err := c.validateAddPreBuildCommandParameters(command); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"addPreBuildCommand",
@@ -197,6 +218,9 @@ func (c *jsiiProxy_CodeBuildImageBuilder) Bind() *RunnerImage {
 }
 
 func (c *jsiiProxy_CodeBuildImageBuilder) SetBuildArg(name *string, value *string) {
+	if err := c.validateSetBuildArgParameters(name, value); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		c,
 		"setBuildArg",

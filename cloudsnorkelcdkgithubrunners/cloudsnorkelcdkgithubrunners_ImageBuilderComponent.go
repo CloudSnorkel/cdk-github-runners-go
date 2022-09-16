@@ -170,6 +170,9 @@ func (j *jsiiProxy_ImageBuilderComponent) Stack() awscdk.Stack {
 func NewImageBuilderComponent(scope constructs.Construct, id *string, props *ImageBuilderComponentProperties) ImageBuilderComponent {
 	_init_.Initialize()
 
+	if err := validateNewImageBuilderComponentParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_ImageBuilderComponent{}
 
 	_jsii_.Create(
@@ -199,6 +202,9 @@ func NewImageBuilderComponent_Override(i ImageBuilderComponent, scope constructs
 func ImageBuilderComponent_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateImageBuilderComponent_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -216,6 +222,9 @@ func ImageBuilderComponent_IsConstruct(x interface{}) *bool {
 func ImageBuilderComponent_IsResource(construct constructs.IConstruct) *bool {
 	_init_.Initialize()
 
+	if err := validateImageBuilderComponent_IsResourceParameters(construct); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -229,6 +238,9 @@ func ImageBuilderComponent_IsResource(construct constructs.IConstruct) *bool {
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) ApplyRemovalPolicy(policy awscdk.RemovalPolicy) {
+	if err := i.validateApplyRemovalPolicyParameters(policy); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		i,
 		"applyRemovalPolicy",
@@ -250,6 +262,9 @@ func (i *jsiiProxy_ImageBuilderComponent) GeneratePhysicalName() *string {
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) GetResourceArnAttribute(arnAttr *string, arnComponents *awscdk.ArnComponents) *string {
+	if err := i.validateGetResourceArnAttributeParameters(arnAttr, arnComponents); err != nil {
+		panic(err)
+	}
 	var returns *string
 
 	_jsii_.Invoke(
@@ -263,6 +278,9 @@ func (i *jsiiProxy_ImageBuilderComponent) GetResourceArnAttribute(arnAttr *strin
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) GetResourceNameAttribute(nameAttr *string) *string {
+	if err := i.validateGetResourceNameAttributeParameters(nameAttr); err != nil {
+		panic(err)
+	}
 	var returns *string
 
 	_jsii_.Invoke(
@@ -276,6 +294,9 @@ func (i *jsiiProxy_ImageBuilderComponent) GetResourceNameAttribute(nameAttr *str
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) GrantAssetsRead(grantee awsiam.IGrantable) {
+	if err := i.validateGrantAssetsReadParameters(grantee); err != nil {
+		panic(err)
+	}
 	_jsii_.InvokeVoid(
 		i,
 		"grantAssetsRead",
@@ -297,6 +318,9 @@ func (i *jsiiProxy_ImageBuilderComponent) ToString() *string {
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) Version(type_ *string, name *string, data interface{}) *string {
+	if err := i.validateVersionParameters(type_, name, data); err != nil {
+		panic(err)
+	}
 	var returns *string
 
 	_jsii_.Invoke(

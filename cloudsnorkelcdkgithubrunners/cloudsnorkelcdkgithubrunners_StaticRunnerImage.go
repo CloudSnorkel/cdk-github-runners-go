@@ -54,6 +54,9 @@ func NewStaticRunnerImage_Override(s StaticRunnerImage) {
 func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, image *string, architecture Architecture, os Os) IImageBuilder {
 	_init_.Initialize()
 
+	if err := validateStaticRunnerImage_FromDockerHubParameters(scope, id, image); err != nil {
+		panic(err)
+	}
 	var returns IImageBuilder
 
 	_jsii_.StaticInvoke(
@@ -73,6 +76,9 @@ func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, ima
 func StaticRunnerImage_FromEcrRepository(repository awsecr.IRepository, tag *string, architecture Architecture, os Os) IImageBuilder {
 	_init_.Initialize()
 
+	if err := validateStaticRunnerImage_FromEcrRepositoryParameters(repository); err != nil {
+		panic(err)
+	}
 	var returns IImageBuilder
 
 	_jsii_.StaticInvoke(

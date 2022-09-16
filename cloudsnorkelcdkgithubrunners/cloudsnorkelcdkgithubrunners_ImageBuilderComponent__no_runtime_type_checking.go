@@ -1,0 +1,40 @@
+//go:build no_runtime_type_checking
+// +build no_runtime_type_checking
+
+// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
+package cloudsnorkelcdkgithubrunners
+
+// Building without runtime type checking enabled, so all the below just return nil
+
+func (i *jsiiProxy_ImageBuilderComponent) validateApplyRemovalPolicyParameters(policy awscdk.RemovalPolicy) error {
+	return nil
+}
+
+func (i *jsiiProxy_ImageBuilderComponent) validateGetResourceArnAttributeParameters(arnAttr *string, arnComponents *awscdk.ArnComponents) error {
+	return nil
+}
+
+func (i *jsiiProxy_ImageBuilderComponent) validateGetResourceNameAttributeParameters(nameAttr *string) error {
+	return nil
+}
+
+func (i *jsiiProxy_ImageBuilderComponent) validateGrantAssetsReadParameters(grantee awsiam.IGrantable) error {
+	return nil
+}
+
+func (i *jsiiProxy_ImageBuilderComponent) validateVersionParameters(type_ *string, name *string, data interface{}) error {
+	return nil
+}
+
+func validateImageBuilderComponent_IsConstructParameters(x interface{}) error {
+	return nil
+}
+
+func validateImageBuilderComponent_IsResourceParameters(construct constructs.IConstruct) error {
+	return nil
+}
+
+func validateNewImageBuilderComponentParameters(scope constructs.Construct, id *string, props *ImageBuilderComponentProperties) error {
+	return nil
+}
+

@@ -147,6 +147,9 @@ func (j *jsiiProxy_CodeBuildRunner) Vpc() awsec2.IVpc {
 func NewCodeBuildRunner(scope constructs.Construct, id *string, props *CodeBuildRunnerProps) CodeBuildRunner {
 	_init_.Initialize()
 
+	if err := validateNewCodeBuildRunnerParameters(scope, id, props); err != nil {
+		panic(err)
+	}
 	j := jsiiProxy_CodeBuildRunner{}
 
 	_jsii_.Create(
@@ -176,6 +179,9 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 func CodeBuildRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
+	if err := validateCodeBuildRunner_IsConstructParameters(x); err != nil {
+		panic(err)
+	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
@@ -211,6 +217,9 @@ func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 }
 
 func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
+		panic(err)
+	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(
