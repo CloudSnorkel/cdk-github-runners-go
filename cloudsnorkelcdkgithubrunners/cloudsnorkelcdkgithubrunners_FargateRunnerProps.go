@@ -82,6 +82,9 @@ type FargateRunnerProps struct {
 	// * Runners might be stopped prematurely with spot pricing.
 	// Experimental.
 	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
+	// Subnets to run the runners in.
+	// Experimental.
+	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
 	// VPC to launch the runners in.
 	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`

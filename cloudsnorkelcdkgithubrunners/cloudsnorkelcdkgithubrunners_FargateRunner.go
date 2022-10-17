@@ -22,7 +22,7 @@ import (
 type FargateRunner interface {
 	constructs.Construct
 	IRunnerProvider
-	// Whether task will have a public IP.
+	// Whether runner task will have a public IP.
 	// Experimental.
 	AssignPublicIp() *bool
 	// Cluster hosting the task hosting the runner.
@@ -52,10 +52,13 @@ type FargateRunner interface {
 	// Use spot pricing for Fargate tasks.
 	// Experimental.
 	Spot() *bool
+	// Subnets used for hosting the runner task.
+	// Experimental.
+	SubnetSelection() *awsec2.SubnetSelection
 	// Fargate task hosting the runner.
 	// Experimental.
 	Task() awsecs.FargateTaskDefinition
-	// VPC used for hosting the task.
+	// VPC used for hosting the runner task.
 	// Experimental.
 	Vpc() awsec2.IVpc
 	// Generate step function task(s) to start a new runner.
@@ -169,6 +172,16 @@ func (j *jsiiProxy_FargateRunner) Spot() *bool {
 	_jsii_.Get(
 		j,
 		"spot",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_FargateRunner) SubnetSelection() *awsec2.SubnetSelection {
+	var returns *awsec2.SubnetSelection
+	_jsii_.Get(
+		j,
+		"subnetSelection",
 		&returns,
 	)
 	return returns
