@@ -33,6 +33,11 @@ type ContainerImageBuilderProps struct {
 	// Image OS.
 	// Experimental.
 	Os Os `field:"optional" json:"os" yaml:"os"`
+	// Parent image for the new Docker Image.
+	//
+	// You can use either Image Builder image ARN or public registry image.
+	// Experimental.
+	ParentImage *string `field:"optional" json:"parentImage" yaml:"parentImage"`
 	// Schedule the image to be rebuilt every given interval.
 	//
 	// Useful for keeping the image up-do-date with the latest GitHub runner version and latest OS updates.
