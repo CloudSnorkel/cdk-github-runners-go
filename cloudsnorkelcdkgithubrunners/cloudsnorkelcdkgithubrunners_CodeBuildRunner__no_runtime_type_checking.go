@@ -9,6 +9,10 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
+func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	return nil
+}
+
 func validateCodeBuildRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }

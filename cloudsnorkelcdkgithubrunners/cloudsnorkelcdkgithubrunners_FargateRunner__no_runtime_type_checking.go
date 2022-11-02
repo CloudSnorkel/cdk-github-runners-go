@@ -9,6 +9,10 @@ func (f *jsiiProxy_FargateRunner) validateGetStepFunctionTaskParameters(paramete
 	return nil
 }
 
+func (f *jsiiProxy_FargateRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	return nil
+}
+
 func validateFargateRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }

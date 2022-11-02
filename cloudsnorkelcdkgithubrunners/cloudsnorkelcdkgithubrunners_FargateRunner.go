@@ -40,9 +40,9 @@ type FargateRunner interface {
 	// Docker image used to start a new Fargate task.
 	// Experimental.
 	Image() *RunnerImage
-	// Label associated with this provider.
+	// Labels associated with this provider.
 	// Experimental.
-	Label() *string
+	Labels() *[]*string
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -66,6 +66,8 @@ type FargateRunner interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	// Experimental.
+	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -137,11 +139,11 @@ func (j *jsiiProxy_FargateRunner) Image() *RunnerImage {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Label() *string {
-	var returns *string
+func (j *jsiiProxy_FargateRunner) Labels() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
 		j,
-		"label",
+		"labels",
 		&returns,
 	)
 	return returns
@@ -291,6 +293,22 @@ func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeP
 		f,
 		"getStepFunctionTask",
 		[]interface{}{parameters},
+		&returns,
+	)
+
+	return returns
+}
+
+func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
+	if err := f.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
+		panic(err)
+	}
+	var returns *[]*string
+
+	_jsii_.Invoke(
+		f,
+		"labelsFromProperties",
+		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

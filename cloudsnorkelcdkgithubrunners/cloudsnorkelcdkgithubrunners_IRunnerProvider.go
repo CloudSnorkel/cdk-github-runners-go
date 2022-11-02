@@ -27,9 +27,13 @@ type IRunnerProvider interface {
 	// Can be Docker image, AMI, or something else.
 	// Experimental.
 	Image() *RunnerImage
-	// GitHub Actions label associated with this runner provider.
+	// GitHub Actions labels used for this provider.
+	//
+	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
+	// based on runs-on. We use match the labels from the webhook with the labels specified here. If all the labels specified here are present in the
+	// job's labels, this provider will be chosen and spawn a new runner.
 	// Experimental.
-	Label() *string
+	Labels() *[]*string
 	// Security group associated with runners.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
@@ -70,11 +74,11 @@ func (j *jsiiProxy_IRunnerProvider) Image() *RunnerImage {
 	return returns
 }
 
-func (j *jsiiProxy_IRunnerProvider) Label() *string {
-	var returns *string
+func (j *jsiiProxy_IRunnerProvider) Labels() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
 		j,
-		"label",
+		"labels",
 		&returns,
 	)
 	return returns

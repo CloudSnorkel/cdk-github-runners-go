@@ -22,6 +22,14 @@ func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameter
 	return nil
 }
 
+func (l *jsiiProxy_LambdaRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	if defaultLabel == nil {
+		return fmt.Errorf("parameter defaultLabel is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateLambdaRunner_IsConstructParameters(x interface{}) error {
 	if x == nil {
 		return fmt.Errorf("parameter x is required, but nil was provided")

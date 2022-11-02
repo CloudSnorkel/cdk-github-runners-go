@@ -34,9 +34,9 @@ type LambdaRunner interface {
 	// Docker image used to start Lambda function.
 	// Experimental.
 	Image() *RunnerImage
-	// Label associated with this provider.
+	// Labels associated with this provider.
 	// Experimental.
-	Label() *string
+	Labels() *[]*string
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -51,6 +51,8 @@ type LambdaRunner interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	// Experimental.
+	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -102,11 +104,11 @@ func (j *jsiiProxy_LambdaRunner) Image() *RunnerImage {
 	return returns
 }
 
-func (j *jsiiProxy_LambdaRunner) Label() *string {
-	var returns *string
+func (j *jsiiProxy_LambdaRunner) Labels() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
 		j,
-		"label",
+		"labels",
 		&returns,
 	)
 	return returns
@@ -226,6 +228,22 @@ func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimePa
 		l,
 		"getStepFunctionTask",
 		[]interface{}{parameters},
+		&returns,
+	)
+
+	return returns
+}
+
+func (l *jsiiProxy_LambdaRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
+	if err := l.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
+		panic(err)
+	}
+	var returns *[]*string
+
+	_jsii_.Invoke(
+		l,
+		"labelsFromProperties",
+		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

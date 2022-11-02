@@ -22,6 +22,14 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
+func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	if defaultLabel == nil {
+		return fmt.Errorf("parameter defaultLabel is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateCodeBuildRunner_IsConstructParameters(x interface{}) error {
 	if x == nil {
 		return fmt.Errorf("parameter x is required, but nil was provided")

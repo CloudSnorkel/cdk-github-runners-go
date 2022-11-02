@@ -9,6 +9,10 @@ func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameter
 	return nil
 }
 
+func (l *jsiiProxy_LambdaRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	return nil
+}
+
 func validateLambdaRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }

@@ -2,6 +2,7 @@
 package cloudsnorkelcdkgithubrunners
 
 import (
+	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 )
 
@@ -38,6 +39,11 @@ type GitHubRunnersProps struct {
 	// ```.
 	// Experimental.
 	ExtraCertificates *string `field:"optional" json:"extraCertificates" yaml:"extraCertificates"`
+	// Time to wait before stopping a runner that remains idle.
+	//
+	// If the user cancelled the job, or if another runner stole it, this stops the runner to avoid wasting resources.
+	// Experimental.
+	IdleTimeout awscdk.Duration `field:"optional" json:"idleTimeout" yaml:"idleTimeout"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
