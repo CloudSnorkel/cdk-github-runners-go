@@ -13,7 +13,7 @@ import (
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using CodeBuild to execute the actions.
+// GitHub Actions runner provider using CodeBuild to execute jobs.
 //
 // Creates a project that gets started for each job.
 //
@@ -28,7 +28,9 @@ type CodeBuildRunner interface {
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image in CodeBuild project.
+	// Docker image loaded with GitHub Actions Runner and its prerequisites.
+	//
+	// The image is built by an image builder and is specific to CodeBuild.
 	// Experimental.
 	Image() *RunnerImage
 	// Labels associated with this provider.
@@ -51,8 +53,19 @@ type CodeBuildRunner interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	// An optional method that modifies the role of the state machine after all the tasks have been generated.
+	//
+	// This can be used to add additional policy
+	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
+	// Experimental.
+	GrantStateMachine(_arg awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
+	// Return status of the runner provider to be used in the main status function.
+	//
+	// Also gives the status function any needed permissions to query the Docker image or AMI.
+	// Experimental.
+	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -234,6 +247,17 @@ func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntim
 	return returns
 }
 
+func (c *jsiiProxy_CodeBuildRunner) GrantStateMachine(_arg awsiam.IGrantable) {
+	if err := c.validateGrantStateMachineParameters(_arg); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		c,
+		"grantStateMachine",
+		[]interface{}{_arg},
+	)
+}
+
 func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -244,6 +268,22 @@ func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, p
 		c,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_CodeBuildRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := c.validateStatusParameters(statusFunctionRole); err != nil {
+		panic(err)
+	}
+	var returns IRunnerProviderStatus
+
+	_jsii_.Invoke(
+		c,
+		"status",
+		[]interface{}{statusFunctionRole},
 		&returns,
 	)
 

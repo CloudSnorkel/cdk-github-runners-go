@@ -15,3 +15,11 @@ func (o *jsiiProxy_Os) validateIsParameters(os Os) error {
 	return nil
 }
 
+func (o *jsiiProxy_Os) validateIsInParameters(oses *[]Os) error {
+	if oses == nil {
+		return fmt.Errorf("parameter oses is required, but nil was provided")
+	}
+
+	return nil
+}
+

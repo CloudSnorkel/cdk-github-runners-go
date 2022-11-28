@@ -8,6 +8,7 @@ import (
 
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -22,9 +23,25 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
+func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+	if _arg == nil {
+		return fmt.Errorf("parameter _arg is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
 	if defaultLabel == nil {
 		return fmt.Errorf("parameter defaultLabel is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (c *jsiiProxy_CodeBuildRunner) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
+	if statusFunctionRole == nil {
+		return fmt.Errorf("parameter statusFunctionRole is required, but nil was provided")
 	}
 
 	return nil

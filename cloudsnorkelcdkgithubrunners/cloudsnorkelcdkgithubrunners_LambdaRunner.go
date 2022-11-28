@@ -13,7 +13,7 @@ import (
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using Lambda to execute the actions.
+// GitHub Actions runner provider using Lambda to execute jobs.
 //
 // Creates a Docker-based function that gets executed for each job.
 //
@@ -31,7 +31,9 @@ type LambdaRunner interface {
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image used to start Lambda function.
+	// Docker image loaded with GitHub Actions Runner and its prerequisites.
+	//
+	// The image is built by an image builder and is specific to Lambda.
 	// Experimental.
 	Image() *RunnerImage
 	// Labels associated with this provider.
@@ -51,8 +53,19 @@ type LambdaRunner interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	// An optional method that modifies the role of the state machine after all the tasks have been generated.
+	//
+	// This can be used to add additional policy
+	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
+	// Experimental.
+	GrantStateMachine(_arg awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
+	// Return status of the runner provider to be used in the main status function.
+	//
+	// Also gives the status function any needed permissions to query the Docker image or AMI.
+	// Experimental.
+	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -234,6 +247,17 @@ func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimePa
 	return returns
 }
 
+func (l *jsiiProxy_LambdaRunner) GrantStateMachine(_arg awsiam.IGrantable) {
+	if err := l.validateGrantStateMachineParameters(_arg); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		l,
+		"grantStateMachine",
+		[]interface{}{_arg},
+	)
+}
+
 func (l *jsiiProxy_LambdaRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := l.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -244,6 +268,22 @@ func (l *jsiiProxy_LambdaRunner) LabelsFromProperties(defaultLabel *string, prop
 		l,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
+		&returns,
+	)
+
+	return returns
+}
+
+func (l *jsiiProxy_LambdaRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := l.validateStatusParameters(statusFunctionRole); err != nil {
+		panic(err)
+	}
+	var returns IRunnerProviderStatus
+
+	_jsii_.Invoke(
+		l,
+		"status",
+		[]interface{}{statusFunctionRole},
 		&returns,
 	)
 

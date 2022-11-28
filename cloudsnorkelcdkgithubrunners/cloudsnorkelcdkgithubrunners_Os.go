@@ -14,6 +14,9 @@ type Os interface {
 	// Checks if the given OS is the same as this one.
 	// Experimental.
 	Is(os Os) *bool
+	// Checks if this OS is in a given list.
+	// Experimental.
+	IsIn(oses *[]Os) *bool
 }
 
 // The jsii proxy struct for Os
@@ -64,6 +67,22 @@ func (o *jsiiProxy_Os) Is(os Os) *bool {
 		o,
 		"is",
 		[]interface{}{os},
+		&returns,
+	)
+
+	return returns
+}
+
+func (o *jsiiProxy_Os) IsIn(oses *[]Os) *bool {
+	if err := o.validateIsInParameters(oses); err != nil {
+		panic(err)
+	}
+	var returns *bool
+
+	_jsii_.Invoke(
+		o,
+		"isIn",
+		[]interface{}{oses},
 		&returns,
 	)
 

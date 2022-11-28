@@ -9,3 +9,7 @@ func (o *jsiiProxy_Os) validateIsParameters(os Os) error {
 	return nil
 }
 
+func (o *jsiiProxy_Os) validateIsInParameters(oses *[]Os) error {
+	return nil
+}
+

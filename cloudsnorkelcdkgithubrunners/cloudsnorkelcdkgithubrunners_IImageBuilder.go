@@ -14,7 +14,7 @@ import (
 // The image can be further updated over time manually or using a schedule as long as it is always written to the same tag.
 // Experimental.
 type IImageBuilder interface {
-	// ECR repository containing the image.
+	// Finalize and return all required information about the Docker image built by this builder.
 	//
 	// This method can be called multiple times if the image is bound to multiple providers. Make sure you cache the image when implementing or return an error if this builder doesn't support reusing images.
 	//

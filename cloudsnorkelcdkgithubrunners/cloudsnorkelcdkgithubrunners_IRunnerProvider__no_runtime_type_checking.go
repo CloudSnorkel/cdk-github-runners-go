@@ -9,3 +9,11 @@ func (i *jsiiProxy_IRunnerProvider) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
+func (i *jsiiProxy_IRunnerProvider) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
+	return nil
+}
+
+func (i *jsiiProxy_IRunnerProvider) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
+	return nil
+}
+

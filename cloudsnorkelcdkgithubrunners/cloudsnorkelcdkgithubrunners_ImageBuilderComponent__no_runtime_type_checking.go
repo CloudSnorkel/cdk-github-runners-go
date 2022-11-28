@@ -29,6 +29,10 @@ func validateImageBuilderComponent_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
+func validateImageBuilderComponent_IsOwnedResourceParameters(construct constructs.IConstruct) error {
+	return nil
+}
+
 func validateImageBuilderComponent_IsResourceParameters(construct constructs.IConstruct) error {
 	return nil
 }

@@ -9,7 +9,15 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
+func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+	return nil
+}
+
 func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+	return nil
+}
+
+func (c *jsiiProxy_CodeBuildRunner) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
 	return nil
 }
 

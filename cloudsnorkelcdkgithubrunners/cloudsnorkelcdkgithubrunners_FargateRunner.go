@@ -13,7 +13,7 @@ import (
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using Fargate to execute the actions.
+// GitHub Actions runner provider using Fargate to execute jobs.
 //
 // Creates a task definition with a single container that gets started for each job.
 //
@@ -37,7 +37,9 @@ type FargateRunner interface {
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image used to start a new Fargate task.
+	// Docker image loaded with GitHub Actions Runner and its prerequisites.
+	//
+	// The image is built by an image builder and is specific to Fargate tasks.
 	// Experimental.
 	Image() *RunnerImage
 	// Labels associated with this provider.
@@ -66,8 +68,19 @@ type FargateRunner interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	// An optional method that modifies the role of the state machine after all the tasks have been generated.
+	//
+	// This can be used to add additional policy
+	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
+	// Experimental.
+	GrantStateMachine(_arg awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
+	// Return status of the runner provider to be used in the main status function.
+	//
+	// Also gives the status function any needed permissions to query the Docker image or AMI.
+	// Experimental.
+	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -299,6 +312,17 @@ func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeP
 	return returns
 }
 
+func (f *jsiiProxy_FargateRunner) GrantStateMachine(_arg awsiam.IGrantable) {
+	if err := f.validateGrantStateMachineParameters(_arg); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		f,
+		"grantStateMachine",
+		[]interface{}{_arg},
+	)
+}
+
 func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := f.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -309,6 +333,22 @@ func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, pro
 		f,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
+		&returns,
+	)
+
+	return returns
+}
+
+func (f *jsiiProxy_FargateRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := f.validateStatusParameters(statusFunctionRole); err != nil {
+		panic(err)
+	}
+	var returns IRunnerProviderStatus
+
+	_jsii_.Invoke(
+		f,
+		"status",
+		[]interface{}{statusFunctionRole},
 		&returns,
 	)
 

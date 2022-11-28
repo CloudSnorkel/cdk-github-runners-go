@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 )
 
+// Description of a Docker image built by {@link IImageBuilder}.
 // Experimental.
 type RunnerImage struct {
 	// Architecture of the image.
@@ -20,6 +21,9 @@ type RunnerImage struct {
 	// OS type of the image.
 	// Experimental.
 	Os Os `field:"required" json:"os" yaml:"os"`
+	// Installed runner version.
+	// Experimental.
+	RunnerVersion RunnerVersion `field:"required" json:"runnerVersion" yaml:"runnerVersion"`
 	// Log group where image builds are logged.
 	// Experimental.
 	LogGroup awslogs.LogGroup `field:"optional" json:"logGroup" yaml:"logGroup"`

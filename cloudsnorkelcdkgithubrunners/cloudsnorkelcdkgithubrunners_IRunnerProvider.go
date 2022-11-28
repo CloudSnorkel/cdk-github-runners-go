@@ -22,11 +22,17 @@ type IRunnerProvider interface {
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
-	// Image used to create a new resource compute.
+	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
-	// Can be Docker image, AMI, or something else.
+	// This can be used to add additional policy
+	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Experimental.
-	Image() *RunnerImage
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
+	// Return status of the runner provider to be used in the main status function.
+	//
+	// Also gives the status function any needed permissions to query the Docker image or AMI.
+	// Experimental.
+	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// GitHub Actions labels used for this provider.
 	//
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
@@ -64,13 +70,30 @@ func (i *jsiiProxy_IRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntim
 	return returns
 }
 
-func (j *jsiiProxy_IRunnerProvider) Image() *RunnerImage {
-	var returns *RunnerImage
-	_jsii_.Get(
-		j,
-		"image",
+func (i *jsiiProxy_IRunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := i.validateGrantStateMachineParameters(stateMachineRole); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		i,
+		"grantStateMachine",
+		[]interface{}{stateMachineRole},
+	)
+}
+
+func (i *jsiiProxy_IRunnerProvider) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := i.validateStatusParameters(statusFunctionRole); err != nil {
+		panic(err)
+	}
+	var returns IRunnerProviderStatus
+
+	_jsii_.Invoke(
+		i,
+		"status",
+		[]interface{}{statusFunctionRole},
 		&returns,
 	)
+
 	return returns
 }
 

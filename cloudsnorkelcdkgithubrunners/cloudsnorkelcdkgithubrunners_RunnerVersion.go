@@ -11,6 +11,9 @@ import (
 type RunnerVersion interface {
 	// Experimental.
 	Version() *string
+	// Check if two versions are the same.
+	// Experimental.
+	Is(other RunnerVersion) *bool
 }
 
 // The jsii proxy struct for RunnerVersion
@@ -91,6 +94,22 @@ func RunnerVersion_Specific(version *string) RunnerVersion {
 		"@cloudsnorkel/cdk-github-runners.RunnerVersion",
 		"specific",
 		[]interface{}{version},
+		&returns,
+	)
+
+	return returns
+}
+
+func (r *jsiiProxy_RunnerVersion) Is(other RunnerVersion) *bool {
+	if err := r.validateIsParameters(other); err != nil {
+		panic(err)
+	}
+	var returns *bool
+
+	_jsii_.Invoke(
+		r,
+		"is",
+		[]interface{}{other},
 		&returns,
 	)
 

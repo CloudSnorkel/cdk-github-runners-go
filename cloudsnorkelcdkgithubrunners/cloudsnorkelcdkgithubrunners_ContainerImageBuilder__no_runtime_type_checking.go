@@ -13,11 +13,31 @@ func (c *jsiiProxy_ContainerImageBuilder) validateAddExtraCertificatesParameters
 	return nil
 }
 
+func (c *jsiiProxy_ContainerImageBuilder) validateCreateImageParameters(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup) error {
+	return nil
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) validateCreateInfrastructureParameters(managedPolicies *[]awsiam.IManagedPolicy) error {
+	return nil
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) validateCreateLogParameters(recipeName *string) error {
+	return nil
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) validateCreatePipelineParameters(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup) error {
+	return nil
+}
+
 func (c *jsiiProxy_ContainerImageBuilder) validatePrependComponentParameters(component ImageBuilderComponent) error {
 	return nil
 }
 
 func validateContainerImageBuilder_IsConstructParameters(x interface{}) error {
+	return nil
+}
+
+func (j *jsiiProxy_ContainerImageBuilder) validateSetComponentsParameters(val *[]ImageBuilderComponent) error {
 	return nil
 }
 

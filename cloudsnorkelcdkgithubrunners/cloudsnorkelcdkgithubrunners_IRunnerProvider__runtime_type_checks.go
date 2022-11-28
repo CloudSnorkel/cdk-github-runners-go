@@ -7,6 +7,8 @@ import (
 	"fmt"
 
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
+
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 )
 
 func (i *jsiiProxy_IRunnerProvider) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
@@ -15,6 +17,22 @@ func (i *jsiiProxy_IRunnerProvider) validateGetStepFunctionTaskParameters(parame
 	}
 	if err := _jsii_.ValidateStruct(parameters, func() string { return "parameter parameters" }); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (i *jsiiProxy_IRunnerProvider) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
+	if stateMachineRole == nil {
+		return fmt.Errorf("parameter stateMachineRole is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (i *jsiiProxy_IRunnerProvider) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
+	if statusFunctionRole == nil {
+		return fmt.Errorf("parameter statusFunctionRole is required, but nil was provided")
 	}
 
 	return nil

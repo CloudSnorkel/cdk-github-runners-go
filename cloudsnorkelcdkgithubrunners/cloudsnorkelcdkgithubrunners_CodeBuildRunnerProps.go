@@ -22,7 +22,7 @@ type CodeBuildRunnerProps struct {
 	// See the {@link ComputeType} enum for the possible values.
 	// Experimental.
 	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
-	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
+	// Image builder for CodeBuild image with GitHub runner pre-configured.
 	//
 	// A user named `runner` is expected to exist with access to Docker-in-Docker.
 	// Experimental.

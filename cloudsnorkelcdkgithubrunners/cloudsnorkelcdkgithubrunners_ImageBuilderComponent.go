@@ -217,6 +217,26 @@ func ImageBuilderComponent_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
+// Returns true if the construct was created by CDK, and false otherwise.
+// Experimental.
+func ImageBuilderComponent_IsOwnedResource(construct constructs.IConstruct) *bool {
+	_init_.Initialize()
+
+	if err := validateImageBuilderComponent_IsOwnedResourceParameters(construct); err != nil {
+		panic(err)
+	}
+	var returns *bool
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.ImageBuilderComponent",
+		"isOwnedResource",
+		[]interface{}{construct},
+		&returns,
+	)
+
+	return returns
+}
+
 // Check whether the given construct is a Resource.
 // Experimental.
 func ImageBuilderComponent_IsResource(construct constructs.IConstruct) *bool {

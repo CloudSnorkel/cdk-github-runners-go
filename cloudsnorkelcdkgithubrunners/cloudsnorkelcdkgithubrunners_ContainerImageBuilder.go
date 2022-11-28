@@ -5,14 +5,15 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecr"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsimagebuilder"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// An image builder that uses Image Builder to build Docker images pre-baked with all the GitHub Actions runner requirements.
+// An image builder that uses AWS Image Builder to build Docker images pre-baked with all the GitHub Actions runner requirements.
 //
 // Builders can be used with runner providers.
 //
@@ -30,7 +31,7 @@ import (
 //      rebuildInterval: Duration.days(14),
 // });
 // new CodeBuildRunner(this, 'CodeBuild provider', {
-//      label: 'windows-codebuild',
+//      label: 'custom-codebuild',
 //      imageBuilder: builder,
 // });
 // ```.
@@ -41,13 +42,11 @@ type ContainerImageBuilder interface {
 	// Experimental.
 	Architecture() Architecture
 	// Experimental.
+	Components() *[]ImageBuilderComponent
+	// Experimental.
+	SetComponents(val *[]ImageBuilderComponent)
+	// Experimental.
 	Description() *string
-	// Experimental.
-	InstanceTypes() *[]*string
-	// Experimental.
-	LogRemovalPolicy() awscdk.RemovalPolicy
-	// Experimental.
-	LogRetention() awslogs.RetentionDays
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -56,15 +55,9 @@ type ContainerImageBuilder interface {
 	// Experimental.
 	Platform() *string
 	// Experimental.
-	RebuildInterval() awscdk.Duration
-	// Experimental.
 	Repository() awsecr.IRepository
 	// Experimental.
 	RunnerVersion() RunnerVersion
-	// Experimental.
-	SecurityGroupIds() *[]*string
-	// Experimental.
-	SubnetId() *string
 	// Add a component to be installed.
 	// Experimental.
 	AddComponent(component ImageBuilderComponent)
@@ -76,6 +69,14 @@ type ContainerImageBuilder interface {
 	// Called by IRunnerProvider to finalize settings and create the image builder.
 	// Experimental.
 	Bind() *RunnerImage
+	// Experimental.
+	CreateImage(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImage
+	// Experimental.
+	CreateInfrastructure(managedPolicies *[]awsiam.IManagedPolicy) awsimagebuilder.CfnInfrastructureConfiguration
+	// Experimental.
+	CreateLog(recipeName *string) awslogs.LogGroup
+	// Experimental.
+	CreatePipeline(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImagePipeline
 	// Add a component to be installed before any other components.
 	//
 	// Useful for required system settings like certificates or proxy settings.
@@ -102,41 +103,21 @@ func (j *jsiiProxy_ContainerImageBuilder) Architecture() Architecture {
 	return returns
 }
 
+func (j *jsiiProxy_ContainerImageBuilder) Components() *[]ImageBuilderComponent {
+	var returns *[]ImageBuilderComponent
+	_jsii_.Get(
+		j,
+		"components",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_ContainerImageBuilder) Description() *string {
 	var returns *string
 	_jsii_.Get(
 		j,
 		"description",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_ContainerImageBuilder) InstanceTypes() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"instanceTypes",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_ContainerImageBuilder) LogRemovalPolicy() awscdk.RemovalPolicy {
-	var returns awscdk.RemovalPolicy
-	_jsii_.Get(
-		j,
-		"logRemovalPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_ContainerImageBuilder) LogRetention() awslogs.RetentionDays {
-	var returns awslogs.RetentionDays
-	_jsii_.Get(
-		j,
-		"logRetention",
 		&returns,
 	)
 	return returns
@@ -172,16 +153,6 @@ func (j *jsiiProxy_ContainerImageBuilder) Platform() *string {
 	return returns
 }
 
-func (j *jsiiProxy_ContainerImageBuilder) RebuildInterval() awscdk.Duration {
-	var returns awscdk.Duration
-	_jsii_.Get(
-		j,
-		"rebuildInterval",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_ContainerImageBuilder) Repository() awsecr.IRepository {
 	var returns awsecr.IRepository
 	_jsii_.Get(
@@ -197,26 +168,6 @@ func (j *jsiiProxy_ContainerImageBuilder) RunnerVersion() RunnerVersion {
 	_jsii_.Get(
 		j,
 		"runnerVersion",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_ContainerImageBuilder) SecurityGroupIds() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"securityGroupIds",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_ContainerImageBuilder) SubnetId() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"subnetId",
 		&returns,
 	)
 	return returns
@@ -249,6 +200,17 @@ func NewContainerImageBuilder_Override(c ContainerImageBuilder, scope constructs
 		"@cloudsnorkel/cdk-github-runners.ContainerImageBuilder",
 		[]interface{}{scope, id, props},
 		c,
+	)
+}
+
+func (j *jsiiProxy_ContainerImageBuilder)SetComponents(val *[]ImageBuilderComponent) {
+	if err := j.validateSetComponentsParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"components",
+		val,
 	)
 }
 
@@ -303,6 +265,70 @@ func (c *jsiiProxy_ContainerImageBuilder) Bind() *RunnerImage {
 		c,
 		"bind",
 		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) CreateImage(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImage {
+	if err := c.validateCreateImageParameters(infra, dist, log); err != nil {
+		panic(err)
+	}
+	var returns awsimagebuilder.CfnImage
+
+	_jsii_.Invoke(
+		c,
+		"createImage",
+		[]interface{}{infra, dist, log, imageRecipeArn, containerRecipeArn},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) CreateInfrastructure(managedPolicies *[]awsiam.IManagedPolicy) awsimagebuilder.CfnInfrastructureConfiguration {
+	if err := c.validateCreateInfrastructureParameters(managedPolicies); err != nil {
+		panic(err)
+	}
+	var returns awsimagebuilder.CfnInfrastructureConfiguration
+
+	_jsii_.Invoke(
+		c,
+		"createInfrastructure",
+		[]interface{}{managedPolicies},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) CreateLog(recipeName *string) awslogs.LogGroup {
+	if err := c.validateCreateLogParameters(recipeName); err != nil {
+		panic(err)
+	}
+	var returns awslogs.LogGroup
+
+	_jsii_.Invoke(
+		c,
+		"createLog",
+		[]interface{}{recipeName},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) CreatePipeline(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImagePipeline {
+	if err := c.validateCreatePipelineParameters(infra, dist, log); err != nil {
+		panic(err)
+	}
+	var returns awsimagebuilder.CfnImagePipeline
+
+	_jsii_.Invoke(
+		c,
+		"createPipeline",
+		[]interface{}{infra, dist, log, imageRecipeArn, containerRecipeArn},
 		&returns,
 	)
 
