@@ -109,6 +109,33 @@ func init() {
 		reflect.TypeOf((*ContainerImageBuilderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.Ec2Runner",
+		reflect.TypeOf((*Ec2Runner)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "securityGroup", GoGetter: "SecurityGroup"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberProperty{JsiiProperty: "subnet", GoGetter: "Subnet"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_Ec2Runner{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProps",
+		reflect.TypeOf((*Ec2RunnerProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.FargateRunner",
 		reflect.TypeOf((*FargateRunner)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -160,6 +187,16 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.GitHubRunnersProps",
 		reflect.TypeOf((*GitHubRunnersProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.IAmiBuilder",
+		reflect.TypeOf((*IAmiBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+		},
+		func() interface{} {
+			return &jsiiProxy_IAmiBuilder{}
+		},
 	)
 	_jsii_.RegisterInterface(
 		"@cloudsnorkel/cdk-github-runners.IImageBuilder",
@@ -310,6 +347,10 @@ func init() {
 		func() interface{} {
 			return &jsiiProxy_Os{}
 		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.RunnerAmi",
+		reflect.TypeOf((*RunnerAmi)(nil)).Elem(),
 	)
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerImage",
