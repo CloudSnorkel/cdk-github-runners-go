@@ -121,7 +121,6 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "securityGroup", GoGetter: "SecurityGroup"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberProperty{JsiiProperty: "subnet", GoGetter: "Subnet"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 		},
 		func() interface{} {

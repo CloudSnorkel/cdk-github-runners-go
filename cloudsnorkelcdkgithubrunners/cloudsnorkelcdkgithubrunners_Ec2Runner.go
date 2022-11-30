@@ -34,9 +34,6 @@ type Ec2Runner interface {
 	// Security group attached to launched instances.
 	// Experimental.
 	SecurityGroup() awsec2.ISecurityGroup
-	// VPC subnet used for hosting launched instances.
-	// Experimental.
-	Subnet() awsec2.ISubnet
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -111,16 +108,6 @@ func (j *jsiiProxy_Ec2Runner) SecurityGroup() awsec2.ISecurityGroup {
 	_jsii_.Get(
 		j,
 		"securityGroup",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Ec2Runner) Subnet() awsec2.ISubnet {
-	var returns awsec2.ISubnet
-	_jsii_.Get(
-		j,
-		"subnet",
 		&returns,
 	)
 	return returns

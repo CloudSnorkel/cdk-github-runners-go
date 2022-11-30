@@ -49,7 +49,15 @@ type Ec2RunnerProps struct {
 	// Experimental.
 	StorageSize awscdk.Size `field:"optional" json:"storageSize" yaml:"storageSize"`
 	// Subnet where the runner instances will be launched.
-	// Experimental.
+	// Deprecated: use {@link vpc} and {@link subnetSelection}.
 	Subnet awsec2.ISubnet `field:"optional" json:"subnet" yaml:"subnet"`
+	// Where to place the network interfaces within the VPC.
+	//
+	// Only the first matched subnet will be used.
+	// Experimental.
+	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
+	// VPC where runner instances will be launched.
+	// Experimental.
+	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 
