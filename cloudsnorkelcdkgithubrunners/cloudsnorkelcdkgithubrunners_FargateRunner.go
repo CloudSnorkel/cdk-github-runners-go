@@ -48,9 +48,6 @@ type FargateRunner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Security group attached to the task.
-	// Experimental.
-	SecurityGroup() awsec2.ISecurityGroup
 	// Use spot pricing for Fargate tasks.
 	// Experimental.
 	Spot() *bool
@@ -167,16 +164,6 @@ func (j *jsiiProxy_FargateRunner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) SecurityGroup() awsec2.ISecurityGroup {
-	var returns awsec2.ISecurityGroup
-	_jsii_.Get(
-		j,
-		"securityGroup",
 		&returns,
 	)
 	return returns

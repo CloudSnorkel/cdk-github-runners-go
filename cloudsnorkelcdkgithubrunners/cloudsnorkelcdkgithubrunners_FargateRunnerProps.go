@@ -80,9 +80,12 @@ type FargateRunnerProps struct {
 	// Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU).
 	// Experimental.
 	MemoryLimitMiB *float64 `field:"optional" json:"memoryLimitMiB" yaml:"memoryLimitMiB"`
-	// Security Group to assign to the task.
-	// Experimental.
+	// Security group to assign to the task.
+	// Deprecated: use {@link securityGroupss}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Security groups to assign to the task.
+	// Experimental.
+	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Use Fargate spot capacity provider to save money.
 	//
 	// * Runners may fail to start due to missing capacity.

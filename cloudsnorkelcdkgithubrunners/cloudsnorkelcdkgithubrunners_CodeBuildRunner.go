@@ -42,12 +42,6 @@ type CodeBuildRunner interface {
 	// CodeBuild project hosting the runner.
 	// Experimental.
 	Project() awscodebuild.Project
-	// Security group attached to the task.
-	// Experimental.
-	SecurityGroup() awsec2.ISecurityGroup
-	// VPC used for hosting the project.
-	// Experimental.
-	Vpc() awsec2.IVpc
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -132,26 +126,6 @@ func (j *jsiiProxy_CodeBuildRunner) Project() awscodebuild.Project {
 	_jsii_.Get(
 		j,
 		"project",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunner) SecurityGroup() awsec2.ISecurityGroup {
-	var returns awsec2.ISecurityGroup
-	_jsii_.Get(
-		j,
-		"securityGroup",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunner) Vpc() awsec2.IVpc {
-	var returns awsec2.IVpc
-	_jsii_.Get(
-		j,
-		"vpc",
 		&returns,
 	)
 	return returns

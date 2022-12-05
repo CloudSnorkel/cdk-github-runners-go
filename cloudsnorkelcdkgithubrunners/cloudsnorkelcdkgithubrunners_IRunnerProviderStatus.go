@@ -20,9 +20,9 @@ type IRunnerProviderStatus interface {
 	// Role attached to runners.
 	// Experimental.
 	RoleArn() *string
-	// Security group attached to runners.
+	// Security groups attached to runners.
 	// Experimental.
-	SecurityGroup() *string
+	SecurityGroups() *[]*string
 	// Runner provider type.
 	// Experimental.
 	Type() *string
@@ -76,11 +76,11 @@ func (j *jsiiProxy_IRunnerProviderStatus) RoleArn() *string {
 	return returns
 }
 
-func (j *jsiiProxy_IRunnerProviderStatus) SecurityGroup() *string {
-	var returns *string
+func (j *jsiiProxy_IRunnerProviderStatus) SecurityGroups() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
 		j,
-		"securityGroup",
+		"securityGroups",
 		&returns,
 	)
 	return returns

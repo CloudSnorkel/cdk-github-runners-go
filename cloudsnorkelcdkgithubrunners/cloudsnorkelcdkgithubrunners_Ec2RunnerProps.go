@@ -33,8 +33,11 @@ type Ec2RunnerProps struct {
 	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
 	// Security Group to assign to launched runner instances.
-	// Experimental.
+	// Deprecated: use {@link securityGroups}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Security groups to assign to launched runner instances.
+	// Experimental.
+	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Use spot instances to save money.
 	//
 	// Spot instances are cheaper but not always available and can be stopped prematurely.

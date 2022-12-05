@@ -31,9 +31,6 @@ type Ec2Runner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Security group attached to launched instances.
-	// Experimental.
-	SecurityGroup() awsec2.ISecurityGroup
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -98,16 +95,6 @@ func (j *jsiiProxy_Ec2Runner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Ec2Runner) SecurityGroup() awsec2.ISecurityGroup {
-	var returns awsec2.ISecurityGroup
-	_jsii_.Get(
-		j,
-		"securityGroup",
 		&returns,
 	)
 	return returns

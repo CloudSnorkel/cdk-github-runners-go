@@ -40,12 +40,6 @@ type IRunnerProvider interface {
 	// job's labels, this provider will be chosen and spawn a new runner.
 	// Experimental.
 	Labels() *[]*string
-	// Security group associated with runners.
-	// Experimental.
-	SecurityGroup() awsec2.ISecurityGroup
-	// VPC network in which runners will be placed.
-	// Experimental.
-	Vpc() awsec2.IVpc
 }
 
 // The jsii proxy for IRunnerProvider
@@ -102,26 +96,6 @@ func (j *jsiiProxy_IRunnerProvider) Labels() *[]*string {
 	_jsii_.Get(
 		j,
 		"labels",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_IRunnerProvider) SecurityGroup() awsec2.ISecurityGroup {
-	var returns awsec2.ISecurityGroup
-	_jsii_.Get(
-		j,
-		"securityGroup",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_IRunnerProvider) Vpc() awsec2.IVpc {
-	var returns awsec2.IVpc
-	_jsii_.Get(
-		j,
-		"vpc",
 		&returns,
 	)
 	return returns

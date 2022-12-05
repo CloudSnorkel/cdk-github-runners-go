@@ -5,6 +5,7 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecr"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsimagebuilder"
@@ -39,12 +40,16 @@ import (
 type ContainerImageBuilder interface {
 	constructs.Construct
 	IImageBuilder
+	awsec2.IConnectable
 	// Experimental.
 	Architecture() Architecture
 	// Experimental.
 	Components() *[]ImageBuilderComponent
 	// Experimental.
 	SetComponents(val *[]ImageBuilderComponent)
+	// The network connections associated with this resource.
+	// Experimental.
+	Connections() awsec2.Connections
 	// Experimental.
 	Description() *string
 	// The tree node.
@@ -91,6 +96,7 @@ type ContainerImageBuilder interface {
 type jsiiProxy_ContainerImageBuilder struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IImageBuilder
+	internal.Type__awsec2IConnectable
 }
 
 func (j *jsiiProxy_ContainerImageBuilder) Architecture() Architecture {
@@ -108,6 +114,16 @@ func (j *jsiiProxy_ContainerImageBuilder) Components() *[]ImageBuilderComponent 
 	_jsii_.Get(
 		j,
 		"components",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_ContainerImageBuilder) Connections() awsec2.Connections {
+	var returns awsec2.Connections
+	_jsii_.Get(
+		j,
+		"connections",
 		&returns,
 	)
 	return returns

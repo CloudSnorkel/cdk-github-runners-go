@@ -48,9 +48,12 @@ type ContainerImageBuilderProps struct {
 	// Version of GitHub Runners to install.
 	// Experimental.
 	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
-	// Security Group to assign to this instance.
-	// Experimental.
+	// Security group to assign to launched builder instances.
+	// Deprecated: use {@link securityGroups}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Security groups to assign to launched builder instances.
+	// Experimental.
+	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Where to place the network interfaces within the VPC.
 	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`

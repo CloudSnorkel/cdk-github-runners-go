@@ -43,9 +43,12 @@ type LambdaRunnerProps struct {
 	// Developer Guide.
 	// Experimental.
 	MemorySize *float64 `field:"optional" json:"memorySize" yaml:"memorySize"`
-	// Security Group to assign to this instance.
-	// Experimental.
+	// Security group to assign to this instance.
+	// Deprecated: use {@link securityGroups}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Security groups to assign to this instance.
+	// Experimental.
+	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Where to place the network interfaces within the VPC.
 	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`

@@ -42,12 +42,6 @@ type LambdaRunner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Security group attached to the function.
-	// Experimental.
-	SecurityGroup() awsec2.ISecurityGroup
-	// VPC used for hosting the function.
-	// Experimental.
-	Vpc() awsec2.IVpc
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -132,26 +126,6 @@ func (j *jsiiProxy_LambdaRunner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_LambdaRunner) SecurityGroup() awsec2.ISecurityGroup {
-	var returns awsec2.ISecurityGroup
-	_jsii_.Get(
-		j,
-		"securityGroup",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_LambdaRunner) Vpc() awsec2.IVpc {
-	var returns awsec2.IVpc
-	_jsii_.Get(
-		j,
-		"vpc",
 		&returns,
 	)
 	return returns
