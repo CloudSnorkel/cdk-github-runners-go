@@ -85,6 +85,25 @@ func LinuxUbuntuComponents_Docker(scope constructs.Construct, id *string, _archi
 }
 
 // Experimental.
+func LinuxUbuntuComponents_ExtraCertificates(scope constructs.Construct, id *string, path *string) ImageBuilderComponent {
+	_init_.Initialize()
+
+	if err := validateLinuxUbuntuComponents_ExtraCertificatesParameters(scope, id, path); err != nil {
+		panic(err)
+	}
+	var returns ImageBuilderComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.LinuxUbuntuComponents",
+		"extraCertificates",
+		[]interface{}{scope, id, path},
+		&returns,
+	)
+
+	return returns
+}
+
+// Experimental.
 func LinuxUbuntuComponents_Git(scope constructs.Construct, id *string, _architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 

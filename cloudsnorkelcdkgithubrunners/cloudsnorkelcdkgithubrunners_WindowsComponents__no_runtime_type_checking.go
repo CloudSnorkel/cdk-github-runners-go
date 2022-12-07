@@ -17,6 +17,10 @@ func validateWindowsComponents_DockerParameters(scope constructs.Construct, id *
 	return nil
 }
 
+func validateWindowsComponents_ExtraCertificatesParameters(scope constructs.Construct, id *string, path *string) error {
+	return nil
+}
+
 func validateWindowsComponents_GitParameters(scope constructs.Construct, id *string) error {
 	return nil
 }

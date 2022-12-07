@@ -41,6 +41,22 @@ func validateLinuxUbuntuComponents_DockerParameters(scope constructs.Construct, 
 	return nil
 }
 
+func validateLinuxUbuntuComponents_ExtraCertificatesParameters(scope constructs.Construct, id *string, path *string) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if id == nil {
+		return fmt.Errorf("parameter id is required, but nil was provided")
+	}
+
+	if path == nil {
+		return fmt.Errorf("parameter path is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateLinuxUbuntuComponents_GitParameters(scope constructs.Construct, id *string, _architecture Architecture) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")

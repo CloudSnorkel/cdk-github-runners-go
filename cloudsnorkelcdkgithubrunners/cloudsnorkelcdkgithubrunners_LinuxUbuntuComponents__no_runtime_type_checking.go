@@ -13,6 +13,10 @@ func validateLinuxUbuntuComponents_DockerParameters(scope constructs.Construct, 
 	return nil
 }
 
+func validateLinuxUbuntuComponents_ExtraCertificatesParameters(scope constructs.Construct, id *string, path *string) error {
+	return nil
+}
+
 func validateLinuxUbuntuComponents_GitParameters(scope constructs.Construct, id *string, _architecture Architecture) error {
 	return nil
 }

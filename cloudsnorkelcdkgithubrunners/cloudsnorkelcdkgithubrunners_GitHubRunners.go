@@ -55,6 +55,8 @@ type GitHubRunners interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// Experimental.
+	Props() *GitHubRunnersProps
 	// Configured runner providers.
 	// Experimental.
 	Providers() *[]IRunnerProvider
@@ -76,6 +78,16 @@ func (j *jsiiProxy_GitHubRunners) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GitHubRunners) Props() *GitHubRunnersProps {
+	var returns *GitHubRunnersProps
+	_jsii_.Get(
+		j,
+		"props",
 		&returns,
 	)
 	return returns

@@ -45,6 +45,22 @@ func validateWindowsComponents_DockerParameters(scope constructs.Construct, id *
 	return nil
 }
 
+func validateWindowsComponents_ExtraCertificatesParameters(scope constructs.Construct, id *string, path *string) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if id == nil {
+		return fmt.Errorf("parameter id is required, but nil was provided")
+	}
+
+	if path == nil {
+		return fmt.Errorf("parameter path is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateWindowsComponents_GitParameters(scope constructs.Construct, id *string) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")

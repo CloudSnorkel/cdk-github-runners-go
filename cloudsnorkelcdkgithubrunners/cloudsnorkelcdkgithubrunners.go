@@ -171,6 +171,7 @@ func init() {
 		reflect.TypeOf((*GitHubRunners)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "props", GoGetter: "Props"},
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
 			_jsii_.MemberProperty{JsiiProperty: "secrets", GoGetter: "Secrets"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},

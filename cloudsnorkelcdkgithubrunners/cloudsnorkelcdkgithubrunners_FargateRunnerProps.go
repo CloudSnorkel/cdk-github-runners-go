@@ -81,7 +81,7 @@ type FargateRunnerProps struct {
 	// Experimental.
 	MemoryLimitMiB *float64 `field:"optional" json:"memoryLimitMiB" yaml:"memoryLimitMiB"`
 	// Security group to assign to the task.
-	// Deprecated: use {@link securityGroupss}.
+	// Deprecated: use {@link securityGroups}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to the task.
 	// Experimental.

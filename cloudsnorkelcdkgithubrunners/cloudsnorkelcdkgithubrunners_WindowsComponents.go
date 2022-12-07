@@ -104,6 +104,25 @@ func WindowsComponents_Docker(scope constructs.Construct, id *string) ImageBuild
 }
 
 // Experimental.
+func WindowsComponents_ExtraCertificates(scope constructs.Construct, id *string, path *string) ImageBuilderComponent {
+	_init_.Initialize()
+
+	if err := validateWindowsComponents_ExtraCertificatesParameters(scope, id, path); err != nil {
+		panic(err)
+	}
+	var returns ImageBuilderComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.WindowsComponents",
+		"extraCertificates",
+		[]interface{}{scope, id, path},
+		&returns,
+	)
+
+	return returns
+}
+
+// Experimental.
 func WindowsComponents_Git(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
