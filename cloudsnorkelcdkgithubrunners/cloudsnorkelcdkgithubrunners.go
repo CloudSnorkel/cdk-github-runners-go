@@ -8,6 +8,40 @@ import (
 
 func init() {
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.AmiBuilder",
+		reflect.TypeOf((*AmiBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addComponent", GoMethod: "AddComponent"},
+			_jsii_.MemberMethod{JsiiMethod: "addExtraCertificates", GoMethod: "AddExtraCertificates"},
+			_jsii_.MemberProperty{JsiiProperty: "architecture", GoGetter: "Architecture"},
+			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+			_jsii_.MemberProperty{JsiiProperty: "components", GoGetter: "Components"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "createImage", GoMethod: "CreateImage"},
+			_jsii_.MemberMethod{JsiiMethod: "createInfrastructure", GoMethod: "CreateInfrastructure"},
+			_jsii_.MemberMethod{JsiiMethod: "createLog", GoMethod: "CreateLog"},
+			_jsii_.MemberMethod{JsiiMethod: "createPipeline", GoMethod: "CreatePipeline"},
+			_jsii_.MemberProperty{JsiiProperty: "description", GoGetter: "Description"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "os", GoGetter: "Os"},
+			_jsii_.MemberProperty{JsiiProperty: "platform", GoGetter: "Platform"},
+			_jsii_.MemberMethod{JsiiMethod: "prependComponent", GoMethod: "PrependComponent"},
+			_jsii_.MemberProperty{JsiiProperty: "runnerVersion", GoGetter: "RunnerVersion"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_AmiBuilder{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IAmiBuilder)
+			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.AmiBuilderProps",
+		reflect.TypeOf((*AmiBuilderProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.Architecture",
 		reflect.TypeOf((*Architecture)(nil)).Elem(),
 		[]_jsii_.Member{
