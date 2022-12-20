@@ -60,6 +60,8 @@ type FargateRunner interface {
 	// VPC used for hosting the runner task.
 	// Experimental.
 	Vpc() awsec2.IVpc
+	// Experimental.
+	AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -281,6 +283,17 @@ func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 		&returns,
 	)
 	return returns
+}
+
+func (f *jsiiProxy_FargateRunner) AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string) {
+	if err := f.validateAddRetryParameters(task, errors); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		f,
+		"addRetry",
+		[]interface{}{task, errors},
+	)
 }
 
 func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {

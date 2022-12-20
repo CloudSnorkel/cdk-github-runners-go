@@ -17,6 +17,9 @@ type Ec2RunnerProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
+	// Options to retry operation in case of failure like missing capacity, or API quota issues.
+	// Experimental.
+	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// AMI builder that creates AMIs with GitHub runner pre-configured.
 	//
 	// On Linux, a user named `runner` is expected to exist with access to Docker.

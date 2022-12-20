@@ -15,5 +15,8 @@ type RunnerProviderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
+	// Options to retry operation in case of failure like missing capacity, or API quota issues.
+	// Experimental.
+	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 }
 

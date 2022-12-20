@@ -42,6 +42,8 @@ type CodeBuildRunner interface {
 	// CodeBuild project hosting the runner.
 	// Experimental.
 	Project() awscodebuild.Project
+	// Experimental.
+	AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -203,6 +205,17 @@ func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 		&returns,
 	)
 	return returns
+}
+
+func (c *jsiiProxy_CodeBuildRunner) AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string) {
+	if err := c.validateAddRetryParameters(task, errors); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		c,
+		"addRetry",
+		[]interface{}{task, errors},
+	)
 }
 
 func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {

@@ -17,11 +17,20 @@ type CodeBuildRunnerProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
+	// Options to retry operation in case of failure like missing capacity, or API quota issues.
+	// Experimental.
+	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// The type of compute to use for this build.
 	//
 	// See the {@link ComputeType} enum for the possible values.
 	// Experimental.
 	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
+	// Support building and running Docker images by enabling Docker-in-Docker (dind) and the required CodeBuild privileged mode.
+	//
+	// Disabling this can
+	// speed up provisioning of CodeBuild runners. If you don't intend on running or building Docker images, disable this for faster start-up times.
+	// Experimental.
+	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
 	// Image builder for CodeBuild image with GitHub runner pre-configured.
 	//
 	// A user named `runner` is expected to exist with access to Docker-in-Docker.

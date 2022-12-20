@@ -44,6 +44,9 @@ type GitHubRunnersProps struct {
 	// If the user cancelled the job, or if another runner stole it, this stops the runner to avoid wasting resources.
 	// Experimental.
 	IdleTimeout awscdk.Duration `field:"optional" json:"idleTimeout" yaml:"idleTimeout"`
+	// Logging options for the state machine that manages the runners.
+	// Experimental.
+	LogOptions *LogOptions `field:"optional" json:"logOptions" yaml:"logOptions"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.

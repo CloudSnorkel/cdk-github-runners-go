@@ -84,6 +84,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
 		reflect.TypeOf((*CodeBuildRunner)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
@@ -146,6 +147,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.Ec2Runner",
 		reflect.TypeOf((*Ec2Runner)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
@@ -171,6 +173,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.FargateRunner",
 		reflect.TypeOf((*FargateRunner)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
 			_jsii_.MemberProperty{JsiiProperty: "assignPublicIp", GoGetter: "AssignPublicIp"},
 			_jsii_.MemberProperty{JsiiProperty: "cluster", GoGetter: "Cluster"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
@@ -333,6 +336,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.LambdaRunner",
 		reflect.TypeOf((*LambdaRunner)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "function", GoGetter: "Function"},
 			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
@@ -364,6 +368,10 @@ func init() {
 			return &jsiiProxy_LinuxUbuntuComponents{}
 		},
 	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.LogOptions",
+		reflect.TypeOf((*LogOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.Os",
 		reflect.TypeOf((*Os)(nil)).Elem(),
@@ -375,6 +383,10 @@ func init() {
 		func() interface{} {
 			return &jsiiProxy_Os{}
 		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ProviderRetryOptions",
+		reflect.TypeOf((*ProviderRetryOptions)(nil)).Elem(),
 	)
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerAmi",

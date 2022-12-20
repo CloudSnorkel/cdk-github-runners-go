@@ -31,6 +31,8 @@ type Ec2Runner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// Experimental.
+	AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -150,6 +152,17 @@ func Ec2Runner_IsConstruct(x interface{}) *bool {
 	)
 
 	return returns
+}
+
+func (e *jsiiProxy_Ec2Runner) AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string) {
+	if err := e.validateAddRetryParameters(task, errors); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		e,
+		"addRetry",
+		[]interface{}{task, errors},
+	)
 }
 
 func (e *jsiiProxy_Ec2Runner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
