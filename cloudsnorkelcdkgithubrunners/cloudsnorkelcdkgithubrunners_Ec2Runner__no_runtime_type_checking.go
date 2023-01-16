@@ -5,7 +5,7 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (e *jsiiProxy_Ec2Runner) validateAddRetryParameters(task awsstepfunctions.TaskStateBase, errors *[]*string) error {
+func (e *jsiiProxy_Ec2Runner) validateAddRetryParameters(task interface{}, errors *[]*string) error {
 	return nil
 }
 

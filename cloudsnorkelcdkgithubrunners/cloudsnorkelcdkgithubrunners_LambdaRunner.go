@@ -43,7 +43,7 @@ type LambdaRunner interface {
 	// Experimental.
 	Node() constructs.Node
 	// Experimental.
-	AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string)
+	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -207,7 +207,7 @@ func LambdaRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (l *jsiiProxy_LambdaRunner) AddRetry(task awsstepfunctions.TaskStateBase, errors *[]*string) {
+func (l *jsiiProxy_LambdaRunner) AddRetry(task interface{}, errors *[]*string) {
 	if err := l.validateAddRetryParameters(task, errors); err != nil {
 		panic(err)
 	}

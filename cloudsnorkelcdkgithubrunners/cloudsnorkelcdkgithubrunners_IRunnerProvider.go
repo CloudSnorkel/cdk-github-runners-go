@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
+	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
@@ -16,6 +17,7 @@ import (
 // Experimental.
 type IRunnerProvider interface {
 	awsec2.IConnectable
+	constructs.IConstruct
 	awsiam.IGrantable
 	// Generate step function tasks that execute the runner.
 	//
@@ -45,6 +47,7 @@ type IRunnerProvider interface {
 // The jsii proxy for IRunnerProvider
 type jsiiProxy_IRunnerProvider struct {
 	internal.Type__awsec2IConnectable
+	internal.Type__constructsIConstruct
 	internal.Type__awsiamIGrantable
 }
 
@@ -116,6 +119,16 @@ func (j *jsiiProxy_IRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	_jsii_.Get(
 		j,
 		"grantPrincipal",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_IRunnerProvider) Node() constructs.Node {
+	var returns constructs.Node
+	_jsii_.Get(
+		j,
+		"node",
 		&returns,
 	)
 	return returns

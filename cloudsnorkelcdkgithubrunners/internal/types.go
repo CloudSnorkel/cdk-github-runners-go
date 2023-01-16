@@ -7,5 +7,6 @@ import (
 )
 type Type__constructsConstruct = constructs.Construct
 type Type__awsec2IConnectable = awsec2.IConnectable
+type Type__constructsIConstruct = constructs.IConstruct
 type Type__awsiamIGrantable = awsiam.IGrantable
 type Type__awscdkResource = awscdk.Resource

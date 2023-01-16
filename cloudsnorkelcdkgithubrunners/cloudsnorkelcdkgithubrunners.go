@@ -275,11 +275,13 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
 			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 		},
 		func() interface{} {
 			j := jsiiProxy_IRunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			_jsii_.InitJsiiProxy(&j.Type__constructsIConstruct)
 			_jsii_.InitJsiiProxy(&j.Type__awsiamIGrantable)
 			return &j
 		},

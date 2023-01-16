@@ -13,9 +13,19 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (c *jsiiProxy_CodeBuildRunner) validateAddRetryParameters(task awsstepfunctions.TaskStateBase, errors *[]*string) error {
+func (c *jsiiProxy_CodeBuildRunner) validateAddRetryParameters(task interface{}, errors *[]*string) error {
 	if task == nil {
 		return fmt.Errorf("parameter task is required, but nil was provided")
+	}
+	switch task.(type) {
+	case awsstepfunctions.Parallel:
+		// ok
+	case awsstepfunctions.TaskStateBase:
+		// ok
+	default:
+		if !_jsii_.IsAnonymousProxy(task) {
+			return fmt.Errorf("parameter task must be one of the allowed types: awsstepfunctions.Parallel, awsstepfunctions.TaskStateBase; received %#v (a %T)", task, task)
+		}
 	}
 
 	if errors == nil {

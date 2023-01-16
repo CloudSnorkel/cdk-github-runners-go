@@ -13,6 +13,11 @@ type AmiBuilderProps struct {
 	// Image architecture.
 	// Experimental.
 	Architecture Architecture `field:"optional" json:"architecture" yaml:"architecture"`
+	// Install Docker inside the image, so it can be used by the runner.
+	//
+	// You may want to disable this if you are building a Windows image and don't have a Docker Desktop license.
+	// Experimental.
+	InstallDocker *bool `field:"optional" json:"installDocker" yaml:"installDocker"`
 	// The instance type used to build the image.
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
