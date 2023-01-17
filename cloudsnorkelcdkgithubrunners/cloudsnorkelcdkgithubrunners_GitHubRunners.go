@@ -5,6 +5,7 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudwatch"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
@@ -63,6 +64,30 @@ type GitHubRunners interface {
 	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
+	// Metric for failed runner executions.
+	//
+	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link metricJobCompleted}.
+	// Experimental.
+	MetricFailed(props *awscloudwatch.MetricProps) awscloudwatch.Metric
+	// Metric for the number of GitHub Actions jobs completed.
+	//
+	// It has `ProviderLabels` and `Status` dimensions. The status can be one of "Succeeded", "SucceededWithIssues", "Failed", "Canceled", "Skipped", or "Abandoned".
+	//
+	// **WARNING:** this method creates a metric filter for each provider. Each metric has a status dimension with six possible values. These resources may incur cost.
+	// Experimental.
+	MetricJobCompleted(props *awscloudwatch.MetricProps) awscloudwatch.Metric
+	// Metric for successful executions.
+	//
+	// A successful execution doesn't always mean a runner was started. It can be successful even without any label matches.
+	//
+	// A successful runner doesn't mean the job it executed was successful. For that, see {@link metricJobCompleted}.
+	// Experimental.
+	MetricSucceeded(props *awscloudwatch.MetricProps) awscloudwatch.Metric
+	// Metric for the interval, in milliseconds, between the time the execution starts and the time it closes.
+	//
+	// This time may be longer than the time the runner took.
+	// Experimental.
+	MetricTime(props *awscloudwatch.MetricProps) awscloudwatch.Metric
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -159,6 +184,70 @@ func GitHubRunners_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.GitHubRunners",
 		"isConstruct",
 		[]interface{}{x},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricFailed(props *awscloudwatch.MetricProps) awscloudwatch.Metric {
+	if err := g.validateMetricFailedParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricFailed",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricJobCompleted(props *awscloudwatch.MetricProps) awscloudwatch.Metric {
+	if err := g.validateMetricJobCompletedParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricJobCompleted",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricSucceeded(props *awscloudwatch.MetricProps) awscloudwatch.Metric {
+	if err := g.validateMetricSucceededParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricSucceeded",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricTime(props *awscloudwatch.MetricProps) awscloudwatch.Metric {
+	if err := g.validateMetricTimeParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricTime",
+		[]interface{}{props},
 		&returns,
 	)
 

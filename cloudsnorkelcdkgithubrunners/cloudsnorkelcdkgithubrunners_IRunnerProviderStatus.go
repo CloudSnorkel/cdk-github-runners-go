@@ -17,6 +17,9 @@ type IRunnerProviderStatus interface {
 	// Labels associated with provider.
 	// Experimental.
 	Labels() *[]*string
+	// Log group for runners.
+	// Experimental.
+	LogGroup() *string
 	// Role attached to runners.
 	// Experimental.
 	RoleArn() *string
@@ -61,6 +64,16 @@ func (j *jsiiProxy_IRunnerProviderStatus) Labels() *[]*string {
 	_jsii_.Get(
 		j,
 		"labels",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_IRunnerProviderStatus) LogGroup() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"logGroup",
 		&returns,
 	)
 	return returns

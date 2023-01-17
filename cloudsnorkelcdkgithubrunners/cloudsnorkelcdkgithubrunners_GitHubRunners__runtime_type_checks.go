@@ -8,8 +8,41 @@ import (
 
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudwatch"
 	"github.com/aws/constructs-go/constructs/v10"
 )
+
+func (g *jsiiProxy_GitHubRunners) validateMetricFailedParameters(props *awscloudwatch.MetricProps) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *awscloudwatch.MetricProps) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricProps) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (g *jsiiProxy_GitHubRunners) validateMetricTimeParameters(props *awscloudwatch.MetricProps) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func validateGitHubRunners_IsConstructParameters(x interface{}) error {
 	if x == nil {

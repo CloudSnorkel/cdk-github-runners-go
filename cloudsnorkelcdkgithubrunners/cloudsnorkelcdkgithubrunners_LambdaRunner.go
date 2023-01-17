@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
@@ -39,6 +40,11 @@ type LambdaRunner interface {
 	// Labels associated with this provider.
 	// Experimental.
 	Labels() *[]*string
+	// Log group where provided runners will save their logs.
+	//
+	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
+	// Experimental.
+	LogGroup() awslogs.ILogGroup
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -118,6 +124,16 @@ func (j *jsiiProxy_LambdaRunner) Labels() *[]*string {
 	_jsii_.Get(
 		j,
 		"labels",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_LambdaRunner) LogGroup() awslogs.ILogGroup {
+	var returns awslogs.ILogGroup
+	_jsii_.Get(
+		j,
+		"logGroup",
 		&returns,
 	)
 	return returns
