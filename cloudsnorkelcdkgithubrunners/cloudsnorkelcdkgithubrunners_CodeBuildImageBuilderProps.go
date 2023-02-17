@@ -19,6 +19,13 @@ type CodeBuildImageBuilderProps struct {
 	// Image architecture.
 	// Experimental.
 	Architecture Architecture `field:"optional" json:"architecture" yaml:"architecture"`
+	// Build image to use in CodeBuild.
+	//
+	// This is the image that's going to run the code that builds the runner image.
+	//
+	// The only action taken in CodeBuild is running `docker build`. You would therefore not need to change this setting often.
+	// Experimental.
+	BuildImage awscodebuild.IBuildImage `field:"optional" json:"buildImage" yaml:"buildImage"`
 	// The type of compute to use for this build.
 	//
 	// See the {@link ComputeType} enum for the possible values.
