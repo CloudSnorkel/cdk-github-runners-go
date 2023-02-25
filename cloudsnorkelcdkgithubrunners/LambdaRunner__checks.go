@@ -13,7 +13,7 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (c *jsiiProxy_CodeBuildRunner) validateAddRetryParameters(task interface{}, errors *[]*string) error {
+func (l *jsiiProxy_LambdaRunner) validateAddRetryParameters(task interface{}, errors *[]*string) error {
 	if task == nil {
 		return fmt.Errorf("parameter task is required, but nil was provided")
 	}
@@ -35,7 +35,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateAddRetryParameters(task interface{},
 	return nil
 }
 
-func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
+func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
 	if parameters == nil {
 		return fmt.Errorf("parameter parameters is required, but nil was provided")
 	}
@@ -46,7 +46,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
-func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+func (l *jsiiProxy_LambdaRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
 	if _arg == nil {
 		return fmt.Errorf("parameter _arg is required, but nil was provided")
 	}
@@ -54,7 +54,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(_arg aws
 	return nil
 }
 
-func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
+func (l *jsiiProxy_LambdaRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
 	if defaultLabel == nil {
 		return fmt.Errorf("parameter defaultLabel is required, but nil was provided")
 	}
@@ -62,7 +62,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateLabelsFromPropertiesParameters(defau
 	return nil
 }
 
-func (c *jsiiProxy_CodeBuildRunner) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
+func (l *jsiiProxy_LambdaRunner) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
 	if statusFunctionRole == nil {
 		return fmt.Errorf("parameter statusFunctionRole is required, but nil was provided")
 	}
@@ -70,7 +70,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateStatusParameters(statusFunctionRole 
 	return nil
 }
 
-func validateCodeBuildRunner_IsConstructParameters(x interface{}) error {
+func validateLambdaRunner_IsConstructParameters(x interface{}) error {
 	if x == nil {
 		return fmt.Errorf("parameter x is required, but nil was provided")
 	}
@@ -78,7 +78,7 @@ func validateCodeBuildRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
-func validateNewCodeBuildRunnerParameters(scope constructs.Construct, id *string, props *CodeBuildRunnerProps) error {
+func validateNewLambdaRunnerParameters(scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}

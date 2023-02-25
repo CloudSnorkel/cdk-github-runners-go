@@ -10,62 +10,56 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using EC2 to execute jobs.
-//
-// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
+// Deprecated: use {@link Ec2RunnerProvider}.
 type Ec2Runner interface {
-	constructs.Construct
-	IRunnerProvider
+	Ec2RunnerProvider
 	// The network connections associated with this resource.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	GrantPrincipal() awsiam.IPrincipal
 	// Labels associated with this provider.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	Node() constructs.Node
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	GrantStateMachine(stateMachineRole awsiam.IGrantable)
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
 	//
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
-	// Experimental.
+	// Deprecated: use {@link Ec2RunnerProvider}.
 	ToString() *string
 }
 
 // The jsii proxy struct for Ec2Runner
 type jsiiProxy_Ec2Runner struct {
-	internal.Type__constructsConstruct
-	jsiiProxy_IRunnerProvider
+	jsiiProxy_Ec2RunnerProvider
 }
 
 func (j *jsiiProxy_Ec2Runner) Connections() awsec2.Connections {
@@ -119,8 +113,8 @@ func (j *jsiiProxy_Ec2Runner) Node() constructs.Node {
 }
 
 
-// Experimental.
-func NewEc2Runner(scope constructs.Construct, id *string, props *Ec2RunnerProps) Ec2Runner {
+// Deprecated: use {@link Ec2RunnerProvider}.
+func NewEc2Runner(scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) Ec2Runner {
 	_init_.Initialize()
 
 	if err := validateNewEc2RunnerParameters(scope, id, props); err != nil {
@@ -137,8 +131,8 @@ func NewEc2Runner(scope constructs.Construct, id *string, props *Ec2RunnerProps)
 	return &j
 }
 
-// Experimental.
-func NewEc2Runner_Override(e Ec2Runner, scope constructs.Construct, id *string, props *Ec2RunnerProps) {
+// Deprecated: use {@link Ec2RunnerProvider}.
+func NewEc2Runner_Override(e Ec2Runner, scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) {
 	_init_.Initialize()
 
 	_jsii_.Create(

@@ -78,7 +78,7 @@ func validateFargateRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
-func validateNewFargateRunnerParameters(scope constructs.Construct, id *string, props *FargateRunnerProps) error {
+func validateNewFargateRunnerParameters(scope constructs.Construct, id *string, props *FargateRunnerProviderProps) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}

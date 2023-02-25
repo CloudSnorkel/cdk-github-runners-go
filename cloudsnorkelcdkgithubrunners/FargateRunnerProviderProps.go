@@ -9,7 +9,7 @@ import (
 
 // Properties for FargateRunner.
 // Experimental.
-type FargateRunnerProps struct {
+type FargateRunnerProviderProps struct {
 	// The number of days log events are kept in CloudWatch Logs.
 	//
 	// When updating

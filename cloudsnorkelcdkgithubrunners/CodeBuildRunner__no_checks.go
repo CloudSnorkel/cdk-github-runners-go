@@ -29,7 +29,7 @@ func validateCodeBuildRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
-func validateNewCodeBuildRunnerParameters(scope constructs.Construct, id *string, props *CodeBuildRunnerProps) error {
+func validateNewCodeBuildRunnerParameters(scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) error {
 	return nil
 }
 

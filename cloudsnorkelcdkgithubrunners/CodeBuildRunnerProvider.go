@@ -5,8 +5,8 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awscodebuild"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsecs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
@@ -14,33 +14,24 @@ import (
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using Fargate to execute jobs.
+// GitHub Actions runner provider using CodeBuild to execute jobs.
 //
-// Creates a task definition with a single container that gets started for each job.
+// Creates a project that gets started for each job.
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
-type FargateRunner interface {
+type CodeBuildRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
-	// Whether runner task will have a public IP.
-	// Experimental.
-	AssignPublicIp() *bool
-	// Cluster hosting the task hosting the runner.
-	// Experimental.
-	Cluster() awsecs.Cluster
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
-	// Container definition hosting the runner.
-	// Experimental.
-	Container() awsecs.ContainerDefinition
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
-	// The image is built by an image builder and is specific to Fargate tasks.
+	// The image is built by an image builder and is specific to CodeBuild.
 	// Experimental.
 	Image() *RunnerImage
 	// Labels associated with this provider.
@@ -54,18 +45,9 @@ type FargateRunner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Use spot pricing for Fargate tasks.
+	// CodeBuild project hosting the runner.
 	// Experimental.
-	Spot() *bool
-	// Subnets used for hosting the runner task.
-	// Experimental.
-	SubnetSelection() *awsec2.SubnetSelection
-	// Fargate task hosting the runner.
-	// Experimental.
-	Task() awsecs.FargateTaskDefinition
-	// VPC used for hosting the runner task.
-	// Experimental.
-	Vpc() awsec2.IVpc
+	Project() awscodebuild.Project
 	// Experimental.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
@@ -91,33 +73,13 @@ type FargateRunner interface {
 	ToString() *string
 }
 
-// The jsii proxy struct for FargateRunner
-type jsiiProxy_FargateRunner struct {
+// The jsii proxy struct for CodeBuildRunnerProvider
+type jsiiProxy_CodeBuildRunnerProvider struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IRunnerProvider
 }
 
-func (j *jsiiProxy_FargateRunner) AssignPublicIp() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"assignPublicIp",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) Cluster() awsecs.Cluster {
-	var returns awsecs.Cluster
-	_jsii_.Get(
-		j,
-		"cluster",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) Connections() awsec2.Connections {
+func (j *jsiiProxy_CodeBuildRunnerProvider) Connections() awsec2.Connections {
 	var returns awsec2.Connections
 	_jsii_.Get(
 		j,
@@ -127,17 +89,7 @@ func (j *jsiiProxy_FargateRunner) Connections() awsec2.Connections {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Container() awsecs.ContainerDefinition {
-	var returns awsecs.ContainerDefinition
-	_jsii_.Get(
-		j,
-		"container",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) GrantPrincipal() awsiam.IPrincipal {
+func (j *jsiiProxy_CodeBuildRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	var returns awsiam.IPrincipal
 	_jsii_.Get(
 		j,
@@ -147,7 +99,7 @@ func (j *jsiiProxy_FargateRunner) GrantPrincipal() awsiam.IPrincipal {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Image() *RunnerImage {
+func (j *jsiiProxy_CodeBuildRunnerProvider) Image() *RunnerImage {
 	var returns *RunnerImage
 	_jsii_.Get(
 		j,
@@ -157,7 +109,7 @@ func (j *jsiiProxy_FargateRunner) Image() *RunnerImage {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Labels() *[]*string {
+func (j *jsiiProxy_CodeBuildRunnerProvider) Labels() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
 		j,
@@ -167,7 +119,7 @@ func (j *jsiiProxy_FargateRunner) Labels() *[]*string {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) LogGroup() awslogs.ILogGroup {
+func (j *jsiiProxy_CodeBuildRunnerProvider) LogGroup() awslogs.ILogGroup {
 	var returns awslogs.ILogGroup
 	_jsii_.Get(
 		j,
@@ -177,7 +129,7 @@ func (j *jsiiProxy_FargateRunner) LogGroup() awslogs.ILogGroup {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Node() constructs.Node {
+func (j *jsiiProxy_CodeBuildRunnerProvider) Node() constructs.Node {
 	var returns constructs.Node
 	_jsii_.Get(
 		j,
@@ -187,41 +139,11 @@ func (j *jsiiProxy_FargateRunner) Node() constructs.Node {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunner) Spot() *bool {
-	var returns *bool
+func (j *jsiiProxy_CodeBuildRunnerProvider) Project() awscodebuild.Project {
+	var returns awscodebuild.Project
 	_jsii_.Get(
 		j,
-		"spot",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) SubnetSelection() *awsec2.SubnetSelection {
-	var returns *awsec2.SubnetSelection
-	_jsii_.Get(
-		j,
-		"subnetSelection",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) Task() awsecs.FargateTaskDefinition {
-	var returns awsecs.FargateTaskDefinition
-	_jsii_.Get(
-		j,
-		"task",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) Vpc() awsec2.IVpc {
-	var returns awsec2.IVpc
-	_jsii_.Get(
-		j,
-		"vpc",
+		"project",
 		&returns,
 	)
 	return returns
@@ -229,16 +151,16 @@ func (j *jsiiProxy_FargateRunner) Vpc() awsec2.IVpc {
 
 
 // Experimental.
-func NewFargateRunner(scope constructs.Construct, id *string, props *FargateRunnerProps) FargateRunner {
+func NewCodeBuildRunnerProvider(scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) CodeBuildRunnerProvider {
 	_init_.Initialize()
 
-	if err := validateNewFargateRunnerParameters(scope, id, props); err != nil {
+	if err := validateNewCodeBuildRunnerProviderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	j := jsiiProxy_FargateRunner{}
+	j := jsiiProxy_CodeBuildRunnerProvider{}
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		[]interface{}{scope, id, props},
 		&j,
 	)
@@ -247,13 +169,13 @@ func NewFargateRunner(scope constructs.Construct, id *string, props *FargateRunn
 }
 
 // Experimental.
-func NewFargateRunner_Override(f FargateRunner, scope constructs.Construct, id *string, props *FargateRunnerProps) {
+func NewCodeBuildRunnerProvider_Override(c CodeBuildRunnerProvider, scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) {
 	_init_.Initialize()
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		[]interface{}{scope, id, props},
-		f,
+		c,
 	)
 }
 
@@ -261,16 +183,16 @@ func NewFargateRunner_Override(f FargateRunner, scope constructs.Construct, id *
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
 // Deprecated: use `x instanceof Construct` instead.
-func FargateRunner_IsConstruct(x interface{}) *bool {
+func CodeBuildRunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
-	if err := validateFargateRunner_IsConstructParameters(x); err != nil {
+	if err := validateCodeBuildRunnerProvider_IsConstructParameters(x); err != nil {
 		panic(err)
 	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
-		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
 		&returns,
@@ -279,47 +201,47 @@ func FargateRunner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func FargateRunner_LINUX_ARM64_DOCKERFILE_PATH() *string {
+func CodeBuildRunnerProvider_LINUX_ARM64_DOCKERFILE_PATH() *string {
 	_init_.Initialize()
 	var returns *string
 	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		"LINUX_ARM64_DOCKERFILE_PATH",
 		&returns,
 	)
 	return returns
 }
 
-func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
+func CodeBuildRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
 	_init_.Initialize()
 	var returns *string
 	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.FargateRunner",
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		"LINUX_X64_DOCKERFILE_PATH",
 		&returns,
 	)
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) AddRetry(task interface{}, errors *[]*string) {
-	if err := f.validateAddRetryParameters(task, errors); err != nil {
+func (c *jsiiProxy_CodeBuildRunnerProvider) AddRetry(task interface{}, errors *[]*string) {
+	if err := c.validateAddRetryParameters(task, errors); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
-		f,
+		c,
 		"addRetry",
 		[]interface{}{task, errors},
 	)
 }
 
-func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := f.validateGetStepFunctionTaskParameters(parameters); err != nil {
+func (c *jsiiProxy_CodeBuildRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(
-		f,
+		c,
 		"getStepFunctionTask",
 		[]interface{}{parameters},
 		&returns,
@@ -328,25 +250,25 @@ func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeP
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := f.validateGrantStateMachineParameters(_arg); err != nil {
+func (c *jsiiProxy_CodeBuildRunnerProvider) GrantStateMachine(_arg awsiam.IGrantable) {
+	if err := c.validateGrantStateMachineParameters(_arg); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
-		f,
+		c,
 		"grantStateMachine",
 		[]interface{}{_arg},
 	)
 }
 
-func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := f.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
+func (c *jsiiProxy_CodeBuildRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
+	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
 	}
 	var returns *[]*string
 
 	_jsii_.Invoke(
-		f,
+		c,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
@@ -355,14 +277,14 @@ func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, pro
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := f.validateStatusParameters(statusFunctionRole); err != nil {
+func (c *jsiiProxy_CodeBuildRunnerProvider) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := c.validateStatusParameters(statusFunctionRole); err != nil {
 		panic(err)
 	}
 	var returns IRunnerProviderStatus
 
 	_jsii_.Invoke(
-		f,
+		c,
 		"status",
 		[]interface{}{statusFunctionRole},
 		&returns,
@@ -371,11 +293,11 @@ func (f *jsiiProxy_FargateRunner) Status(statusFunctionRole awsiam.IGrantable) I
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) ToString() *string {
+func (c *jsiiProxy_CodeBuildRunnerProvider) ToString() *string {
 	var returns *string
 
 	_jsii_.Invoke(
-		f,
+		c,
 		"toString",
 		nil, // no parameters
 		&returns,

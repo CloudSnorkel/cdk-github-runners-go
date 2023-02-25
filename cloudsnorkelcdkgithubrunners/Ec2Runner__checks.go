@@ -78,7 +78,7 @@ func validateEc2Runner_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
-func validateNewEc2RunnerParameters(scope constructs.Construct, id *string, props *Ec2RunnerProps) error {
+func validateNewEc2RunnerParameters(scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}

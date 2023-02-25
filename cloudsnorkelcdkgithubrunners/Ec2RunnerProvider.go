@@ -5,7 +5,6 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2/awscodebuild"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
@@ -14,13 +13,11 @@ import (
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// GitHub Actions runner provider using CodeBuild to execute jobs.
-//
-// Creates a project that gets started for each job.
+// GitHub Actions runner provider using EC2 to execute jobs.
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
-type CodeBuildRunner interface {
+type Ec2RunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	// The network connections associated with this resource.
@@ -29,11 +26,6 @@ type CodeBuildRunner interface {
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image loaded with GitHub Actions Runner and its prerequisites.
-	//
-	// The image is built by an image builder and is specific to CodeBuild.
-	// Experimental.
-	Image() *RunnerImage
 	// Labels associated with this provider.
 	// Experimental.
 	Labels() *[]*string
@@ -45,9 +37,6 @@ type CodeBuildRunner interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// CodeBuild project hosting the runner.
-	// Experimental.
-	Project() awscodebuild.Project
 	// Experimental.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
@@ -60,7 +49,7 @@ type CodeBuildRunner interface {
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Experimental.
-	GrantStateMachine(_arg awsiam.IGrantable)
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
@@ -73,13 +62,13 @@ type CodeBuildRunner interface {
 	ToString() *string
 }
 
-// The jsii proxy struct for CodeBuildRunner
-type jsiiProxy_CodeBuildRunner struct {
+// The jsii proxy struct for Ec2RunnerProvider
+type jsiiProxy_Ec2RunnerProvider struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IRunnerProvider
 }
 
-func (j *jsiiProxy_CodeBuildRunner) Connections() awsec2.Connections {
+func (j *jsiiProxy_Ec2RunnerProvider) Connections() awsec2.Connections {
 	var returns awsec2.Connections
 	_jsii_.Get(
 		j,
@@ -89,7 +78,7 @@ func (j *jsiiProxy_CodeBuildRunner) Connections() awsec2.Connections {
 	return returns
 }
 
-func (j *jsiiProxy_CodeBuildRunner) GrantPrincipal() awsiam.IPrincipal {
+func (j *jsiiProxy_Ec2RunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	var returns awsiam.IPrincipal
 	_jsii_.Get(
 		j,
@@ -99,17 +88,7 @@ func (j *jsiiProxy_CodeBuildRunner) GrantPrincipal() awsiam.IPrincipal {
 	return returns
 }
 
-func (j *jsiiProxy_CodeBuildRunner) Image() *RunnerImage {
-	var returns *RunnerImage
-	_jsii_.Get(
-		j,
-		"image",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunner) Labels() *[]*string {
+func (j *jsiiProxy_Ec2RunnerProvider) Labels() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
 		j,
@@ -119,7 +98,7 @@ func (j *jsiiProxy_CodeBuildRunner) Labels() *[]*string {
 	return returns
 }
 
-func (j *jsiiProxy_CodeBuildRunner) LogGroup() awslogs.ILogGroup {
+func (j *jsiiProxy_Ec2RunnerProvider) LogGroup() awslogs.ILogGroup {
 	var returns awslogs.ILogGroup
 	_jsii_.Get(
 		j,
@@ -129,7 +108,7 @@ func (j *jsiiProxy_CodeBuildRunner) LogGroup() awslogs.ILogGroup {
 	return returns
 }
 
-func (j *jsiiProxy_CodeBuildRunner) Node() constructs.Node {
+func (j *jsiiProxy_Ec2RunnerProvider) Node() constructs.Node {
 	var returns constructs.Node
 	_jsii_.Get(
 		j,
@@ -139,28 +118,18 @@ func (j *jsiiProxy_CodeBuildRunner) Node() constructs.Node {
 	return returns
 }
 
-func (j *jsiiProxy_CodeBuildRunner) Project() awscodebuild.Project {
-	var returns awscodebuild.Project
-	_jsii_.Get(
-		j,
-		"project",
-		&returns,
-	)
-	return returns
-}
-
 
 // Experimental.
-func NewCodeBuildRunner(scope constructs.Construct, id *string, props *CodeBuildRunnerProps) CodeBuildRunner {
+func NewEc2RunnerProvider(scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) Ec2RunnerProvider {
 	_init_.Initialize()
 
-	if err := validateNewCodeBuildRunnerParameters(scope, id, props); err != nil {
+	if err := validateNewEc2RunnerProviderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	j := jsiiProxy_CodeBuildRunner{}
+	j := jsiiProxy_Ec2RunnerProvider{}
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProvider",
 		[]interface{}{scope, id, props},
 		&j,
 	)
@@ -169,13 +138,13 @@ func NewCodeBuildRunner(scope constructs.Construct, id *string, props *CodeBuild
 }
 
 // Experimental.
-func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, id *string, props *CodeBuildRunnerProps) {
+func NewEc2RunnerProvider_Override(e Ec2RunnerProvider, scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) {
 	_init_.Initialize()
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProvider",
 		[]interface{}{scope, id, props},
-		c,
+		e,
 	)
 }
 
@@ -183,16 +152,16 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
 // Deprecated: use `x instanceof Construct` instead.
-func CodeBuildRunner_IsConstruct(x interface{}) *bool {
+func Ec2RunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
-	if err := validateCodeBuildRunner_IsConstructParameters(x); err != nil {
+	if err := validateEc2RunnerProvider_IsConstructParameters(x); err != nil {
 		panic(err)
 	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
 		&returns,
@@ -201,47 +170,25 @@ func CodeBuildRunner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func CodeBuildRunner_LINUX_ARM64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
-		"LINUX_ARM64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
-		"LINUX_X64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunner) AddRetry(task interface{}, errors *[]*string) {
-	if err := c.validateAddRetryParameters(task, errors); err != nil {
+func (e *jsiiProxy_Ec2RunnerProvider) AddRetry(task interface{}, errors *[]*string) {
+	if err := e.validateAddRetryParameters(task, errors); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
-		c,
+		e,
 		"addRetry",
 		[]interface{}{task, errors},
 	)
 }
 
-func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
+func (e *jsiiProxy_Ec2RunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+	if err := e.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
 	var returns awsstepfunctions.IChainable
 
 	_jsii_.Invoke(
-		c,
+		e,
 		"getStepFunctionTask",
 		[]interface{}{parameters},
 		&returns,
@@ -250,25 +197,25 @@ func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntim
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := c.validateGrantStateMachineParameters(_arg); err != nil {
+func (e *jsiiProxy_Ec2RunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := e.validateGrantStateMachineParameters(stateMachineRole); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
-		c,
+		e,
 		"grantStateMachine",
-		[]interface{}{_arg},
+		[]interface{}{stateMachineRole},
 	)
 }
 
-func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
+func (e *jsiiProxy_Ec2RunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
+	if err := e.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
 	}
 	var returns *[]*string
 
 	_jsii_.Invoke(
-		c,
+		e,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
@@ -277,14 +224,14 @@ func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, p
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := c.validateStatusParameters(statusFunctionRole); err != nil {
+func (e *jsiiProxy_Ec2RunnerProvider) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
+	if err := e.validateStatusParameters(statusFunctionRole); err != nil {
 		panic(err)
 	}
 	var returns IRunnerProviderStatus
 
 	_jsii_.Invoke(
-		c,
+		e,
 		"status",
 		[]interface{}{statusFunctionRole},
 		&returns,
@@ -293,11 +240,11 @@ func (c *jsiiProxy_CodeBuildRunner) Status(statusFunctionRole awsiam.IGrantable)
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) ToString() *string {
+func (e *jsiiProxy_Ec2RunnerProvider) ToString() *string {
 	var returns *string
 
 	_jsii_.Invoke(
-		c,
+		e,
 		"toString",
 		nil, // no parameters
 		&returns,

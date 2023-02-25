@@ -3,13 +3,13 @@ package cloudsnorkelcdkgithubrunners
 
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awscodebuild"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 )
 
+// Properties for {@link Ec2RunnerProvider} construct.
 // Experimental.
-type CodeBuildRunnerProps struct {
+type Ec2RunnerProviderProps struct {
 	// The number of days log events are kept in CloudWatch Logs.
 	//
 	// When updating
@@ -20,25 +20,14 @@ type CodeBuildRunnerProps struct {
 	// Options to retry operation in case of failure like missing capacity, or API quota issues.
 	// Experimental.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// The type of compute to use for this build.
+	// AMI builder that creates AMIs with GitHub runner pre-configured.
 	//
-	// See the {@link ComputeType} enum for the possible values.
+	// On Linux, a user named `runner` is expected to exist with access to Docker.
 	// Experimental.
-	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
-	// Support building and running Docker images by enabling Docker-in-Docker (dind) and the required CodeBuild privileged mode.
-	//
-	// Disabling this can
-	// speed up provisioning of CodeBuild runners. If you don't intend on running or building Docker images, disable this for faster start-up times.
+	AmiBuilder IAmiBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
+	// Instance type for launched runner instances.
 	// Experimental.
-	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
-	// Image builder for CodeBuild image with GitHub runner pre-configured.
-	//
-	// A user named `runner` is expected to exist with access to Docker-in-Docker.
-	// Experimental.
-	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
-	// GitHub Actions label used for this provider.
-	// Deprecated: use {@link labels} instead.
-	Label *string `field:"optional" json:"label" yaml:"label"`
+	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
 	// GitHub Actions labels used for this provider.
 	//
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
@@ -46,22 +35,34 @@ type CodeBuildRunnerProps struct {
 	// job's labels, this provider will be chosen and spawn a new runner.
 	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
-	// Security group to assign to this instance.
+	// Security Group to assign to launched runner instances.
 	// Deprecated: use {@link securityGroups}.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
-	// Security groups to assign to this instance.
+	// Security groups to assign to launched runner instances.
 	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
+	// Use spot instances to save money.
+	//
+	// Spot instances are cheaper but not always available and can be stopped prematurely.
+	// Experimental.
+	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
+	// Set a maximum price for spot instances.
+	// Experimental.
+	SpotMaxPrice *string `field:"optional" json:"spotMaxPrice" yaml:"spotMaxPrice"`
+	// Size of volume available for launched runner instances.
+	//
+	// This modifies the boot volume size and doesn't add any additional volumes.
+	// Experimental.
+	StorageSize awscdk.Size `field:"optional" json:"storageSize" yaml:"storageSize"`
+	// Subnet where the runner instances will be launched.
+	// Deprecated: use {@link vpc} and {@link subnetSelection}.
+	Subnet awsec2.ISubnet `field:"optional" json:"subnet" yaml:"subnet"`
 	// Where to place the network interfaces within the VPC.
+	//
+	// Only the first matched subnet will be used.
 	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
-	// The number of minutes after which AWS CodeBuild stops the build if it's not complete.
-	//
-	// For valid values, see the timeoutInMinutes field in the AWS
-	// CodeBuild User Guide.
-	// Experimental.
-	Timeout awscdk.Duration `field:"optional" json:"timeout" yaml:"timeout"`
-	// VPC to launch the runners in.
+	// VPC where runner instances will be launched.
 	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }

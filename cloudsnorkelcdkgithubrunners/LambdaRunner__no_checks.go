@@ -29,7 +29,7 @@ func validateLambdaRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
-func validateNewLambdaRunnerParameters(scope constructs.Construct, id *string, props *LambdaRunnerProps) error {
+func validateNewLambdaRunnerParameters(scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) error {
 	return nil
 }
 

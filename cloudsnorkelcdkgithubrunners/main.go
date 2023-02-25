@@ -100,14 +100,38 @@ func init() {
 		},
 		func() interface{} {
 			j := jsiiProxy_CodeBuildRunner{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_CodeBuildRunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
+		reflect.TypeOf((*CodeBuildRunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "project", GoGetter: "Project"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_CodeBuildRunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
 			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProps",
-		reflect.TypeOf((*CodeBuildRunnerProps)(nil)).Elem(),
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProviderProps",
+		reflect.TypeOf((*CodeBuildRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.ContainerImageBuilder",
@@ -162,14 +186,36 @@ func init() {
 		},
 		func() interface{} {
 			j := jsiiProxy_Ec2Runner{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Ec2RunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProvider",
+		reflect.TypeOf((*Ec2RunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_Ec2RunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
 			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
-		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProps",
-		reflect.TypeOf((*Ec2RunnerProps)(nil)).Elem(),
+		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProviderProps",
+		reflect.TypeOf((*Ec2RunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.FargateRunner",
@@ -197,14 +243,44 @@ func init() {
 		},
 		func() interface{} {
 			j := jsiiProxy_FargateRunner{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_FargateRunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.FargateRunnerProvider",
+		reflect.TypeOf((*FargateRunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
+			_jsii_.MemberProperty{JsiiProperty: "assignPublicIp", GoGetter: "AssignPublicIp"},
+			_jsii_.MemberProperty{JsiiProperty: "cluster", GoGetter: "Cluster"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberProperty{JsiiProperty: "container", GoGetter: "Container"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "spot", GoGetter: "Spot"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberProperty{JsiiProperty: "subnetSelection", GoGetter: "SubnetSelection"},
+			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "vpc", GoGetter: "Vpc"},
+		},
+		func() interface{} {
+			j := jsiiProxy_FargateRunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
 			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
-		"@cloudsnorkel/cdk-github-runners.FargateRunnerProps",
-		reflect.TypeOf((*FargateRunnerProps)(nil)).Elem(),
+		"@cloudsnorkel/cdk-github-runners.FargateRunnerProviderProps",
+		reflect.TypeOf((*FargateRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.GitHubRunners",
@@ -363,14 +439,38 @@ func init() {
 		},
 		func() interface{} {
 			j := jsiiProxy_LambdaRunner{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_LambdaRunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProvider",
+		reflect.TypeOf((*LambdaRunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberProperty{JsiiProperty: "function", GoGetter: "Function"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_LambdaRunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
 			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
-		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProps",
-		reflect.TypeOf((*LambdaRunnerProps)(nil)).Elem(),
+		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProviderProps",
+		reflect.TypeOf((*LambdaRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.LinuxUbuntuComponents",
