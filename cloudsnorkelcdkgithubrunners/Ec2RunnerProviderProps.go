@@ -23,6 +23,8 @@ type Ec2RunnerProviderProps struct {
 	// AMI builder that creates AMIs with GitHub runner pre-configured.
 	//
 	// On Linux, a user named `runner` is expected to exist with access to Docker.
+	//
+	// The AMI builder determines the OS and architecture of the runner.
 	// Experimental.
 	AmiBuilder IAmiBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
 	// Instance type for launched runner instances.

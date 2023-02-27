@@ -25,6 +25,8 @@ type LambdaRunnerProviderProps struct {
 	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
 	//
 	// The default command (`CMD`) should be `["runner.handler"]` which points to an included `runner.js` with a function named `handler`. The function should start the GitHub runner.
+	//
+	// The image builder determines the OS and architecture of the runner.
 	// See: https://github.com/CloudSnorkel/cdk-github-runners/tree/main/src/providers/docker-images/lambda
 	//
 	// Experimental.

@@ -34,6 +34,8 @@ type CodeBuildRunnerProviderProps struct {
 	// Image builder for CodeBuild image with GitHub runner pre-configured.
 	//
 	// A user named `runner` is expected to exist with access to Docker-in-Docker.
+	//
+	// The image builder determines the OS and architecture of the runner.
 	// Experimental.
 	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.

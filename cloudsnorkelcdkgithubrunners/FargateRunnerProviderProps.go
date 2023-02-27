@@ -55,6 +55,8 @@ type FargateRunnerProviderProps struct {
 	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
 	//
 	// A user named `runner` is expected to exist.
+	//
+	// The image builder determines the OS and architecture of the runner.
 	// Experimental.
 	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
