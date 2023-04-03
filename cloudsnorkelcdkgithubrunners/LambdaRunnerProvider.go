@@ -179,6 +179,37 @@ func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.C
 	)
 }
 
+// Create new image builder that builds Lambda specific runner images using Amazon Linux 2.
+//
+// Included components:
+//  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.runnerUser()`
+//  * `RunnerImageComponent.git()`
+//  * `RunnerImageComponent.githubCli()`
+//  * `RunnerImageComponent.awsCli()`
+//  * `RunnerImageComponent.githubRunner()`
+//  * `RunnerImageComponent.lambdaEntrypoint()`
+//
+//  Base Docker image: `public.ecr.aws/lambda/nodejs:14-x86_64` or `public.ecr.aws/lambda/nodejs:14-arm64`
+// Experimental.
+func LambdaRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+	_init_.Initialize()
+
+	if err := validateLambdaRunnerProvider_ImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProvider",
+		"imageBuilder",
+		[]interface{}{scope, id, props},
+		&returns,
+	)
+
+	return returns
+}
+
 // Checks if `x` is a construct.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.

@@ -52,6 +52,18 @@ func (i *jsiiProxy_ImageBuilderComponent) validateGrantAssetsReadParameters(gran
 	return nil
 }
 
+func (i *jsiiProxy_ImageBuilderComponent) validatePrefixCommandsWithErrorHandlingParameters(platform *string, commands *[]*string) error {
+	if platform == nil {
+		return fmt.Errorf("parameter platform is required, but nil was provided")
+	}
+
+	if commands == nil {
+		return fmt.Errorf("parameter commands is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (i *jsiiProxy_ImageBuilderComponent) validateVersionParameters(type_ *string, name *string, data interface{}) error {
 	if type_ == nil {
 		return fmt.Errorf("parameter type_ is required, but nil was provided")

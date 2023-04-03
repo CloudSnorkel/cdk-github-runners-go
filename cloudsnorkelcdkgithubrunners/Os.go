@@ -46,6 +46,28 @@ func Os_LINUX() Os {
 	return returns
 }
 
+func Os_LINUX_AMAZON_2() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX_AMAZON_2",
+		&returns,
+	)
+	return returns
+}
+
+func Os_LINUX_UBUNTU() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX_UBUNTU",
+		&returns,
+	)
+	return returns
+}
+
 func Os_WINDOWS() Os {
 	_init_.Initialize()
 	var returns Os

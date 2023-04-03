@@ -51,13 +51,13 @@ func NewStaticRunnerImage_Override(s StaticRunnerImage) {
 //
 // We create a CodeBuild image builder behind the scenes to copy the image over to ECR. This helps avoid Docker Hub rate limits and prevent failures.
 // Experimental.
-func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, image *string, architecture Architecture, os Os) IImageBuilder {
+func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, image *string, architecture Architecture, os Os) IRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateStaticRunnerImage_FromDockerHubParameters(scope, id, image); err != nil {
 		panic(err)
 	}
-	var returns IImageBuilder
+	var returns IRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",
@@ -73,13 +73,13 @@ func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, ima
 //
 // The image must already have GitHub Actions runner installed. You are responsible to update it and remove it when done.
 // Experimental.
-func StaticRunnerImage_FromEcrRepository(repository awsecr.IRepository, tag *string, architecture Architecture, os Os) IImageBuilder {
+func StaticRunnerImage_FromEcrRepository(repository awsecr.IRepository, tag *string, architecture Architecture, os Os) IRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateStaticRunnerImage_FromEcrRepositoryParameters(repository); err != nil {
 		panic(err)
 	}
-	var returns IImageBuilder
+	var returns IRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.StaticRunnerImage",

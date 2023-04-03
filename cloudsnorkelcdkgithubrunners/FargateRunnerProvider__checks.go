@@ -18,13 +18,13 @@ func (f *jsiiProxy_FargateRunnerProvider) validateAddRetryParameters(task interf
 		return fmt.Errorf("parameter task is required, but nil was provided")
 	}
 	switch task.(type) {
-	case awsstepfunctions.Parallel:
-		// ok
 	case awsstepfunctions.TaskStateBase:
+		// ok
+	case awsstepfunctions.Parallel:
 		// ok
 	default:
 		if !_jsii_.IsAnonymousProxy(task) {
-			return fmt.Errorf("parameter task must be one of the allowed types: awsstepfunctions.Parallel, awsstepfunctions.TaskStateBase; received %#v (a %T)", task, task)
+			return fmt.Errorf("parameter task must be one of the allowed types: awsstepfunctions.TaskStateBase, awsstepfunctions.Parallel; received %#v (a %T)", task, task)
 		}
 	}
 
@@ -65,6 +65,22 @@ func (f *jsiiProxy_FargateRunnerProvider) validateLabelsFromPropertiesParameters
 func (f *jsiiProxy_FargateRunnerProvider) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
 	if statusFunctionRole == nil {
 		return fmt.Errorf("parameter statusFunctionRole is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func validateFargateRunnerProvider_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if id == nil {
+		return fmt.Errorf("parameter id is required, but nil was provided")
+	}
+
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
 	}
 
 	return nil

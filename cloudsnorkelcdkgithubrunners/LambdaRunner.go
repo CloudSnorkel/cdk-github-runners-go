@@ -13,56 +13,56 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-// Deprecated: use {@link LambdaRunnerProvider}.
+// Deprecated: use {@link LambdaRunnerProvider }.
 type LambdaRunner interface {
 	LambdaRunnerProvider
 	// The network connections associated with this resource.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Connections() awsec2.Connections
 	// The function hosting the GitHub runner.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Function() awslambda.Function
 	// Grant principal used to add permissions to the runner role.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	GrantPrincipal() awsiam.IPrincipal
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
 	// The image is built by an image builder and is specific to Lambda.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Image() *RunnerImage
 	// Labels associated with this provider.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Node() constructs.Node
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	GrantStateMachine(_arg awsiam.IGrantable)
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
 	//
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
-	// Deprecated: use {@link LambdaRunnerProvider}.
+	// Deprecated: use {@link LambdaRunnerProvider }.
 	ToString() *string
 }
 
@@ -142,7 +142,7 @@ func (j *jsiiProxy_LambdaRunner) Node() constructs.Node {
 }
 
 
-// Deprecated: use {@link LambdaRunnerProvider}.
+// Deprecated: use {@link LambdaRunnerProvider }.
 func NewLambdaRunner(scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) LambdaRunner {
 	_init_.Initialize()
 
@@ -160,7 +160,7 @@ func NewLambdaRunner(scope constructs.Construct, id *string, props *LambdaRunner
 	return &j
 }
 
-// Deprecated: use {@link LambdaRunnerProvider}.
+// Deprecated: use {@link LambdaRunnerProvider }.
 func NewLambdaRunner_Override(l LambdaRunner, scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -169,6 +169,37 @@ func NewLambdaRunner_Override(l LambdaRunner, scope constructs.Construct, id *st
 		[]interface{}{scope, id, props},
 		l,
 	)
+}
+
+// Create new image builder that builds Lambda specific runner images using Amazon Linux 2.
+//
+// Included components:
+//  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.runnerUser()`
+//  * `RunnerImageComponent.git()`
+//  * `RunnerImageComponent.githubCli()`
+//  * `RunnerImageComponent.awsCli()`
+//  * `RunnerImageComponent.githubRunner()`
+//  * `RunnerImageComponent.lambdaEntrypoint()`
+//
+//  Base Docker image: `public.ecr.aws/lambda/nodejs:14-x86_64` or `public.ecr.aws/lambda/nodejs:14-arm64`
+// Deprecated: use {@link LambdaRunnerProvider }.
+func LambdaRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+	_init_.Initialize()
+
+	if err := validateLambdaRunner_ImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.LambdaRunner",
+		"imageBuilder",
+		[]interface{}{scope, id, props},
+		&returns,
+	)
+
+	return returns
 }
 
 // Checks if `x` is a construct.

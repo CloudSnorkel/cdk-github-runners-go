@@ -257,6 +257,34 @@ func NewFargateRunnerProvider_Override(f FargateRunnerProvider, scope constructs
 	)
 }
 
+// Create new image builder that builds Fargate specific runner images using Ubuntu.
+//
+// Included components:
+//  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.runnerUser()`
+//  * `RunnerImageComponent.git()`
+//  * `RunnerImageComponent.githubCli()`
+//  * `RunnerImageComponent.awsCli()`
+//  * `RunnerImageComponent.githubRunner()`
+// Experimental.
+func FargateRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+	_init_.Initialize()
+
+	if err := validateFargateRunnerProvider_ImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.FargateRunnerProvider",
+		"imageBuilder",
+		[]interface{}{scope, id, props},
+		&returns,
+	)
+
+	return returns
+}
+
 // Checks if `x` is a construct.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.

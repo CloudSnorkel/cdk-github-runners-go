@@ -25,6 +25,10 @@ func (f *jsiiProxy_FargateRunner) validateStatusParameters(statusFunctionRole aw
 	return nil
 }
 
+func validateFargateRunner_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
+	return nil
+}
+
 func validateFargateRunner_IsConstructParameters(x interface{}) error {
 	return nil
 }

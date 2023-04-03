@@ -14,7 +14,8 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "addComponent", GoMethod: "AddComponent"},
 			_jsii_.MemberMethod{JsiiMethod: "addExtraCertificates", GoMethod: "AddExtraCertificates"},
 			_jsii_.MemberProperty{JsiiProperty: "architecture", GoGetter: "Architecture"},
-			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
 			_jsii_.MemberProperty{JsiiProperty: "components", GoGetter: "Components"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "createImage", GoMethod: "CreateImage"},
@@ -32,8 +33,7 @@ func init() {
 		func() interface{} {
 			j := jsiiProxy_AmiBuilder{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
-			_jsii_.InitJsiiProxy(&j.jsiiProxy_IAmiBuilder)
-			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
 			return &j
 		},
 	)
@@ -54,6 +54,10 @@ func init() {
 			return &jsiiProxy_Architecture{}
 		},
 	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.AwsImageBuilderRunnerImageBuilderProps",
+		reflect.TypeOf((*AwsImageBuilderRunnerImageBuilderProps)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
 		reflect.TypeOf((*CodeBuildImageBuilder)(nil)).Elem(),
@@ -63,7 +67,9 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "addPolicyStatement", GoMethod: "AddPolicyStatement"},
 			_jsii_.MemberMethod{JsiiMethod: "addPostBuildCommand", GoMethod: "AddPostBuildCommand"},
 			_jsii_.MemberMethod{JsiiMethod: "addPreBuildCommand", GoMethod: "AddPreBuildCommand"},
-			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "props", GoGetter: "Props"},
 			_jsii_.MemberMethod{JsiiMethod: "setBuildArg", GoMethod: "SetBuildArg"},
@@ -72,7 +78,7 @@ func init() {
 		func() interface{} {
 			j := jsiiProxy_CodeBuildImageBuilder{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
-			_jsii_.InitJsiiProxy(&j.jsiiProxy_IImageBuilder)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
 			return &j
 		},
 	)
@@ -103,6 +109,10 @@ func init() {
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_CodeBuildRunnerProvider)
 			return &j
 		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerImageBuilderProps",
+		reflect.TypeOf((*CodeBuildRunnerImageBuilderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
@@ -140,7 +150,8 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "addComponent", GoMethod: "AddComponent"},
 			_jsii_.MemberMethod{JsiiMethod: "addExtraCertificates", GoMethod: "AddExtraCertificates"},
 			_jsii_.MemberProperty{JsiiProperty: "architecture", GoGetter: "Architecture"},
-			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
 			_jsii_.MemberProperty{JsiiProperty: "components", GoGetter: "Components"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "createImage", GoMethod: "CreateImage"},
@@ -159,8 +170,7 @@ func init() {
 		func() interface{} {
 			j := jsiiProxy_ContainerImageBuilder{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
-			_jsii_.InitJsiiProxy(&j.jsiiProxy_IImageBuilder)
-			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
 			return &j
 		},
 	)
@@ -307,26 +317,6 @@ func init() {
 		reflect.TypeOf((*GitHubRunnersProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterInterface(
-		"@cloudsnorkel/cdk-github-runners.IAmiBuilder",
-		reflect.TypeOf((*IAmiBuilder)(nil)).Elem(),
-		[]_jsii_.Member{
-			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
-		},
-		func() interface{} {
-			return &jsiiProxy_IAmiBuilder{}
-		},
-	)
-	_jsii_.RegisterInterface(
-		"@cloudsnorkel/cdk-github-runners.IImageBuilder",
-		reflect.TypeOf((*IImageBuilder)(nil)).Elem(),
-		[]_jsii_.Member{
-			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
-		},
-		func() interface{} {
-			return &jsiiProxy_IImageBuilder{}
-		},
-	)
-	_jsii_.RegisterInterface(
 		"@cloudsnorkel/cdk-github-runners.IRunnerAmiStatus",
 		reflect.TypeOf((*IRunnerAmiStatus)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -335,6 +325,17 @@ func init() {
 		},
 		func() interface{} {
 			return &jsiiProxy_IRunnerAmiStatus{}
+		},
+	)
+	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.IRunnerImageBuilder",
+		reflect.TypeOf((*IRunnerImageBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
+		},
+		func() interface{} {
+			return &jsiiProxy_IRunnerImageBuilder{}
 		},
 	)
 	_jsii_.RegisterInterface(
@@ -405,6 +406,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "physicalName", GoGetter: "PhysicalName"},
 			_jsii_.MemberProperty{JsiiProperty: "platform", GoGetter: "Platform"},
+			_jsii_.MemberMethod{JsiiMethod: "prefixCommandsWithErrorHandling", GoMethod: "PrefixCommandsWithErrorHandling"},
 			_jsii_.MemberProperty{JsiiProperty: "stack", GoGetter: "Stack"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "version", GoMethod: "Version"},
@@ -507,6 +509,62 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerImage",
 		reflect.TypeOf((*RunnerImage)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageAsset",
+		reflect.TypeOf((*RunnerImageAsset)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageBuilder",
+		reflect.TypeOf((*RunnerImageBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addComponent", GoMethod: "AddComponent"},
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
+			_jsii_.MemberProperty{JsiiProperty: "components", GoGetter: "Components"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "removeComponent", GoMethod: "RemoveComponent"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_RunnerImageBuilder{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
+			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			_jsii_.InitJsiiProxy(&j.Type__awsiamIGrantable)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageBuilderProps",
+		reflect.TypeOf((*RunnerImageBuilderProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterEnum(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageBuilderType",
+		reflect.TypeOf((*RunnerImageBuilderType)(nil)).Elem(),
+		map[string]interface{}{
+			"CODE_BUILD": RunnerImageBuilderType_CODE_BUILD,
+			"AWS_IMAGE_BUILDER": RunnerImageBuilderType_AWS_IMAGE_BUILDER,
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		reflect.TypeOf((*RunnerImageComponent)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "getAssets", GoMethod: "GetAssets"},
+			_jsii_.MemberMethod{JsiiMethod: "getCommands", GoMethod: "GetCommands"},
+			_jsii_.MemberMethod{JsiiMethod: "getDockerCommands", GoMethod: "GetDockerCommands"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
+		func() interface{} {
+			return &jsiiProxy_RunnerImageComponent{}
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponentCustomProps",
+		reflect.TypeOf((*RunnerImageComponentCustomProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerProviderProps",

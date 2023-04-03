@@ -13,56 +13,56 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-// Deprecated: use {@link CodeBuildRunnerProvider}.
+// Deprecated: use {@link CodeBuildRunnerProvider }.
 type CodeBuildRunner interface {
 	CodeBuildRunnerProvider
 	// The network connections associated with this resource.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	GrantPrincipal() awsiam.IPrincipal
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
 	// The image is built by an image builder and is specific to CodeBuild.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Image() *RunnerImage
 	// Labels associated with this provider.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Node() constructs.Node
 	// CodeBuild project hosting the runner.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Project() awscodebuild.Project
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	GrantStateMachine(_arg awsiam.IGrantable)
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
 	//
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
-	// Deprecated: use {@link CodeBuildRunnerProvider}.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	ToString() *string
 }
 
@@ -142,7 +142,7 @@ func (j *jsiiProxy_CodeBuildRunner) Project() awscodebuild.Project {
 }
 
 
-// Deprecated: use {@link CodeBuildRunnerProvider}.
+// Deprecated: use {@link CodeBuildRunnerProvider }.
 func NewCodeBuildRunner(scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) CodeBuildRunner {
 	_init_.Initialize()
 
@@ -160,7 +160,7 @@ func NewCodeBuildRunner(scope constructs.Construct, id *string, props *CodeBuild
 	return &j
 }
 
-// Deprecated: use {@link CodeBuildRunnerProvider}.
+// Deprecated: use {@link CodeBuildRunnerProvider }.
 func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -169,6 +169,35 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 		[]interface{}{scope, id, props},
 		c,
 	)
+}
+
+// Create new image builder that builds CodeBuild specific runner images using Ubuntu.
+//
+// Included components:
+//  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.runnerUser()`
+//  * `RunnerImageComponent.git()`
+//  * `RunnerImageComponent.githubCli()`
+//  * `RunnerImageComponent.awsCli()`
+//  * `RunnerImageComponent.dockerInDocker()`
+//  * `RunnerImageComponent.githubRunner()`
+// Deprecated: use {@link CodeBuildRunnerProvider }.
+func CodeBuildRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+	_init_.Initialize()
+
+	if err := validateCodeBuildRunner_ImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",
+		"imageBuilder",
+		[]interface{}{scope, id, props},
+		&returns,
+	)
+
+	return returns
 }
 
 // Checks if `x` is a construct.

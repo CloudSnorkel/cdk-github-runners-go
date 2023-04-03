@@ -52,15 +52,13 @@ type FargateRunnerProviderProps struct {
 	// NOTE: This parameter is only supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
 	// Experimental.
 	EphemeralStorageGiB *float64 `field:"optional" json:"ephemeralStorageGiB" yaml:"ephemeralStorageGiB"`
-	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
-	//
-	// A user named `runner` is expected to exist.
+	// Runner image builder used to build Docker images containing GitHub Runner and all requirements.
 	//
 	// The image builder determines the OS and architecture of the runner.
 	// Experimental.
-	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
+	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
-	// Deprecated: use {@link labels} instead.
+	// Deprecated: use {@link labels } instead.
 	Label *string `field:"optional" json:"label" yaml:"label"`
 	// GitHub Actions labels used for this provider.
 	//
@@ -86,7 +84,7 @@ type FargateRunnerProviderProps struct {
 	// Experimental.
 	MemoryLimitMiB *float64 `field:"optional" json:"memoryLimitMiB" yaml:"memoryLimitMiB"`
 	// Security group to assign to the task.
-	// Deprecated: use {@link securityGroups}.
+	// Deprecated: use {@link securityGroups }.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to the task.
 	// Experimental.

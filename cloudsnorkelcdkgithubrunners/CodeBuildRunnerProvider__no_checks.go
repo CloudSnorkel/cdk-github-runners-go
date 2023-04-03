@@ -25,6 +25,10 @@ func (c *jsiiProxy_CodeBuildRunnerProvider) validateStatusParameters(statusFunct
 	return nil
 }
 
+func validateCodeBuildRunnerProvider_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
+	return nil
+}
+
 func validateCodeBuildRunnerProvider_IsConstructParameters(x interface{}) error {
 	return nil
 }

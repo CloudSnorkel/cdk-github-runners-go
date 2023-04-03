@@ -20,13 +20,13 @@ type Ec2RunnerProviderProps struct {
 	// Options to retry operation in case of failure like missing capacity, or API quota issues.
 	// Experimental.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// AMI builder that creates AMIs with GitHub runner pre-configured.
+	// Deprecated: use imageBuilder.
+	AmiBuilder IRunnerImageBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
+	// Runner image builder used to build AMI containing GitHub Runner and all requirements.
 	//
-	// On Linux, a user named `runner` is expected to exist with access to Docker.
-	//
-	// The AMI builder determines the OS and architecture of the runner.
+	// The image builder determines the OS and architecture of the runner.
 	// Experimental.
-	AmiBuilder IAmiBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
+	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// Instance type for launched runner instances.
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
@@ -38,7 +38,7 @@ type Ec2RunnerProviderProps struct {
 	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
 	// Security Group to assign to launched runner instances.
-	// Deprecated: use {@link securityGroups}.
+	// Deprecated: use {@link securityGroups }.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to launched runner instances.
 	// Experimental.
@@ -57,7 +57,7 @@ type Ec2RunnerProviderProps struct {
 	// Experimental.
 	StorageSize awscdk.Size `field:"optional" json:"storageSize" yaml:"storageSize"`
 	// Subnet where the runner instances will be launched.
-	// Deprecated: use {@link vpc} and {@link subnetSelection}.
+	// Deprecated: use {@link vpc } and {@link subnetSelection }.
 	Subnet awsec2.ISubnet `field:"optional" json:"subnet" yaml:"subnet"`
 	// Where to place the network interfaces within the VPC.
 	//

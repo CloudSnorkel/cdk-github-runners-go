@@ -10,8 +10,8 @@ import (
 
 // Components for Ubuntu Linux that can be used with AWS Image Builder based builders.
 //
-// These cannot be used by {@link CodeBuildImageBuilder}.
-// Experimental.
+// These cannot be used by {@link CodeBuildImageBuilder }.
+// Deprecated: Use `RunnerImageComponent` instead.
 type LinuxUbuntuComponents interface {
 }
 
@@ -20,7 +20,7 @@ type jsiiProxy_LinuxUbuntuComponents struct {
 	_ byte // padding
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func NewLinuxUbuntuComponents() LinuxUbuntuComponents {
 	_init_.Initialize()
 
@@ -35,7 +35,7 @@ func NewLinuxUbuntuComponents() LinuxUbuntuComponents {
 	return &j
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func NewLinuxUbuntuComponents_Override(l LinuxUbuntuComponents) {
 	_init_.Initialize()
 
@@ -46,7 +46,7 @@ func NewLinuxUbuntuComponents_Override(l LinuxUbuntuComponents) {
 	)
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_AwsCli(scope constructs.Construct, id *string, architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -65,7 +65,7 @@ func LinuxUbuntuComponents_AwsCli(scope constructs.Construct, id *string, archit
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_Docker(scope constructs.Construct, id *string, _architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -84,7 +84,7 @@ func LinuxUbuntuComponents_Docker(scope constructs.Construct, id *string, _archi
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_ExtraCertificates(scope constructs.Construct, id *string, path *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -103,7 +103,7 @@ func LinuxUbuntuComponents_ExtraCertificates(scope constructs.Construct, id *str
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_Git(scope constructs.Construct, id *string, _architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -122,7 +122,7 @@ func LinuxUbuntuComponents_Git(scope constructs.Construct, id *string, _architec
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_GithubCli(scope constructs.Construct, id *string, _architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -141,7 +141,7 @@ func LinuxUbuntuComponents_GithubCli(scope constructs.Construct, id *string, _ar
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_GithubRunner(scope constructs.Construct, id *string, runnerVersion RunnerVersion, architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -160,7 +160,7 @@ func LinuxUbuntuComponents_GithubRunner(scope constructs.Construct, id *string, 
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_RequiredPackages(scope constructs.Construct, id *string, architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -179,7 +179,7 @@ func LinuxUbuntuComponents_RequiredPackages(scope constructs.Construct, id *stri
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func LinuxUbuntuComponents_RunnerUser(scope constructs.Construct, id *string, _architecture Architecture) ImageBuilderComponent {
 	_init_.Initialize()
 

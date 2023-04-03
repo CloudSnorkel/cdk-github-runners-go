@@ -25,6 +25,10 @@ func (e *jsiiProxy_Ec2Runner) validateStatusParameters(statusFunctionRole awsiam
 	return nil
 }
 
+func validateEc2Runner_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
+	return nil
+}
+
 func validateEc2Runner_IsConstructParameters(x interface{}) error {
 	return nil
 }

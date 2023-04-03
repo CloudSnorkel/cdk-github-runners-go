@@ -15,7 +15,7 @@ import (
 
 // An AMI builder that uses AWS Image Builder to build AMIs pre-baked with all the GitHub Actions runner requirements.
 //
-// Builders can be used with {@link Ec2Runner}.
+// Builders can be used with {@link Ec2Runner }.
 //
 // Each builder re-runs automatically at a set interval to make sure the AMIs contain the latest versions of everything.
 //
@@ -25,82 +25,89 @@ import (
 //
 // ```
 // const builder = new AmiBuilder(this, 'Builder', {
-//      runnerVersion: RunnerVersion.specific('2.293.0'),
-//      rebuildInterval: Duration.days(14),
+//     runnerVersion: RunnerVersion.specific('2.293.0'),
+//     rebuildInterval: Duration.days(14),
 // });
 // builder.addComponent(new ImageBuilderComponent(scope, id, {
-//    platform: 'Linux',
-//    displayName: 'p7zip',
-//    description: 'Install some more packages',
-//    commands: [
-//      'set -ex',
-//      'apt-get install p7zip',
-//    ],
+//   platform: 'Linux',
+//   displayName: 'p7zip',
+//   description: 'Install some more packages',
+//   commands: [
+//     'set -ex',
+//     'apt-get install p7zip',
+//   ],
 // }));
 // new Ec2Runner(this, 'EC2 provider', {
-//      label: 'custom-ec2',
-//      amiBuilder: builder,
+//     label: 'custom-ec2',
+//     amiBuilder: builder,
 // });
 // ```.
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 type AmiBuilder interface {
 	constructs.Construct
-	IAmiBuilder
-	awsec2.IConnectable
-	// Experimental.
+	IRunnerImageBuilder
+	// Deprecated: use RunnerImageBuilder.
 	Architecture() Architecture
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Components() *[]ImageBuilderComponent
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	SetComponents(val *[]ImageBuilderComponent)
 	// The network connections associated with this resource.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Connections() awsec2.Connections
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Description() *string
 	// The tree node.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Node() constructs.Node
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Os() Os
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Platform() *string
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	RunnerVersion() RunnerVersion
 	// Add a component to be installed.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddComponent(component ImageBuilderComponent)
 	// Add extra trusted certificates.
 	//
 	// This helps deal with self-signed certificates for GitHub Enterprise Server.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddExtraCertificates(path *string)
 	// Called by IRunnerProvider to finalize settings and create the AMI builder.
-	// Experimental.
-	Bind() *RunnerAmi
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
+	BindAmi() *RunnerAmi
+	// Build and return a Docker image with GitHub Runner installed in it.
+	//
+	// Anything that ends up with an ECR repository containing a Docker image that runs GitHub self-hosted runners can be used. A simple implementation could even point to an existing image and nothing else.
+	//
+	// It's important that the specified image tag be available at the time the repository is available. Providers usually assume the image is ready and will fail if it's not.
+	//
+	// The image can be further updated over time manually or using a schedule as long as it is always written to the same tag.
+	// Deprecated: use RunnerImageBuilder.
+	BindDockerImage() *RunnerImage
+	// Deprecated: use RunnerImageBuilder.
 	CreateImage(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImage
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreateInfrastructure(managedPolicies *[]awsiam.IManagedPolicy) awsimagebuilder.CfnInfrastructureConfiguration
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreateLog(recipeName *string) awslogs.LogGroup
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreatePipeline(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImagePipeline
 	// Add a component to be installed before any other components.
 	//
 	// Useful for required system settings like certificates or proxy settings.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	PrependComponent(component ImageBuilderComponent)
 	// Returns a string representation of this construct.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	ToString() *string
 }
 
 // The jsii proxy struct for AmiBuilder
 type jsiiProxy_AmiBuilder struct {
 	internal.Type__constructsConstruct
-	jsiiProxy_IAmiBuilder
-	internal.Type__awsec2IConnectable
+	jsiiProxy_IRunnerImageBuilder
 }
 
 func (j *jsiiProxy_AmiBuilder) Architecture() Architecture {
@@ -184,7 +191,7 @@ func (j *jsiiProxy_AmiBuilder) RunnerVersion() RunnerVersion {
 }
 
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewAmiBuilder(scope constructs.Construct, id *string, props *AmiBuilderProps) AmiBuilder {
 	_init_.Initialize()
 
@@ -202,7 +209,7 @@ func NewAmiBuilder(scope constructs.Construct, id *string, props *AmiBuilderProp
 	return &j
 }
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewAmiBuilder_Override(a AmiBuilder, scope constructs.Construct, id *string, props *AmiBuilderProps) {
 	_init_.Initialize()
 
@@ -268,12 +275,25 @@ func (a *jsiiProxy_AmiBuilder) AddExtraCertificates(path *string) {
 	)
 }
 
-func (a *jsiiProxy_AmiBuilder) Bind() *RunnerAmi {
+func (a *jsiiProxy_AmiBuilder) BindAmi() *RunnerAmi {
 	var returns *RunnerAmi
 
 	_jsii_.Invoke(
 		a,
-		"bind",
+		"bindAmi",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (a *jsiiProxy_AmiBuilder) BindDockerImage() *RunnerImage {
+	var returns *RunnerImage
+
+	_jsii_.Invoke(
+		a,
+		"bindDockerImage",
 		nil, // no parameters
 		&returns,
 	)

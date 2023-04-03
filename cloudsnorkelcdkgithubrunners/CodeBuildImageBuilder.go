@@ -5,6 +5,7 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
@@ -22,59 +23,78 @@ import (
 //
 // ```
 // const builder = new CodeBuildImageBuilder(this, 'Builder', {
-//      dockerfilePath: FargateProvider.LINUX_X64_DOCKERFILE_PATH,
-//      runnerVersion: RunnerVersion.specific('2.293.0'),
-//      rebuildInterval: Duration.days(14),
+//     dockerfilePath: FargateProvider.LINUX_X64_DOCKERFILE_PATH,
+//     runnerVersion: RunnerVersion.specific('2.293.0'),
+//     rebuildInterval: Duration.days(14),
 // });
 // builder.setBuildArg('EXTRA_PACKAGES', 'nginx xz-utils');
 // new FargateRunner(this, 'Fargate provider', {
-//      label: 'customized-fargate',
-//      imageBuilder: builder,
+//     label: 'customized-fargate',
+//     imageBuilder: builder,
 // });
 // ```.
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 type CodeBuildImageBuilder interface {
 	constructs.Construct
-	IImageBuilder
+	IRunnerImageBuilder
+	// Deprecated: use RunnerImageBuilder.
+	Connections() awsec2.Connections
 	// The tree node.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Node() constructs.Node
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Props() *CodeBuildImageBuilderProps
 	// Add extra trusted certificates. This helps deal with self-signed certificates for GitHub Enterprise Server.
 	//
 	// All first party Dockerfiles support this. Others may not.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddExtraCertificates(path *string)
 	// Uploads a folder to the build server at a given folder name.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddFiles(sourcePath *string, destName *string)
 	// Add a policy statement to the builder to access resources required to the image build.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddPolicyStatement(statement awsiam.PolicyStatement)
 	// Adds a command that runs after `docker build` and `docker push`.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddPostBuildCommand(command *string)
 	// Adds a command that runs before `docker build`.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddPreBuildCommand(command *string)
+	// Build and return an AMI with GitHub Runner installed in it.
+	//
+	// Anything that ends up with a launch template pointing to an AMI that runs GitHub self-hosted runners can be used. A simple implementation could even point to an existing AMI and nothing else.
+	//
+	// The AMI can be further updated over time manually or using a schedule as long as it is always written to the same launch template.
+	// Deprecated: use RunnerImageBuilder.
+	BindAmi() *RunnerAmi
 	// Called by IRunnerProvider to finalize settings and create the image builder.
-	// Experimental.
-	Bind() *RunnerImage
+	// Deprecated: use RunnerImageBuilder.
+	BindDockerImage() *RunnerImage
 	// Adds a build argument for Docker.
 	//
 	// See the documentation for the Dockerfile you're using for a list of supported build arguments.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	SetBuildArg(name *string, value *string)
 	// Returns a string representation of this construct.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	ToString() *string
 }
 
 // The jsii proxy struct for CodeBuildImageBuilder
 type jsiiProxy_CodeBuildImageBuilder struct {
 	internal.Type__constructsConstruct
-	jsiiProxy_IImageBuilder
+	jsiiProxy_IRunnerImageBuilder
+}
+
+func (j *jsiiProxy_CodeBuildImageBuilder) Connections() awsec2.Connections {
+	var returns awsec2.Connections
+	_jsii_.Get(
+		j,
+		"connections",
+		&returns,
+	)
+	return returns
 }
 
 func (j *jsiiProxy_CodeBuildImageBuilder) Node() constructs.Node {
@@ -98,7 +118,7 @@ func (j *jsiiProxy_CodeBuildImageBuilder) Props() *CodeBuildImageBuilderProps {
 }
 
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewCodeBuildImageBuilder(scope constructs.Construct, id *string, props *CodeBuildImageBuilderProps) CodeBuildImageBuilder {
 	_init_.Initialize()
 
@@ -116,7 +136,7 @@ func NewCodeBuildImageBuilder(scope constructs.Construct, id *string, props *Cod
 	return &j
 }
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewCodeBuildImageBuilder_Override(c CodeBuildImageBuilder, scope constructs.Construct, id *string, props *CodeBuildImageBuilderProps) {
 	_init_.Initialize()
 
@@ -204,12 +224,25 @@ func (c *jsiiProxy_CodeBuildImageBuilder) AddPreBuildCommand(command *string) {
 	)
 }
 
-func (c *jsiiProxy_CodeBuildImageBuilder) Bind() *RunnerImage {
+func (c *jsiiProxy_CodeBuildImageBuilder) BindAmi() *RunnerAmi {
+	var returns *RunnerAmi
+
+	_jsii_.Invoke(
+		c,
+		"bindAmi",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_CodeBuildImageBuilder) BindDockerImage() *RunnerImage {
 	var returns *RunnerImage
 
 	_jsii_.Invoke(
 		c,
-		"bind",
+		"bindDockerImage",
 		nil, // no parameters
 		&returns,
 	)

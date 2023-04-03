@@ -16,25 +16,23 @@ type GitHubRunnersProps struct {
 	AllowPublicSubnet *bool `field:"optional" json:"allowPublicSubnet" yaml:"allowPublicSubnet"`
 	// Path to a directory containing a file named certs.pem containing any additional certificates required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
 	//
-	// You may also want to use custom images for your runner providers that contain the same certificates. See {@link CodeBuildImageBuilder.addCertificates}.
+	// You may also want to use custom images for your runner providers that contain the same certificates. See {@link CodeBuildImageBuilder.addCertificates }.
 	//
 	// ```typescript
-	// const imageBuilder = new CodeBuildImageBuilder(this, 'Image Builder with Certs', {
-	//      dockerfilePath: CodeBuildRunner.LINUX_X64_DOCKERFILE_PATH,
-	// });
-	// imageBuilder.addExtraCertificates('path-to-my-extra-certs-folder');
+	// const imageBuilder = CodeBuildRunnerProvider.imageBuilder(this, 'Image Builder with Certs');
+	// imageBuilder.addComponent(RunnerImageComponent.extraCertificates('path-to-my-extra-certs-folder/certs.pem', 'private-ca');
 	//
-	// const provider = new CodeBuildRunner(this, 'CodeBuild', {
-	//      imageBuilder: imageBuilder,
+	// const provider = new CodeBuildRunnerProvider(this, 'CodeBuild', {
+	//     imageBuilder: imageBuilder,
 	// });
 	//
 	// new GitHubRunners(
-	//    this,
-	//    'runners',
-	//    {
-	//      providers: [provider],
-	//      extraCertificates: 'path-to-my-extra-certs-folder',
-	//    }
+	//   this,
+	//   'runners',
+	//   {
+	//     providers: [provider],
+	//     extraCertificates: 'path-to-my-extra-certs-folder',
+	//   }
 	// );
 	// ```.
 	// Experimental.

@@ -12,48 +12,48 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-// Deprecated: use {@link Ec2RunnerProvider}.
+// Deprecated: use {@link Ec2RunnerProvider }.
 type Ec2Runner interface {
 	Ec2RunnerProvider
 	// The network connections associated with this resource.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	GrantPrincipal() awsiam.IPrincipal
 	// Labels associated with this provider.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	Node() constructs.Node
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	GrantStateMachine(stateMachineRole awsiam.IGrantable)
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
 	//
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
 	// Returns a string representation of this construct.
-	// Deprecated: use {@link Ec2RunnerProvider}.
+	// Deprecated: use {@link Ec2RunnerProvider }.
 	ToString() *string
 }
 
@@ -113,7 +113,7 @@ func (j *jsiiProxy_Ec2Runner) Node() constructs.Node {
 }
 
 
-// Deprecated: use {@link Ec2RunnerProvider}.
+// Deprecated: use {@link Ec2RunnerProvider }.
 func NewEc2Runner(scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) Ec2Runner {
 	_init_.Initialize()
 
@@ -131,7 +131,7 @@ func NewEc2Runner(scope constructs.Construct, id *string, props *Ec2RunnerProvid
 	return &j
 }
 
-// Deprecated: use {@link Ec2RunnerProvider}.
+// Deprecated: use {@link Ec2RunnerProvider }.
 func NewEc2Runner_Override(e Ec2Runner, scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) {
 	_init_.Initialize()
 
@@ -140,6 +140,35 @@ func NewEc2Runner_Override(e Ec2Runner, scope constructs.Construct, id *string, 
 		[]interface{}{scope, id, props},
 		e,
 	)
+}
+
+// Create new image builder that builds EC2 specific runner images using Ubuntu.
+//
+// Included components:
+//  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.runnerUser()`
+//  * `RunnerImageComponent.git()`
+//  * `RunnerImageComponent.githubCli()`
+//  * `RunnerImageComponent.awsCli()`
+//  * `RunnerImageComponent.docker()`
+//  * `RunnerImageComponent.githubRunner()`
+// Deprecated: use {@link Ec2RunnerProvider }.
+func Ec2Runner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+	_init_.Initialize()
+
+	if err := validateEc2Runner_ImageBuilderParameters(scope, id, props); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageBuilder
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.Ec2Runner",
+		"imageBuilder",
+		[]interface{}{scope, id, props},
+		&returns,
+	)
+
+	return returns
 }
 
 // Checks if `x` is a construct.

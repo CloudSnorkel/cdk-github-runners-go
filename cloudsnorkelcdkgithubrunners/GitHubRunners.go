@@ -30,12 +30,12 @@ import (
 //
 // // create a custom CodeBuild provider
 // const myProvider = new CodeBuildRunner(
-//    this, 'codebuild runner',
-//    {
-//       label: 'my-codebuild',
-//       vpc: vpc,
-//       securityGroup: runnerSg,
-//    },
+//   this, 'codebuild runner',
+//   {
+//      label: 'my-codebuild',
+//      vpc: vpc,
+//      securityGroup: runnerSg,
+//   },
 // );
 // // grant some permissions to the provider
 // bucket.grantReadWrite(myProvider);
@@ -43,11 +43,11 @@ import (
 //
 // // create the runner infrastructure
 // new GitHubRunners(
-//    this,
-//    'runners',
-//    {
-//      providers: [myProvider],
-//    }
+//   this,
+//   'runners',
+//   {
+//     providers: [myProvider],
+//   }
 // );
 // ```.
 // Experimental.

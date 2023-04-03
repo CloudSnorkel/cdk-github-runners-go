@@ -28,75 +28,80 @@ import (
 //
 // ```
 // const builder = new ContainerImageBuilder(this, 'Builder', {
-//      runnerVersion: RunnerVersion.specific('2.293.0'),
-//      rebuildInterval: Duration.days(14),
+//     runnerVersion: RunnerVersion.specific('2.293.0'),
+//     rebuildInterval: Duration.days(14),
 // });
 // new CodeBuildRunner(this, 'CodeBuild provider', {
-//      label: 'custom-codebuild',
-//      imageBuilder: builder,
+//     label: 'custom-codebuild',
+//     imageBuilder: builder,
 // });
 // ```.
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 type ContainerImageBuilder interface {
 	constructs.Construct
-	IImageBuilder
-	awsec2.IConnectable
-	// Experimental.
+	IRunnerImageBuilder
+	// Deprecated: use RunnerImageBuilder.
 	Architecture() Architecture
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Components() *[]ImageBuilderComponent
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	SetComponents(val *[]ImageBuilderComponent)
 	// The network connections associated with this resource.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Connections() awsec2.Connections
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Description() *string
 	// The tree node.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Node() constructs.Node
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Os() Os
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Platform() *string
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	Repository() awsecr.IRepository
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	RunnerVersion() RunnerVersion
 	// Add a component to be installed.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddComponent(component ImageBuilderComponent)
 	// Add extra trusted certificates. This helps deal with self-signed certificates for GitHub Enterprise Server.
 	//
 	// All first party Dockerfiles support this. Others may not.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	AddExtraCertificates(path *string)
+	// Build and return an AMI with GitHub Runner installed in it.
+	//
+	// Anything that ends up with a launch template pointing to an AMI that runs GitHub self-hosted runners can be used. A simple implementation could even point to an existing AMI and nothing else.
+	//
+	// The AMI can be further updated over time manually or using a schedule as long as it is always written to the same launch template.
+	// Deprecated: use RunnerImageBuilder.
+	BindAmi() *RunnerAmi
 	// Called by IRunnerProvider to finalize settings and create the image builder.
-	// Experimental.
-	Bind() *RunnerImage
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
+	BindDockerImage() *RunnerImage
+	// Deprecated: use RunnerImageBuilder.
 	CreateImage(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImage
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreateInfrastructure(managedPolicies *[]awsiam.IManagedPolicy) awsimagebuilder.CfnInfrastructureConfiguration
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreateLog(recipeName *string) awslogs.LogGroup
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	CreatePipeline(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImagePipeline
 	// Add a component to be installed before any other components.
 	//
 	// Useful for required system settings like certificates or proxy settings.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	PrependComponent(component ImageBuilderComponent)
 	// Returns a string representation of this construct.
-	// Experimental.
+	// Deprecated: use RunnerImageBuilder.
 	ToString() *string
 }
 
 // The jsii proxy struct for ContainerImageBuilder
 type jsiiProxy_ContainerImageBuilder struct {
 	internal.Type__constructsConstruct
-	jsiiProxy_IImageBuilder
-	internal.Type__awsec2IConnectable
+	jsiiProxy_IRunnerImageBuilder
 }
 
 func (j *jsiiProxy_ContainerImageBuilder) Architecture() Architecture {
@@ -190,7 +195,7 @@ func (j *jsiiProxy_ContainerImageBuilder) RunnerVersion() RunnerVersion {
 }
 
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewContainerImageBuilder(scope constructs.Construct, id *string, props *ContainerImageBuilderProps) ContainerImageBuilder {
 	_init_.Initialize()
 
@@ -208,7 +213,7 @@ func NewContainerImageBuilder(scope constructs.Construct, id *string, props *Con
 	return &j
 }
 
-// Experimental.
+// Deprecated: use RunnerImageBuilder.
 func NewContainerImageBuilder_Override(c ContainerImageBuilder, scope constructs.Construct, id *string, props *ContainerImageBuilderProps) {
 	_init_.Initialize()
 
@@ -274,12 +279,25 @@ func (c *jsiiProxy_ContainerImageBuilder) AddExtraCertificates(path *string) {
 	)
 }
 
-func (c *jsiiProxy_ContainerImageBuilder) Bind() *RunnerImage {
+func (c *jsiiProxy_ContainerImageBuilder) BindAmi() *RunnerAmi {
+	var returns *RunnerAmi
+
+	_jsii_.Invoke(
+		c,
+		"bindAmi",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_ContainerImageBuilder) BindDockerImage() *RunnerImage {
 	var returns *RunnerImage
 
 	_jsii_.Invoke(
 		c,
-		"bind",
+		"bindDockerImage",
 		nil, // no parameters
 		&returns,
 	)

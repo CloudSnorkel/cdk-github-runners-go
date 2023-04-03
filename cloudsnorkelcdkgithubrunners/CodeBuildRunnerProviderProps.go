@@ -31,15 +31,15 @@ type CodeBuildRunnerProviderProps struct {
 	// speed up provisioning of CodeBuild runners. If you don't intend on running or building Docker images, disable this for faster start-up times.
 	// Experimental.
 	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
-	// Image builder for CodeBuild image with GitHub runner pre-configured.
+	// Runner image builder used to build Docker images containing GitHub Runner and all requirements.
 	//
-	// A user named `runner` is expected to exist with access to Docker-in-Docker.
+	// The image builder must contain the {@link RunnerImageComponent.dockerInDocker} component unless `dockerInDocker` is set to false.
 	//
 	// The image builder determines the OS and architecture of the runner.
 	// Experimental.
-	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
+	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
-	// Deprecated: use {@link labels} instead.
+	// Deprecated: use {@link labels } instead.
 	Label *string `field:"optional" json:"label" yaml:"label"`
 	// GitHub Actions labels used for this provider.
 	//
@@ -49,7 +49,7 @@ type CodeBuildRunnerProviderProps struct {
 	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
 	// Security group to assign to this instance.
-	// Deprecated: use {@link securityGroups}.
+	// Deprecated: use {@link securityGroups }.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to this instance.
 	// Experimental.

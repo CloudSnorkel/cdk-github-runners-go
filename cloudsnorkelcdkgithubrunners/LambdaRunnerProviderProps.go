@@ -22,17 +22,15 @@ type LambdaRunnerProviderProps struct {
 	// The size of the function’s /tmp directory in MiB.
 	// Experimental.
 	EphemeralStorageSize awscdk.Size `field:"optional" json:"ephemeralStorageSize" yaml:"ephemeralStorageSize"`
-	// Provider running an image to run inside CodeBuild with GitHub runner pre-configured.
+	// Runner image builder used to build Docker images containing GitHub Runner and all requirements.
 	//
-	// The default command (`CMD`) should be `["runner.handler"]` which points to an included `runner.js` with a function named `handler`. The function should start the GitHub runner.
+	// The image builder must contain the {@link RunnerImageComponent.lambdaEntrypoint} component.
 	//
 	// The image builder determines the OS and architecture of the runner.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners/tree/main/src/providers/docker-images/lambda
-	//
 	// Experimental.
-	ImageBuilder IImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
+	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// GitHub Actions label used for this provider.
-	// Deprecated: use {@link labels} instead.
+	// Deprecated: use {@link labels } instead.
 	Label *string `field:"optional" json:"label" yaml:"label"`
 	// GitHub Actions labels used for this provider.
 	//
@@ -49,7 +47,7 @@ type LambdaRunnerProviderProps struct {
 	// Experimental.
 	MemorySize *float64 `field:"optional" json:"memorySize" yaml:"memorySize"`
 	// Security group to assign to this instance.
-	// Deprecated: use {@link securityGroups}.
+	// Deprecated: use {@link securityGroups }.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to this instance.
 	// Experimental.

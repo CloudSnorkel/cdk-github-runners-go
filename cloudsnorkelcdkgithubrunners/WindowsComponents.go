@@ -10,8 +10,8 @@ import (
 
 // Components for Windows that can be used with AWS Image Builder based builders.
 //
-// These cannot be used by {@link CodeBuildImageBuilder}.
-// Experimental.
+// These cannot be used by {@link CodeBuildImageBuilder }.
+// Deprecated: Use `RunnerImageComponent` instead.
 type WindowsComponents interface {
 }
 
@@ -20,7 +20,7 @@ type jsiiProxy_WindowsComponents struct {
 	_ byte // padding
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func NewWindowsComponents() WindowsComponents {
 	_init_.Initialize()
 
@@ -35,7 +35,7 @@ func NewWindowsComponents() WindowsComponents {
 	return &j
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func NewWindowsComponents_Override(w WindowsComponents) {
 	_init_.Initialize()
 
@@ -46,7 +46,7 @@ func NewWindowsComponents_Override(w WindowsComponents) {
 	)
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_AwsCli(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -65,7 +65,7 @@ func WindowsComponents_AwsCli(scope constructs.Construct, id *string) ImageBuild
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_CloudwatchAgent(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -84,7 +84,7 @@ func WindowsComponents_CloudwatchAgent(scope constructs.Construct, id *string) I
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_Docker(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -103,7 +103,7 @@ func WindowsComponents_Docker(scope constructs.Construct, id *string) ImageBuild
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_ExtraCertificates(scope constructs.Construct, id *string, path *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -122,7 +122,7 @@ func WindowsComponents_ExtraCertificates(scope constructs.Construct, id *string,
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_Git(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -141,7 +141,7 @@ func WindowsComponents_Git(scope constructs.Construct, id *string) ImageBuilderC
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_GithubCli(scope constructs.Construct, id *string) ImageBuilderComponent {
 	_init_.Initialize()
 
@@ -160,7 +160,7 @@ func WindowsComponents_GithubCli(scope constructs.Construct, id *string) ImageBu
 	return returns
 }
 
-// Experimental.
+// Deprecated: Use `RunnerImageComponent` instead.
 func WindowsComponents_GithubRunner(scope constructs.Construct, id *string, runnerVersion RunnerVersion) ImageBuilderComponent {
 	_init_.Initialize()
 

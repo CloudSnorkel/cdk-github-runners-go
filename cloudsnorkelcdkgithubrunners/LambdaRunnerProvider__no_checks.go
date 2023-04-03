@@ -25,6 +25,10 @@ func (l *jsiiProxy_LambdaRunnerProvider) validateStatusParameters(statusFunction
 	return nil
 }
 
+func validateLambdaRunnerProvider_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
+	return nil
+}
+
 func validateLambdaRunnerProvider_IsConstructParameters(x interface{}) error {
 	return nil
 }

@@ -49,7 +49,7 @@ type ContainerImageBuilderProps struct {
 	// Experimental.
 	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// Security group to assign to launched builder instances.
-	// Deprecated: use {@link securityGroups}.
+	// Deprecated: use {@link securityGroups }.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to launched builder instances.
 	// Experimental.

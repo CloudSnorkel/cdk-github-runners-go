@@ -21,6 +21,10 @@ func (i *jsiiProxy_ImageBuilderComponent) validateGrantAssetsReadParameters(gran
 	return nil
 }
 
+func (i *jsiiProxy_ImageBuilderComponent) validatePrefixCommandsWithErrorHandlingParameters(platform *string, commands *[]*string) error {
+	return nil
+}
+
 func (i *jsiiProxy_ImageBuilderComponent) validateVersionParameters(type_ *string, name *string, data interface{}) error {
 	return nil
 }
