@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 )
 
-// Properties for FargateRunner.
+// Properties for FargateRunnerProvider.
 // Experimental.
 type FargateRunnerProviderProps struct {
 	// The number of days log events are kept in CloudWatch Logs.
