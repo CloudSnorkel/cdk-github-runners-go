@@ -41,6 +41,10 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.AmiBuilderProps",
 		reflect.TypeOf((*AmiBuilderProps)(nil)).Elem(),
 	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ApiGatewayAccessProps",
+		reflect.TypeOf((*ApiGatewayAccessProps)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.Architecture",
 		reflect.TypeOf((*Architecture)(nil)).Elem(),
@@ -420,6 +424,14 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.ImageBuilderComponentProperties",
 		reflect.TypeOf((*ImageBuilderComponentProperties)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.LambdaAccess",
+		reflect.TypeOf((*LambdaAccess)(nil)).Elem(),
+		nil, // no members
+		func() interface{} {
+			return &jsiiProxy_LambdaAccess{}
+		},
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.LambdaRunner",

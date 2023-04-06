@@ -55,6 +55,16 @@ type GitHubRunnersProps struct {
 	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
 	// Experimental.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Access configuration for the setup function.
+	//
+	// Once you finish the setup process, you can set this to `LambdaAccess.noAccess()` to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.
+	// Experimental.
+	SetupAccess LambdaAccess `field:"optional" json:"setupAccess" yaml:"setupAccess"`
+	// Access configuration for the status function.
+	//
+	// This function returns a lot of sensitive information about the runner, so you should only allow access to it from trusted IPs, if at all.
+	// Experimental.
+	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
 	// VPC used for all management functions.
 	//
 	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
@@ -65,5 +75,14 @@ type GitHubRunnersProps struct {
 	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
 	// Experimental.
 	VpcSubnets *awsec2.SubnetSelection `field:"optional" json:"vpcSubnets" yaml:"vpcSubnets"`
+	// Access configuration for the webhook function.
+	//
+	// This function is called by GitHub when a new workflow job is scheduled. For an extra layer of security, you can set this to `LambdaAccess.apiGateway({ allowedIps: LambdaAccess.githubWebhookIps() })`.
+	//
+	// You can also set this to `LambdaAccess.privateApiGateway()` if your GitHub Enterprise Server is hosted in a VPC. This will create an API Gateway endpoint that's only accessible from within the VPC.
+	//
+	// *WARNING*: changing access type may change the URL. When the URL changes, you must update GitHub as well.
+	// Experimental.
+	WebhookAccess LambdaAccess `field:"optional" json:"webhookAccess" yaml:"webhookAccess"`
 }
 
