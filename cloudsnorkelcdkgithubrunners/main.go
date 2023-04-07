@@ -232,6 +232,33 @@ func init() {
 		reflect.TypeOf((*Ec2RunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.EcsRunnerProvider",
+		reflect.TypeOf((*EcsRunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addRetry", GoMethod: "AddRetry"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
+		func() interface{} {
+			j := jsiiProxy_EcsRunnerProvider{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.EcsRunnerProviderProps",
+		reflect.TypeOf((*EcsRunnerProviderProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.FargateRunner",
 		reflect.TypeOf((*FargateRunner)(nil)).Elem(),
 		[]_jsii_.Member{
