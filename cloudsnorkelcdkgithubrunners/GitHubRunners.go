@@ -6,6 +6,7 @@ import (
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudwatch"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awssns"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
@@ -64,6 +65,13 @@ type GitHubRunners interface {
 	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
+	// Creates a topic for notifications when a runner image build fails.
+	//
+	// Runner images are rebuilt every week by default. This provides the latest GitHub Runner version and software updates.
+	//
+	// If you want to be sure you are using the latest runner version, you can use this topic to be notified when a build fails.
+	// Experimental.
+	FailedImageBuildsTopic() awssns.Topic
 	// Metric for failed runner executions.
 	//
 	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link metricJobCompleted}.
@@ -184,6 +192,19 @@ func GitHubRunners_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.GitHubRunners",
 		"isConstruct",
 		[]interface{}{x},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) FailedImageBuildsTopic() awssns.Topic {
+	var returns awssns.Topic
+
+	_jsii_.Invoke(
+		g,
+		"failedImageBuildsTopic",
+		nil, // no parameters
 		&returns,
 	)
 
