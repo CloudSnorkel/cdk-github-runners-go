@@ -18,6 +18,8 @@ type RunnerImageBuilderProps struct {
 	// Experimental.
 	AwsImageBuilderOptions *AwsImageBuilderRunnerImageBuilderProps `field:"optional" json:"awsImageBuilderOptions" yaml:"awsImageBuilderOptions"`
 	// Base AMI from which runner AMIs will be built.
+	//
+	// This can be an actual AMI or an AWS Image Builder ARN that points to the latest AMI. For example `arn:aws:imagebuilder:us-east-1:aws:image/ubuntu-server-22-lts-x86/x.x.x` would always use the latest version of Ubuntu 22.04 in each build. If you want a specific version, you can replace `x.x.x` with that version.
 	// Experimental.
 	BaseAmi *string `field:"optional" json:"baseAmi" yaml:"baseAmi"`
 	// Base image from which Docker runner images will be built.

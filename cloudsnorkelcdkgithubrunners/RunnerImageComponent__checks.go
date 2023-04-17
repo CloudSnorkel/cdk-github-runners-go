@@ -45,6 +45,18 @@ func (r *jsiiProxy_RunnerImageComponent) validateGetDockerCommandsParameters(_os
 	return nil
 }
 
+func (r *jsiiProxy_RunnerImageComponent) validateShouldRebootParameters(_os Os, _architecture Architecture) error {
+	if _os == nil {
+		return fmt.Errorf("parameter _os is required, but nil was provided")
+	}
+
+	if _architecture == nil {
+		return fmt.Errorf("parameter _architecture is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateRunnerImageComponent_CustomParameters(props *RunnerImageComponentCustomProps) error {
 	if props == nil {
 		return fmt.Errorf("parameter props is required, but nil was provided")

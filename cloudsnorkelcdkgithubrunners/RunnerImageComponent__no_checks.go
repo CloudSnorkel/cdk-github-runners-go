@@ -17,6 +17,10 @@ func (r *jsiiProxy_RunnerImageComponent) validateGetDockerCommandsParameters(_os
 	return nil
 }
 
+func (r *jsiiProxy_RunnerImageComponent) validateShouldRebootParameters(_os Os, _architecture Architecture) error {
+	return nil
+}
+
 func validateRunnerImageComponent_CustomParameters(props *RunnerImageComponentCustomProps) error {
 	return nil
 }

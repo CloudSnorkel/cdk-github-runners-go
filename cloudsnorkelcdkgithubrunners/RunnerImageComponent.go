@@ -33,6 +33,9 @@ type RunnerImageComponent interface {
 	// Docker commands are added after assets and normal commands.
 	// Experimental.
 	GetDockerCommands(_os Os, _architecture Architecture) *[]*string
+	// Returns true if the image builder should be rebooted after this component is installed.
+	// Experimental.
+	ShouldReboot(_os Os, _architecture Architecture) *bool
 }
 
 // The jsii proxy struct for RunnerImageComponent
@@ -107,7 +110,7 @@ func RunnerImageComponent_Custom(props *RunnerImageComponentCustomProps) RunnerI
 
 // A component to install Docker.
 //
-// On Windows this installs Docker Desktop.
+// On Windows this sets up dockerd for Windows containers without Docker Desktop. If you need Linux containers on Windows, you'll need to install Docker Desktop which doesn't seem to play well with servers (PRs welcome).
 // Experimental.
 func RunnerImageComponent_Docker() RunnerImageComponent {
 	_init_.Initialize()
@@ -311,6 +314,22 @@ func (r *jsiiProxy_RunnerImageComponent) GetDockerCommands(_os Os, _architecture
 	_jsii_.Invoke(
 		r,
 		"getDockerCommands",
+		[]interface{}{_os, _architecture},
+		&returns,
+	)
+
+	return returns
+}
+
+func (r *jsiiProxy_RunnerImageComponent) ShouldReboot(_os Os, _architecture Architecture) *bool {
+	if err := r.validateShouldRebootParameters(_os, _architecture); err != nil {
+		panic(err)
+	}
+	var returns *bool
+
+	_jsii_.Invoke(
+		r,
+		"shouldReboot",
 		[]interface{}{_os, _architecture},
 		&returns,
 	)

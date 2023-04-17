@@ -597,6 +597,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "getCommands", GoMethod: "GetCommands"},
 			_jsii_.MemberMethod{JsiiMethod: "getDockerCommands", GoMethod: "GetDockerCommands"},
 			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "shouldReboot", GoMethod: "ShouldReboot"},
 		},
 		func() interface{} {
 			return &jsiiProxy_RunnerImageComponent{}
