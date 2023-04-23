@@ -31,8 +31,8 @@ import (
 //     runnerVersion: RunnerVersion.specific('2.293.0'),
 //     rebuildInterval: Duration.days(14),
 // });
-// new CodeBuildRunner(this, 'CodeBuild provider', {
-//     label: 'custom-codebuild',
+// new CodeBuildRunnerProvider(this, 'CodeBuild provider', {
+//     labels: ['custom-codebuild'],
 //     imageBuilder: builder,
 // });
 // ```.

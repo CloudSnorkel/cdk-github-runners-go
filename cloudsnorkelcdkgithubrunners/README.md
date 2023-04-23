@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/@cloudsnorkel/cdk-github-runners?label=npm&logo=npm)](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
 [![PyPI](https://img.shields.io/pypi/v/cloudsnorkel.cdk-github-runners?label=pypi&logo=pypi)](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
-[![Maven Central](https://img.shields.io/maven-central/v/com.cloudsnorkel/cdk.github.runners.svg?label=Maven%20Central&logo=apachemaven)](https://search.maven.org/search?q=g:%22com.cloudsnorkel%22%20AND%20a:%22cdk.github.runners%22)
+[![Maven Central](https://img.shields.io/maven-central/v/com.cloudsnorkel/cdk.github.runners.svg?label=Maven%20Central&logo=apachemaven)](https://central.sonatype.com/artifact/com.cloudsnorkel/cdk.github.runners/)
 [![Go](https://img.shields.io/github/v/tag/CloudSnorkel/cdk-github-runners?color=red&label=go&logo=go)](https://pkg.go.dev/github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners)
 [![Nuget](https://img.shields.io/nuget/v/CloudSnorkel.Cdk.Github.Runners?color=red&&logo=nuget)](https://www.nuget.org/packages/CloudSnorkel.Cdk.Github.Runners/)
 [![Release](https://github.com/CloudSnorkel/cdk-github-runners/actions/workflows/release.yml/badge.svg)](https://github.com/CloudSnorkel/cdk-github-runners/actions/workflows/release.yml)
@@ -55,45 +55,123 @@ You can also create your own provider by implementing `IRunnerProvider`.
 
 ## Installation
 
-1. Confirm you're using CDK v2
-2. Install the appropriate package
+1. Install and use the appropriate package
 
-   1. [Python](https://pypi.org/project/cloudsnorkel.cdk-github-runners)
+   <details><summary>Python</summary>
 
-      ```
-      pip install cloudsnorkel.cdk-github-runners
-      ```
-   2. [TypeScript or JavaScript](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners)
+   ### Install
 
-      ```
-      npm i @cloudsnorkel/cdk-github-runners
-      ```
-   3. [Java](https://search.maven.org/search?q=g:%22com.cloudsnorkel%22%20AND%20a:%22cdk.github.runners%22)
+   Available on [PyPI](https://pypi.org/project/cloudsnorkel.cdk-github-runners).
 
-      ```xml
-      <dependency>
+   ```bash
+   pip install cloudsnorkel.cdk-github-runners
+   ```
+
+   ### Use
+
+   ```python
+   from cloudsnorkel.cdk_github_runners import GitHubRunners
+
+   GitHubRunners(self, "runners")
+   ```
+
+   </details>
+   <details><summary>TypeScript or JavaScript</summary>
+
+   ### Install
+
+   Available on [npm](https://www.npmjs.com/package/@cloudsnorkel/cdk-github-runners).
+
+   ```bash
+   npm i @cloudsnorkel/cdk-github-runners
+   ```
+
+   ### Use
+
+   ```go
+   import { GitHubRunners } from '@cloudsnorkel/cdk-github-runners';
+
+   new GitHubRunners(this, "runners");
+   ```
+
+   </details>
+   <details><summary>Java</summary>
+
+   ### Install
+
+   Available on [Maven](https://central.sonatype.com/artifact/com.cloudsnorkel/cdk.github.runners/).
+
+   ```xml
+   <dependency>
       <groupId>com.cloudsnorkel</groupId>
       <artifactId>cdk.github.runners</artifactId>
-      </dependency>
-      ```
-   4. [Go](https://pkg.go.dev/github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners)
+   </dependency>
+   ```
 
-      ```
-      go get github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners
-      ```
-   5. [.NET](https://www.nuget.org/packages/CloudSnorkel.Cdk.Github.Runners/)
+   ### Use
 
-      ```
-      dotnet add package CloudSnorkel.Cdk.Github.Runners
-      ```
-3. Use `GitHubRunners` construct in your code (starting with default arguments is fine)
-4. Deploy your stack
-5. Look for the status command output similar to `aws --region us-east-1 lambda invoke --function-name status-XYZ123 status.json`
-6. Execute the status command (you may need to specify `--profile` too) and open the resulting `status.json` file
-7. Open the URL in `github.setup.url` from `status.json` or [manually setup GitHub](SETUP_GITHUB.md) integration as an app or with personal access token
-8. Run status command again to confirm `github.auth.status` and `github.webhook.status` are OK
-9. Trigger a GitHub action that has a `self-hosted` label with `runs-on: [self-hosted, linux, codebuild]` or similar
-10. If the action is not successful, see [troubleshooting](#Troubleshooting)
+   ```java
+   import com.cloudsnorkel.cdk.github.runners.GitHubRunners;
+
+   GitHubRunners.Builder.create(this, "runners").build();
+   ```
+
+   </details>
+   <details><summary>Go</summary>
+
+   ### Install
+
+   Available on [GitHub](https://pkg.go.dev/github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners).
+
+   ```bash
+   go get github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners
+   ```
+
+   ### Use
+
+   ```go
+   import "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners"
+
+   NewGitHubRunners(this, jsii.String("runners"))
+   ```
+
+   </details>
+   <details><summary>.NET</summary>
+
+   ### Install
+
+   Available on [Nuget](https://www.nuget.org/packages/CloudSnorkel.Cdk.Github.Runners/).
+
+   ```bash
+   dotnet add package CloudSnorkel.Cdk.Github.Runners
+   ```
+
+   ### Use
+
+   ```csharp
+   using CloudSnorkel;
+
+   new GitHubRunners(this, "runners");
+   ```
+
+   </details>
+2. Use `GitHubRunners` construct in your code (starting with default arguments is fine)
+3. Deploy your stack
+4. Look for the status command output similar to `aws --region us-east-1 lambda invoke --function-name status-XYZ123 status.json`
+
+   ```
+    ✅  github-runners-test
+
+   ✨  Deployment time: 260.01s
+
+   Outputs:
+   github-runners-test.runnersstatuscommand4A30F0F5 = aws --region us-east-1 lambda invoke --function-name github-runners-test-runnersstatus1A5771C0-mvttg8oPQnQS status.json
+   ```
+5. Execute the status command (you may need to specify `--profile` too) and open the resulting `status.json` file
+6. Open the URL in `github.setup.url` from `status.json` or [manually setup GitHub](SETUP_GITHUB.md) integration as an app or with personal access token
+7. Run status command again to confirm `github.auth.status` and `github.webhook.status` are OK
+8. Trigger a GitHub action that has a `self-hosted` label with `runs-on: [self-hosted, linux, codebuild]` or similar
+9. If the action is not successful, see [troubleshooting](#Troubleshooting)
 
 [![Demo](demo-thumbnail.jpg)](https://youtu.be/wlyv_3V8lIw)
 
@@ -111,9 +189,9 @@ let bucket: s3.Bucket;
 
 // create a custom CodeBuild provider
 const myProvider = new CodeBuildRunnerProvider(this, 'codebuild runner', {
-  label: 'my-codebuild',
-  vpc: vpc,
-  securityGroup: runnerSg,
+   labels: ['my-codebuild'],
+   vpc: vpc,
+   securityGroups: [runnerSg],
 });
 // grant some permissions to the provider
 bucket.grantReadWrite(myProvider);
@@ -138,9 +216,9 @@ myBuilder.addComponent(
 );
 
 const myProvider = new FargateRunnerProvider(this, 'fargate runner', {
-   label: 'customized-fargate',
+   labels: ['customized-fargate'],
    vpc: vpc,
-   securityGroup: runnerSg,
+   securityGroups: [runnerSg],
    imageBuilder: myBuilder,
 });
 
@@ -166,31 +244,31 @@ Windows images can also be customized the same way.
 
 ```go
 const myWindowsBuilder = FargateRunnerProvider.imageBuilder(this, 'Windows image builder', {
-  architecture: Architecture.X86_64,
-  os: Os.WINDOWS,
-  runnerVersion: RunnerVersion.specific('2.291.0'),
-  rebuildInterval: Duration.days(14),
+   architecture: Architecture.X86_64,
+   os: Os.WINDOWS,
+   runnerVersion: RunnerVersion.specific('2.291.0'),
+   rebuildInterval: Duration.days(14),
 });
 myWindowsBuilder.addComponent(
-  RunnerImageComponent.custom({
-    name: 'Ninja',
-    commands: [
-      'Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-win.zip" -OutFile ninja.zip',
-      'Expand-Archive ninja.zip -DestinationPath C:\\actions',
-      'del ninja.zip',
-    ],
-  })
+        RunnerImageComponent.custom({
+           name: 'Ninja',
+           commands: [
+              'Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-win.zip" -OutFile ninja.zip',
+              'Expand-Archive ninja.zip -DestinationPath C:\\actions',
+              'del ninja.zip',
+           ],
+        })
 );
 
 const myProvider = new FargateRunnerProvider(this, 'fargate runner', {
-  label: 'customized-windows-fargate',
-  vpc: vpc,
-  securityGroup: runnerSg,
-  imageBuidler: myWindowsBuilder,
+   labels: ['customized-windows-fargate'],
+   vpc: vpc,
+   securityGroups: [runnerSg],
+   imageBuidler: myWindowsBuilder,
 });
 
 new GitHubRunners(this, 'runners', {
-  providers: [myProvider],
+   providers: [myProvider],
 });
 ```
 
@@ -198,15 +276,15 @@ The runner OS and architecture is determined by the image it is set to use. For 
 
 ```go
 new GitHubRunners(this, 'runners', {
-  providers: [
-    new FargateRunnerProvider(this, 'fargate runner', {
-      labels: ['arm64', 'fargate'],
-      imageBuidler: FargateRunnerProvider.imageBuilder(this, 'image builder', {
-        architecture: Architecture.ARM64,
-        os: Os.LINUX,
+   providers: [
+      new FargateRunnerProvider(this, 'fargate runner', {
+         labels: ['arm64', 'fargate'],
+         imageBuidler: FargateRunnerProvider.imageBuilder(this, 'image builder', {
+            architecture: Architecture.ARM64,
+            os: Os.LINUX_UBUNTU,
+         }),
       }),
-    }),
-  ],
+   ],
 });
 ```
 
