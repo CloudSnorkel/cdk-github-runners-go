@@ -76,7 +76,10 @@ type EcsRunnerProviderProps struct {
 	// Security groups to assign to the task.
 	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
-	// Use spot capacity and set a maximum price for spot instances.
+	// Use spot capacity.
+	// Experimental.
+	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
+	// Maximum price for spot instances.
 	// Experimental.
 	SpotMaxPrice *string `field:"optional" json:"spotMaxPrice" yaml:"spotMaxPrice"`
 	// Size of volume available for launched cluster instances.
