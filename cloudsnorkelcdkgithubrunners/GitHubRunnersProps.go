@@ -65,9 +65,16 @@ type GitHubRunnersProps struct {
 	// This function returns a lot of sensitive information about the runner, so you should only allow access to it from trusted IPs, if at all.
 	// Experimental.
 	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
-	// VPC used for all management functions.
+	// VPC used for all management functions. Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
 	//
-	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
+	// Make sure the selected VPC and subnets have access to the following with either NAT Gateway or VPC Endpoints:
+	// * GitHub Enterprise Server
+	// * Secrets Manager
+	// * SQS
+	// * Step Functions
+	// * CloudFormation (status function only)
+	// * EC2 (status function only)
+	// * ECR (status function only).
 	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 	// VPC subnets used for all management functions.

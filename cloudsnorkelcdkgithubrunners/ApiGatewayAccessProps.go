@@ -19,8 +19,15 @@ type ApiGatewayAccessProps struct {
 	// Only works for private API Gateways with {@link allowedVpc}.
 	// Experimental.
 	AllowedSecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"allowedSecurityGroups" yaml:"allowedSecurityGroups"`
-	// Creates a private API Gateway and allows access from the specified VPC.
+	// Create a private API Gateway and allow access from the specified VPC.
 	// Experimental.
 	AllowedVpc awsec2.IVpc `field:"optional" json:"allowedVpc" yaml:"allowedVpc"`
+	// Create a private API Gateway and allow access from the specified VPC endpoints.
+	//
+	// Use this to make use of existing VPC endpoints. The VPC endpoint must point to `ec2.InterfaceVpcEndpointAwsService.APIGATEWAY`.
+	//
+	// No other settings are supported when using this option.
+	// Experimental.
+	AllowedVpcEndpoints *[]awsec2.IVpcEndpoint `field:"optional" json:"allowedVpcEndpoints" yaml:"allowedVpcEndpoints"`
 }
 
