@@ -17,8 +17,7 @@ type FargateRunnerProviderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Options to retry operation in case of failure like missing capacity, or API quota issues.
-	// Experimental.
+	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// Assign public IP to the runner task.
 	//

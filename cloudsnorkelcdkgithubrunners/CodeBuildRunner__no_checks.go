@@ -5,10 +5,6 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (c *jsiiProxy_CodeBuildRunner) validateAddRetryParameters(task interface{}, errors *[]*string) error {
-	return nil
-}
-
 func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
 	return nil
 }

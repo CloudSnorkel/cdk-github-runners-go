@@ -41,8 +41,9 @@ type LambdaRunner interface {
 	// The tree node.
 	// Deprecated: use {@link LambdaRunnerProvider }.
 	Node() constructs.Node
+	// List of step functions errors that should be retried.
 	// Deprecated: use {@link LambdaRunnerProvider }.
-	AddRetry(task interface{}, errors *[]*string)
+	RetryableErrors() *[]*string
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -136,6 +137,16 @@ func (j *jsiiProxy_LambdaRunner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_LambdaRunner) RetryableErrors() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -244,17 +255,6 @@ func LambdaRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 		&returns,
 	)
 	return returns
-}
-
-func (l *jsiiProxy_LambdaRunner) AddRetry(task interface{}, errors *[]*string) {
-	if err := l.validateAddRetryParameters(task, errors); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		l,
-		"addRetry",
-		[]interface{}{task, errors},
-	)
 }
 
 func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {

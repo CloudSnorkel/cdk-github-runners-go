@@ -48,6 +48,9 @@ type IRunnerProvider interface {
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
 	// Experimental.
 	LogGroup() awslogs.ILogGroup
+	// List of step functions errors that should be retried.
+	// Experimental.
+	RetryableErrors() *[]*string
 }
 
 // The jsii proxy for IRunnerProvider
@@ -115,6 +118,16 @@ func (j *jsiiProxy_IRunnerProvider) LogGroup() awslogs.ILogGroup {
 	_jsii_.Get(
 		j,
 		"logGroup",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_IRunnerProvider) RetryableErrors() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"retryableErrors",
 		&returns,
 	)
 	return returns

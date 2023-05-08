@@ -50,6 +50,13 @@ type GitHubRunnersProps struct {
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
+	// Options to retry operation in case of failure like missing capacity, or API quota issues.
+	//
+	// GitHub jobs time out after not being able to get a runner for 24 hours. You should not retry for more than 24 hours.
+	//
+	// Total time spent waiting can be calculated with interval * (backoffRate ^ maxAttempts) / (backoffRate - 1).
+	// Experimental.
+	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// Security group attached to all management functions.
 	//
 	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
@@ -86,7 +93,7 @@ type GitHubRunnersProps struct {
 	//
 	// This function is called by GitHub when a new workflow job is scheduled. For an extra layer of security, you can set this to `LambdaAccess.apiGateway({ allowedIps: LambdaAccess.githubWebhookIps() })`.
 	//
-	// You can also set this to `LambdaAccess.privateApiGateway()` if your GitHub Enterprise Server is hosted in a VPC. This will create an API Gateway endpoint that's only accessible from within the VPC.
+	// You can also set this to `LambdaAccess.apiGateway({allowedVpc: vpc, allowedIps: ['GHES.IP.ADDRESS/32']})` if your GitHub Enterprise Server is hosted in a VPC. This will create an API Gateway endpoint that's only accessible from within the VPC.
 	//
 	// *WARNING*: changing access type may change the URL. When the URL changes, you must update GitHub as well.
 	// Experimental.

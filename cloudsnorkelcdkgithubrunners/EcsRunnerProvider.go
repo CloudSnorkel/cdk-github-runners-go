@@ -41,8 +41,9 @@ type EcsRunnerProvider interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// List of step functions errors that should be retried.
 	// Experimental.
-	AddRetry(task interface{}, errors *[]*string)
+	RetryableErrors() *[]*string
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -117,6 +118,16 @@ func (j *jsiiProxy_EcsRunnerProvider) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_EcsRunnerProvider) RetryableErrors() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -201,17 +212,6 @@ func EcsRunnerProvider_IsConstruct(x interface{}) *bool {
 	)
 
 	return returns
-}
-
-func (e *jsiiProxy_EcsRunnerProvider) AddRetry(task interface{}, errors *[]*string) {
-	if err := e.validateAddRetryParameters(task, errors); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		e,
-		"addRetry",
-		[]interface{}{task, errors},
-	)
 }
 
 func (e *jsiiProxy_EcsRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {

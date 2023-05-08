@@ -54,6 +54,9 @@ type FargateRunnerProvider interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// List of step functions errors that should be retried.
+	// Experimental.
+	RetryableErrors() *[]*string
 	// Use spot pricing for Fargate tasks.
 	// Experimental.
 	Spot() *bool
@@ -66,8 +69,6 @@ type FargateRunnerProvider interface {
 	// VPC used for hosting the runner task.
 	// Experimental.
 	Vpc() awsec2.IVpc
-	// Experimental.
-	AddRetry(task interface{}, errors *[]*string)
 	// Generate step function task(s) to start a new runner.
 	//
 	// Called by GithubRunners and shouldn't be called manually.
@@ -182,6 +183,16 @@ func (j *jsiiProxy_FargateRunnerProvider) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_FargateRunnerProvider) RetryableErrors() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -327,17 +338,6 @@ func FargateRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
 		&returns,
 	)
 	return returns
-}
-
-func (f *jsiiProxy_FargateRunnerProvider) AddRetry(task interface{}, errors *[]*string) {
-	if err := f.validateAddRetryParameters(task, errors); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		f,
-		"addRetry",
-		[]interface{}{task, errors},
-	)
 }
 
 func (f *jsiiProxy_FargateRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {

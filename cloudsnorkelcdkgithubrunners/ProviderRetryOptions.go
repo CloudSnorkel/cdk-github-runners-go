@@ -7,7 +7,7 @@ import (
 
 // Retry options for providers.
 //
-// The default is to retry 10 times for about 45 minutes with increasing interval.
+// The default is to retry 23 times for about 24 hours with increasing interval.
 // Experimental.
 type ProviderRetryOptions struct {
 	// Multiplication for how much longer the wait interval gets on every retry.
