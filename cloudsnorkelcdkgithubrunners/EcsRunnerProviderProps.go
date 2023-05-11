@@ -26,6 +26,8 @@ type EcsRunnerProviderProps struct {
 	// Experimental.
 	AssignPublicIp *bool `field:"optional" json:"assignPublicIp" yaml:"assignPublicIp"`
 	// Existing capacity provider to use.
+	//
+	// Make sure the AMI used by the capacity provider is compatible with ECS.
 	// Experimental.
 	CapacityProvider awsecs.AsgCapacityProvider `field:"optional" json:"capacityProvider" yaml:"capacityProvider"`
 	// Existing ECS cluster to use.
