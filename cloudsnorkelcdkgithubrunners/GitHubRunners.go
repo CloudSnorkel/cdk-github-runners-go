@@ -6,6 +6,7 @@ import (
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudwatch"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awssns"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
@@ -54,6 +55,14 @@ import (
 // Experimental.
 type GitHubRunners interface {
 	constructs.Construct
+	awsec2.IConnectable
+	// Manage the connections of all management functions.
+	//
+	// Use this to enable connections to your GitHub Enterprise Server in a VPC.
+	//
+	// This cannot be used to manage connections of the runners. Use the `connections` property of each runner provider to manage runner connections.
+	// Experimental.
+	Connections() awsec2.Connections
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -104,6 +113,17 @@ type GitHubRunners interface {
 // The jsii proxy struct for GitHubRunners
 type jsiiProxy_GitHubRunners struct {
 	internal.Type__constructsConstruct
+	internal.Type__awsec2IConnectable
+}
+
+func (j *jsiiProxy_GitHubRunners) Connections() awsec2.Connections {
+	var returns awsec2.Connections
+	_jsii_.Get(
+		j,
+		"connections",
+		&returns,
+	)
+	return returns
 }
 
 func (j *jsiiProxy_GitHubRunners) Node() constructs.Node {

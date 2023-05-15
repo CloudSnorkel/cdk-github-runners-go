@@ -60,8 +60,13 @@ type GitHubRunnersProps struct {
 	// Security group attached to all management functions.
 	//
 	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
-	// Experimental.
+	// Deprecated: use {@link securityGroups } instead.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
+	// Security groups attached to all management functions.
+	//
+	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
+	// Experimental.
+	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Access configuration for the setup function.
 	//
 	// Once you finish the setup process, you can set this to `LambdaAccess.noAccess()` to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.

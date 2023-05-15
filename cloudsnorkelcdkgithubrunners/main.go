@@ -327,6 +327,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.GitHubRunners",
 		reflect.TypeOf((*GitHubRunners)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "failedImageBuildsTopic", GoMethod: "FailedImageBuildsTopic"},
 			_jsii_.MemberMethod{JsiiMethod: "metricFailed", GoMethod: "MetricFailed"},
 			_jsii_.MemberMethod{JsiiMethod: "metricJobCompleted", GoMethod: "MetricJobCompleted"},
@@ -341,6 +342,7 @@ func init() {
 		func() interface{} {
 			j := jsiiProxy_GitHubRunners{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
 			return &j
 		},
 	)
