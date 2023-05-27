@@ -1,4 +1,3 @@
-// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
 package cloudsnorkelcdkgithubrunners
 
 import (
@@ -49,7 +48,7 @@ type IRunnerProvider interface {
 	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// List of step functions errors that should be retried.
-	// Experimental.
+	// Deprecated: do not use.
 	RetryableErrors() *[]*string
 }
 

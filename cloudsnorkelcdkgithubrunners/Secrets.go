@@ -1,4 +1,3 @@
-// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
 package cloudsnorkelcdkgithubrunners
 
 import (
@@ -14,7 +13,7 @@ import (
 // Experimental.
 type Secrets interface {
 	constructs.Construct
-	// Authentication secret for GitHub containing either app details or personal authentication token.
+	// Authentication secret for GitHub containing either app details or personal access token.
 	//
 	// This secret is used to register runners and
 	// cancel jobs when the runner fails to start.
@@ -22,7 +21,7 @@ type Secrets interface {
 	// This secret is meant to be edited by the user after being created.
 	// Experimental.
 	Github() awssecretsmanager.Secret
-	// GitHub app private key. Not needed when using personal authentication tokens.
+	// GitHub app private key. Not needed when using personal access tokens.
 	//
 	// This secret is meant to be edited by the user after being created. It is separate than the main GitHub secret because inserting private keys into JSON is hard.
 	// Experimental.

@@ -1,3 +1,4 @@
+// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
 package cloudsnorkelcdkgithubrunners
 
 import (
@@ -459,7 +460,9 @@ func init() {
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.LambdaAccess",
 		reflect.TypeOf((*LambdaAccess)(nil)).Elem(),
-		nil, // no members
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "bind", GoMethod: "Bind"},
+		},
 		func() interface{} {
 			return &jsiiProxy_LambdaAccess{}
 		},

@@ -1,16 +1,23 @@
-// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
 package cloudsnorkelcdkgithubrunners
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
+
+	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
+	"github.com/aws/constructs-go/constructs/v10"
 )
 
-// Access configuration options for Lambda functions like setup and webhook function.
+// Access configuration options for Lambda functions like setup and webhook function. Use this to limit access to these functions.
 //
-// Use this to limit access to these functions.
+// If you need a custom access point, you can implement this abstract class yourself. Note that the Lambda functions expect API Gateway v1 or v2 input. They also expect every URL under the constructed URL to point to the function.
 // Experimental.
 type LambdaAccess interface {
+	// Creates all required resources and returns access URL or empty string if disabled.
+	//
+	// Returns: access URL or empty string if disabled.
+	// Experimental.
+	Bind(scope constructs.Construct, id *string, lambdaFunction awslambda.Function) *string
 }
 
 // The jsii proxy struct for LambdaAccess
@@ -116,6 +123,22 @@ func LambdaAccess_NoAccess() LambdaAccess {
 		"@cloudsnorkel/cdk-github-runners.LambdaAccess",
 		"noAccess",
 		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (l *jsiiProxy_LambdaAccess) Bind(scope constructs.Construct, id *string, lambdaFunction awslambda.Function) *string {
+	if err := l.validateBindParameters(scope, id, lambdaFunction); err != nil {
+		panic(err)
+	}
+	var returns *string
+
+	_jsii_.Invoke(
+		l,
+		"bind",
+		[]interface{}{scope, id, lambdaFunction},
 		&returns,
 	)
 
