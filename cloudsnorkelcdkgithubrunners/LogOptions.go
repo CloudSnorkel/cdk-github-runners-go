@@ -9,9 +9,13 @@ import (
 // Experimental.
 type LogOptions struct {
 	// Determines whether execution data is included in your log.
+	// Default: false.
+	//
 	// Experimental.
 	IncludeExecutionData *bool `field:"optional" json:"includeExecutionData" yaml:"includeExecutionData"`
 	// Defines which category of execution history events are logged.
+	// Default: ERROR.
+	//
 	// Experimental.
 	Level awsstepfunctions.LogLevel `field:"optional" json:"level" yaml:"level"`
 	// The log group where the execution history events will be logged.
@@ -22,6 +26,8 @@ type LogOptions struct {
 	// When updating
 	// this property, unsetting it doesn't remove the log retention policy. To
 	// remove the retention policy, set the value to `INFINITE`.
+	// Default: logs.RetentionDays.ONE_MONTH
+	//
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
 }

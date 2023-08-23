@@ -12,17 +12,23 @@ type CodeBuildRunnerImageBuilderProps struct {
 	// This is the image that's going to run the code that builds the runner image.
 	//
 	// The only action taken in CodeBuild is running `docker build`. You would therefore not need to change this setting often.
+	// Default: Ubuntu 22.04 for x64 and Amazon Linux 2 for ARM64
+	//
 	// Experimental.
 	BuildImage awscodebuild.IBuildImage `field:"optional" json:"buildImage" yaml:"buildImage"`
 	// The type of compute to use for this build.
 	//
 	// See the {@link ComputeType} enum for the possible values.
+	// Default: {@link ComputeType#SMALL }.
+	//
 	// Experimental.
 	ComputeType awscodebuild.ComputeType `field:"optional" json:"computeType" yaml:"computeType"`
 	// The number of minutes after which AWS CodeBuild stops the build if it's not complete.
 	//
 	// For valid values, see the timeoutInMinutes field in the AWS
 	// CodeBuild User Guide.
+	// Default: Duration.hours(1)
+	//
 	// Experimental.
 	Timeout awscdk.Duration `field:"optional" json:"timeout" yaml:"timeout"`
 }

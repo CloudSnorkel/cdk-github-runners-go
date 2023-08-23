@@ -24,6 +24,8 @@ type ImageBuilderComponentProperties struct {
 	// Experimental.
 	Assets *[]*ImageBuilderAsset `field:"optional" json:"assets" yaml:"assets"`
 	// Require a reboot after installing this component.
+	// Default: false.
+	//
 	// Experimental.
 	Reboot *bool `field:"optional" json:"reboot" yaml:"reboot"`
 }

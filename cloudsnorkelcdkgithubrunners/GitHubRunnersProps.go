@@ -11,6 +11,8 @@ type GitHubRunnersProps struct {
 	// Allow management functions to run in public subnets.
 	//
 	// Lambda Functions in a public subnet can NOT access the internet.
+	// Default: false.
+	//
 	// Experimental.
 	AllowPublicSubnet *bool `field:"optional" json:"allowPublicSubnet" yaml:"allowPublicSubnet"`
 	// Path to a directory containing a file named certs.pem containing any additional certificates required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
@@ -39,14 +41,20 @@ type GitHubRunnersProps struct {
 	// Time to wait before stopping a runner that remains idle.
 	//
 	// If the user cancelled the job, or if another runner stole it, this stops the runner to avoid wasting resources.
+	// Default: 5 minutes.
+	//
 	// Experimental.
 	IdleTimeout awscdk.Duration `field:"optional" json:"idleTimeout" yaml:"idleTimeout"`
 	// Logging options for the state machine that manages the runners.
+	// Default: no logs.
+	//
 	// Experimental.
 	LogOptions *LogOptions `field:"optional" json:"logOptions" yaml:"logOptions"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
+	// Default: CodeBuild, Lambda and Fargate runners with all the defaults (no VPC or default account VPC).
+	//
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
 	// Options to retry operation in case of failure like missing capacity, or API quota issues.
@@ -54,6 +62,8 @@ type GitHubRunnersProps struct {
 	// GitHub jobs time out after not being able to get a runner for 24 hours. You should not retry for more than 24 hours.
 	//
 	// Total time spent waiting can be calculated with interval * (backoffRate ^ maxAttempts) / (backoffRate - 1).
+	// Default: retry 23 times up to about 24 hours.
+	//
 	// Experimental.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// Security group attached to all management functions.
@@ -69,11 +79,15 @@ type GitHubRunnersProps struct {
 	// Access configuration for the setup function.
 	//
 	// Once you finish the setup process, you can set this to `LambdaAccess.noAccess()` to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.
+	// Default: LambdaAccess.lambdaUrl()
+	//
 	// Experimental.
 	SetupAccess LambdaAccess `field:"optional" json:"setupAccess" yaml:"setupAccess"`
 	// Access configuration for the status function.
 	//
 	// This function returns a lot of sensitive information about the runner, so you should only allow access to it from trusted IPs, if at all.
+	// Default: LambdaAccess.noAccess()
+	//
 	// Experimental.
 	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
 	// VPC used for all management functions. Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
@@ -100,6 +114,8 @@ type GitHubRunnersProps struct {
 	// You can also set this to `LambdaAccess.apiGateway({allowedVpc: vpc, allowedIps: ['GHES.IP.ADDRESS/32']})` if your GitHub Enterprise Server is hosted in a VPC. This will create an API Gateway endpoint that's only accessible from within the VPC.
 	//
 	// *WARNING*: changing access type may change the URL. When the URL changes, you must update GitHub as well.
+	// Default: LambdaAccess.lambdaUrl()
+	//
 	// Experimental.
 	WebhookAccess LambdaAccess `field:"optional" json:"webhookAccess" yaml:"webhookAccess"`
 }

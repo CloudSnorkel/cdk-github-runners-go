@@ -264,7 +264,7 @@ const myProvider = new FargateRunnerProvider(this, 'fargate runner', {
    labels: ['customized-windows-fargate'],
    vpc: vpc,
    securityGroups: [runnerSg],
-   imageBuidler: myWindowsBuilder,
+   imageBuilder: myWindowsBuilder,
 });
 
 new GitHubRunners(this, 'runners', {
@@ -279,7 +279,7 @@ new GitHubRunners(this, 'runners', {
    providers: [
       new FargateRunnerProvider(this, 'fargate runner', {
          labels: ['arm64', 'fargate'],
-         imageBuidler: FargateRunnerProvider.imageBuilder(this, 'image builder', {
+         imageBuilder: FargateRunnerProvider.imageBuilder(this, 'image builder', {
             architecture: Architecture.ARM64,
             os: Os.LINUX_UBUNTU,
          }),

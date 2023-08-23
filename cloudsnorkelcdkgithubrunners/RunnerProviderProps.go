@@ -12,6 +12,8 @@ type RunnerProviderProps struct {
 	// When updating
 	// this property, unsetting it doesn't remove the log retention policy. To
 	// remove the retention policy, set the value to `INFINITE`.
+	// Default: logs.RetentionDays.ONE_MONTH
+	//
 	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
 	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
