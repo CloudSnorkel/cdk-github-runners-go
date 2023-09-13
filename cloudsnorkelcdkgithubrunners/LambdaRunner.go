@@ -192,7 +192,7 @@ func NewLambdaRunner_Override(l LambdaRunner, scope constructs.Construct, id *st
 //  * `RunnerImageComponent.githubRunner()`
 //  * `RunnerImageComponent.lambdaEntrypoint()`
 //
-//  Base Docker image: `public.ecr.aws/lambda/nodejs:14-x86_64` or `public.ecr.aws/lambda/nodejs:14-arm64`
+//  Base Docker image: `public.ecr.aws/lambda/nodejs:16-x86_64` or `public.ecr.aws/lambda/nodejs:16-arm64`
 // Deprecated: use {@link LambdaRunnerProvider }.
 func LambdaRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
 	_init_.Initialize()

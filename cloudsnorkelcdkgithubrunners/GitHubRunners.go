@@ -73,6 +73,14 @@ type GitHubRunners interface {
 	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
+	// Creates CloudWatch Logs Insights saved queries that can be used to debug issues with the runners.
+	//
+	// * "Webhook errors" helps diagnose configuration issues with GitHub integration
+	// * "Ignored webhook" helps understand why runners aren't started
+	// * "Ignored jobs based on labels" helps debug label matching issues
+	// * "Webhook started runners" helps understand which runners were started.
+	// Experimental.
+	CreateLogsInsightsQueries()
 	// Creates a topic for notifications when a runner image build fails.
 	//
 	// Runner images are rebuilt every week by default. This provides the latest GitHub Runner version and software updates.
@@ -215,6 +223,14 @@ func GitHubRunners_IsConstruct(x interface{}) *bool {
 	)
 
 	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) CreateLogsInsightsQueries() {
+	_jsii_.InvokeVoid(
+		g,
+		"createLogsInsightsQueries",
+		nil, // no parameters
+	)
 }
 
 func (g *jsiiProxy_GitHubRunners) FailedImageBuildsTopic() awssns.Topic {

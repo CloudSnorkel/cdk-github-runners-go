@@ -329,6 +329,7 @@ func init() {
 		reflect.TypeOf((*GitHubRunners)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberMethod{JsiiMethod: "createLogsInsightsQueries", GoMethod: "CreateLogsInsightsQueries"},
 			_jsii_.MemberMethod{JsiiMethod: "failedImageBuildsTopic", GoMethod: "FailedImageBuildsTopic"},
 			_jsii_.MemberMethod{JsiiMethod: "metricFailed", GoMethod: "MetricFailed"},
 			_jsii_.MemberMethod{JsiiMethod: "metricJobCompleted", GoMethod: "MetricJobCompleted"},
