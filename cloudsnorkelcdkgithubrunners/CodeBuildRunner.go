@@ -189,7 +189,7 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 //  * `RunnerImageComponent.git()`
 //  * `RunnerImageComponent.githubCli()`
 //  * `RunnerImageComponent.awsCli()`
-//  * `RunnerImageComponent.dockerInDocker()`
+//  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
 // Deprecated: use {@link CodeBuildRunnerProvider }.
 func CodeBuildRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {

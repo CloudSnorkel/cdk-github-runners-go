@@ -37,7 +37,7 @@ type CodeBuildRunnerProviderProps struct {
 	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
 	// Runner image builder used to build Docker images containing GitHub Runner and all requirements.
 	//
-	// The image builder must contain the {@link RunnerImageComponent.dockerInDocker} component unless `dockerInDocker` is set to false.
+	// The image builder must contain the {@link RunnerImageComponent.docker} component unless `dockerInDocker` is set to false.
 	//
 	// The image builder determines the OS and architecture of the runner.
 	// Default: CodeBuildRunnerProvider.imageBuilder()

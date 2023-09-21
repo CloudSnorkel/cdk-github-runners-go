@@ -197,7 +197,7 @@ func NewCodeBuildRunnerProvider_Override(c CodeBuildRunnerProvider, scope constr
 //  * `RunnerImageComponent.git()`
 //  * `RunnerImageComponent.githubCli()`
 //  * `RunnerImageComponent.awsCli()`
-//  * `RunnerImageComponent.dockerInDocker()`
+//  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
 // Experimental.
 func CodeBuildRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {

@@ -127,7 +127,7 @@ func RunnerImageComponent_Docker() RunnerImageComponent {
 }
 
 // A component to install Docker-in-Docker.
-// Experimental.
+// Deprecated: use `docker()`.
 func RunnerImageComponent_DockerInDocker() RunnerImageComponent {
 	_init_.Initialize()
 

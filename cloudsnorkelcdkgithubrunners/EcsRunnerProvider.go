@@ -170,7 +170,7 @@ func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Constru
 //  * `RunnerImageComponent.git()`
 //  * `RunnerImageComponent.githubCli()`
 //  * `RunnerImageComponent.awsCli()`
-//  * `RunnerImageComponent.dockerInDocker()`
+//  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
 // Experimental.
 func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
