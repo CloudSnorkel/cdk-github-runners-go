@@ -86,10 +86,15 @@ type EcsRunnerProviderProps struct {
 	// Experimental.
 	MaxInstances *float64 `field:"optional" json:"maxInstances" yaml:"maxInstances"`
 	// The amount (in MiB) of memory used by the task.
-	// Default: 3500.
+	// Default: 3500, unless `memoryReservationMiB` is used and then it's undefined.
 	//
 	// Experimental.
 	MemoryLimitMiB *float64 `field:"optional" json:"memoryLimitMiB" yaml:"memoryLimitMiB"`
+	// The soft limit (in MiB) of memory to reserve for the container.
+	// Default: undefined.
+	//
+	// Experimental.
+	MemoryReservationMiB *float64 `field:"optional" json:"memoryReservationMiB" yaml:"memoryReservationMiB"`
 	// The minimum number of instances to run in the cluster.
 	//
 	// Only used when creating a new cluster.

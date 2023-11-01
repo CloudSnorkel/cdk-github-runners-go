@@ -4,7 +4,7 @@ package cloudsnorkelcdkgithubrunners
 // Workflow job parameters as parsed from the webhook event. Pass these into your runner executor and run something like:.
 //
 // ```sh
-// ./config.sh --unattended --url "https://${GITHUB_DOMAIN}/${OWNER}/${REPO}" --token "${RUNNER_TOKEN}" --ephemeral --work _work --labels "${RUNNER_LABEL}" --name "${RUNNER_NAME}" --disableupdate
+// ./config.sh --unattended --url "{REGISTRATION_URL}" --token "${RUNNER_TOKEN}" --ephemeral --work _work --labels "${RUNNER_LABEL}" --name "${RUNNER_NAME}" --disableupdate
 // ```
 //
 // All parameters are specified as step function paths and therefore must be used only in step function task parameters.
@@ -18,6 +18,9 @@ type RunnerRuntimeParameters struct {
 	// Path to repository owner name.
 	// Experimental.
 	OwnerPath *string `field:"required" json:"ownerPath" yaml:"ownerPath"`
+	// Repository or organization URL to register runner at.
+	// Experimental.
+	RegistrationUrl *string `field:"required" json:"registrationUrl" yaml:"registrationUrl"`
 	// Path to repository name.
 	// Experimental.
 	RepoPath *string `field:"required" json:"repoPath" yaml:"repoPath"`
