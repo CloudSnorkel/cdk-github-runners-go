@@ -57,6 +57,15 @@ type GitHubRunnersProps struct {
 	//
 	// Experimental.
 	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
+	// Whether to require the `self-hosted` label.
+	//
+	// If `true`, the runner will only start if the workflow job explicitly requests the `self-hosted` label.
+	//
+	// Be careful when setting this to `false`. Avoid setting up providers with generic label requirements like `linux` as they may match workflows that are not meant to run on self-hosted runners.
+	// Default: true.
+	//
+	// Experimental.
+	RequireSelfHostedLabel *bool `field:"optional" json:"requireSelfHostedLabel" yaml:"requireSelfHostedLabel"`
 	// Options to retry operation in case of failure like missing capacity, or API quota issues.
 	//
 	// GitHub jobs time out after not being able to get a runner for 24 hours. You should not retry for more than 24 hours.
