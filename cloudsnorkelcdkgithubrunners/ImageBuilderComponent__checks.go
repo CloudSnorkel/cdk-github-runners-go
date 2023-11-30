@@ -20,6 +20,22 @@ func (i *jsiiProxy_ImageBuilderComponent) validateApplyRemovalPolicyParameters(p
 	return nil
 }
 
+func (i *jsiiProxy_ImageBuilderComponent) validateGenerateVersionParameters(type_ *string, name *string, data interface{}) error {
+	if type_ == nil {
+		return fmt.Errorf("parameter type_ is required, but nil was provided")
+	}
+
+	if name == nil {
+		return fmt.Errorf("parameter name is required, but nil was provided")
+	}
+
+	if data == nil {
+		return fmt.Errorf("parameter data is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (i *jsiiProxy_ImageBuilderComponent) validateGetResourceArnAttributeParameters(arnAttr *string, arnComponents *awscdk.ArnComponents) error {
 	if arnAttr == nil {
 		return fmt.Errorf("parameter arnAttr is required, but nil was provided")
@@ -58,22 +74,6 @@ func (i *jsiiProxy_ImageBuilderComponent) validatePrefixCommandsWithErrorHandlin
 
 	if commands == nil {
 		return fmt.Errorf("parameter commands is required, but nil was provided")
-	}
-
-	return nil
-}
-
-func (i *jsiiProxy_ImageBuilderComponent) validateVersionParameters(type_ *string, name *string, data interface{}) error {
-	if type_ == nil {
-		return fmt.Errorf("parameter type_ is required, but nil was provided")
-	}
-
-	if name == nil {
-		return fmt.Errorf("parameter name is required, but nil was provided")
-	}
-
-	if data == nil {
-		return fmt.Errorf("parameter data is required, but nil was provided")
 	}
 
 	return nil

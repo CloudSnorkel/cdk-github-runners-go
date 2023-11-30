@@ -12,7 +12,7 @@ import (
 type RunnerImageComponent interface {
 	// Component name.
 	//
-	// Used to identify component in image build logs, and for {@link RunnerImageBuilder.removeComponent }
+	// Used to identify component in image build logs, and for {@link IConfigurableRunnerImageBuilder.removeComponent }
 	// Experimental.
 	Name() *string
 	// Returns assets to copy into the built image.

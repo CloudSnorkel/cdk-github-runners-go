@@ -259,7 +259,13 @@ func NewFargateRunner_Override(f FargateRunner, scope constructs.Construct, id *
 	)
 }
 
-// Create new image builder that builds Fargate specific runner images using Ubuntu.
+// Create new image builder that builds Fargate specific runner images.
+//
+// You can customize the OS, architecture, VPC, subnet, security groups, etc. by passing in props.
+//
+// You can add components to the image builder by calling `imageBuilder.addComponent()`.
+//
+// The default OS is Ubuntu running on x64 architecture.
 //
 // Included components:
 //  * `RunnerImageComponent.requiredPackages()`
@@ -269,13 +275,13 @@ func NewFargateRunner_Override(f FargateRunner, scope constructs.Construct, id *
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.githubRunner()`
 // Deprecated: use {@link FargateRunnerProvider }.
-func FargateRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+func FargateRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateFargateRunner_ImageBuilderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	var returns RunnerImageBuilder
+	var returns IConfigurableRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.FargateRunner",

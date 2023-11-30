@@ -18,9 +18,7 @@ import (
 // Experimental.
 type RunnerImageBuilder interface {
 	constructs.Construct
-	IRunnerImageBuilder
-	awsec2.IConnectable
-	awsiam.IGrantable
+	IConfigurableRunnerImageBuilder
 	// Experimental.
 	Components() *[]RunnerImageComponent
 	// Experimental.
@@ -68,9 +66,7 @@ type RunnerImageBuilder interface {
 // The jsii proxy struct for RunnerImageBuilder
 type jsiiProxy_RunnerImageBuilder struct {
 	internal.Type__constructsConstruct
-	jsiiProxy_IRunnerImageBuilder
-	internal.Type__awsec2IConnectable
-	internal.Type__awsiamIGrantable
+	jsiiProxy_IConfigurableRunnerImageBuilder
 }
 
 func (j *jsiiProxy_RunnerImageBuilder) Components() *[]RunnerImageComponent {
@@ -162,13 +158,13 @@ func RunnerImageBuilder_IsConstruct(x interface{}) *bool {
 //
 // The implementation will differ based on the OS, architecture, and requested builder type.
 // Experimental.
-func RunnerImageBuilder_New(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+func RunnerImageBuilder_New(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateRunnerImageBuilder_NewParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	var returns RunnerImageBuilder
+	var returns IConfigurableRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageBuilder",

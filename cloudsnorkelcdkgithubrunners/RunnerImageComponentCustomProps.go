@@ -16,7 +16,7 @@ type RunnerImageComponentCustomProps struct {
 	// These commands are ignored when building AMIs.
 	// Experimental.
 	DockerCommands *[]*string `field:"optional" json:"dockerCommands" yaml:"dockerCommands"`
-	// Component name used for (1) image build logging and (2) identifier for {@link ImageRunnerBuilder.removeComponent }.
+	// Component name used for (1) image build logging and (2) identifier for {@link IConfigurableRunnerImageBuilder.removeComponent }.
 	//
 	// Name must only contain alphanumeric characters and dashes.
 	// Experimental.

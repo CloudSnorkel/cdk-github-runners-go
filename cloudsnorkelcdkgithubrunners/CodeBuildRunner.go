@@ -181,7 +181,13 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 	)
 }
 
-// Create new image builder that builds CodeBuild specific runner images using Ubuntu.
+// Create new image builder that builds CodeBuild specific runner images.
+//
+// You can customize the OS, architecture, VPC, subnet, security groups, etc. by passing in props.
+//
+// You can add components to the image builder by calling `imageBuilder.addComponent()`.
+//
+// The default OS is Ubuntu running on x64 architecture.
 //
 // Included components:
 //  * `RunnerImageComponent.requiredPackages()`
@@ -192,13 +198,13 @@ func NewCodeBuildRunner_Override(c CodeBuildRunner, scope constructs.Construct, 
 //  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
 // Deprecated: use {@link CodeBuildRunnerProvider }.
-func CodeBuildRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+func CodeBuildRunner_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateCodeBuildRunner_ImageBuilderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	var returns RunnerImageBuilder
+	var returns IConfigurableRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.CodeBuildRunner",

@@ -8,6 +8,10 @@ func (i *jsiiProxy_ImageBuilderComponent) validateApplyRemovalPolicyParameters(p
 	return nil
 }
 
+func (i *jsiiProxy_ImageBuilderComponent) validateGenerateVersionParameters(type_ *string, name *string, data interface{}) error {
+	return nil
+}
+
 func (i *jsiiProxy_ImageBuilderComponent) validateGetResourceArnAttributeParameters(arnAttr *string, arnComponents *awscdk.ArnComponents) error {
 	return nil
 }
@@ -21,10 +25,6 @@ func (i *jsiiProxy_ImageBuilderComponent) validateGrantAssetsReadParameters(gran
 }
 
 func (i *jsiiProxy_ImageBuilderComponent) validatePrefixCommandsWithErrorHandlingParameters(platform *string, commands *[]*string) error {
-	return nil
-}
-
-func (i *jsiiProxy_ImageBuilderComponent) validateVersionParameters(type_ *string, name *string, data interface{}) error {
 	return nil
 }
 

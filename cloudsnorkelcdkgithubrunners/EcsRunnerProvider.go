@@ -162,7 +162,13 @@ func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Constru
 	)
 }
 
-// Create new image builder that builds ECS specific runner images using Ubuntu.
+// Create new image builder that builds ECS specific runner images.
+//
+// You can customize the OS, architecture, VPC, subnet, security groups, etc. by passing in props.
+//
+// You can add components to the image builder by calling `imageBuilder.addComponent()`.
+//
+// The default OS is Ubuntu running on x64 architecture.
 //
 // Included components:
 //  * `RunnerImageComponent.requiredPackages()`
@@ -173,13 +179,13 @@ func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Constru
 //  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
 // Experimental.
-func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) RunnerImageBuilder {
+func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
 	if err := validateEcsRunnerProvider_ImageBuilderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	var returns RunnerImageBuilder
+	var returns IConfigurableRunnerImageBuilder
 
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.EcsRunnerProvider",

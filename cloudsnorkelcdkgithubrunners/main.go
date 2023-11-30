@@ -353,6 +353,25 @@ func init() {
 		reflect.TypeOf((*GitHubRunnersProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.IConfigurableRunnerImageBuilder",
+		reflect.TypeOf((*IConfigurableRunnerImageBuilder)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addComponent", GoMethod: "AddComponent"},
+			_jsii_.MemberMethod{JsiiMethod: "bindAmi", GoMethod: "BindAmi"},
+			_jsii_.MemberMethod{JsiiMethod: "bindDockerImage", GoMethod: "BindDockerImage"},
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberMethod{JsiiMethod: "removeComponent", GoMethod: "RemoveComponent"},
+		},
+		func() interface{} {
+			j := jsiiProxy_IConfigurableRunnerImageBuilder{}
+			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
+			_jsii_.InitJsiiProxy(&j.Type__awsiamIGrantable)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
+			return &j
+		},
+	)
+	_jsii_.RegisterInterface(
 		"@cloudsnorkel/cdk-github-runners.IRunnerAmiStatus",
 		reflect.TypeOf((*IRunnerAmiStatus)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -437,6 +456,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "arn", GoGetter: "Arn"},
 			_jsii_.MemberProperty{JsiiProperty: "env", GoGetter: "Env"},
 			_jsii_.MemberMethod{JsiiMethod: "generatePhysicalName", GoMethod: "GeneratePhysicalName"},
+			_jsii_.MemberMethod{JsiiMethod: "generateVersion", GoMethod: "GenerateVersion"},
 			_jsii_.MemberMethod{JsiiMethod: "getResourceArnAttribute", GoMethod: "GetResourceArnAttribute"},
 			_jsii_.MemberMethod{JsiiMethod: "getResourceNameAttribute", GoMethod: "GetResourceNameAttribute"},
 			_jsii_.MemberMethod{JsiiMethod: "grantAssetsRead", GoMethod: "GrantAssetsRead"},
@@ -446,7 +466,6 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "prefixCommandsWithErrorHandling", GoMethod: "PrefixCommandsWithErrorHandling"},
 			_jsii_.MemberProperty{JsiiProperty: "stack", GoGetter: "Stack"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
-			_jsii_.MemberMethod{JsiiMethod: "version", GoMethod: "Version"},
 		},
 		func() interface{} {
 			j := jsiiProxy_ImageBuilderComponent{}
@@ -578,9 +597,7 @@ func init() {
 		func() interface{} {
 			j := jsiiProxy_RunnerImageBuilder{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
-			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerImageBuilder)
-			_jsii_.InitJsiiProxy(&j.Type__awsec2IConnectable)
-			_jsii_.InitJsiiProxy(&j.Type__awsiamIGrantable)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IConfigurableRunnerImageBuilder)
 			return &j
 		},
 	)
