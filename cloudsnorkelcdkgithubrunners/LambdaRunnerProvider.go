@@ -206,7 +206,7 @@ func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.C
 //  * `RunnerImageComponent.githubRunner()`
 //  * `RunnerImageComponent.lambdaEntrypoint()`
 //
-//  Base Docker image: `public.ecr.aws/lambda/nodejs:16-x86_64` or `public.ecr.aws/lambda/nodejs:16-arm64`
+//  Base Docker image: `public.ecr.aws/lambda/nodejs:20-x86_64` or `public.ecr.aws/lambda/nodejs:20-arm64`
 // Experimental.
 func LambdaRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()

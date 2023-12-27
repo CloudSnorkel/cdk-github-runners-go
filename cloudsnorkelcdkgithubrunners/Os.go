@@ -56,6 +56,17 @@ func Os_LINUX_AMAZON_2() Os {
 	return returns
 }
 
+func Os_LINUX_AMAZON_2023() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX_AMAZON_2023",
+		&returns,
+	)
+	return returns
+}
+
 func Os_LINUX_UBUNTU() Os {
 	_init_.Initialize()
 	var returns Os
