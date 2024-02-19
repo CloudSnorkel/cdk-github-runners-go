@@ -12,7 +12,7 @@ type CodeBuildRunnerImageBuilderProps struct {
 	// This is the image that's going to run the code that builds the runner image.
 	//
 	// The only action taken in CodeBuild is running `docker build`. You would therefore not need to change this setting often.
-	// Default: Ubuntu 22.04 for x64 and Amazon Linux 2 for ARM64
+	// Default: Amazon Linux 2023.
 	//
 	// Experimental.
 	BuildImage awscodebuild.IBuildImage `field:"optional" json:"buildImage" yaml:"buildImage"`
