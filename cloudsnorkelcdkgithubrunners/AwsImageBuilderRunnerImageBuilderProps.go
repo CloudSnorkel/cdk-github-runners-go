@@ -6,6 +6,13 @@ import (
 
 // Experimental.
 type AwsImageBuilderRunnerImageBuilderProps struct {
+	// Options for fast launch.
+	//
+	// This is only supported for Windows AMIs.
+	// Default: disabled.
+	//
+	// Experimental.
+	FastLaunchOptions *FastLaunchOptions `field:"optional" json:"fastLaunchOptions" yaml:"fastLaunchOptions"`
 	// The instance type used to build the image.
 	// Default: m5.large
 	//

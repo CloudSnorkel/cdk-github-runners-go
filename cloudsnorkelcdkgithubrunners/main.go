@@ -324,6 +324,10 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.FargateRunnerProviderProps",
 		reflect.TypeOf((*FargateRunnerProviderProps)(nil)).Elem(),
 	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.FastLaunchOptions",
+		reflect.TypeOf((*FastLaunchOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.GitHubRunners",
 		reflect.TypeOf((*GitHubRunners)(nil)).Elem(),
