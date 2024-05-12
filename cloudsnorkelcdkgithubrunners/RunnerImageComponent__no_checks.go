@@ -24,6 +24,10 @@ func validateRunnerImageComponent_CustomParameters(props *RunnerImageComponentCu
 	return nil
 }
 
+func validateRunnerImageComponent_EnvironmentVariablesParameters(vars *map[string]*string) error {
+	return nil
+}
+
 func validateRunnerImageComponent_ExtraCertificatesParameters(source *string, name *string) error {
 	return nil
 }

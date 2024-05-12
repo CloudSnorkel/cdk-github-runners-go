@@ -67,6 +67,14 @@ func validateRunnerImageComponent_CustomParameters(props *RunnerImageComponentCu
 	return nil
 }
 
+func validateRunnerImageComponent_EnvironmentVariablesParameters(vars *map[string]*string) error {
+	if vars == nil {
+		return fmt.Errorf("parameter vars is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateRunnerImageComponent_ExtraCertificatesParameters(source *string, name *string) error {
 	if source == nil {
 		return fmt.Errorf("parameter source is required, but nil was provided")

@@ -143,6 +143,32 @@ func RunnerImageComponent_DockerInDocker() RunnerImageComponent {
 	return returns
 }
 
+// A component to add environment variables for jobs the runner executes.
+//
+// These variables only affect the jobs ran by the runner. They are not global. They do not affect other components.
+//
+// It is not recommended to use this component to pass secrets. Instead, use GitHub Secrets or AWS Secrets Manager.
+//
+// Must be used after the {@link githubRunner} component.
+// Experimental.
+func RunnerImageComponent_EnvironmentVariables(vars *map[string]*string) RunnerImageComponent {
+	_init_.Initialize()
+
+	if err := validateRunnerImageComponent_EnvironmentVariablesParameters(vars); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		"environmentVariables",
+		[]interface{}{vars},
+		&returns,
+	)
+
+	return returns
+}
+
 // A component to add a trusted certificate authority.
 //
 // This can be used to support GitHub Enterprise Server with self-signed certificate.

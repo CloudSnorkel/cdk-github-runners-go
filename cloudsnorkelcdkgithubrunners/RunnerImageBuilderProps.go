@@ -26,6 +26,8 @@ type RunnerImageBuilderProps struct {
 	// Experimental.
 	BaseAmi *string `field:"optional" json:"baseAmi" yaml:"baseAmi"`
 	// Base image from which Docker runner images will be built.
+	//
+	// When using private images from a different account or not on ECR, you may need to include additional setup commands with {@link dockerSetupCommands}.
 	// Default: public.ecr.aws/lts/ubuntu:22.04 for Os.LINUX_UBUNTU, public.ecr.aws/amazonlinux/amazonlinux:2 for Os.LINUX_AMAZON_2, mcr.microsoft.com/windows/servercore:ltsc2019-amd64 for Os.WINDOWS
 	//
 	// Experimental.
@@ -44,6 +46,13 @@ type RunnerImageBuilderProps struct {
 	//
 	// Experimental.
 	Components *[]RunnerImageComponent `field:"optional" json:"components" yaml:"components"`
+	// Additional commands to run on the build host before starting the Docker runner image build.
+	//
+	// Use this to execute commands such as `docker login` or `aws ecr get-login-password` to pull private base images.
+	// Default: [].
+	//
+	// Experimental.
+	DockerSetupCommands *[]*string `field:"optional" json:"dockerSetupCommands" yaml:"dockerSetupCommands"`
 	// Removal policy for logs of image builds.
 	//
 	// If deployment fails on the custom resource, try setting this to `RemovalPolicy.RETAIN`. This way the CodeBuild logs can still be viewed, and you can see why the build failed.
