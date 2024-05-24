@@ -15,7 +15,7 @@ type ContainerImageBuilderProps struct {
 	// Experimental.
 	Architecture Architecture `field:"optional" json:"architecture" yaml:"architecture"`
 	// The instance type used to build the image.
-	// Default: m5.large
+	// Default: m6i.large
 	//
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`

@@ -20,7 +20,7 @@ type AmiBuilderProps struct {
 	// Experimental.
 	InstallDocker *bool `field:"optional" json:"installDocker" yaml:"installDocker"`
 	// The instance type used to build the image.
-	// Default: m5.large
+	// Default: m6i.large
 	//
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`

@@ -30,7 +30,7 @@ type Ec2RunnerProviderProps struct {
 	// Experimental.
 	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// Instance type for launched runner instances.
-	// Default: m5.large
+	// Default: m6i.large
 	//
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`

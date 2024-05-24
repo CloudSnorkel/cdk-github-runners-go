@@ -10,11 +10,11 @@
 
 Use this CDK construct to create ephemeral [self-hosted GitHub runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) on-demand inside your AWS account.
 
-* Easy to configure GitHub integration with a web-based interface
-* Customizable runners with decent defaults
-* Multiple runner configurations controlled by labels
-* Everything fully hosted in your account
-* Automatically updated build environment with latest runner version
+* 🧩 Easy to configure GitHub integration with a web-based interface
+* 🧠 Customizable runners with decent defaults
+* 🏃🏻 Multiple runner configurations controlled by labels
+* 🔐 Everything fully hosted in your account
+* 🔃 Automatically updated build environment with latest runner version
 
 Self-hosted runners in AWS are useful when:
 
@@ -321,6 +321,20 @@ Other useful metrics to track:
 
 1. Use `GitHubRunners.metricJobCompleted()` to get a metric for the number of completed jobs broken down by labels and job success.
 2. Use `GitHubRunners.metricTime()` to get a metric for the total time a runner is running. This includes the overhead of starting the runner.
+
+## Contributing
+
+If you use and love this project, please consider contributing.
+
+1. 🪳 If you see something, say something. [Issues](https://github.com/CloudSnorkel/cdk-github-runners/issues) help improve the quality of the project.
+
+   * Include relevant logs and package versions for bugs.
+   * When possible, describe the use-case behind feature requests.
+2. 🛠️ [Pull requests](https://github.com/CloudSnorkel/cdk-github-runners/pulls) are welcome.
+
+   * Run `npm run build` before submitting to make sure all tests pass.
+   * Allow edits from maintainers so small adjustments can be made easily.
+3. 💵 Consider [sponsoring](https://github.com/sponsors/CloudSnorkel) the project to show your support and optionally get your name listed below.
 
 ## Other Options
 

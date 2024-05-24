@@ -65,7 +65,7 @@ type EcsRunnerProviderProps struct {
 	// Instance type of ECS cluster instances.
 	//
 	// Only used when creating a new cluster.
-	// Default: m5.large or m6g.large
+	// Default: m6i.large or m6g.large
 	//
 	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
