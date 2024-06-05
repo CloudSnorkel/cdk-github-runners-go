@@ -195,7 +195,7 @@ func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.C
 //
 // You can add components to the image builder by calling `imageBuilder.addComponent()`.
 //
-// The default OS is Amazon Linux 2 running on x64 architecture.
+// The default OS is Amazon Linux 2023 running on x64 architecture.
 //
 // Included components:
 //  * `RunnerImageComponent.requiredPackages()`
@@ -205,8 +205,6 @@ func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.C
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.githubRunner()`
 //  * `RunnerImageComponent.lambdaEntrypoint()`
-//
-//  Base Docker image: `public.ecr.aws/lambda/nodejs:20-x86_64` or `public.ecr.aws/lambda/nodejs:20-arm64`
 // Experimental.
 func LambdaRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
