@@ -14,7 +14,7 @@ import (
 
 // An AMI builder that uses AWS Image Builder to build AMIs pre-baked with all the GitHub Actions runner requirements.
 //
-// Builders can be used with {@link Ec2Runner }.
+// Builders can be used with {@link Ec2RunnerProvider }.
 //
 // Each builder re-runs automatically at a set interval to make sure the AMIs contain the latest versions of everything.
 //
@@ -40,40 +40,40 @@ import (
 //     amiBuilder: builder,
 // });
 // ```.
-// Deprecated: use RunnerImageBuilder.
+// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 type AmiBuilder interface {
 	constructs.Construct
 	IRunnerImageBuilder
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Architecture() Architecture
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Components() *[]ImageBuilderComponent
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	SetComponents(val *[]ImageBuilderComponent)
 	// The network connections associated with this resource.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Connections() awsec2.Connections
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Description() *string
 	// The tree node.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Node() constructs.Node
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Os() Os
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	Platform() *string
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	RunnerVersion() RunnerVersion
 	// Add a component to be installed.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	AddComponent(component ImageBuilderComponent)
 	// Add extra trusted certificates.
 	//
 	// This helps deal with self-signed certificates for GitHub Enterprise Server.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	AddExtraCertificates(path *string)
 	// Called by IRunnerProvider to finalize settings and create the AMI builder.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	BindAmi() *RunnerAmi
 	// Build and return a Docker image with GitHub Runner installed in it.
 	//
@@ -82,23 +82,23 @@ type AmiBuilder interface {
 	// It's important that the specified image tag be available at the time the repository is available. Providers usually assume the image is ready and will fail if it's not.
 	//
 	// The image can be further updated over time manually or using a schedule as long as it is always written to the same tag.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	BindDockerImage() *RunnerImage
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	CreateImage(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImage
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	CreateInfrastructure(managedPolicies *[]awsiam.IManagedPolicy) awsimagebuilder.CfnInfrastructureConfiguration
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	CreateLog(recipeName *string) awslogs.LogGroup
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	CreatePipeline(infra awsimagebuilder.CfnInfrastructureConfiguration, dist awsimagebuilder.CfnDistributionConfiguration, log awslogs.LogGroup, imageRecipeArn *string, containerRecipeArn *string) awsimagebuilder.CfnImagePipeline
 	// Add a component to be installed before any other components.
 	//
 	// Useful for required system settings like certificates or proxy settings.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	PrependComponent(component ImageBuilderComponent)
 	// Returns a string representation of this construct.
-	// Deprecated: use RunnerImageBuilder.
+	// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 	ToString() *string
 }
 
@@ -189,7 +189,7 @@ func (j *jsiiProxy_AmiBuilder) RunnerVersion() RunnerVersion {
 }
 
 
-// Deprecated: use RunnerImageBuilder.
+// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 func NewAmiBuilder(scope constructs.Construct, id *string, props *AmiBuilderProps) AmiBuilder {
 	_init_.Initialize()
 
@@ -207,7 +207,7 @@ func NewAmiBuilder(scope constructs.Construct, id *string, props *AmiBuilderProp
 	return &j
 }
 
-// Deprecated: use RunnerImageBuilder.
+// Deprecated: use RunnerImageBuilder, e.g. with Ec2RunnerProvider.imageBuilder()
 func NewAmiBuilder_Override(a AmiBuilder, scope constructs.Construct, id *string, props *AmiBuilderProps) {
 	_init_.Initialize()
 
