@@ -115,6 +115,9 @@ type EcsRunnerProviderProps struct {
 	// Maximum price for spot instances.
 	// Experimental.
 	SpotMaxPrice *string `field:"optional" json:"spotMaxPrice" yaml:"spotMaxPrice"`
+	// Options for runner instance storage volume.
+	// Experimental.
+	StorageOptions *StorageOptions `field:"optional" json:"storageOptions" yaml:"storageOptions"`
 	// Size of volume available for launched cluster instances.
 	//
 	// This modifies the boot volume size and doesn't add any additional volumes.

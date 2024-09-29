@@ -679,6 +679,10 @@ func init() {
 			return &jsiiProxy_StaticRunnerImage{}
 		},
 	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.StorageOptions",
+		reflect.TypeOf((*StorageOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.WindowsComponents",
 		reflect.TypeOf((*WindowsComponents)(nil)).Elem(),
