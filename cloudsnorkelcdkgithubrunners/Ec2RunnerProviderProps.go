@@ -22,6 +22,18 @@ type Ec2RunnerProviderProps struct {
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// Deprecated: use imageBuilder.
 	AmiBuilder IRunnerImageBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
+	// GitHub Actions runner group name.
+	//
+	// If specified, the runner will be registered with this group name. Setting a runner group can help managing access to self-hosted runners. It
+	// requires a paid GitHub account.
+	//
+	// The group must exist or the runner will not start.
+	//
+	// Users will still be able to trigger this runner with the correct labels. But the runner will only be able to run jobs from repos allowed to use the group.
+	// Default: undefined.
+	//
+	// Experimental.
+	Group *string `field:"optional" json:"group" yaml:"group"`
 	// Runner image builder used to build AMI containing GitHub Runner and all requirements.
 	//
 	// The image builder determines the OS and architecture of the runner.

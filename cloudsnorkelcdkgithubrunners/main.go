@@ -1,4 +1,4 @@
-// CDK construct to create GitHub Actions self-hosted runners. A webhook listens to events and creates ephemeral runners on the fly.
+// CDK construct to create GitHub Actions self-hosted runners. Creates ephemeral runners on demand. Easy to deploy and highly customizable.
 package cloudsnorkelcdkgithubrunners
 
 import (
