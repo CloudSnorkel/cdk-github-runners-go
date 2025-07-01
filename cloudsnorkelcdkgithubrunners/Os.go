@@ -78,6 +78,28 @@ func Os_LINUX_UBUNTU() Os {
 	return returns
 }
 
+func Os_LINUX_UBUNTU_2204() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX_UBUNTU_2204",
+		&returns,
+	)
+	return returns
+}
+
+func Os_LINUX_UBUNTU_2404() Os {
+	_init_.Initialize()
+	var returns Os
+	_jsii_.StaticGet(
+		"@cloudsnorkel/cdk-github-runners.Os",
+		"LINUX_UBUNTU_2404",
+		&returns,
+	)
+	return returns
+}
+
 func Os_WINDOWS() Os {
 	_init_.Initialize()
 	var returns Os
