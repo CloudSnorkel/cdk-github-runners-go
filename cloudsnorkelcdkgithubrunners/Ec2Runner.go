@@ -162,6 +162,7 @@ func NewEc2Runner_Override(e Ec2Runner, scope constructs.Construct, id *string, 
 //
 // Included components:
 //  * `RunnerImageComponent.requiredPackages()`
+//  * `RunnerImageComponent.cloudWatchAgent()`
 //  * `RunnerImageComponent.runnerUser()`
 //  * `RunnerImageComponent.git()`
 //  * `RunnerImageComponent.githubCli()`

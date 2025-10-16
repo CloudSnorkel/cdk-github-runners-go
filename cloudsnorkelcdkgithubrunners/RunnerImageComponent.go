@@ -81,6 +81,23 @@ func RunnerImageComponent_AwsCli() RunnerImageComponent {
 	return returns
 }
 
+// A component to install CloudWatch Agent for the runner so we can send logs.
+// Experimental.
+func RunnerImageComponent_CloudWatchAgent() RunnerImageComponent {
+	_init_.Initialize()
+
+	var returns RunnerImageComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		"cloudWatchAgent",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
 // Define a custom component that can run commands in the image, copy files into the image, and run some Docker commands.
 //
 // The order of operations is (1) assets (2) commands (3) docker commands.

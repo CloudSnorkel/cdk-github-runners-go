@@ -114,6 +114,20 @@ type EcsRunnerProviderProps struct {
 	//
 	// Experimental.
 	MinInstances *float64 `field:"optional" json:"minInstances" yaml:"minInstances"`
+	// ECS placement constraints to influence task placement.
+	//
+	// Example: [ecs.PlacementConstraint.memberOf('ecs-placement')]
+	// Default: undefined (no placement constraints).
+	//
+	// Experimental.
+	PlacementConstraints *[]awsecs.PlacementConstraint `field:"optional" json:"placementConstraints" yaml:"placementConstraints"`
+	// ECS placement strategies to influence task placement.
+	//
+	// Example: [ecs.PlacementStrategy.packedByCpu()]
+	// Default: undefined (no placement strategies).
+	//
+	// Experimental.
+	PlacementStrategies *[]awsecs.PlacementStrategy `field:"optional" json:"placementStrategies" yaml:"placementStrategies"`
 	// Security groups to assign to the task.
 	// Default: a new security group.
 	//
