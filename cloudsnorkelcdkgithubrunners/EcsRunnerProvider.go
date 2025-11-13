@@ -53,7 +53,7 @@ type EcsRunnerProvider interface {
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Experimental.
-	GrantStateMachine(_arg awsiam.IGrantable)
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
@@ -235,14 +235,14 @@ func (e *jsiiProxy_EcsRunnerProvider) GetStepFunctionTask(parameters *RunnerRunt
 	return returns
 }
 
-func (e *jsiiProxy_EcsRunnerProvider) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := e.validateGrantStateMachineParameters(_arg); err != nil {
+func (e *jsiiProxy_EcsRunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := e.validateGrantStateMachineParameters(stateMachineRole); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
 		e,
 		"grantStateMachine",
-		[]interface{}{_arg},
+		[]interface{}{stateMachineRole},
 	)
 }
 

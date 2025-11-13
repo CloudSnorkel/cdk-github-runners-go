@@ -8,7 +8,7 @@ func (f *jsiiProxy_FargateRunner) validateGetStepFunctionTaskParameters(paramete
 	return nil
 }
 
-func (f *jsiiProxy_FargateRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+func (f *jsiiProxy_FargateRunner) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
 	return nil
 }
 

@@ -60,7 +60,7 @@ type LambdaRunnerProvider interface {
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Experimental.
-	GrantStateMachine(_arg awsiam.IGrantable)
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
@@ -284,14 +284,14 @@ func (l *jsiiProxy_LambdaRunnerProvider) GetStepFunctionTask(parameters *RunnerR
 	return returns
 }
 
-func (l *jsiiProxy_LambdaRunnerProvider) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := l.validateGrantStateMachineParameters(_arg); err != nil {
+func (l *jsiiProxy_LambdaRunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := l.validateGrantStateMachineParameters(stateMachineRole); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
 		l,
 		"grantStateMachine",
-		[]interface{}{_arg},
+		[]interface{}{stateMachineRole},
 	)
 }
 

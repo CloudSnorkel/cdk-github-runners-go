@@ -22,9 +22,9 @@ func (e *jsiiProxy_EcsRunnerProvider) validateGetStepFunctionTaskParameters(para
 	return nil
 }
 
-func (e *jsiiProxy_EcsRunnerProvider) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
-	if _arg == nil {
-		return fmt.Errorf("parameter _arg is required, but nil was provided")
+func (e *jsiiProxy_EcsRunnerProvider) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
+	if stateMachineRole == nil {
+		return fmt.Errorf("parameter stateMachineRole is required, but nil was provided")
 	}
 
 	return nil

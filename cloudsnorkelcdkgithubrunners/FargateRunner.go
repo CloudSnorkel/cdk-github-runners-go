@@ -71,7 +71,7 @@ type FargateRunner interface {
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Deprecated: use {@link FargateRunnerProvider }.
-	GrantStateMachine(_arg awsiam.IGrantable)
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Deprecated: use {@link FargateRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
@@ -353,14 +353,14 @@ func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeP
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := f.validateGrantStateMachineParameters(_arg); err != nil {
+func (f *jsiiProxy_FargateRunner) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := f.validateGrantStateMachineParameters(stateMachineRole); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
 		f,
 		"grantStateMachine",
-		[]interface{}{_arg},
+		[]interface{}{stateMachineRole},
 	)
 }
 

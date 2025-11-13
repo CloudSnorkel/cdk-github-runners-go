@@ -53,7 +53,7 @@ type CodeBuildRunner interface {
 	// This can be used to add additional policy
 	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	GrantStateMachine(_arg awsiam.IGrantable)
+	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Return status of the runner provider to be used in the main status function.
@@ -276,14 +276,14 @@ func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntim
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) GrantStateMachine(_arg awsiam.IGrantable) {
-	if err := c.validateGrantStateMachineParameters(_arg); err != nil {
+func (c *jsiiProxy_CodeBuildRunner) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
+	if err := c.validateGrantStateMachineParameters(stateMachineRole); err != nil {
 		panic(err)
 	}
 	_jsii_.InvokeVoid(
 		c,
 		"grantStateMachine",
-		[]interface{}{_arg},
+		[]interface{}{stateMachineRole},
 	)
 }
 

@@ -8,7 +8,7 @@ func (c *jsiiProxy_CodeBuildRunner) validateGetStepFunctionTaskParameters(parame
 	return nil
 }
 
-func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+func (c *jsiiProxy_CodeBuildRunner) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
 	return nil
 }
 

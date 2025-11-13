@@ -8,7 +8,7 @@ func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameter
 	return nil
 }
 
-func (l *jsiiProxy_LambdaRunner) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+func (l *jsiiProxy_LambdaRunner) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
 	return nil
 }
 

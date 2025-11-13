@@ -8,7 +8,7 @@ func (e *jsiiProxy_EcsRunnerProvider) validateGetStepFunctionTaskParameters(para
 	return nil
 }
 
-func (e *jsiiProxy_EcsRunnerProvider) validateGrantStateMachineParameters(_arg awsiam.IGrantable) error {
+func (e *jsiiProxy_EcsRunnerProvider) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
 	return nil
 }
 
