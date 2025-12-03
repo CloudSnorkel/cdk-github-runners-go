@@ -7,6 +7,13 @@ import (
 // Common properties for all runner providers.
 // Experimental.
 type RunnerProviderProps struct {
+	// Add default labels based on OS and architecture of the runner.
+	//
+	// This will tell GitHub Runner to add default labels like `self-hosted`, `linux`, `x64`, and `arm64`.
+	// Default: true.
+	//
+	// Experimental.
+	DefaultLabels *bool `field:"optional" json:"defaultLabels" yaml:"defaultLabels"`
 	// The number of days log events are kept in CloudWatch Logs.
 	//
 	// When updating
