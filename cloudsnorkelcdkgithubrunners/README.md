@@ -323,6 +323,155 @@ new GitHubRunners(this, 'runners', {
 });
 ```
 
+### Composite Providers
+
+Composite providers allow you to combine multiple runner providers with different strategies. There are two types:
+
+**Fallback Strategy**: Try providers in order until one succeeds. Useful for trying spot instances first, then falling back to on-demand if spot capacity is unavailable.
+
+```go
+// Try spot instances first, fall back to on-demand if spot is unavailable
+const ecsFallback = CompositeProvider.fallback(this, 'ECS Fallback', [
+  new EcsRunnerProvider(this, 'ECS Spot', {
+    labels: ['ecs', 'linux', 'x64'],
+    spot: true,
+    // ... other config
+  }),
+  new EcsRunnerProvider(this, 'ECS On-Demand', {
+    labels: ['ecs', 'linux', 'x64'],
+    spot: false,
+    // ... other config
+  }),
+]);
+
+new GitHubRunners(this, 'runners', {
+  providers: [ecsFallback],
+});
+```
+
+**Weighted Distribution Strategy**: Randomly select a provider based on weights. Useful for distributing load across multiple availability zones or instance types.
+
+```go
+// Distribute 60% of traffic to AZ-1, 40% to AZ-2
+const distributedProvider = CompositeProvider.distribute(this, 'Fargate Distribution', [
+  {
+    weight: 3, // 3/(3+2) = 60%
+    provider: new FargateRunnerProvider(this, 'Fargate AZ-1', {
+      labels: ['fargate', 'linux', 'x64'],
+      subnetSelection: vpc.selectSubnets({
+        availabilityZones: [vpc.availabilityZones[0]],
+      }),
+      // ... other config
+    }),
+  },
+  {
+    weight: 2, // 2/(3+2) = 40%
+    provider: new FargateRunnerProvider(this, 'Fargate AZ-2', {
+      labels: ['fargate', 'linux', 'x64'],
+      subnetSelection: vpc.selectSubnets({
+        availabilityZones: [vpc.availabilityZones[1]],
+      }),
+      // ... other config
+    }),
+  },
+]);
+
+new GitHubRunners(this, 'runners', {
+  providers: [distributedProvider],
+});
+```
+
+**Important**: All providers in a composite must have the exact same labels. This ensures any provisioned runner can match the labels requested by the GitHub workflow job.
+
+### Custom Provider Selection
+
+By default, providers are selected based on label matching: the first provider that has all the labels requested by the job is selected. You can customize this behavior using a provider selector Lambda function to:
+
+* Filter out certain jobs (prevent runner provisioning)
+* Dynamically select a provider based on job characteristics (repository, branch, time of day, etc.)
+* Customize labels for the runner (add, remove, or modify labels dynamically)
+
+The selector function receives the full GitHub webhook payload, a map of all available providers and their labels, and the default provider/labels that would have been selected. It returns the provider to use (or `undefined` to skip runner creation) and the labels to assign to the runner.
+
+**Example: Route jobs to different providers based on repository**
+
+```go
+import { ComputeType } from 'aws-cdk-lib/aws-codebuild';
+import { Function, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { GitHubRunners, CodeBuildRunnerProvider } from '@cloudsnorkel/cdk-github-runners';
+
+const defaultProvider = new CodeBuildRunnerProvider(this, 'default', {
+  labels: ['custom-runner', 'default'],
+});
+const productionProvider = new CodeBuildRunnerProvider(this, 'production', {
+  labels: ['custom-runner', 'production'],
+  computeType: ComputeType.LARGE,
+});
+
+const providerSelector = new Function(this, 'provider-selector', {
+  runtime: Runtime.NODEJS_LATEST,
+  handler: 'index.handler',
+  code: Code.fromInline(`
+    exports.handler = async (event) => {
+      const { payload, providers, defaultProvider, defaultLabels } = event;
+
+      // Route production repos to dedicated provider
+      if (payload.repository.name.includes('prod')) {
+        return {
+          provider: '${productionProvider.node.path}',
+          labels: ['custom-runner', 'production', 'modified-via-selector'],
+        };
+      }
+
+      // Filter out draft PRs
+      if (payload.workflow_job.head_branch?.startsWith('draft/')) {
+        return { provider: undefined }; // Skip runner provisioning
+      }
+
+      // Use default for everything else
+      return {
+        provider: defaultProvider,
+        labels: defaultLabels,
+      };
+    };
+  `),
+});
+
+new GitHubRunners(this, 'runners', {
+   providers: [defaultProvider, productionProvider],
+   providerSelector: providerSelector,
+});
+```
+
+**Example: Add dynamic labels based on job metadata**
+
+```go
+const providerSelector = new Function(this, 'provider-selector', {
+  runtime: Runtime.NODEJS_LATEST,
+  handler: 'index.handler',
+  code: Code.fromInline(`
+    exports.handler = async (event) => {
+      const { payload, defaultProvider, defaultLabels } = event;
+
+      // Add branch name as a label
+      const branch = payload.workflow_job.head_branch || 'unknown';
+      const labels = [...(defaultLabels || []), 'branch:' + branch];
+
+      return {
+        provider: defaultProvider,
+        labels: labels,
+      };
+    };
+  `),
+});
+```
+
+**Important considerations:**
+
+* ⚠️ **Label matching responsibility**: You are responsible for ensuring the selected provider's labels match what the job requires. If labels don't match, the runner will be provisioned but GitHub Actions won't assign the job to it.
+* ⚠️ **No guarantee of assignment**: Provider selection only determines which provider will provision a runner. GitHub Actions may still route the job to any available runner with matching labels. For reliable provider assignment, consider repo-level runner registration (the default).
+* ⚡ **Performance**: The selector runs synchronously during webhook processing. Keep it fast and efficient—the webhook has a 30-second timeout total.
+
 ## Examples
 
 Beyond the code snippets above, the fullest example available is the [integration test](test/default.integ.ts).

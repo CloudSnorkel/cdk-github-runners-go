@@ -3,6 +3,7 @@ package cloudsnorkelcdkgithubrunners
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 )
 
 // Properties for GitHubRunners.
@@ -56,7 +57,23 @@ type GitHubRunnersProps struct {
 	// Default: CodeBuild, Lambda and Fargate runners with all the defaults (no VPC or default account VPC).
 	//
 	// Experimental.
-	Providers *[]IRunnerProvider `field:"optional" json:"providers" yaml:"providers"`
+	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
+	// Optional Lambda function to customize provider selection logic and label assignment.
+	//
+	// * The function receives the webhook payload along with default provider and its labels as {@link ProviderSelectorInput }
+	// * The function returns a selected provider and its labels as {@link ProviderSelectorResult }
+	// * You can decline to provision a runner by returning undefined as the provider selector result
+	// * You can fully customize the labels for the about-to-be-provisioned runner (add, remove, modify, dynamic labels, etc.)
+	// * Labels don't have to match the labels originally configured for the provider, but see warnings below
+	// * This function will be called synchronously during webhook processing, so it should be fast and efficient (webhook limit is 30 seconds total)
+	//
+	// **WARNING: It is your responsibility to ensure the selected provider's labels match the job's required labels. If you return the wrong labels, the runner will be created but GitHub Actions will not assign the job to it.**
+	//
+	// **WARNING: Provider selection is not a guarantee that a specific provider will be assigned for the job. GitHub Actions may assign the job to any runner with matching labels. The provider selector only determines which provider's runner will be *created*, but GitHub Actions may route the job to any available runner with the required labels.**
+	//
+	// **For reliable provider assignment based on job characteristics, consider using repo-level runner registration where you can control which runners are available for specific repositories. See {@link SETUP_GITHUB.md } for more details on the different registration levels. This information is also available while using the setup wizard.
+	// Experimental.
+	ProviderSelector awslambda.IFunction `field:"optional" json:"providerSelector" yaml:"providerSelector"`
 	// Whether to require the `self-hosted` label.
 	//
 	// If `true`, the runner will only start if the workflow job explicitly requests the `self-hosted` label.

@@ -15,6 +15,9 @@ type RunnerRuntimeParameters struct {
 	// Most of the time this will be github.com but for self-hosted GitHub instances, this will be different.
 	// Experimental.
 	GithubDomainPath *string `field:"required" json:"githubDomainPath" yaml:"githubDomainPath"`
+	// Path to comma-separated labels string to use for runner.
+	// Experimental.
+	LabelsPath *string `field:"required" json:"labelsPath" yaml:"labelsPath"`
 	// Path to repository owner name.
 	// Experimental.
 	OwnerPath *string `field:"required" json:"ownerPath" yaml:"ownerPath"`

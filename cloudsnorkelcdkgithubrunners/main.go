@@ -149,6 +149,14 @@ func init() {
 		reflect.TypeOf((*CodeBuildRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.CompositeProvider",
+		reflect.TypeOf((*CompositeProvider)(nil)).Elem(),
+		nil, // no members
+		func() interface{} {
+			return &jsiiProxy_CompositeProvider{}
+		},
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.ContainerImageBuilder",
 		reflect.TypeOf((*ContainerImageBuilder)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -357,6 +365,23 @@ func init() {
 		reflect.TypeOf((*GitHubRunnersProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.ICompositeProvider",
+		reflect.TypeOf((*ICompositeProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
+			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
+			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+		},
+		func() interface{} {
+			j := jsiiProxy_ICompositeProvider{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsIConstruct)
+			return &j
+		},
+	)
+	_jsii_.RegisterInterface(
 		"@cloudsnorkel/cdk-github-runners.IConfigurableRunnerImageBuilder",
 		reflect.TypeOf((*IConfigurableRunnerImageBuilder)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -436,6 +461,7 @@ func init() {
 		reflect.TypeOf((*IRunnerProviderStatus)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "ami", GoGetter: "Ami"},
+			_jsii_.MemberProperty{JsiiProperty: "constructPath", GoGetter: "ConstructPath"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
@@ -460,7 +486,6 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "arn", GoGetter: "Arn"},
 			_jsii_.MemberProperty{JsiiProperty: "env", GoGetter: "Env"},
 			_jsii_.MemberMethod{JsiiMethod: "generatePhysicalName", GoMethod: "GeneratePhysicalName"},
-			_jsii_.MemberMethod{JsiiMethod: "generateVersion", GoMethod: "GenerateVersion"},
 			_jsii_.MemberMethod{JsiiMethod: "getResourceArnAttribute", GoMethod: "GetResourceArnAttribute"},
 			_jsii_.MemberMethod{JsiiMethod: "getResourceNameAttribute", GoMethod: "GetResourceNameAttribute"},
 			_jsii_.MemberMethod{JsiiMethod: "grantAssetsRead", GoMethod: "GrantAssetsRead"},
@@ -573,6 +598,14 @@ func init() {
 		reflect.TypeOf((*ProviderRetryOptions)(nil)).Elem(),
 	)
 	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ProviderSelectorInput",
+		reflect.TypeOf((*ProviderSelectorInput)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ProviderSelectorResult",
+		reflect.TypeOf((*ProviderSelectorResult)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerAmi",
 		reflect.TypeOf((*RunnerAmi)(nil)).Elem(),
 	)
@@ -682,6 +715,10 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.StorageOptions",
 		reflect.TypeOf((*StorageOptions)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.WeightedRunnerProvider",
+		reflect.TypeOf((*WeightedRunnerProvider)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.WindowsComponents",

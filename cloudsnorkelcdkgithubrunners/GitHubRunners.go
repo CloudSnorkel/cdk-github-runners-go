@@ -69,7 +69,7 @@ type GitHubRunners interface {
 	Props() *GitHubRunnersProps
 	// Configured runner providers.
 	// Experimental.
-	Providers() *[]IRunnerProvider
+	Providers() *[]interface{}
 	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
@@ -153,8 +153,8 @@ func (j *jsiiProxy_GitHubRunners) Props() *GitHubRunnersProps {
 	return returns
 }
 
-func (j *jsiiProxy_GitHubRunners) Providers() *[]IRunnerProvider {
-	var returns *[]IRunnerProvider
+func (j *jsiiProxy_GitHubRunners) Providers() *[]interface{} {
+	var returns *[]interface{}
 	_jsii_.Get(
 		j,
 		"providers",

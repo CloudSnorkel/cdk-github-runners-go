@@ -10,6 +10,9 @@ type IRunnerProviderStatus interface {
 	// Details about AMI used by this runner provider.
 	// Experimental.
 	Ami() IRunnerAmiStatus
+	// CDK construct node path for this provider.
+	// Experimental.
+	ConstructPath() *string
 	// Details about Docker image used by this runner provider.
 	// Experimental.
 	Image() IRunnerImageStatus
@@ -43,6 +46,16 @@ func (j *jsiiProxy_IRunnerProviderStatus) Ami() IRunnerAmiStatus {
 	_jsii_.Get(
 		j,
 		"ami",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_IRunnerProviderStatus) ConstructPath() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"constructPath",
 		&returns,
 	)
 	return returns

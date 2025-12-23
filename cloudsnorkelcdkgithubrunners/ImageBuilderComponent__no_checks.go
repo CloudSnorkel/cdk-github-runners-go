@@ -8,10 +8,6 @@ func (i *jsiiProxy_ImageBuilderComponent) validateApplyRemovalPolicyParameters(p
 	return nil
 }
 
-func (i *jsiiProxy_ImageBuilderComponent) validateGenerateVersionParameters(type_ *string, name *string, data interface{}) error {
-	return nil
-}
-
 func (i *jsiiProxy_ImageBuilderComponent) validateGetResourceArnAttributeParameters(arnAttr *string, arnComponents *awscdk.ArnComponents) error {
 	return nil
 }

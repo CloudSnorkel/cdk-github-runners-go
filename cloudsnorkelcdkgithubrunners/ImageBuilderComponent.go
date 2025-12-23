@@ -74,8 +74,6 @@ type ImageBuilderComponent interface {
 	ApplyRemovalPolicy(policy awscdk.RemovalPolicy)
 	// Deprecated: Use `RunnerImageComponent` instead as this be internal soon.
 	GeneratePhysicalName() *string
-	// Deprecated: Use `RunnerImageComponent` instead as this be internal soon.
-	GenerateVersion(type_ *string, name *string, data interface{}) *string
 	// Returns an environment-sensitive token that should be used for the resource's "ARN" attribute (e.g. `bucket.bucketArn`).
 	//
 	// Normally, this token will resolve to `arnAttr`, but if the resource is
@@ -276,22 +274,6 @@ func (i *jsiiProxy_ImageBuilderComponent) GeneratePhysicalName() *string {
 		i,
 		"generatePhysicalName",
 		nil, // no parameters
-		&returns,
-	)
-
-	return returns
-}
-
-func (i *jsiiProxy_ImageBuilderComponent) GenerateVersion(type_ *string, name *string, data interface{}) *string {
-	if err := i.validateGenerateVersionParameters(type_, name, data); err != nil {
-		panic(err)
-	}
-	var returns *string
-
-	_jsii_.Invoke(
-		i,
-		"generateVersion",
-		[]interface{}{type_, name, data},
 		&returns,
 	)
 
