@@ -11,7 +11,7 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (g *jsiiProxy_GitHubRunners) validateMetricFailedParameters(props *awscloudwatch.MetricProps) error {
+func (g *jsiiProxy_GitHubRunners) validateMetricFailedParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err
 	}
@@ -19,7 +19,7 @@ func (g *jsiiProxy_GitHubRunners) validateMetricFailedParameters(props *awscloud
 	return nil
 }
 
-func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *awscloudwatch.MetricProps) error {
+func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err
 	}
@@ -27,7 +27,7 @@ func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *aw
 	return nil
 }
 
-func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricProps) error {
+func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err
 	}
@@ -35,7 +35,7 @@ func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscl
 	return nil
 }
 
-func (g *jsiiProxy_GitHubRunners) validateMetricTimeParameters(props *awscloudwatch.MetricProps) error {
+func (g *jsiiProxy_GitHubRunners) validateMetricTimeParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err
 	}
