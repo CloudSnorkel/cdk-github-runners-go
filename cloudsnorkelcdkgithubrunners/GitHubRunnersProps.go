@@ -9,20 +9,23 @@ import (
 // Properties for GitHubRunners.
 // Experimental.
 type GitHubRunnersProps struct {
-	// Allow management functions to run in public subnets.
+	// Allow management functions to run in public subnets. Lambda Functions in a public subnet can NOT access the internet.
 	//
-	// Lambda Functions in a public subnet can NOT access the internet.
+	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	// Default: false.
 	//
 	// Experimental.
 	AllowPublicSubnet *bool `field:"optional" json:"allowPublicSubnet" yaml:"allowPublicSubnet"`
-	// Path to a directory containing a file named certs.pem containing any additional certificates required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
+	// Path to a certificate file (.pem or .crt) or a directory containing certificate files (.pem or .crt) required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
 	//
-	// You may also want to use custom images for your runner providers that contain the same certificates. See {@link CodeBuildImageBuilder.addCertificates }.
+	// If a directory is provided, all .pem and .crt files in that directory will be used. The certificates will be concatenated into a single file for use by Node.js.
+	//
+	// You may also want to use custom images for your runner providers that contain the same certificates. See {@link RunnerImageComponent.extraCertificates }.
 	//
 	// ```typescript
+	// const selfSignedCertificates = 'certs/ghes.pem'; // or 'path-to-my-extra-certs-folder' for a directory
 	// const imageBuilder = CodeBuildRunnerProvider.imageBuilder(this, 'Image Builder with Certs');
-	// imageBuilder.addComponent(RunnerImageComponent.extraCertificates('path-to-my-extra-certs-folder/certs.pem', 'private-ca');
+	// imageBuilder.addComponent(RunnerImageComponent.extraCertificates(selfSignedCertificates, 'private-ca'));
 	//
 	// const provider = new CodeBuildRunnerProvider(this, 'CodeBuild', {
 	//     imageBuilder: imageBuilder,
@@ -33,7 +36,7 @@ type GitHubRunnersProps struct {
 	//   'runners',
 	//   {
 	//     providers: [provider],
-	//     extraCertificates: 'path-to-my-extra-certs-folder',
+	//     extraCertificates: selfSignedCertificates,
 	//   }
 	// );
 	// ```.
@@ -95,11 +98,17 @@ type GitHubRunnersProps struct {
 	// Security group attached to all management functions.
 	//
 	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
+	//
+	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	// Deprecated: use {@link securityGroups } instead.
 	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups attached to all management functions.
 	//
-	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
+	// Use this to provide outbound access from management functions to GitHub Enterprise Server hosted inside a VPC.
+	//
+	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
+	//
+	// **Note:** Defining inbound rules on this security group does nothing. This security group only controls outbound access FROM the management functions. To limit access TO the webhook or setup functions, use {@link webhookAccess} and {@link setupAccess} instead.
 	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Access configuration for the setup function.
@@ -118,6 +127,8 @@ type GitHubRunnersProps struct {
 	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
 	// VPC used for all management functions. Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
 	//
+	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting and will run outside the VPC.
+	//
 	// Make sure the selected VPC and subnets have access to the following with either NAT Gateway or VPC Endpoints:
 	// * GitHub Enterprise Server
 	// * Secrets Manager
@@ -131,6 +142,8 @@ type GitHubRunnersProps struct {
 	// VPC subnets used for all management functions.
 	//
 	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
+	//
+	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	// Experimental.
 	VpcSubnets *awsec2.SubnetSelection `field:"optional" json:"vpcSubnets" yaml:"vpcSubnets"`
 	// Access configuration for the webhook function.

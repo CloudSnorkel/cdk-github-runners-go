@@ -64,6 +64,27 @@ func init() {
 		reflect.TypeOf((*AwsImageBuilderRunnerImageBuilderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.BaseContainerImage",
+		reflect.TypeOf((*BaseContainerImage)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "ecrRepository", GoGetter: "EcrRepository"},
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+		},
+		func() interface{} {
+			return &jsiiProxy_BaseContainerImage{}
+		},
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.BaseImage",
+		reflect.TypeOf((*BaseImage)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+		},
+		func() interface{} {
+			return &jsiiProxy_BaseImage{}
+		},
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.CodeBuildImageBuilder",
 		reflect.TypeOf((*CodeBuildImageBuilder)(nil)).Elem(),
 		[]_jsii_.Member{
