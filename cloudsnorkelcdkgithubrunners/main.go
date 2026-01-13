@@ -265,6 +265,7 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.EcsRunnerProvider",
 		reflect.TypeOf((*EcsRunnerProvider)(nil)).Elem(),
 		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "capacityProvider", GoGetter: "CapacityProvider"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},

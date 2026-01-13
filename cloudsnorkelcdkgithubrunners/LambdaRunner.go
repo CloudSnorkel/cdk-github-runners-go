@@ -27,7 +27,7 @@ type LambdaRunner interface {
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
 	// The image is built by an image builder and is specific to Lambda.
-	// Deprecated: use {@link LambdaRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Image() *RunnerImage
 	// Labels associated with this provider.
 	// Deprecated: use {@link LambdaRunnerProvider }.

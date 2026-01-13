@@ -574,5 +574,5 @@ If you use and love this project, please consider contributing.
 
 ## Other Options
 
-1. [philips-labs/terraform-aws-github-runner](https://github.com/philips-labs/terraform-aws-github-runner) if you're using Terraform
+1. [github-aws-runners/terraform-aws-github-runner](https://github.com/github-aws-runners/terraform-aws-github-runner) if you're using Terraform
 2. [actions/actions-runner-controller](https://github.com/actions/actions-runner-controller) if you're using Kubernetes

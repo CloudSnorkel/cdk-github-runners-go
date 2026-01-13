@@ -27,9 +27,17 @@ type CodeBuildRunnerProviderProps struct {
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
 	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// The type of compute to use for this build.
+	// The type of compute to use for this build. See the {@link ComputeType} enum for the possible values.
 	//
-	// See the {@link ComputeType} enum for the possible values.
+	// The compute type determines CPU, memory, and disk space:
+	// - SMALL: 2 vCPU, 3 GB RAM, 64 GB disk
+	// - MEDIUM: 4 vCPU, 7 GB RAM, 128 GB disk
+	// - LARGE: 8 vCPU, 15 GB RAM, 128 GB disk
+	// - X2_LARGE: 72 vCPU, 145 GB RAM, 256 GB disk (Linux) or 824 GB disk (Windows)
+	//
+	// Use a larger compute type when you need more disk space for building larger Docker images.
+	//
+	// For more details, see https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
 	// Default: {@link ComputeType#SMALL }.
 	//
 	// Experimental.

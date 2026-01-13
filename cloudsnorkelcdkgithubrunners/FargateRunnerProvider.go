@@ -23,7 +23,7 @@ type FargateRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	// Whether runner task will have a public IP.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	AssignPublicIp() *bool
 	// Cluster hosting the task hosting the runner.
 	// Experimental.
@@ -32,7 +32,7 @@ type FargateRunnerProvider interface {
 	// Experimental.
 	Connections() awsec2.Connections
 	// Container definition hosting the runner.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Container() awsecs.ContainerDefinition
 	// Grant principal used to add permissions to the runner role.
 	// Experimental.
@@ -40,7 +40,7 @@ type FargateRunnerProvider interface {
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
 	// The image is built by an image builder and is specific to Fargate tasks.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Image() *RunnerImage
 	// Labels associated with this provider.
 	// Experimental.
@@ -57,16 +57,16 @@ type FargateRunnerProvider interface {
 	// Experimental.
 	RetryableErrors() *[]*string
 	// Use spot pricing for Fargate tasks.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Spot() *bool
 	// Subnets used for hosting the runner task.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	SubnetSelection() *awsec2.SubnetSelection
 	// Fargate task hosting the runner.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Task() awsecs.FargateTaskDefinition
 	// VPC used for hosting the runner task.
-	// Experimental.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Vpc() awsec2.IVpc
 	// Generate step function task(s) to start a new runner.
 	//

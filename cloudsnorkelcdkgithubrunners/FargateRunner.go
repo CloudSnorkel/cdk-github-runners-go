@@ -16,7 +16,7 @@ import (
 type FargateRunner interface {
 	FargateRunnerProvider
 	// Whether runner task will have a public IP.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	AssignPublicIp() *bool
 	// Cluster hosting the task hosting the runner.
 	// Deprecated: use {@link FargateRunnerProvider }.
@@ -25,7 +25,7 @@ type FargateRunner interface {
 	// Deprecated: use {@link FargateRunnerProvider }.
 	Connections() awsec2.Connections
 	// Container definition hosting the runner.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Container() awsecs.ContainerDefinition
 	// Grant principal used to add permissions to the runner role.
 	// Deprecated: use {@link FargateRunnerProvider }.
@@ -33,7 +33,7 @@ type FargateRunner interface {
 	// Docker image loaded with GitHub Actions Runner and its prerequisites.
 	//
 	// The image is built by an image builder and is specific to Fargate tasks.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Image() *RunnerImage
 	// Labels associated with this provider.
 	// Deprecated: use {@link FargateRunnerProvider }.
@@ -50,16 +50,16 @@ type FargateRunner interface {
 	// Deprecated: use {@link FargateRunnerProvider }.
 	RetryableErrors() *[]*string
 	// Use spot pricing for Fargate tasks.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Spot() *bool
 	// Subnets used for hosting the runner task.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	SubnetSelection() *awsec2.SubnetSelection
 	// Fargate task hosting the runner.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Task() awsecs.FargateTaskDefinition
 	// VPC used for hosting the runner task.
-	// Deprecated: use {@link FargateRunnerProvider }.
+	// Deprecated: This field is internal and should not be accessed directly.
 	Vpc() awsec2.IVpc
 	// Generate step function task(s) to start a new runner.
 	//

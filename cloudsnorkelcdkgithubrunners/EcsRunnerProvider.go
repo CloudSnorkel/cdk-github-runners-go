@@ -5,6 +5,7 @@ import (
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsecs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
@@ -23,6 +24,11 @@ import (
 type EcsRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
+	// Capacity provider used to scale the cluster.
+	//
+	// Use capacityProvider.autoScalingGroup to access the auto scaling group. This can help set up custom scaling policies.
+	// Experimental.
+	CapacityProvider() awsecs.AsgCapacityProvider
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
@@ -70,6 +76,16 @@ type EcsRunnerProvider interface {
 type jsiiProxy_EcsRunnerProvider struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IRunnerProvider
+}
+
+func (j *jsiiProxy_EcsRunnerProvider) CapacityProvider() awsecs.AsgCapacityProvider {
+	var returns awsecs.AsgCapacityProvider
+	_jsii_.Get(
+		j,
+		"capacityProvider",
+		&returns,
+	)
+	return returns
 }
 
 func (j *jsiiProxy_EcsRunnerProvider) Connections() awsec2.Connections {
