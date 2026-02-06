@@ -66,7 +66,7 @@ func NewRunnerImageComponent_Override(r RunnerImageComponent) {
 
 // A component to install the AWS CLI.
 // Experimental.
-func RunnerImageComponent_AwsCli() RunnerImageComponent {
+func RunnerImageComponent_AwsCli(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
 	var returns RunnerImageComponent
@@ -74,7 +74,7 @@ func RunnerImageComponent_AwsCli() RunnerImageComponent {
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
 		"awsCli",
-		nil, // no parameters
+		[]interface{}{version},
 		&returns,
 	)
 
@@ -128,7 +128,7 @@ func RunnerImageComponent_Custom(props *RunnerImageComponentCustomProps) RunnerI
 //
 // On Windows this sets up dockerd for Windows containers without Docker Desktop. If you need Linux containers on Windows, you'll need to install Docker Desktop which doesn't seem to play well with servers (PRs welcome).
 // Experimental.
-func RunnerImageComponent_Docker() RunnerImageComponent {
+func RunnerImageComponent_Docker(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
 	var returns RunnerImageComponent
@@ -136,7 +136,7 @@ func RunnerImageComponent_Docker() RunnerImageComponent {
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
 		"docker",
-		nil, // no parameters
+		[]interface{}{version},
 		&returns,
 	)
 
@@ -145,7 +145,7 @@ func RunnerImageComponent_Docker() RunnerImageComponent {
 
 // A component to install Docker-in-Docker.
 // Deprecated: use `docker()`.
-func RunnerImageComponent_DockerInDocker() RunnerImageComponent {
+func RunnerImageComponent_DockerInDocker(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
 	var returns RunnerImageComponent
@@ -153,7 +153,7 @@ func RunnerImageComponent_DockerInDocker() RunnerImageComponent {
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
 		"dockerInDocker",
-		nil, // no parameters
+		[]interface{}{version},
 		&returns,
 	)
 
@@ -208,9 +208,9 @@ func RunnerImageComponent_ExtraCertificates(source *string, name *string) Runner
 	return returns
 }
 
-// A component to install the GitHub CLI.
+// A component to install Git.
 // Experimental.
-func RunnerImageComponent_Git() RunnerImageComponent {
+func RunnerImageComponent_Git(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
 	var returns RunnerImageComponent
@@ -218,7 +218,7 @@ func RunnerImageComponent_Git() RunnerImageComponent {
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
 		"git",
-		nil, // no parameters
+		[]interface{}{version},
 		&returns,
 	)
 
@@ -227,7 +227,7 @@ func RunnerImageComponent_Git() RunnerImageComponent {
 
 // A component to install the GitHub CLI.
 // Experimental.
-func RunnerImageComponent_GithubCli() RunnerImageComponent {
+func RunnerImageComponent_GithubCli(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
 	var returns RunnerImageComponent
@@ -235,7 +235,7 @@ func RunnerImageComponent_GithubCli() RunnerImageComponent {
 	_jsii_.StaticInvoke(
 		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
 		"githubCli",
-		nil, // no parameters
+		[]interface{}{version},
 		&returns,
 	)
 

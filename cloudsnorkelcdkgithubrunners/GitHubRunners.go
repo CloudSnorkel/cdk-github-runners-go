@@ -86,8 +86,12 @@ type GitHubRunners interface {
 	// Runner images are rebuilt every week by default. This provides the latest GitHub Runner version and software updates.
 	//
 	// If you want to be sure you are using the latest runner version, you can use this topic to be notified when a build fails.
+	//
+	// When the image builder is defined in a separate stack (e.g. in a split-stacks setup), pass that stack or construct
+	// as the optional scope so the topic and failure-notification aspects are created in the same stack as the image
+	// builder. Otherwise the aspects may not find the image builder resources.
 	// Experimental.
-	FailedImageBuildsTopic() awssns.Topic
+	FailedImageBuildsTopic(scope constructs.Construct) awssns.Topic
 	// Metric for failed runner executions.
 	//
 	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link metricJobCompleted}.
@@ -233,13 +237,13 @@ func (g *jsiiProxy_GitHubRunners) CreateLogsInsightsQueries() {
 	)
 }
 
-func (g *jsiiProxy_GitHubRunners) FailedImageBuildsTopic() awssns.Topic {
+func (g *jsiiProxy_GitHubRunners) FailedImageBuildsTopic(scope constructs.Construct) awssns.Topic {
 	var returns awssns.Topic
 
 	_jsii_.Invoke(
 		g,
 		"failedImageBuildsTopic",
-		nil, // no parameters
+		[]interface{}{scope},
 		&returns,
 	)
 
