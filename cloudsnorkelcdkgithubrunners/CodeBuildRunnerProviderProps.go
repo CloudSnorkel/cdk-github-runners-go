@@ -50,6 +50,23 @@ type CodeBuildRunnerProviderProps struct {
 	//
 	// Experimental.
 	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
+	// Use GPU compute for builds.
+	//
+	// When enabled, the default compute type is BUILD_GENERAL1_SMALL (4 vCPU, 16 GB RAM, 1 NVIDIA A10G GPU).
+	//
+	// You can override the compute type using the `computeType` property (for example, to use BUILD_GENERAL1_LARGE for more resources),
+	// subject to the supported GPU compute types.
+	//
+	// When using GPU compute, ensure your runner image includes any required GPU libraries (for example, CUDA)
+	// either by using a base image that has them preinstalled (such as an appropriate nvidia/cuda image) or by
+	// adding image components that install them. The default image builder does not automatically switch to a
+	// CUDA-enabled base image when GPU is enabled.
+	//
+	// GPU compute is only available for Linux x64 images. Not supported on Windows or ARM.
+	// Default: false.
+	//
+	// Experimental.
+	Gpu *bool `field:"optional" json:"gpu" yaml:"gpu"`
 	// GitHub Actions runner group name.
 	//
 	// If specified, the runner will be registered with this group name. Setting a runner group can help managing access to self-hosted runners. It

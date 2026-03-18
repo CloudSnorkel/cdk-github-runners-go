@@ -62,6 +62,18 @@ type EcsRunnerProviderProps struct {
 	//
 	// Experimental.
 	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
+	// Number of GPUs to request for the runner task. When set, the task will be scheduled on GPU-capable instances.
+	//
+	// Requires a GPU-capable instance type (e.g., g4dn.xlarge for 1 GPU, g4dn.12xlarge for 4 GPUs) and GPU AMI.
+	// When creating a new cluster, instanceType defaults to g4dn.xlarge and the ECS Optimized GPU AMI is used.
+	//
+	// You must ensure that the task's container image includes the CUDA runtime. Provide a CUDA-enabled base image
+	// via `baseDockerImage`, use an image builder that starts from a GPU-capable image (such as nvidia/cuda), or add
+	// an image component that installs the CUDA runtime into the image.
+	// Default: undefined (no GPU).
+	//
+	// Experimental.
+	Gpu *float64 `field:"optional" json:"gpu" yaml:"gpu"`
 	// GitHub Actions runner group name.
 	//
 	// If specified, the runner will be registered with this group name. Setting a runner group can help managing access to self-hosted runners. It

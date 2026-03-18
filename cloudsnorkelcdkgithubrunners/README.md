@@ -35,6 +35,7 @@ Ephemeral (or on-demand) runners are the [recommended way by GitHub](https://doc
 
   * [Composite Providers](#composite-providers)
   * [Custom Provider Selection](#custom-provider-selection)
+  * [Warm Runners](#warm-runners)
 * [Examples](#examples)
 * [Architecture](#architecture)
 * [Troubleshooting](#troubleshooting)
@@ -491,6 +492,55 @@ const providerSelector = new Function(this, 'provider-selector', {
 * ⚠️ **No guarantee of assignment**: Provider selection only determines which provider will provision a runner. GitHub Actions may still route the job to any available runner with matching labels. For reliable provider assignment, consider repo-level runner registration (the default).
 * ⚡ **Performance**: The selector runs synchronously during webhook processing. Keep it fast and efficient—the webhook has a 30-second timeout total.
 
+### Warm Runners
+
+Warm runners are pre-provisioned and stay idle until a job arrives, reducing startup latency. Use `AlwaysOnWarmRunner` for 24/7 pools or `ScheduledWarmRunner` for time-windowed pools. You specify the provider directly.
+
+```go
+import { AlwaysOnWarmRunner, CodeBuildRunnerProvider, GitHubRunners } from '@cloudsnorkel/cdk-github-runners';
+
+const provider = new CodeBuildRunnerProvider(this, 'provider', { labels: ['codebuild', 'linux'] });
+const runners = new GitHubRunners(this, 'runners', { providers: [provider] });
+
+new AlwaysOnWarmRunner(this, 'warm', {
+  runners,
+  provider,
+  count: 2,
+  owner: 'my-org',
+  repo: 'my-repo',
+});
+```
+
+Warm runner pools can be stacked. If you want 2 warm runners always available but 3 during peak work hours, you can create one pool with 2 runners always on and another pool with 1 runner during work hours.
+
+```go
+import { aws_events as events, Duration } from 'aws-cdk-lib';
+import { AlwaysOnWarmRunner, ScheduledWarmRunner, CodeBuildRunnerProvider, GitHubRunners } from '@cloudsnorkel/cdk-github-runners';
+
+const provider = new CodeBuildRunnerProvider(this, 'provider', { labels: ['codebuild', 'linux'] });
+const runners = new GitHubRunners(this, 'runners', { providers: [provider] });
+
+new AlwaysOnWarmRunner(this, 'warm', {
+  runners,
+  provider,
+  count: 2,
+  owner: 'my-org',
+  repo: 'my-repo',
+});
+
+new ScheduledWarmRunner(this, 'work hours warm', {
+  runners,
+  provider,
+  count: 1,
+  owner: 'my-org',
+  repo: 'my-repo',
+  schedule: events.Schedule.cron({ hour: '13', minute: '0', weekDay: 'MON-FRI' }),
+  duration: Duration.hours(2),
+});
+```
+
+See the [warm-runners example](examples/typescript/warm-runners/) for a complete setup.
+
 ## Examples
 
 We provide comprehensive examples in the [`examples/`](examples/) folder to help you get started quickly:
@@ -498,6 +548,7 @@ We provide comprehensive examples in the [`examples/`](examples/) folder to help
 ### Getting Started
 
 * **[Simple CodeBuild](examples/typescript/simple-codebuild/)** - Basic setup with just a CodeBuild provider (also available in [Python](examples/python/simple-codebuild/))
+* **[Warm Runners](examples/typescript/warm-runners/)** - Pre-provisioned runners for low-latency job starts (also available in [Python](examples/python/warm-runners/))
 
 ### Provider Configuration
 
@@ -522,6 +573,7 @@ We provide comprehensive examples in the [`examples/`](examples/) folder to help
 ### Customization
 
 * **[Add Software](examples/typescript/add-software/)** - Add custom software to runner images (also available in [Python](examples/python/add-software/))
+* **[GPU](examples/typescript/gpu/)** - GPU support with NVIDIA drivers across EC2, CodeBuild, and ECS (also available in [Python](examples/python/gpu/))
 
 ### Enterprise & Monitoring
 

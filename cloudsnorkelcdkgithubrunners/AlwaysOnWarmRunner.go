@@ -4,39 +4,41 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/jsii"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2/awssecretsmanager"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// Secrets required for GitHub runners operation.
+// Warm runners that run 24/7. Fills at midnight UTC and each runner stays alive for 24 hours.
+//
+// Runners will be provisioned using the specified provider and registered in the specified repository or organization.
+//
+// Registration level must match the one selected during setup. See {@link SETUP_GITHUB.md } for more information on the selection.
+//
+// ## Limitations
+//
+// - Jobs will still trigger provisioning of on-demand runners, even if a warm runner ends up being used.
+// - You may briefly see more than `count` runners when changing config or at rotation.
+// - To remove: set `count` to 0, deploy, wait for warm runners to stop, then remove and deploy again.
+//   If you don't follow this procedure, warm runners may linger until they expire.
+// - Provider failures or timeouts (like Lambda provider timing out after 15 minutes) will result in a
+//   gap in coverage until the retry succeeds. Current retry mechanism has built-in back-off rate and
+//   can be tweaked using `retryOptions`. This will be improved in the future.
+//
+// Example:
+//   new AlwaysOnWarmRunner(stack, 'AlwaysOnLinux', {
+//     runners,
+//     provider: myProvider,
+//     count: 3,
+//     owner: 'my-org',
+//     repo: 'my-repo',
+//   });
+//
 // Experimental.
-type Secrets interface {
+type AlwaysOnWarmRunner interface {
 	constructs.Construct
-	// Authentication secret for GitHub containing either app details or personal access token.
-	//
-	// This secret is used to register runners and
-	// cancel jobs when the runner fails to start.
-	//
-	// This secret is meant to be edited by the user after being created.
-	// Experimental.
-	Github() awssecretsmanager.Secret
-	// GitHub app private key. Not needed when using personal access tokens.
-	//
-	// This secret is meant to be edited by the user after being created. It is separate than the main GitHub secret because inserting private keys into JSON is hard.
-	// Experimental.
-	GithubPrivateKey() awssecretsmanager.Secret
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// Setup secret used to authenticate user for our setup wizard.
-	//
-	// Should be empty after setup has been completed.
-	// Experimental.
-	Setup() awssecretsmanager.Secret
-	// Webhook secret used to confirm events are coming from GitHub and nowhere else.
-	// Experimental.
-	Webhook() awssecretsmanager.Secret
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -52,32 +54,12 @@ type Secrets interface {
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
-// The jsii proxy struct for Secrets
-type jsiiProxy_Secrets struct {
+// The jsii proxy struct for AlwaysOnWarmRunner
+type jsiiProxy_AlwaysOnWarmRunner struct {
 	internal.Type__constructsConstruct
 }
 
-func (j *jsiiProxy_Secrets) Github() awssecretsmanager.Secret {
-	var returns awssecretsmanager.Secret
-	_jsii_.Get(
-		j,
-		"github",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Secrets) GithubPrivateKey() awssecretsmanager.Secret {
-	var returns awssecretsmanager.Secret
-	_jsii_.Get(
-		j,
-		"githubPrivateKey",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Secrets) Node() constructs.Node {
+func (j *jsiiProxy_AlwaysOnWarmRunner) Node() constructs.Node {
 	var returns constructs.Node
 	_jsii_.Get(
 		j,
@@ -87,39 +69,19 @@ func (j *jsiiProxy_Secrets) Node() constructs.Node {
 	return returns
 }
 
-func (j *jsiiProxy_Secrets) Setup() awssecretsmanager.Secret {
-	var returns awssecretsmanager.Secret
-	_jsii_.Get(
-		j,
-		"setup",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Secrets) Webhook() awssecretsmanager.Secret {
-	var returns awssecretsmanager.Secret
-	_jsii_.Get(
-		j,
-		"webhook",
-		&returns,
-	)
-	return returns
-}
-
 
 // Experimental.
-func NewSecrets(scope constructs.Construct, id *string) Secrets {
+func NewAlwaysOnWarmRunner(scope constructs.Construct, id *string, props *AlwaysOnWarmRunnerProps) AlwaysOnWarmRunner {
 	_init_.Initialize()
 
-	if err := validateNewSecretsParameters(scope, id); err != nil {
+	if err := validateNewAlwaysOnWarmRunnerParameters(scope, id, props); err != nil {
 		panic(err)
 	}
-	j := jsiiProxy_Secrets{}
+	j := jsiiProxy_AlwaysOnWarmRunner{}
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.Secrets",
-		[]interface{}{scope, id},
+		"@cloudsnorkel/cdk-github-runners.AlwaysOnWarmRunner",
+		[]interface{}{scope, id, props},
 		&j,
 	)
 
@@ -127,13 +89,13 @@ func NewSecrets(scope constructs.Construct, id *string) Secrets {
 }
 
 // Experimental.
-func NewSecrets_Override(s Secrets, scope constructs.Construct, id *string) {
+func NewAlwaysOnWarmRunner_Override(a AlwaysOnWarmRunner, scope constructs.Construct, id *string, props *AlwaysOnWarmRunnerProps) {
 	_init_.Initialize()
 
 	_jsii_.Create(
-		"@cloudsnorkel/cdk-github-runners.Secrets",
-		[]interface{}{scope, id},
-		s,
+		"@cloudsnorkel/cdk-github-runners.AlwaysOnWarmRunner",
+		[]interface{}{scope, id, props},
+		a,
 	)
 }
 
@@ -155,16 +117,16 @@ func NewSecrets_Override(s Secrets, scope constructs.Construct, id *string) {
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
 // Experimental.
-func Secrets_IsConstruct(x interface{}) *bool {
+func AlwaysOnWarmRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
-	if err := validateSecrets_IsConstructParameters(x); err != nil {
+	if err := validateAlwaysOnWarmRunner_IsConstructParameters(x); err != nil {
 		panic(err)
 	}
 	var returns *bool
 
 	_jsii_.StaticInvoke(
-		"@cloudsnorkel/cdk-github-runners.Secrets",
+		"@cloudsnorkel/cdk-github-runners.AlwaysOnWarmRunner",
 		"isConstruct",
 		[]interface{}{x},
 		&returns,
@@ -173,11 +135,11 @@ func Secrets_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func (s *jsiiProxy_Secrets) ToString() *string {
+func (a *jsiiProxy_AlwaysOnWarmRunner) ToString() *string {
 	var returns *string
 
 	_jsii_.Invoke(
-		s,
+		a,
 		"toString",
 		nil, // no parameters
 		&returns,
@@ -186,7 +148,7 @@ func (s *jsiiProxy_Secrets) ToString() *string {
 	return returns
 }
 
-func (s *jsiiProxy_Secrets) With(mixins ...constructs.IMixin) constructs.IConstruct {
+func (a *jsiiProxy_AlwaysOnWarmRunner) With(mixins ...constructs.IMixin) constructs.IConstruct {
 	args := []interface{}{}
 	for _, a := range mixins {
 		args = append(args, a)
@@ -195,7 +157,7 @@ func (s *jsiiProxy_Secrets) With(mixins ...constructs.IMixin) constructs.IConstr
 	var returns constructs.IConstruct
 
 	_jsii_.Invoke(
-		s,
+		a,
 		"with",
 		args,
 		&returns,

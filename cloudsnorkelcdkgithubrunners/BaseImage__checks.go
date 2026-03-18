@@ -17,6 +17,18 @@ func validateBaseImage_FromAmiIdParameters(amiId *string) error {
 	return nil
 }
 
+func validateBaseImage_FromGpuBaseParameters(os Os, architecture Architecture) error {
+	if os == nil {
+		return fmt.Errorf("parameter os is required, but nil was provided")
+	}
+
+	if architecture == nil {
+		return fmt.Errorf("parameter architecture is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateBaseImage_FromImageBuilderParameters(scope constructs.Construct, resourceName *string) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")

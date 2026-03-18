@@ -8,6 +8,10 @@ func validateBaseImage_FromAmiIdParameters(amiId *string) error {
 	return nil
 }
 
+func validateBaseImage_FromGpuBaseParameters(os Os, architecture Architecture) error {
+	return nil
+}
+
 func validateBaseImage_FromImageBuilderParameters(scope constructs.Construct, resourceName *string) error {
 	return nil
 }

@@ -9,6 +9,24 @@ import (
 
 func init() {
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.AlwaysOnWarmRunner",
+		reflect.TypeOf((*AlwaysOnWarmRunner)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
+		},
+		func() interface{} {
+			j := jsiiProxy_AlwaysOnWarmRunner{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.AlwaysOnWarmRunnerProps",
+		reflect.TypeOf((*AlwaysOnWarmRunnerProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.AmiBuilder",
 		reflect.TypeOf((*AmiBuilder)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -30,6 +48,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "prependComponent", GoMethod: "PrependComponent"},
 			_jsii_.MemberProperty{JsiiProperty: "runnerVersion", GoGetter: "RunnerVersion"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_AmiBuilder{}
@@ -100,6 +119,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "props", GoGetter: "Props"},
 			_jsii_.MemberMethod{JsiiMethod: "setBuildArg", GoMethod: "SetBuildArg"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_CodeBuildImageBuilder{}
@@ -129,6 +149,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_CodeBuildRunner{}
@@ -157,6 +178,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_CodeBuildRunnerProvider{}
@@ -200,6 +222,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "repository", GoGetter: "Repository"},
 			_jsii_.MemberProperty{JsiiProperty: "runnerVersion", GoGetter: "RunnerVersion"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_ContainerImageBuilder{}
@@ -227,6 +250,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_Ec2Runner{}
@@ -249,6 +273,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_Ec2RunnerProvider{}
@@ -277,6 +302,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_EcsRunnerProvider{}
@@ -312,6 +338,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberProperty{JsiiProperty: "vpc", GoGetter: "Vpc"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_FargateRunner{}
@@ -342,6 +369,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberProperty{JsiiProperty: "vpc", GoGetter: "Vpc"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_FargateRunnerProvider{}
@@ -374,6 +402,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
 			_jsii_.MemberProperty{JsiiProperty: "secrets", GoGetter: "Secrets"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_GitHubRunners{}
@@ -396,6 +425,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_ICompositeProvider{}
@@ -469,6 +499,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_IRunnerProvider{}
@@ -517,6 +548,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "prefixCommandsWithErrorHandling", GoMethod: "PrefixCommandsWithErrorHandling"},
 			_jsii_.MemberProperty{JsiiProperty: "stack", GoGetter: "Stack"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_ImageBuilderComponent{}
@@ -555,6 +587,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_LambdaRunner{}
@@ -579,6 +612,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_LambdaRunnerProvider{}
@@ -652,6 +686,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "removeComponent", GoMethod: "RemoveComponent"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_RunnerImageBuilder{}
@@ -710,6 +745,24 @@ func init() {
 		},
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.ScheduledWarmRunner",
+		reflect.TypeOf((*ScheduledWarmRunner)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
+		},
+		func() interface{} {
+			j := jsiiProxy_ScheduledWarmRunner{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ScheduledWarmRunnerProps",
+		reflect.TypeOf((*ScheduledWarmRunnerProps)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.Secrets",
 		reflect.TypeOf((*Secrets)(nil)).Elem(),
 		[]_jsii_.Member{
@@ -719,6 +772,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "setup", GoGetter: "Setup"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberProperty{JsiiProperty: "webhook", GoGetter: "Webhook"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
 			j := jsiiProxy_Secrets{}

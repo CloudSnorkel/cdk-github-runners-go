@@ -49,6 +49,11 @@ type Ec2RunnerProviderProps struct {
 	// Experimental.
 	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// Instance type for launched runner instances.
+	//
+	// For GPU instance types (g4dn, g5, p3, etc.), we automatically use a GPU base image (AWS Deep Learning AMI)
+	// with NVIDIA drivers pre-installed. If you provide your own image builder, use
+	// `baseAmi: BaseImage.fromGpuBase(os, architecture)` or another image preloaded with NVIDIA drivers, or use
+	// an image component to install NVIDIA drivers.
 	// Default: m6i.large
 	//
 	// Experimental.
