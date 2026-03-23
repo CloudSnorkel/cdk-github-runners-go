@@ -47,7 +47,7 @@ type LambdaRunner interface {
 	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Deprecated: use {@link LambdaRunnerProvider }.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -61,6 +61,9 @@ type LambdaRunner interface {
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
 	// Deprecated: use {@link LambdaRunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
+	// Override to inject static strings into `$.consts` on the orchestrator state machine.
+	// Deprecated: use {@link LambdaRunnerProvider }.
+	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link LambdaRunnerProvider }.
 	ToString() *string
@@ -284,7 +287,7 @@ func LambdaRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (l *jsiiProxy_LambdaRunner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := l.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -337,6 +340,19 @@ func (l *jsiiProxy_LambdaRunner) Status(statusFunctionRole awsiam.IGrantable) IR
 		l,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (l *jsiiProxy_LambdaRunner) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		l,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

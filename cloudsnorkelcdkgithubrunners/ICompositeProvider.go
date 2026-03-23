@@ -18,9 +18,12 @@ type ICompositeProvider interface {
 	constructs.IConstruct
 	// Generate step function tasks that execute the runner.
 	//
+	// If the provider has multiple attempts, each attempt should be followed by a `Catch` that deletes the failed runner. Use
+	// {@link IRunnerRuntimeParameters.addCatchAndCleanUp} to add the catch.
+	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -32,6 +35,9 @@ type ICompositeProvider interface {
 	// Also gives the status function any needed permissions to query the Docker images or AMIs.
 	// Experimental.
 	Status(statusFunctionRole awsiam.IGrantable) *[]IRunnerProviderStatus
+	// Merged constants from all sub-providers for the single orchestrator `$.consts` pass. Duplicate keys across sub-providers must be avoided.
+	// Experimental.
+	StepFunctionConstants() *map[string]*string
 	// GitHub Actions labels used for this provider.
 	//
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
@@ -51,7 +57,7 @@ type jsiiProxy_ICompositeProvider struct {
 	internal.Type__constructsIConstruct
 }
 
-func (i *jsiiProxy_ICompositeProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (i *jsiiProxy_ICompositeProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := i.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -88,6 +94,19 @@ func (i *jsiiProxy_ICompositeProvider) Status(statusFunctionRole awsiam.IGrantab
 		i,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (i *jsiiProxy_ICompositeProvider) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		i,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

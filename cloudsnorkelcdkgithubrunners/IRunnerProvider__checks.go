@@ -5,17 +5,12 @@ package cloudsnorkelcdkgithubrunners
 import (
 	"fmt"
 
-	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 )
 
-func (i *jsiiProxy_IRunnerProvider) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
+func (i *jsiiProxy_IRunnerProvider) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
 	if parameters == nil {
 		return fmt.Errorf("parameter parameters is required, but nil was provided")
-	}
-	if err := _jsii_.ValidateStruct(parameters, func() string { return "parameter parameters" }); err != nil {
-		return err
 	}
 
 	return nil

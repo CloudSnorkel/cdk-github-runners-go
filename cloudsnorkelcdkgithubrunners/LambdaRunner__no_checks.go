@@ -4,7 +4,7 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
+func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
 	return nil
 }
 

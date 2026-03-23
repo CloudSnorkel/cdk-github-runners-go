@@ -14,6 +14,8 @@ import (
 // Interface for all runner providers.
 //
 // Implementations create all required resources and return a step function task that starts those resources from {@link getStepFunctionTask}.
+//
+// This interface is not guaranteed to be stable. If you end up implementing your own provider, please let us know so we can consider changing that contract.
 // Experimental.
 type IRunnerProvider interface {
 	awsec2.IConnectable
@@ -23,7 +25,7 @@ type IRunnerProvider interface {
 	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -35,6 +37,13 @@ type IRunnerProvider interface {
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
 	// Experimental.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
+	// Static string constants injected once into the orchestrator execution input at `$.consts`. Use unique keys for dynamic values (e.g. include `this.node.path` in the key). Values must be plain strings known at synthesis time.
+	//
+	// To use the constants in your provider, use `'$.consts.key'` as a path.
+	// Default: `{}` — {@link BaseProvider } returns an empty object; override when needed (e.g. EC2 userdata template).
+	//
+	// Experimental.
+	StepFunctionConstants() *map[string]*string
 	// GitHub Actions labels used for this provider.
 	//
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
@@ -59,7 +68,7 @@ type jsiiProxy_IRunnerProvider struct {
 	internal.Type__awsiamIGrantable
 }
 
-func (i *jsiiProxy_IRunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (i *jsiiProxy_IRunnerProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := i.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -96,6 +105,19 @@ func (i *jsiiProxy_IRunnerProvider) Status(statusFunctionRole awsiam.IGrantable)
 		i,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (i *jsiiProxy_IRunnerProvider) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		i,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

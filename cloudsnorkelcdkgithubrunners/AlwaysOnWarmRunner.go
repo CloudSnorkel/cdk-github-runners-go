@@ -12,26 +12,28 @@ import (
 //
 // Runners will be provisioned using the specified provider and registered in the specified repository or organization.
 //
-// Registration level must match the one selected during setup. See {@link SETUP_GITHUB.md } for more information on the selection.
+// Registration level must match the one selected during setup.
+// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
 //
 // ## Limitations
 //
 // - Jobs will still trigger provisioning of on-demand runners, even if a warm runner ends up being used.
 // - You may briefly see more than `count` runners when changing config or at rotation.
 // - To remove: set `count` to 0, deploy, wait for warm runners to stop, then remove and deploy again.
-//   If you don't follow this procedure, warm runners may linger until they expire.
+// If you don't follow this procedure, warm runners may linger until they expire.
 // - Provider failures or timeouts (like Lambda provider timing out after 15 minutes) will result in a
-//   gap in coverage until the retry succeeds. Current retry mechanism has built-in back-off rate and
-//   can be tweaked using `retryOptions`. This will be improved in the future.
+// gap in coverage until the retry succeeds. Current retry mechanism has built-in back-off rate and
+// can be tweaked using `retryOptions`. This will be improved in the future.
 //
-// Example:
-//   new AlwaysOnWarmRunner(stack, 'AlwaysOnLinux', {
-//     runners,
-//     provider: myProvider,
-//     count: 3,
-//     owner: 'my-org',
-//     repo: 'my-repo',
-//   });
+// ```typescript
+// new AlwaysOnWarmRunner(stack, 'AlwaysOnLinux', {
+// runners,
+// provider: myProvider,
+// count: 3,
+// owner: 'my-org',
+// repo: 'my-repo',
+// });
+// ```.
 //
 // Experimental.
 type AlwaysOnWarmRunner interface {

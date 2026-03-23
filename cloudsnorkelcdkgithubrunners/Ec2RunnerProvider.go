@@ -43,7 +43,7 @@ type Ec2RunnerProvider interface {
 	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Experimental.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -57,6 +57,9 @@ type Ec2RunnerProvider interface {
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
 	// Experimental.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
+	// Override to inject static strings into `$.consts` on the orchestrator state machine.
+	// Experimental.
+	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -240,7 +243,7 @@ func Ec2RunnerProvider_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func (e *jsiiProxy_Ec2RunnerProvider) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (e *jsiiProxy_Ec2RunnerProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := e.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -293,6 +296,19 @@ func (e *jsiiProxy_Ec2RunnerProvider) Status(statusFunctionRole awsiam.IGrantabl
 		e,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (e *jsiiProxy_Ec2RunnerProvider) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		e,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

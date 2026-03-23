@@ -11,12 +11,9 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (f *jsiiProxy_FargateRunnerProvider) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
+func (f *jsiiProxy_FargateRunnerProvider) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
 	if parameters == nil {
 		return fmt.Errorf("parameter parameters is required, but nil was provided")
-	}
-	if err := _jsii_.ValidateStruct(parameters, func() string { return "parameter parameters" }); err != nil {
-		return err
 	}
 
 	return nil

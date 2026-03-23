@@ -74,7 +74,9 @@ type GitHubRunnersProps struct {
 	//
 	// **WARNING: Provider selection is not a guarantee that a specific provider will be assigned for the job. GitHub Actions may assign the job to any runner with matching labels. The provider selector only determines which provider's runner will be *created*, but GitHub Actions may route the job to any available runner with the required labels.**
 	//
-	// **For reliable provider assignment based on job characteristics, consider using repo-level runner registration where you can control which runners are available for specific repositories. See {@link SETUP_GITHUB.md } for more details on the different registration levels. This information is also available while using the setup wizard.
+	// **For reliable provider assignment based on job characteristics, consider using repo-level runner registration where you can control which runners are available for specific repositories. This information is also available while using the setup wizard.
+	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
+	//
 	// Experimental.
 	ProviderSelector awslambda.IFunction `field:"optional" json:"providerSelector" yaml:"providerSelector"`
 	// Whether to require the `self-hosted` label.

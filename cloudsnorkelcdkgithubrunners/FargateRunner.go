@@ -65,7 +65,7 @@ type FargateRunner interface {
 	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Deprecated: use {@link FargateRunnerProvider }.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -79,6 +79,9 @@ type FargateRunner interface {
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
 	// Deprecated: use {@link FargateRunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
+	// Override to inject static strings into `$.consts` on the orchestrator state machine.
+	// Deprecated: use {@link FargateRunnerProvider }.
+	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link FargateRunnerProvider }.
 	ToString() *string
@@ -361,7 +364,7 @@ func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := f.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -414,6 +417,19 @@ func (f *jsiiProxy_FargateRunner) Status(statusFunctionRole awsiam.IGrantable) I
 		f,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (f *jsiiProxy_FargateRunner) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		f,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

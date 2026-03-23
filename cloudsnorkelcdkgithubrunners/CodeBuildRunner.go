@@ -47,7 +47,7 @@ type CodeBuildRunner interface {
 	//
 	// Called by GithubRunners and shouldn't be called manually.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable
+	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
 	// An optional method that modifies the role of the state machine after all the tasks have been generated.
 	//
 	// This can be used to add additional policy
@@ -61,6 +61,9 @@ type CodeBuildRunner interface {
 	// Also gives the status function any needed permissions to query the Docker image or AMI.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
+	// Override to inject static strings into `$.consts` on the orchestrator state machine.
+	// Deprecated: use {@link CodeBuildRunnerProvider }.
+	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	ToString() *string
@@ -284,7 +287,7 @@ func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters *RunnerRuntimeParameters) awsstepfunctions.IChainable {
+func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
 	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
 		panic(err)
 	}
@@ -337,6 +340,19 @@ func (c *jsiiProxy_CodeBuildRunner) Status(statusFunctionRole awsiam.IGrantable)
 		c,
 		"status",
 		[]interface{}{statusFunctionRole},
+		&returns,
+	)
+
+	return returns
+}
+
+func (c *jsiiProxy_CodeBuildRunner) StepFunctionConstants() *map[string]*string {
+	var returns *map[string]*string
+
+	_jsii_.Invoke(
+		c,
+		"stepFunctionConstants",
+		nil, // no parameters
 		&returns,
 	)
 

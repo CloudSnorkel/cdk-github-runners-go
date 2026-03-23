@@ -4,7 +4,7 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (f *jsiiProxy_FargateRunnerProvider) validateGetStepFunctionTaskParameters(parameters *RunnerRuntimeParameters) error {
+func (f *jsiiProxy_FargateRunnerProvider) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
 	return nil
 }
 

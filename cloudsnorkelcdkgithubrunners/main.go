@@ -148,6 +148,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "project", GoGetter: "Project"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -177,6 +178,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "project", GoGetter: "Project"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -249,6 +251,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -272,6 +275,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -301,6 +305,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -334,6 +339,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberProperty{JsiiProperty: "spot", GoGetter: "Spot"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberProperty{JsiiProperty: "subnetSelection", GoGetter: "SubnetSelection"},
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
@@ -365,6 +371,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberProperty{JsiiProperty: "spot", GoGetter: "Spot"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberProperty{JsiiProperty: "subnetSelection", GoGetter: "SubnetSelection"},
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
@@ -425,6 +432,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
@@ -499,6 +507,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
@@ -525,6 +534,23 @@ func init() {
 		},
 		func() interface{} {
 			return &jsiiProxy_IRunnerProviderStatus{}
+		},
+	)
+	_jsii_.RegisterInterface(
+		"@cloudsnorkel/cdk-github-runners.IRunnerRuntimeParameters",
+		reflect.TypeOf((*IRunnerRuntimeParameters)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addCatchAndCleanUp", GoMethod: "AddCatchAndCleanUp"},
+			_jsii_.MemberProperty{JsiiProperty: "githubDomainPath", GoGetter: "GithubDomainPath"},
+			_jsii_.MemberProperty{JsiiProperty: "labelsPath", GoGetter: "LabelsPath"},
+			_jsii_.MemberProperty{JsiiProperty: "ownerPath", GoGetter: "OwnerPath"},
+			_jsii_.MemberProperty{JsiiProperty: "registrationUrl", GoGetter: "RegistrationUrl"},
+			_jsii_.MemberProperty{JsiiProperty: "repoPath", GoGetter: "RepoPath"},
+			_jsii_.MemberProperty{JsiiProperty: "runnerNamePath", GoGetter: "RunnerNamePath"},
+			_jsii_.MemberProperty{JsiiProperty: "runnerTokenPath", GoGetter: "RunnerTokenPath"},
+		},
+		func() interface{} {
+			return &jsiiProxy_IRunnerRuntimeParameters{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -586,6 +612,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -611,6 +638,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
+			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -728,10 +756,6 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.RunnerProviderProps",
 		reflect.TypeOf((*RunnerProviderProps)(nil)).Elem(),
-	)
-	_jsii_.RegisterStruct(
-		"@cloudsnorkel/cdk-github-runners.RunnerRuntimeParameters",
-		reflect.TypeOf((*RunnerRuntimeParameters)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.RunnerVersion",

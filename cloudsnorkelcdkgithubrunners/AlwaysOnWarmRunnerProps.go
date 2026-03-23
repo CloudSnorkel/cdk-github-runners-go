@@ -22,8 +22,9 @@ type AlwaysOnWarmRunnerProps struct {
 	// Registration level — must match how your runners are set up in GitHub.
 	//
 	// Choose
-	// 'org' for org-wide runners, 'repo' for repo-level. See the setup wizard or
-	// {@link SETUP_GITHUB.md } for choosing repo vs org.
+	// 'org' for org-wide runners, 'repo' for repo-level. See the setup wizard for choosing repo vs org.
+	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
+	//
 	// Default: 'repo'.
 	//
 	// Experimental.
