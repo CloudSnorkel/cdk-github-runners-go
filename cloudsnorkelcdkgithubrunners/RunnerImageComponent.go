@@ -264,6 +264,60 @@ func RunnerImageComponent_GithubRunner(runnerVersion RunnerVersion) RunnerImageC
 	return returns
 }
 
+// A component that runs a script after every job the runner executes.
+//
+// Point this at a local script file. It is copied into the image, made executable, and the runner is
+// configured to run it after each job using the
+// [`ACTIONS_RUNNER_HOOK_JOB_COMPLETED`](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/run-scripts)
+// environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
+//
+// Must be used after the {@link githubRunner} component.
+// Experimental.
+func RunnerImageComponent_JobCompletedHook(sourcePath *string) RunnerImageComponent {
+	_init_.Initialize()
+
+	if err := validateRunnerImageComponent_JobCompletedHookParameters(sourcePath); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		"jobCompletedHook",
+		[]interface{}{sourcePath},
+		&returns,
+	)
+
+	return returns
+}
+
+// A component that runs a script before every job the runner executes.
+//
+// Point this at a local script file. It is copied into the image, made executable, and the runner is
+// configured to run it before each job using the
+// [`ACTIONS_RUNNER_HOOK_JOB_STARTED`](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/run-scripts)
+// environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
+//
+// Must be used after the {@link githubRunner} component.
+// Experimental.
+func RunnerImageComponent_JobStartedHook(sourcePath *string) RunnerImageComponent {
+	_init_.Initialize()
+
+	if err := validateRunnerImageComponent_JobStartedHookParameters(sourcePath); err != nil {
+		panic(err)
+	}
+	var returns RunnerImageComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		"jobStartedHook",
+		[]interface{}{sourcePath},
+		&returns,
+	)
+
+	return returns
+}
+
 // A component to set up the required Lambda entrypoint for Lambda runners.
 // Experimental.
 func RunnerImageComponent_LambdaEntrypoint() RunnerImageComponent {

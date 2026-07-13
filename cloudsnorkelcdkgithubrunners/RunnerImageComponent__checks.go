@@ -95,3 +95,19 @@ func validateRunnerImageComponent_GithubRunnerParameters(runnerVersion RunnerVer
 	return nil
 }
 
+func validateRunnerImageComponent_JobCompletedHookParameters(sourcePath *string) error {
+	if sourcePath == nil {
+		return fmt.Errorf("parameter sourcePath is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func validateRunnerImageComponent_JobStartedHookParameters(sourcePath *string) error {
+	if sourcePath == nil {
+		return fmt.Errorf("parameter sourcePath is required, but nil was provided")
+	}
+
+	return nil
+}
+

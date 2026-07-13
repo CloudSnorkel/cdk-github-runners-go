@@ -36,3 +36,11 @@ func validateRunnerImageComponent_GithubRunnerParameters(runnerVersion RunnerVer
 	return nil
 }
 
+func validateRunnerImageComponent_JobCompletedHookParameters(sourcePath *string) error {
+	return nil
+}
+
+func validateRunnerImageComponent_JobStartedHookParameters(sourcePath *string) error {
+	return nil
+}
+

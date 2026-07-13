@@ -60,6 +60,7 @@ A runner provider creates compute resources on-demand and uses [actions/runner](
 | **RAM**          | Unlimited         | 3gb, 7gb, 15gb, or 145gb   | 512mb to 30gb  | Unlimited      | 128mb to 10gb |
 | **Storage**      | Unlimited         | 50gb to 824gb              | 20gb to 200gb  | Unlimited      | Up to 10gb    |
 | **Architecture** | x86_64, ARM64     | x86_64, ARM64              | x86_64, ARM64  | x86_64, ARM64  | x86_64, ARM64 |
+| **GPU**          | ✔                 | ✔                         | ❌              | ✔              | ❌           |
 | **sudo**         | ✔                 | ✔                         | ✔              | ✔              | ❌           |
 | **Docker**       | ✔                 | ✔ (Linux only)            | ❌              | ✔              | ❌           |
 | **Spot pricing** | ✔                 | ❌                         | ✔              | ✔              | ❌           |
@@ -573,6 +574,7 @@ We provide comprehensive examples in the [`examples/`](examples/) folder to help
 ### Customization
 
 * **[Add Software](examples/typescript/add-software/)** - Add custom software to runner images (also available in [Python](examples/python/add-software/))
+* **[Job Hooks](examples/typescript/job-hooks/)** - Run a script before every job using GitHub Actions runner hooks (also available in [Python](examples/python/job-hooks/))
 * **[GPU](examples/typescript/gpu/)** - GPU support with NVIDIA drivers across EC2, CodeBuild, and ECS (also available in [Python](examples/python/gpu/))
 
 ### Enterprise & Monitoring
@@ -630,6 +632,10 @@ Other useful metrics to track:
 1. Use `GitHubRunners.metricJobCompleted()` to get a metric for the number of completed jobs broken down by labels and job success.
 2. Use `GitHubRunners.metricTime()` to get a metric for the total time a runner is running. This includes the overhead of starting the runner.
 
+## Known Issues
+
+1. Docker images built with AWS Image Builder (by default only Windows Docker images) might not be fully rolled back on deployment failure. If your stack fails to deploy after an image was already built, the new image will stay around. It will be automatically replaced on the next build interval but that might take up to 7 days with default settings (`rebuildInterval`). It's recommended to not leave stacks in `UPDATE_ROLLBACK_COMPLETE` state if you're using Windows Docker images.
+
 ## Getting Help
 
 Need help? We're here for you!
@@ -677,6 +683,13 @@ Thanks to our generous sponsors who helped make this project possible!
         <img src="https://github.com/fragment-dev.png?size=100" width="100" height="100" alt="Fragment" />
         <br />
         <sub><b>Fragment</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/qnicondavid">
+        <img src="https://github.com/qnicondavid.png?size=100" width="100" height="100" alt="Nicon-David Milandru" />
+        <br />
+        <sub><b>Nicon-David Milandru</b></sub>
       </a>
     </td>
     <td align="center">
