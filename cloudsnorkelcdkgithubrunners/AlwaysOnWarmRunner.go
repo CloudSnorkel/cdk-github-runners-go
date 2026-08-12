@@ -15,7 +15,7 @@ import (
 // Registration level must match the one selected during setup.
 // See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
 //
-// ## Limitations
+// **Limitations**
 //
 // - Jobs will still trigger provisioning of on-demand runners, even if a warm runner ends up being used.
 // - You may briefly see more than `count` runners when changing config or at rotation.

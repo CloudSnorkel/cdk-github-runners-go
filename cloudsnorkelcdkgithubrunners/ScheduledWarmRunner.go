@@ -15,7 +15,7 @@ import (
 // Registration level must match the one selected during setup.
 // See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
 //
-// ## Limitations
+// **Limitations**
 //
 // - **No deployment-fill**: Unlike `AlwaysOnWarmRunner`, scheduled warm runners do not get an initial
 // fill on deploy. The first fill happens at the next schedule occurrence. If you deploy at 1pm for
