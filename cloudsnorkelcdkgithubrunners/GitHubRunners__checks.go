@@ -27,6 +27,14 @@ func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *aw
 	return nil
 }
 
+func (g *jsiiProxy_GitHubRunners) validateMetricStolenRunnersParameters(props *awscloudwatch.MetricOptions) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err

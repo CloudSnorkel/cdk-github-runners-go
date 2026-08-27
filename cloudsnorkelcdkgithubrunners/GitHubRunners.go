@@ -105,6 +105,21 @@ type GitHubRunners interface {
 	// **WARNING:** this method creates a metric filter for each provider. Each metric has a status dimension with six possible values. These resources may incur cost.
 	// Experimental.
 	MetricJobCompleted(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
+	// Metric for the number of runners that were stolen by a job that shouldn't have been assigned to them.
+	//
+	// A high number here means your runners are shared with jobs you didn't mean to serve. Use the "Stolen runners"
+	// CloudWatch Logs Insights query created by {@link createLogsInsightsQueries} to see which repositories and jobs
+	// are taking them.
+	//
+	// This metric has two dimensions:
+	//  1. `Replaced` which is "true" or "false" indicating whether the stolen runner was replaced. A runner may not be replaced if it was stolen too
+	//     many times in a row. The current limit is 3. When this is false, there is probably a bug in our detection or something misconfigured.
+	//  2. `Provider` is the provider construct path of the runner that was stolen. You can check your code to see which labels it has that may cause
+	//     it to be stolen. The logs insights queries can provide even more information about the stolen runners.
+	//
+	// **WARNING:** this method creates a metric filter. This resource may incur cost.
+	// Experimental.
+	MetricStolenRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for successful executions.
 	//
 	// A successful execution doesn't always mean a runner was started. It can be successful even without any label matches.
@@ -300,6 +315,22 @@ func (g *jsiiProxy_GitHubRunners) MetricJobCompleted(props *awscloudwatch.Metric
 	_jsii_.Invoke(
 		g,
 		"metricJobCompleted",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricStolenRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric {
+	if err := g.validateMetricStolenRunnersParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricStolenRunners",
 		[]interface{}{props},
 		&returns,
 	)

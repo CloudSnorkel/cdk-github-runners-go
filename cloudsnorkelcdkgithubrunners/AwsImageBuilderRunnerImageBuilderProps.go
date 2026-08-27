@@ -7,6 +7,14 @@ import (
 
 // Experimental.
 type AwsImageBuilderRunnerImageBuilderProps struct {
+	// Additional tags to apply to the AMI built by this builder.
+	//
+	// These additional tags are set on top of `Name`, `GitHubRunners:Stack`, and `GitHubRunners:Builder`.
+	// You may override the built-in tags.
+	// Default: no additional tags.
+	//
+	// Experimental.
+	AmiTags *map[string]*string `field:"optional" json:"amiTags" yaml:"amiTags"`
 	// Options for fast launch.
 	//
 	// This is only supported for Windows AMIs.

@@ -402,6 +402,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "failedImageBuildsTopic", GoMethod: "FailedImageBuildsTopic"},
 			_jsii_.MemberMethod{JsiiMethod: "metricFailed", GoMethod: "MetricFailed"},
 			_jsii_.MemberMethod{JsiiMethod: "metricJobCompleted", GoMethod: "MetricJobCompleted"},
+			_jsii_.MemberMethod{JsiiMethod: "metricStolenRunners", GoMethod: "MetricStolenRunners"},
 			_jsii_.MemberMethod{JsiiMethod: "metricSucceeded", GoMethod: "MetricSucceeded"},
 			_jsii_.MemberMethod{JsiiMethod: "metricTime", GoMethod: "MetricTime"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
