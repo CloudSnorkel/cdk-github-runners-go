@@ -11,6 +11,9 @@ type AwsImageBuilderRunnerImageBuilderProps struct {
 	//
 	// These additional tags are set on top of `Name`, `GitHubRunners:Stack`, and `GitHubRunners:Builder`.
 	// You may override the built-in tags.
+	//
+	// Overriding `GitHubRunners:Stack` will stop old AMIs from being deleted, as the image cleaner is only allowed to touch AMIs tagged with the name
+	// of the stack it lives in. You will have to delete those AMIs yourself.
 	// Default: no additional tags.
 	//
 	// Experimental.
