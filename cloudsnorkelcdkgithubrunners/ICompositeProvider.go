@@ -3,41 +3,19 @@ package cloudsnorkelcdkgithubrunners
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
 
-// Interface for composite runner providers that interact with multiple sub-providers.
+// Interface for composite runner providers that combine multiple sub-providers.
 //
 // Unlike IRunnerProvider, composite providers do not have connections, grant capabilities,
-// log groups, or retryable errors as they delegate to their sub-providers.
+// or log groups as they delegate to their sub-providers.
+//
+// Note that this interface cannot be implemented by external code. Use {@link CompositeProvider } factory methods.
 // Experimental.
 type ICompositeProvider interface {
 	constructs.IConstruct
-	// Generate step function tasks that execute the runner.
-	//
-	// If the provider has multiple attempts, each attempt should be followed by a `Catch` that deletes the failed runner. Use
-	// {@link IRunnerRuntimeParameters.addCatchAndCleanUp} to add the catch.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Experimental.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Experimental.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
-	// Return statuses of all sub-providers to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker images or AMIs.
-	// Experimental.
-	Status(statusFunctionRole awsiam.IGrantable) *[]IRunnerProviderStatus
-	// Merged constants from all sub-providers for the single orchestrator `$.consts` pass. Duplicate keys across sub-providers must be avoided.
-	// Experimental.
-	StepFunctionConstants() *map[string]*string
 	// GitHub Actions labels used for this provider.
 	//
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
@@ -55,62 +33,6 @@ type ICompositeProvider interface {
 // The jsii proxy for ICompositeProvider
 type jsiiProxy_ICompositeProvider struct {
 	internal.Type__constructsIConstruct
-}
-
-func (i *jsiiProxy_ICompositeProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := i.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		i,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (i *jsiiProxy_ICompositeProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := i.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		i,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
-func (i *jsiiProxy_ICompositeProvider) Status(statusFunctionRole awsiam.IGrantable) *[]IRunnerProviderStatus {
-	if err := i.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns *[]IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		i,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (i *jsiiProxy_ICompositeProvider) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		i,
-		"stepFunctionConstants",
-		nil, // no parameters
-		&returns,
-	)
-
-	return returns
 }
 
 func (j *jsiiProxy_ICompositeProvider) Labels() *[]*string {

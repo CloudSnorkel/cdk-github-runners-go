@@ -4,19 +4,7 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (c *jsiiProxy_CodeBuildRunnerProvider) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
-	return nil
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
-	return nil
-}
-
 func (c *jsiiProxy_CodeBuildRunnerProvider) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
-	return nil
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
 	return nil
 }
 

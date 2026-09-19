@@ -137,18 +137,13 @@ func init() {
 		reflect.TypeOf((*CodeBuildRunner)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "project", GoGetter: "Project"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -167,18 +162,13 @@ func init() {
 		reflect.TypeOf((*CodeBuildRunnerProvider)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "project", GoGetter: "Project"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -186,6 +176,7 @@ func init() {
 			j := jsiiProxy_CodeBuildRunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
+			_jsii_.InitJsiiProxy(&j.Type__constructsIConstruct)
 			return &j
 		},
 	)
@@ -242,16 +233,11 @@ func init() {
 		reflect.TypeOf((*Ec2Runner)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -266,16 +252,11 @@ func init() {
 		reflect.TypeOf((*Ec2RunnerProvider)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -283,6 +264,7 @@ func init() {
 			j := jsiiProxy_Ec2RunnerProvider{}
 			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
+			_jsii_.InitJsiiProxy(&j.Type__constructsIConstruct)
 			return &j
 		},
 	)
@@ -296,16 +278,11 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "capacityProvider", GoGetter: "CapacityProvider"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -328,18 +305,13 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "cluster", GoGetter: "Cluster"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "container", GoGetter: "Container"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberProperty{JsiiProperty: "spot", GoGetter: "Spot"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberProperty{JsiiProperty: "subnetSelection", GoGetter: "SubnetSelection"},
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
@@ -360,18 +332,13 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "cluster", GoGetter: "Cluster"},
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "container", GoGetter: "Container"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
 			_jsii_.MemberProperty{JsiiProperty: "spot", GoGetter: "Spot"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberProperty{JsiiProperty: "subnetSelection", GoGetter: "SubnetSelection"},
 			_jsii_.MemberProperty{JsiiProperty: "task", GoGetter: "Task"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
@@ -427,13 +394,9 @@ func init() {
 		"@cloudsnorkel/cdk-github-runners.ICompositeProvider",
 		reflect.TypeOf((*ICompositeProvider)(nil)).Elem(),
 		[]_jsii_.Member{
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberProperty{JsiiProperty: "providers", GoGetter: "Providers"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
@@ -500,15 +463,10 @@ func init() {
 		reflect.TypeOf((*IRunnerProvider)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
 		func() interface{} {
@@ -535,23 +493,6 @@ func init() {
 		},
 		func() interface{} {
 			return &jsiiProxy_IRunnerProviderStatus{}
-		},
-	)
-	_jsii_.RegisterInterface(
-		"@cloudsnorkel/cdk-github-runners.IRunnerRuntimeParameters",
-		reflect.TypeOf((*IRunnerRuntimeParameters)(nil)).Elem(),
-		[]_jsii_.Member{
-			_jsii_.MemberMethod{JsiiMethod: "addCatchAndCleanUp", GoMethod: "AddCatchAndCleanUp"},
-			_jsii_.MemberProperty{JsiiProperty: "githubDomainPath", GoGetter: "GithubDomainPath"},
-			_jsii_.MemberProperty{JsiiProperty: "labelsPath", GoGetter: "LabelsPath"},
-			_jsii_.MemberProperty{JsiiProperty: "ownerPath", GoGetter: "OwnerPath"},
-			_jsii_.MemberProperty{JsiiProperty: "registrationUrl", GoGetter: "RegistrationUrl"},
-			_jsii_.MemberProperty{JsiiProperty: "repoPath", GoGetter: "RepoPath"},
-			_jsii_.MemberProperty{JsiiProperty: "runnerNamePath", GoGetter: "RunnerNamePath"},
-			_jsii_.MemberProperty{JsiiProperty: "runnerTokenPath", GoGetter: "RunnerTokenPath"},
-		},
-		func() interface{} {
-			return &jsiiProxy_IRunnerRuntimeParameters{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -603,17 +544,12 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "function", GoGetter: "Function"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},
@@ -629,17 +565,12 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
 			_jsii_.MemberProperty{JsiiProperty: "function", GoGetter: "Function"},
-			_jsii_.MemberMethod{JsiiMethod: "getStepFunctionTask", GoMethod: "GetStepFunctionTask"},
 			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
-			_jsii_.MemberMethod{JsiiMethod: "grantStateMachine", GoMethod: "GrantStateMachine"},
 			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
 			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
 			_jsii_.MemberMethod{JsiiMethod: "labelsFromProperties", GoMethod: "LabelsFromProperties"},
 			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
-			_jsii_.MemberProperty{JsiiProperty: "retryableErrors", GoGetter: "RetryableErrors"},
-			_jsii_.MemberMethod{JsiiMethod: "status", GoMethod: "Status"},
-			_jsii_.MemberMethod{JsiiMethod: "stepFunctionConstants", GoMethod: "StepFunctionConstants"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
 		},

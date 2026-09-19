@@ -92,8 +92,8 @@ type GitHubRunnersProps struct {
 	//
 	// GitHub jobs time out after not being able to get a runner for 24 hours. You should not retry for more than 24 hours.
 	//
-	// Total time spent waiting can be calculated with interval * (backoffRate ^ maxAttempts) / (backoffRate - 1).
-	// Default: retry 23 times up to about 24 hours.
+	// Retries use full jitter, so total time spent waiting is about half the sum of min(interval * backoffRate ^ attempt, maxDelay) over all attempts.
+	// Default: retry 210 times over a bit more than 24 hours.
 	//
 	// Experimental.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`

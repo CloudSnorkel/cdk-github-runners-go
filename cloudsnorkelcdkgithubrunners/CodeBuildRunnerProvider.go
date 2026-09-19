@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
@@ -22,6 +21,7 @@ import (
 type CodeBuildRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
+	constructs.IConstruct
 	// The network connections associated with this resource.
 	// Experimental.
 	Connections() awsec2.Connections
@@ -47,30 +47,8 @@ type CodeBuildRunnerProvider interface {
 	// CodeBuild project hosting the runner.
 	// Experimental.
 	Project() awscodebuild.Project
-	// List of step functions errors that should be retried.
-	// Experimental.
-	RetryableErrors() *[]*string
-	// Generate step function task(s) to start a new runner.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Experimental.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Experimental.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
-	// Return status of the runner provider to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Experimental.
-	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
-	// Override to inject static strings into `$.consts` on the orchestrator state machine.
-	// Experimental.
-	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -90,6 +68,7 @@ type CodeBuildRunnerProvider interface {
 type jsiiProxy_CodeBuildRunnerProvider struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IRunnerProvider
+	internal.Type__constructsIConstruct
 }
 
 func (j *jsiiProxy_CodeBuildRunnerProvider) Connections() awsec2.Connections {
@@ -157,16 +136,6 @@ func (j *jsiiProxy_CodeBuildRunnerProvider) Project() awscodebuild.Project {
 	_jsii_.Get(
 		j,
 		"project",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunnerProvider) RetryableErrors() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -295,33 +264,6 @@ func CodeBuildRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunnerProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		c,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := c.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		c,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
 func (c *jsiiProxy_CodeBuildRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -332,35 +274,6 @@ func (c *jsiiProxy_CodeBuildRunnerProvider) LabelsFromProperties(defaultLabel *s
 		c,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := c.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		c,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		c,
-		"stepFunctionConstants",
-		nil, // no parameters
 		&returns,
 	)
 

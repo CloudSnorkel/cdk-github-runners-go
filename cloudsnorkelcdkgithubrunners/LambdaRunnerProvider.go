@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/CloudSnorkel/cdk-github-runners-go/cloudsnorkelcdkgithubrunners/internal"
 )
@@ -47,30 +46,8 @@ type LambdaRunnerProvider interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
-	// List of step functions errors that should be retried.
-	// Experimental.
-	RetryableErrors() *[]*string
-	// Generate step function task(s) to start a new runner.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Experimental.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Experimental.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Experimental.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
-	// Return status of the runner provider to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Experimental.
-	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
-	// Override to inject static strings into `$.consts` on the orchestrator state machine.
-	// Experimental.
-	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -157,16 +134,6 @@ func (j *jsiiProxy_LambdaRunnerProvider) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_LambdaRunnerProvider) RetryableErrors() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -295,33 +262,6 @@ func LambdaRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (l *jsiiProxy_LambdaRunnerProvider) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := l.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		l,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (l *jsiiProxy_LambdaRunnerProvider) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := l.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		l,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
 func (l *jsiiProxy_LambdaRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := l.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -332,35 +272,6 @@ func (l *jsiiProxy_LambdaRunnerProvider) LabelsFromProperties(defaultLabel *stri
 		l,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
-		&returns,
-	)
-
-	return returns
-}
-
-func (l *jsiiProxy_LambdaRunnerProvider) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := l.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		l,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (l *jsiiProxy_LambdaRunnerProvider) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		l,
-		"stepFunctionConstants",
-		nil, // no parameters
 		&returns,
 	)
 

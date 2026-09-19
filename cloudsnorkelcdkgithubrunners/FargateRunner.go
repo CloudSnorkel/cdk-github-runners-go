@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -46,9 +45,6 @@ type FargateRunner interface {
 	// The tree node.
 	// Deprecated: use {@link FargateRunnerProvider }.
 	Node() constructs.Node
-	// List of step functions errors that should be retried.
-	// Deprecated: use {@link FargateRunnerProvider }.
-	RetryableErrors() *[]*string
 	// Use spot pricing for Fargate tasks.
 	// Deprecated: This field is internal and should not be accessed directly.
 	Spot() *bool
@@ -61,27 +57,8 @@ type FargateRunner interface {
 	// VPC used for hosting the runner task.
 	// Deprecated: This field is internal and should not be accessed directly.
 	Vpc() awsec2.IVpc
-	// Generate step function task(s) to start a new runner.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link FargateRunnerProvider }.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link FargateRunnerProvider }.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Deprecated: use {@link FargateRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
-	// Return status of the runner provider to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link FargateRunnerProvider }.
-	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
-	// Override to inject static strings into `$.consts` on the orchestrator state machine.
-	// Deprecated: use {@link FargateRunnerProvider }.
-	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link FargateRunnerProvider }.
 	ToString() *string
@@ -187,16 +164,6 @@ func (j *jsiiProxy_FargateRunner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunner) RetryableErrors() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -364,33 +331,6 @@ func FargateRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (f *jsiiProxy_FargateRunner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := f.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		f,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (f *jsiiProxy_FargateRunner) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := f.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		f,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
 func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := f.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -401,35 +341,6 @@ func (f *jsiiProxy_FargateRunner) LabelsFromProperties(defaultLabel *string, pro
 		f,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
-		&returns,
-	)
-
-	return returns
-}
-
-func (f *jsiiProxy_FargateRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := f.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		f,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (f *jsiiProxy_FargateRunner) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		f,
-		"stepFunctionConstants",
-		nil, // no parameters
 		&returns,
 	)
 

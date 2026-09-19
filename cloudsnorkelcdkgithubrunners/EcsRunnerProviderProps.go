@@ -29,11 +29,11 @@ type EcsRunnerProviderProps struct {
 	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
 	// Assign public IP to the runner task.
+	// Default: - ignored.
 	//
-	// Make sure the task will have access to GitHub. A public IP might be required unless you have NAT gateway.
-	// Default: true.
-	//
-	// Experimental.
+	// Deprecated: ECS runner tasks use bridge networking, so they share the host instance's network interface and
+	// cannot get a public IP of their own. This property is ignored. Give the cluster instances internet access
+	// instead (a public subnet or a NAT gateway), and open an issue if you need `awsvpc` networking for ECS.
 	AssignPublicIp *bool `field:"optional" json:"assignPublicIp" yaml:"assignPublicIp"`
 	// Existing capacity provider to use.
 	//

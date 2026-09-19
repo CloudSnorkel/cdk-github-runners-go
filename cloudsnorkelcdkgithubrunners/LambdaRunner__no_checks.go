@@ -4,19 +4,7 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (l *jsiiProxy_LambdaRunner) validateGetStepFunctionTaskParameters(parameters IRunnerRuntimeParameters) error {
-	return nil
-}
-
-func (l *jsiiProxy_LambdaRunner) validateGrantStateMachineParameters(stateMachineRole awsiam.IGrantable) error {
-	return nil
-}
-
 func (l *jsiiProxy_LambdaRunner) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
-	return nil
-}
-
-func (l *jsiiProxy_LambdaRunner) validateStatusParameters(statusFunctionRole awsiam.IGrantable) error {
 	return nil
 }
 

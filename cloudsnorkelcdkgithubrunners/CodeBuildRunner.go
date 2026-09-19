@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -40,30 +39,8 @@ type CodeBuildRunner interface {
 	// CodeBuild project hosting the runner.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	Project() awscodebuild.Project
-	// List of step functions errors that should be retried.
-	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	RetryableErrors() *[]*string
-	// Generate step function task(s) to start a new runner.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
-	// Return status of the runner provider to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
-	// Override to inject static strings into `$.consts` on the orchestrator state machine.
-	// Deprecated: use {@link CodeBuildRunnerProvider }.
-	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link CodeBuildRunnerProvider }.
 	ToString() *string
@@ -149,16 +126,6 @@ func (j *jsiiProxy_CodeBuildRunner) Project() awscodebuild.Project {
 	_jsii_.Get(
 		j,
 		"project",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunner) RetryableErrors() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -287,33 +254,6 @@ func CodeBuildRunner_LINUX_X64_DOCKERFILE_PATH() *string {
 	return returns
 }
 
-func (c *jsiiProxy_CodeBuildRunner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := c.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		c,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunner) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := c.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		c,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
 func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -324,35 +264,6 @@ func (c *jsiiProxy_CodeBuildRunner) LabelsFromProperties(defaultLabel *string, p
 		c,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := c.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		c,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunner) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		c,
-		"stepFunctionConstants",
-		nil, // no parameters
 		&returns,
 	)
 

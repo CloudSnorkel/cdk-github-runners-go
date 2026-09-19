@@ -7,7 +7,6 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
-	"github.com/aws/aws-cdk-go/awscdk/v2/awsstepfunctions"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -31,30 +30,8 @@ type Ec2Runner interface {
 	// The tree node.
 	// Deprecated: use {@link Ec2RunnerProvider }.
 	Node() constructs.Node
-	// List of step functions errors that should be retried.
-	// Deprecated: use {@link Ec2RunnerProvider }.
-	RetryableErrors() *[]*string
-	// Generate step function task(s) to start a new runner.
-	//
-	// Called by GithubRunners and shouldn't be called manually.
-	// Deprecated: use {@link Ec2RunnerProvider }.
-	GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable
-	// An optional method that modifies the role of the state machine after all the tasks have been generated.
-	//
-	// This can be used to add additional policy
-	// statements to the state machine role that are not automatically added by the task returned from {@link getStepFunctionTask}.
-	// Deprecated: use {@link Ec2RunnerProvider }.
-	GrantStateMachine(stateMachineRole awsiam.IGrantable)
 	// Deprecated: use {@link Ec2RunnerProvider }.
 	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
-	// Return status of the runner provider to be used in the main status function.
-	//
-	// Also gives the status function any needed permissions to query the Docker image or AMI.
-	// Deprecated: use {@link Ec2RunnerProvider }.
-	Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus
-	// Override to inject static strings into `$.consts` on the orchestrator state machine.
-	// Deprecated: use {@link Ec2RunnerProvider }.
-	StepFunctionConstants() *map[string]*string
 	// Returns a string representation of this construct.
 	// Deprecated: use {@link Ec2RunnerProvider }.
 	ToString() *string
@@ -120,16 +97,6 @@ func (j *jsiiProxy_Ec2Runner) Node() constructs.Node {
 	_jsii_.Get(
 		j,
 		"node",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_Ec2Runner) RetryableErrors() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"retryableErrors",
 		&returns,
 	)
 	return returns
@@ -237,33 +204,6 @@ func Ec2Runner_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func (e *jsiiProxy_Ec2Runner) GetStepFunctionTask(parameters IRunnerRuntimeParameters) awsstepfunctions.IChainable {
-	if err := e.validateGetStepFunctionTaskParameters(parameters); err != nil {
-		panic(err)
-	}
-	var returns awsstepfunctions.IChainable
-
-	_jsii_.Invoke(
-		e,
-		"getStepFunctionTask",
-		[]interface{}{parameters},
-		&returns,
-	)
-
-	return returns
-}
-
-func (e *jsiiProxy_Ec2Runner) GrantStateMachine(stateMachineRole awsiam.IGrantable) {
-	if err := e.validateGrantStateMachineParameters(stateMachineRole); err != nil {
-		panic(err)
-	}
-	_jsii_.InvokeVoid(
-		e,
-		"grantStateMachine",
-		[]interface{}{stateMachineRole},
-	)
-}
-
 func (e *jsiiProxy_Ec2Runner) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
 	if err := e.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
 		panic(err)
@@ -274,35 +214,6 @@ func (e *jsiiProxy_Ec2Runner) LabelsFromProperties(defaultLabel *string, propsLa
 		e,
 		"labelsFromProperties",
 		[]interface{}{defaultLabel, propsLabel, propsLabels},
-		&returns,
-	)
-
-	return returns
-}
-
-func (e *jsiiProxy_Ec2Runner) Status(statusFunctionRole awsiam.IGrantable) IRunnerProviderStatus {
-	if err := e.validateStatusParameters(statusFunctionRole); err != nil {
-		panic(err)
-	}
-	var returns IRunnerProviderStatus
-
-	_jsii_.Invoke(
-		e,
-		"status",
-		[]interface{}{statusFunctionRole},
-		&returns,
-	)
-
-	return returns
-}
-
-func (e *jsiiProxy_Ec2Runner) StepFunctionConstants() *map[string]*string {
-	var returns *map[string]*string
-
-	_jsii_.Invoke(
-		e,
-		"stepFunctionConstants",
-		nil, // no parameters
 		&returns,
 	)
 
