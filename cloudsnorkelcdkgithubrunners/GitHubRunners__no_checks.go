@@ -12,6 +12,10 @@ func (g *jsiiProxy_GitHubRunners) validateMetricJobCompletedParameters(props *aw
 	return nil
 }
 
+func (g *jsiiProxy_GitHubRunners) validateMetricLambdaErrorsParameters(props *awscloudwatch.MathExpressionOptions) error {
+	return nil
+}
+
 func (g *jsiiProxy_GitHubRunners) validateMetricStolenRunnersParameters(props *awscloudwatch.MetricOptions) error {
 	return nil
 }

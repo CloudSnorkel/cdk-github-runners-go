@@ -592,7 +592,9 @@ If you have more to share, please open a PR adding examples to the `examples` fo
 
 ## Troubleshooting
 
-Runners are started in response to a webhook coming in from GitHub. If there are any issues starting the runner like missing capacity or transient API issues, the provider will keep retrying for 24 hours. Configuration issue related errors like pointing to a missing AMI will not be retried. GitHub itself will cancel the job if it can't find a runner for 24 hours. If your jobs don't start, follow the steps below to examine all parts of this workflow.
+Runners are started in response to a webhook coming in from GitHub. If there are any issues starting the runner like missing capacity or transient API issues, the provider will keep retrying for 24 hours. GitHub itself will cancel the job if it can't find a runner for 24 hours. If your jobs don't start, follow the steps below to examine all parts of this workflow.
+
+Configuration problems that we can detect up-front fail the orchestrator with a `RunnerConfigurationError` before any instance, build, or task is started. The error message says what needs to be fixed. These are still retried like any other error, so a configuration fixed within the 24 hours GitHub keeps the job queued still gets a runner and the job still runs.
 
 1. Always start with the status function, make sure no errors are reported, and confirm all status codes are OK
 2. Make sure `runs-on` in the workflow matches the expected labels set in the runner provider
@@ -620,16 +622,21 @@ aws --region us-east-1 lambda invoke --function-name status-XYZ123 status.json
 
 ## Monitoring
 
-There are two important ways to monitor your runners:
+There are three important ways to monitor your runners:
 
 1. Make sure runners don't fail to start. When that happens, jobs may sit and wait. Use `GitHubRunners.metricFailed()` to get a metric for the number of failed runner starts. You should use this metric to trigger an alarm.
-2. Make sure runner images don't fail to build. Failed runner image builds mean you will get stuck with out-of-date software on your runners. It may lead to security vulnerabilities, or it may lead to slower runner start-ups as the runner software itself needs to be updated. Use `GitHubRunners.failedImageBuildsTopic()` to get SNS topic that gets notified of failed runner image builds. You should subscribe to this topic.
+2. Make sure our management functions don't fail. When that happens, webhooks may be dropped and jobs may never get a runner. Use `GitHubRunners.metricLambdaErrors()` to get a metric for the number of failed invocations across all management Lambda functions. You should use this metric to trigger an alarm.
+3. Make sure runner images don't fail to build. Failed runner image builds mean you will get stuck with out-of-date software on your runners. It may lead to security vulnerabilities, or it may lead to slower runner start-ups as the runner software itself needs to be updated. Use `GitHubRunners.failedImageBuildsTopic()` to get SNS topic that gets notified of failed runner image builds. You should subscribe to this topic.
 
 Other useful metrics to track:
 
 1. Use `GitHubRunners.metricJobCompleted()` to get a metric for the number of completed jobs broken down by labels and job success.
 2. Use `GitHubRunners.metricTime()` to get a metric for the total time a runner is running. This includes the overhead of starting the runner.
 3. Use `GitHubRunners.metricStolenRunners()` to get a metric for number of runners detected as stolen by another job. Anything over zero can indicate a misconfiguration or GitHub webhook issues.
+
+Use `GitHubRunners.createDashboard()` to get a CloudWatch dashboard with all of these metrics in one place. It shows
+completed jobs by status, failed jobs by runner label, runners that failed to start, runner time, webhook activity, and
+recent errors from the logs.
 
 ## Known Issues
 

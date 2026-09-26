@@ -137,7 +137,7 @@ type GitHubRunnersProps struct {
 	// * SQS
 	// * Step Functions
 	// * CloudFormation (status function only)
-	// * EC2 (status function only)
+	// * EC2
 	// * ECR (status function only).
 	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`

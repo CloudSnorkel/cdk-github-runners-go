@@ -73,6 +73,24 @@ type GitHubRunners interface {
 	// Secrets for GitHub communication including webhook secret and runner authentication.
 	// Experimental.
 	Secrets() Secrets
+	// Creates a CloudWatch dashboard with the metrics you need to know if your runners are healthy.
+	//
+	// It answers the questions you're most likely to ask:
+	//
+	// * Are jobs running and passing? See "Jobs completed by status".
+	// * Which runner is broken? See "Failed jobs by runner label".
+	// * Are jobs stuck because runners fail to start? See "Runner executions".
+	// * How long do runners take (and therefore cost)? See "Runner time".
+	// * Is GitHub reaching the webhook at all? See "Webhook".
+	// * Is any of our code failing? See "Lambda errors".
+	// * What exactly went wrong? See "Recent errors".
+	//
+	// **WARNING:** this method calls {@link metricJobCompleted} and {@link metricStolenRunners} which create metric filters.
+	// These resources may incur cost.
+	//
+	// This dashboard is very basic. Pull requests and issues are welcome to improve it.
+	// Experimental.
+	CreateDashboard(name *string) awscloudwatch.Dashboard
 	// Creates CloudWatch Logs Insights saved queries that can be used to debug issues with the runners.
 	//
 	// * "Webhook errors" helps diagnose configuration issues with GitHub integration
@@ -105,6 +123,18 @@ type GitHubRunners interface {
 	// **WARNING:** this method creates a metric filter for each provider. Each metric has a status dimension with six possible values. These resources may incur cost.
 	// Experimental.
 	MetricJobCompleted(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
+	// Metric for the number of failed invocations of the management Lambda functions.
+	//
+	// These are the functions that handle webhooks, retrieve runner tokens, stop idle runners, replace stolen runners, etc. Anything over zero means
+	// jobs may not have gotten a runner. You should use this metric to trigger an alarm.
+	//
+	// Only unhandled errors are counted here, as reported by Lambda itself. Errors that are handled and logged, like a webhook with a bad signature,
+	// are not failed invocations. Use the "Webhook errors" and "Orchestration errors" queries created by {@link createLogsInsightsQueries} to find
+	// those.
+	//
+	// Management functions created after this method is called are not included. Call it last if you use warm runners.
+	// Experimental.
+	MetricLambdaErrors(props *awscloudwatch.MathExpressionOptions) awscloudwatch.MathExpression
 	// Metric for the number of runners that were stolen by a job that shouldn't have been assigned to them.
 	//
 	// A high number here means your runners are shared with jobs you didn't mean to serve. Use the "Stolen runners"
@@ -269,6 +299,19 @@ func GitHubRunners_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
+func (g *jsiiProxy_GitHubRunners) CreateDashboard(name *string) awscloudwatch.Dashboard {
+	var returns awscloudwatch.Dashboard
+
+	_jsii_.Invoke(
+		g,
+		"createDashboard",
+		[]interface{}{name},
+		&returns,
+	)
+
+	return returns
+}
+
 func (g *jsiiProxy_GitHubRunners) CreateLogsInsightsQueries(prefix *string) {
 	_jsii_.InvokeVoid(
 		g,
@@ -315,6 +358,22 @@ func (g *jsiiProxy_GitHubRunners) MetricJobCompleted(props *awscloudwatch.Metric
 	_jsii_.Invoke(
 		g,
 		"metricJobCompleted",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricLambdaErrors(props *awscloudwatch.MathExpressionOptions) awscloudwatch.MathExpression {
+	if err := g.validateMetricLambdaErrorsParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.MathExpression
+
+	_jsii_.Invoke(
+		g,
+		"metricLambdaErrors",
 		[]interface{}{props},
 		&returns,
 	)

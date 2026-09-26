@@ -177,6 +177,14 @@ type EcsRunnerProviderProps struct {
 	//
 	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
+	// Additional tags to apply to launched runner tasks.
+	//
+	// These additional tags are set on top of `Name`, `GitHubRunners:Provider`, `GitHubRunners:Repo`, and `GitHubRunners:Labels`.
+	// You may not override tags with the `GitHubRunners:` prefix.
+	// Default: no additional tags.
+	//
+	// Experimental.
+	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// VPC to launch the runners in.
 	// Default: default account VPC.
 	//
