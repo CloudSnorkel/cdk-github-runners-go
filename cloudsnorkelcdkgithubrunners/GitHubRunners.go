@@ -80,12 +80,14 @@ type GitHubRunners interface {
 	// * Are jobs running and passing? See "Jobs completed by status".
 	// * Which runner is broken? See "Failed jobs by runner label".
 	// * Are jobs stuck because runners fail to start? See "Runner executions".
+	// * Why were runners stopped before getting a job? See "Stopped runners by reason".
+	// * Why are runners failing to start? See "Recent failed attempts".
 	// * How long do runners take (and therefore cost)? See "Runner time".
 	// * Is GitHub reaching the webhook at all? See "Webhook".
 	// * Is any of our code failing? See "Lambda errors".
 	// * What exactly went wrong? See "Recent errors".
 	//
-	// **WARNING:** this method calls {@link metricJobCompleted} and {@link metricStolenRunners} which create metric filters.
+	// **WARNING:** this method calls {@link metricJobCompleted}, {@link metricStolenRunners} and {@link metricStoppedRunners} which create metric filters.
 	// These resources may incur cost.
 	//
 	// This dashboard is very basic. Pull requests and issues are welcome to improve it.
@@ -150,6 +152,20 @@ type GitHubRunners interface {
 	// **WARNING:** this method creates a metric filter. This resource may incur cost.
 	// Experimental.
 	MetricStolenRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
+	// Metric for the number of runners we stopped on purpose before they got a job.
+	//
+	// These step function executions end up as aborted and not failed, so they don't show up in {@link metricFailed}.
+	//
+	// This metric has one dimension, `Reason`, which is the error the step function was stopped with:
+	//  * `IdleRunner`: the runner was idle for longer than its idle timeout and was reaped. This is usually a runner whose job was taken by
+	//    another runner, or a job that was canceled before it started.
+	//  * `StaleWarmRunner`: a warm runner was replaced because its configuration changed.
+	//  * `WarmRunnerExpired`: a warm runner reached the end of its duration.
+	//  * `WarmRunnerBadDeadline`: a warm runner had an invalid deadline and was stopped.
+	//
+	// **WARNING:** this method creates a metric filter. This resource may incur cost.
+	// Experimental.
+	MetricStoppedRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for successful executions.
 	//
 	// A successful execution doesn't always mean a runner was started. It can be successful even without any label matches.
@@ -390,6 +406,22 @@ func (g *jsiiProxy_GitHubRunners) MetricStolenRunners(props *awscloudwatch.Metri
 	_jsii_.Invoke(
 		g,
 		"metricStolenRunners",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricStoppedRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric {
+	if err := g.validateMetricStoppedRunnersParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricStoppedRunners",
 		[]interface{}{props},
 		&returns,
 	)

@@ -372,6 +372,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "metricJobCompleted", GoMethod: "MetricJobCompleted"},
 			_jsii_.MemberMethod{JsiiMethod: "metricLambdaErrors", GoMethod: "MetricLambdaErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "metricStolenRunners", GoMethod: "MetricStolenRunners"},
+			_jsii_.MemberMethod{JsiiMethod: "metricStoppedRunners", GoMethod: "MetricStoppedRunners"},
 			_jsii_.MemberMethod{JsiiMethod: "metricSucceeded", GoMethod: "MetricSucceeded"},
 			_jsii_.MemberMethod{JsiiMethod: "metricTime", GoMethod: "MetricTime"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},

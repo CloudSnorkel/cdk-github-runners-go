@@ -20,6 +20,10 @@ func (g *jsiiProxy_GitHubRunners) validateMetricStolenRunnersParameters(props *a
 	return nil
 }
 
+func (g *jsiiProxy_GitHubRunners) validateMetricStoppedRunnersParameters(props *awscloudwatch.MetricOptions) error {
+	return nil
+}
+
 func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricOptions) error {
 	return nil
 }

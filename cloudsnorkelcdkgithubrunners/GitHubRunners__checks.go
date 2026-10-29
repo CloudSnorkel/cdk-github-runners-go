@@ -43,6 +43,14 @@ func (g *jsiiProxy_GitHubRunners) validateMetricStolenRunnersParameters(props *a
 	return nil
 }
 
+func (g *jsiiProxy_GitHubRunners) validateMetricStoppedRunnersParameters(props *awscloudwatch.MetricOptions) error {
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (g *jsiiProxy_GitHubRunners) validateMetricSucceededParameters(props *awscloudwatch.MetricOptions) error {
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
 		return err
