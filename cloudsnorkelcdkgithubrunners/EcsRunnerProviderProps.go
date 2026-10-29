@@ -38,11 +38,19 @@ type EcsRunnerProviderProps struct {
 	// Existing capacity provider to use.
 	//
 	// Make sure the AMI used by the capacity provider is compatible with ECS.
+	//
+	// Runner containers use bridge networking and share the instance with other jobs. Its launch template must require IMDSv2 and set the
+	// metadata hop limit to 1 (`requireImdsv2: true` and `httpPutResponseHopLimit: 1`), or jobs can take the instance role. A warning is
+	// added when we can't confirm both.
 	// Default: new capacity provider.
 	//
 	// Experimental.
 	CapacityProvider awsecs.AsgCapacityProvider `field:"optional" json:"capacityProvider" yaml:"capacityProvider"`
 	// Existing ECS cluster to use.
+	//
+	// Jobs from all providers using the same cluster can share instances. Only share a cluster between providers whose jobs are equally trusted.
+	// See: https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+	//
 	// Default: a new cluster.
 	//
 	// Experimental.
@@ -54,10 +62,14 @@ type EcsRunnerProviderProps struct {
 	//
 	// Experimental.
 	Cpu *float64 `field:"optional" json:"cpu" yaml:"cpu"`
-	// Support building and running Docker images by enabling Docker-in-Docker (dind) and the required CodeBuild privileged mode.
+	// Support building and running Docker images by enabling Docker-in-Docker (dind) and the required privileged mode for the runner container.
 	//
-	// Disabling this can
-	// speed up provisioning of CodeBuild runners. If you don't intend on running or building Docker images, disable this for faster start-up times.
+	// A job running in a privileged container can take over the instance, access other jobs running on it, and affect jobs that run on it
+	// later. All jobs that can run on the same cluster should be equally trusted. Disable this if your jobs don't need Docker.
+	//
+	// Disabling Docker-in-Docker can also speed up runner provisioning as the runner doesn't have to wait for Docker to boot.
+	// See: https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+	//
 	// Default: true.
 	//
 	// Experimental.

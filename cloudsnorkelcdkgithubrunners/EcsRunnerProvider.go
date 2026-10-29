@@ -18,6 +18,9 @@ import (
 // group to scale down to zero during the night and scale up during work hours. This way you can still save money, but have to wait less for
 // infrastructure to spin up.
 //
+// Jobs share instances, and by default run in privileged containers on Linux that can take over the instance. All jobs that can run on the same
+// cluster should be equally trusted. See https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+//
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
 // Experimental.
 type EcsRunnerProvider interface {

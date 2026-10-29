@@ -9,12 +9,12 @@ import (
 // Experimental.
 type LogOptions struct {
 	// Determines whether execution data is included in your log.
-	// Default: false.
+	// Default: true.
 	//
 	// Experimental.
 	IncludeExecutionData *bool `field:"optional" json:"includeExecutionData" yaml:"includeExecutionData"`
 	// Defines which category of execution history events are logged.
-	// Default: ERROR.
+	// Default: ALL.
 	//
 	// Experimental.
 	Level awsstepfunctions.LogLevel `field:"optional" json:"level" yaml:"level"`
