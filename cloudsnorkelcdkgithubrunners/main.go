@@ -370,6 +370,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "failedImageBuildsTopic", GoMethod: "FailedImageBuildsTopic"},
 			_jsii_.MemberMethod{JsiiMethod: "metricFailed", GoMethod: "MetricFailed"},
 			_jsii_.MemberMethod{JsiiMethod: "metricJobCompleted", GoMethod: "MetricJobCompleted"},
+			_jsii_.MemberMethod{JsiiMethod: "metricJobsMatchingMultipleProviders", GoMethod: "MetricJobsMatchingMultipleProviders"},
 			_jsii_.MemberMethod{JsiiMethod: "metricLambdaErrors", GoMethod: "MetricLambdaErrors"},
 			_jsii_.MemberMethod{JsiiMethod: "metricStolenRunners", GoMethod: "MetricStolenRunners"},
 			_jsii_.MemberMethod{JsiiMethod: "metricStoppedRunners", GoMethod: "MetricStoppedRunners"},

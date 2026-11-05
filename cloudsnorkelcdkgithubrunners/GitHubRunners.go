@@ -75,20 +75,16 @@ type GitHubRunners interface {
 	Secrets() Secrets
 	// Creates a CloudWatch dashboard with the metrics you need to know if your runners are healthy.
 	//
-	// It answers the questions you're most likely to ask:
+	// It's split into sections, each with a short explanation of what its numbers mean and which ones to watch:
 	//
-	// * Are jobs running and passing? See "Jobs completed by status".
-	// * Which runner is broken? See "Failed jobs by runner label".
-	// * Are jobs stuck because runners fail to start? See "Runner executions".
-	// * Why were runners stopped before getting a job? See "Stopped runners by reason".
-	// * Why are runners failing to start? See "Recent failed attempts".
-	// * How long do runners take (and therefore cost)? See "Runner time".
-	// * Is GitHub reaching the webhook at all? See "Webhook".
-	// * Is any of our code failing? See "Lambda errors".
-	// * What exactly went wrong? See "Recent errors".
+	// * **Jobs**: are jobs running and passing, and which runner is failing them?
+	// * **Runners**: do runners start, how long do they take (and therefore cost), and why do they fail to start?
+	// * **Runner assignment**: are runners taken by jobs they weren't started for, do jobs match more than one provider, and why
+	//   were runners stopped before getting a job?
+	// * **Management functions (orchestration)**: is GitHub reaching the webhook, and is any of our code failing?
 	//
-	// **WARNING:** this method calls {@link metricJobCompleted}, {@link metricStolenRunners} and {@link metricStoppedRunners} which create metric filters.
-	// These resources may incur cost.
+	// **WARNING:** this method calls {@link metricJobCompleted}, {@link metricStolenRunners}, {@link metricStoppedRunners} and
+	// {@link metricJobsMatchingMultipleProviders} which create metric filters. These resources may incur cost.
 	//
 	// This dashboard is very basic. Pull requests and issues are welcome to improve it.
 	// Experimental.
@@ -99,6 +95,7 @@ type GitHubRunners interface {
 	// * "Ignored webhook" helps understand why runners aren't started
 	// * "Ignored jobs based on labels" helps debug label matching issues
 	// * "Webhook started runners" helps understand which runners were started
+	// * "Jobs matching multiple providers" lists jobs that need more labels so they match only one provider
 	// * "Warm runner status" and "Warm runner errors" (when warm runners are configured).
 	// Experimental.
 	CreateLogsInsightsQueries(prefix *string)
@@ -107,6 +104,9 @@ type GitHubRunners interface {
 	// Runner images are rebuilt every week by default. This provides the latest GitHub Runner version and software updates.
 	//
 	// If you want to be sure you are using the latest runner version, you can use this topic to be notified when a build fails.
+	//
+	// Email subscribers get a short summary with the failure reason and a link to the logs. Other subscribers get the original
+	// JSON notification from CodeBuild or EC2 Image Builder.
 	//
 	// When the image builder is defined in a separate stack (e.g. in a split-stacks setup), pass that stack or construct
 	// as the optional scope so the topic and failure-notification aspects are created in the same stack as the image
@@ -125,6 +125,18 @@ type GitHubRunners interface {
 	// **WARNING:** this method creates a metric filter for each provider. Each metric has a status dimension with six possible values. These resources may incur cost.
 	// Experimental.
 	MetricJobCompleted(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
+	// Metric for the number of jobs whose labels matched more than one provider.
+	//
+	// We start a runner from the first matching provider, but GitHub may give such a job a runner from any of them, including one started for
+	// another job. Stolen runner detection starts another runner for the job left behind, but the job itself may run on a provider you didn't
+	// expect. Anything over zero means some workflows ask for too few labels. Add labels to those jobs so they match only one provider. Use the
+	// "Jobs matching multiple providers" CloudWatch Logs Insights query created by {@link createLogsInsightsQueries} to find them.
+	//
+	// Jobs routed by a provider selector are not counted, as the selector picks the provider.
+	//
+	// **WARNING:** this method creates a metric filter. This resource may incur cost.
+	// Experimental.
+	MetricJobsMatchingMultipleProviders(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of failed invocations of the management Lambda functions.
 	//
 	// These are the functions that handle webhooks, retrieve runner tokens, stop idle runners, replace stolen runners, etc. Anything over zero means
@@ -374,6 +386,22 @@ func (g *jsiiProxy_GitHubRunners) MetricJobCompleted(props *awscloudwatch.Metric
 	_jsii_.Invoke(
 		g,
 		"metricJobCompleted",
+		[]interface{}{props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GitHubRunners) MetricJobsMatchingMultipleProviders(props *awscloudwatch.MetricOptions) awscloudwatch.Metric {
+	if err := g.validateMetricJobsMatchingMultipleProvidersParameters(props); err != nil {
+		panic(err)
+	}
+	var returns awscloudwatch.Metric
+
+	_jsii_.Invoke(
+		g,
+		"metricJobsMatchingMultipleProviders",
 		[]interface{}{props},
 		&returns,
 	)
