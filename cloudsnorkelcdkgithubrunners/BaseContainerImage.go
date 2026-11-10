@@ -10,15 +10,12 @@ import (
 // Represents a base container image that is used to start from in EC2 Image Builder container builds.
 //
 // This class is adapted from AWS CDK's BaseContainerImage class to support both string and object inputs.
-// Experimental.
 type BaseContainerImage interface {
 	// The ECR repository if this image was created from an ECR repository.
 	//
 	// This allows automatic permission granting for CodeBuild.
-	// Experimental.
 	EcrRepository() awsecr.IRepository
 	// The rendered base image to use.
-	// Experimental.
 	Image() *string
 }
 
@@ -48,7 +45,6 @@ func (j *jsiiProxy_BaseContainerImage) Image() *string {
 }
 
 
-// Experimental.
 func NewBaseContainerImage(image *string, ecrRepository awsecr.IRepository) BaseContainerImage {
 	_init_.Initialize()
 
@@ -66,7 +62,6 @@ func NewBaseContainerImage(image *string, ecrRepository awsecr.IRepository) Base
 	return &j
 }
 
-// Experimental.
 func NewBaseContainerImage_Override(b BaseContainerImage, image *string, ecrRepository awsecr.IRepository) {
 	_init_.Initialize()
 
@@ -78,7 +73,6 @@ func NewBaseContainerImage_Override(b BaseContainerImage, image *string, ecrRepo
 }
 
 // The DockerHub image to use as the base image in a container recipe.
-// Experimental.
 func BaseContainerImage_FromDockerHub(repository *string, tag *string) BaseContainerImage {
 	_init_.Initialize()
 
@@ -98,7 +92,6 @@ func BaseContainerImage_FromDockerHub(repository *string, tag *string) BaseConta
 }
 
 // The ECR container image to use as the base image in a container recipe.
-// Experimental.
 func BaseContainerImage_FromEcr(repository awsecr.IRepository, tag *string) BaseContainerImage {
 	_init_.Initialize()
 
@@ -118,7 +111,6 @@ func BaseContainerImage_FromEcr(repository awsecr.IRepository, tag *string) Base
 }
 
 // The ECR public container image to use as the base image in a container recipe.
-// Experimental.
 func BaseContainerImage_FromEcrPublic(registryAlias *string, repositoryName *string, tag *string) BaseContainerImage {
 	_init_.Initialize()
 
@@ -141,7 +133,6 @@ func BaseContainerImage_FromEcrPublic(registryAlias *string, repositoryName *str
 //
 // This can be an EC2 Image Builder image ARN,
 // an ECR or ECR public image, or a container URI sourced from a third-party container registry such as DockerHub.
-// Experimental.
 func BaseContainerImage_FromString(baseContainerImageString *string) BaseContainerImage {
 	_init_.Initialize()
 

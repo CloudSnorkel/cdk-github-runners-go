@@ -51,7 +51,6 @@ import (
 //   }
 // );
 // ```.
-// Experimental.
 type GitHubRunners interface {
 	constructs.Construct
 	awsec2.IConnectable
@@ -60,18 +59,13 @@ type GitHubRunners interface {
 	// Use this to enable connections to your GitHub Enterprise Server in a VPC.
 	//
 	// This cannot be used to manage connections of the runners. Use the `connections` property of each runner provider to manage runner connections.
-	// Experimental.
 	Connections() awsec2.Connections
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
-	// Experimental.
 	Props() *GitHubRunnersProps
 	// Configured runner providers.
-	// Experimental.
 	Providers() *[]interface{}
 	// Secrets for GitHub communication including webhook secret and runner authentication.
-	// Experimental.
 	Secrets() Secrets
 	// Creates a CloudWatch dashboard with the metrics you need to know if your runners are healthy.
 	//
@@ -87,7 +81,6 @@ type GitHubRunners interface {
 	// {@link metricJobsMatchingMultipleProviders} which create metric filters. These resources may incur cost.
 	//
 	// This dashboard is very basic. Pull requests and issues are welcome to improve it.
-	// Experimental.
 	CreateDashboard(name *string) awscloudwatch.Dashboard
 	// Creates CloudWatch Logs Insights saved queries that can be used to debug issues with the runners.
 	//
@@ -97,7 +90,6 @@ type GitHubRunners interface {
 	// * "Webhook started runners" helps understand which runners were started
 	// * "Jobs matching multiple providers" lists jobs that need more labels so they match only one provider
 	// * "Warm runner status" and "Warm runner errors" (when warm runners are configured).
-	// Experimental.
 	CreateLogsInsightsQueries(prefix *string)
 	// Creates a topic for notifications when a runner image build fails.
 	//
@@ -111,19 +103,16 @@ type GitHubRunners interface {
 	// When the image builder is defined in a separate stack (e.g. in a split-stacks setup), pass that stack or construct
 	// as the optional scope so the topic and failure-notification aspects are created in the same stack as the image
 	// builder. Otherwise the aspects may not find the image builder resources.
-	// Experimental.
 	FailedImageBuildsTopic(scope constructs.Construct) awssns.Topic
 	// Metric for failed runner executions.
 	//
 	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link metricJobCompleted}.
-	// Experimental.
 	MetricFailed(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of GitHub Actions jobs completed.
 	//
 	// It has `ProviderLabels` and `Status` dimensions. The status can be one of "Succeeded", "SucceededWithIssues", "Failed", "Canceled", "Skipped", or "Abandoned".
 	//
 	// **WARNING:** this method creates a metric filter for each provider. Each metric has a status dimension with six possible values. These resources may incur cost.
-	// Experimental.
 	MetricJobCompleted(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of jobs whose labels matched more than one provider.
 	//
@@ -135,7 +124,6 @@ type GitHubRunners interface {
 	// Jobs routed by a provider selector are not counted, as the selector picks the provider.
 	//
 	// **WARNING:** this method creates a metric filter. This resource may incur cost.
-	// Experimental.
 	MetricJobsMatchingMultipleProviders(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of failed invocations of the management Lambda functions.
 	//
@@ -147,7 +135,6 @@ type GitHubRunners interface {
 	// those.
 	//
 	// Management functions created after this method is called are not included. Call it last if you use warm runners.
-	// Experimental.
 	MetricLambdaErrors(props *awscloudwatch.MathExpressionOptions) awscloudwatch.MathExpression
 	// Metric for the number of runners that were stolen by a job that shouldn't have been assigned to them.
 	//
@@ -162,7 +149,6 @@ type GitHubRunners interface {
 	//     it to be stolen. The logs insights queries can provide even more information about the stolen runners.
 	//
 	// **WARNING:** this method creates a metric filter. This resource may incur cost.
-	// Experimental.
 	MetricStolenRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of runners we stopped on purpose before they got a job.
 	//
@@ -176,22 +162,18 @@ type GitHubRunners interface {
 	//  * `WarmRunnerBadDeadline`: a warm runner had an invalid deadline and was stopped.
 	//
 	// **WARNING:** this method creates a metric filter. This resource may incur cost.
-	// Experimental.
 	MetricStoppedRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for successful executions.
 	//
 	// A successful execution doesn't always mean a runner was started. It can be successful even without any label matches.
 	//
 	// A successful runner doesn't mean the job it executed was successful. For that, see {@link metricJobCompleted}.
-	// Experimental.
 	MetricSucceeded(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the interval, in milliseconds, between the time the execution starts and the time it closes.
 	//
 	// This time may be longer than the time the runner took.
-	// Experimental.
 	MetricTime(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -201,7 +183,6 @@ type GitHubRunners interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -262,7 +243,6 @@ func (j *jsiiProxy_GitHubRunners) Secrets() Secrets {
 }
 
 
-// Experimental.
 func NewGitHubRunners(scope constructs.Construct, id *string, props *GitHubRunnersProps) GitHubRunners {
 	_init_.Initialize()
 
@@ -280,7 +260,6 @@ func NewGitHubRunners(scope constructs.Construct, id *string, props *GitHubRunne
 	return &j
 }
 
-// Experimental.
 func NewGitHubRunners_Override(g GitHubRunners, scope constructs.Construct, id *string, props *GitHubRunnersProps) {
 	_init_.Initialize()
 
@@ -308,7 +287,6 @@ func NewGitHubRunners_Override(g GitHubRunners, scope constructs.Construct, id *
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func GitHubRunners_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 

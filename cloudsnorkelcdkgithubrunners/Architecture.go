@@ -8,18 +8,13 @@ import (
 )
 
 // CPU architecture enum for an image.
-// Experimental.
 type Architecture interface {
-	// Experimental.
 	Name() *string
 	// Checks if a given EC2 instance type matches this architecture.
-	// Experimental.
 	InstanceTypeMatch(instanceType awsec2.InstanceType) *bool
 	// Checks if the given architecture is the same as this one.
-	// Experimental.
 	Is(arch Architecture) *bool
 	// Checks if this architecture is in a given list.
-	// Experimental.
 	IsIn(arches *[]Architecture) *bool
 }
 

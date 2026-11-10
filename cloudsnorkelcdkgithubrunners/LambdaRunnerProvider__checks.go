@@ -10,14 +10,6 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (l *jsiiProxy_LambdaRunnerProvider) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
-	if defaultLabel == nil {
-		return fmt.Errorf("parameter defaultLabel is required, but nil was provided")
-	}
-
-	return nil
-}
-
 func validateLambdaRunnerProvider_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")

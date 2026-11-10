@@ -8,7 +8,6 @@ import (
 )
 
 // A composite runner provider that implements fallback and distribution strategies.
-// Experimental.
 type CompositeProvider interface {
 }
 
@@ -17,7 +16,6 @@ type jsiiProxy_CompositeProvider struct {
 	_ byte // padding
 }
 
-// Experimental.
 func NewCompositeProvider() CompositeProvider {
 	_init_.Initialize()
 
@@ -32,7 +30,6 @@ func NewCompositeProvider() CompositeProvider {
 	return &j
 }
 
-// Experimental.
 func NewCompositeProvider_Override(c CompositeProvider) {
 	_init_.Initialize()
 
@@ -52,7 +49,6 @@ func NewCompositeProvider_Override(c CompositeProvider) {
 // - Probability of selecting C = 30/60 = 50%
 //
 // You can use this to distribute load across multiple instance types or availability zones.
-// Experimental.
 func CompositeProvider_Distribute(scope constructs.Construct, id *string, weightedProviders *[]*WeightedRunnerProvider) ICompositeProvider {
 	_init_.Initialize()
 
@@ -81,7 +77,6 @@ func CompositeProvider_Distribute(scope constructs.Construct, id *string, weight
 // You can use this to try spot instance first, and switch to on-demand instances if spot is unavailable.
 //
 // Or you can use this to try different instance types in order of preference.
-// Experimental.
 func CompositeProvider_Fallback(scope constructs.Construct, id *string, providers *[]IRunnerProvider) ICompositeProvider {
 	_init_.Initialize()
 

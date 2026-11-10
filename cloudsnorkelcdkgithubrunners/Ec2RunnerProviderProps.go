@@ -7,14 +7,12 @@ import (
 )
 
 // Properties for {@link Ec2RunnerProvider} construct.
-// Experimental.
 type Ec2RunnerProviderProps struct {
 	// Add default labels based on OS and architecture of the runner.
 	//
 	// This will tell GitHub Runner to add default labels like `self-hosted`, `linux`, `x64`, and `arm64`.
 	// Default: true.
 	//
-	// Experimental.
 	DefaultLabels *bool `field:"optional" json:"defaultLabels" yaml:"defaultLabels"`
 	// The number of days log events are kept in CloudWatch Logs.
 	//
@@ -23,12 +21,7 @@ type Ec2RunnerProviderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Default: logs.RetentionDays.ONE_MONTH
 	//
-	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
-	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// Deprecated: use imageBuilder.
-	AmiBuilder IRunnerImageBuilder `field:"optional" json:"amiBuilder" yaml:"amiBuilder"`
 	// GitHub Actions runner group name.
 	//
 	// If specified, the runner will be registered with this group name. Setting a runner group can help managing access to self-hosted runners. It
@@ -39,14 +32,12 @@ type Ec2RunnerProviderProps struct {
 	// Users will still be able to trigger this runner with the correct labels. But the runner will only be able to run jobs from repos allowed to use the group.
 	// Default: undefined.
 	//
-	// Experimental.
 	Group *string `field:"optional" json:"group" yaml:"group"`
 	// Runner image builder used to build AMI containing GitHub Runner and all requirements.
 	//
 	// The image builder determines the OS and architecture of the runner.
 	// Default: Ec2RunnerProvider.imageBuilder()
 	//
-	// Experimental.
 	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// Instance type for launched runner instances.
 	//
@@ -56,7 +47,6 @@ type Ec2RunnerProviderProps struct {
 	// an image component to install NVIDIA drivers.
 	// Default: m6i.large
 	//
-	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
 	// GitHub Actions labels used for this provider.
 	//
@@ -65,51 +55,34 @@ type Ec2RunnerProviderProps struct {
 	// job's labels, this provider will be chosen and spawn a new runner.
 	// Default: ['ec2'].
 	//
-	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
-	// Security Group to assign to launched runner instances.
-	// Default: a new security group.
-	//
-	// Deprecated: use {@link securityGroups }.
-	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups to assign to launched runner instances.
 	// Default: a new security group.
 	//
-	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Use spot instances to save money.
 	//
 	// Spot instances are cheaper but not always available and can be stopped prematurely.
 	// Default: false.
 	//
-	// Experimental.
 	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
 	// Set a maximum price for spot instances.
 	// Default: no max price (you will pay current spot price).
 	//
-	// Experimental.
 	SpotMaxPrice *string `field:"optional" json:"spotMaxPrice" yaml:"spotMaxPrice"`
 	// Options for runner instance storage volume.
-	// Experimental.
 	StorageOptions *StorageOptions `field:"optional" json:"storageOptions" yaml:"storageOptions"`
 	// Size of volume available for launched runner instances.
 	//
 	// This modifies the boot volume size and doesn't add any additional volumes.
 	// Default: 30GB.
 	//
-	// Experimental.
 	StorageSize awscdk.Size `field:"optional" json:"storageSize" yaml:"storageSize"`
-	// Subnet where the runner instances will be launched.
-	// Default: default subnet of account's default VPC.
-	//
-	// Deprecated: use {@link vpc } and {@link subnetSelection }.
-	Subnet awsec2.ISubnet `field:"optional" json:"subnet" yaml:"subnet"`
 	// Where to place the network interfaces within the VPC.
 	//
 	// Only the first matched subnet will be used.
 	// Default: default VPC subnet.
 	//
-	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
 	// Additional tags to apply to launched runner instances and their volumes.
 	//
@@ -118,12 +91,10 @@ type Ec2RunnerProviderProps struct {
 	// used for house-keeping purposes.
 	// Default: no additional tags.
 	//
-	// Experimental.
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// VPC where runner instances will be launched.
 	// Default: default account VPC.
 	//
-	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 

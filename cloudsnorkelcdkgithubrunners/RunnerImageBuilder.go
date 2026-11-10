@@ -15,34 +15,26 @@ import (
 // Images can be customized before passed into the provider by adding or removing components to be installed.
 //
 // Images are rebuilt every week by default to ensure that the latest security patches are applied.
-// Experimental.
 type RunnerImageBuilder interface {
 	constructs.Construct
 	IConfigurableRunnerImageBuilder
-	// Experimental.
 	Components() *[]RunnerImageComponent
-	// Experimental.
 	SetComponents(val *[]RunnerImageComponent)
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
 	// The principal to grant permissions to.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
 	// Add a component to the image builder.
 	//
 	// The component will be added to the end of the list of components.
-	// Experimental.
 	AddComponent(component RunnerImageComponent)
 	// Build and return an AMI with GitHub Runner installed in it.
 	//
 	// Anything that ends up with a launch template pointing to an AMI that runs GitHub self-hosted runners can be used. A simple implementation could even point to an existing AMI and nothing else.
 	//
 	// The AMI can be further updated over time manually or using a schedule as long as it is always written to the same launch template.
-	// Experimental.
 	BindAmi() *RunnerAmi
 	// Build and return a Docker image with GitHub Runner installed in it.
 	//
@@ -51,15 +43,12 @@ type RunnerImageBuilder interface {
 	// It's important that the specified image tag be available at the time the repository is available. Providers usually assume the image is ready and will fail if it's not.
 	//
 	// The image can be further updated over time manually or using a schedule as long as it is always written to the same tag.
-	// Experimental.
 	BindDockerImage() *RunnerImage
 	// Remove a component from the image builder.
 	//
 	// Removal is done by component name. Multiple components with the same name will all be removed.
-	// Experimental.
 	RemoveComponent(component RunnerImageComponent)
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -69,7 +58,6 @@ type RunnerImageBuilder interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -120,7 +108,6 @@ func (j *jsiiProxy_RunnerImageBuilder) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewRunnerImageBuilder_Override(r RunnerImageBuilder, scope constructs.Construct, id *string, props *RunnerImageBuilderProps) {
 	_init_.Initialize()
 
@@ -159,7 +146,6 @@ func (j *jsiiProxy_RunnerImageBuilder)SetComponents(val *[]RunnerImageComponent)
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func RunnerImageBuilder_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -181,7 +167,6 @@ func RunnerImageBuilder_IsConstruct(x interface{}) *bool {
 // Create a new image builder based on the provided properties.
 //
 // The implementation will differ based on the OS, architecture, and requested builder type.
-// Experimental.
 func RunnerImageBuilder_New(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 

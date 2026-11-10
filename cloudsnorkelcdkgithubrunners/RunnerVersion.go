@@ -6,12 +6,9 @@ import (
 )
 
 // Defines desired GitHub Actions runner version.
-// Experimental.
 type RunnerVersion interface {
-	// Experimental.
 	Version() *string
 	// Check if two versions are the same.
-	// Experimental.
 	Is(other RunnerVersion) *bool
 }
 
@@ -31,7 +28,6 @@ func (j *jsiiProxy_RunnerVersion) Version() *string {
 }
 
 
-// Experimental.
 func NewRunnerVersion(version *string) RunnerVersion {
 	_init_.Initialize()
 
@@ -49,7 +45,6 @@ func NewRunnerVersion(version *string) RunnerVersion {
 	return &j
 }
 
-// Experimental.
 func NewRunnerVersion_Override(r RunnerVersion, version *string) {
 	_init_.Initialize()
 
@@ -61,7 +56,6 @@ func NewRunnerVersion_Override(r RunnerVersion, version *string) {
 }
 
 // Use the latest version available at the time the runner provider image is built.
-// Experimental.
 func RunnerVersion_Latest() RunnerVersion {
 	_init_.Initialize()
 
@@ -80,7 +74,6 @@ func RunnerVersion_Latest() RunnerVersion {
 // Use a specific version.
 // See: https://github.com/actions/runner/releases
 //
-// Experimental.
 func RunnerVersion_Specific(version *string) RunnerVersion {
 	_init_.Initialize()
 

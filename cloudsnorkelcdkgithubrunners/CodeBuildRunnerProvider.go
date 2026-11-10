@@ -17,40 +17,25 @@ import (
 // Creates a project that gets started for each job.
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
 type CodeBuildRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	constructs.IConstruct
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image loaded with GitHub Actions Runner and its prerequisites.
-	//
-	// The image is built by an image builder and is specific to CodeBuild.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Image() *RunnerImage
 	// Labels associated with this provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
 	// CodeBuild project hosting the runner.
-	// Experimental.
 	Project() awscodebuild.Project
-	// Experimental.
-	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -60,7 +45,6 @@ type CodeBuildRunnerProvider interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -86,16 +70,6 @@ func (j *jsiiProxy_CodeBuildRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	_jsii_.Get(
 		j,
 		"grantPrincipal",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_CodeBuildRunnerProvider) Image() *RunnerImage {
-	var returns *RunnerImage
-	_jsii_.Get(
-		j,
-		"image",
 		&returns,
 	)
 	return returns
@@ -142,7 +116,6 @@ func (j *jsiiProxy_CodeBuildRunnerProvider) Project() awscodebuild.Project {
 }
 
 
-// Experimental.
 func NewCodeBuildRunnerProvider(scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) CodeBuildRunnerProvider {
 	_init_.Initialize()
 
@@ -160,7 +133,6 @@ func NewCodeBuildRunnerProvider(scope constructs.Construct, id *string, props *C
 	return &j
 }
 
-// Experimental.
 func NewCodeBuildRunnerProvider_Override(c CodeBuildRunnerProvider, scope constructs.Construct, id *string, props *CodeBuildRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -187,7 +159,6 @@ func NewCodeBuildRunnerProvider_Override(c CodeBuildRunnerProvider, scope constr
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
-// Experimental.
 func CodeBuildRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -223,7 +194,6 @@ func CodeBuildRunnerProvider_ImageBuilder(scope constructs.Construct, id *string
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func CodeBuildRunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -236,44 +206,6 @@ func CodeBuildRunnerProvider_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
-		&returns,
-	)
-
-	return returns
-}
-
-func CodeBuildRunnerProvider_LINUX_ARM64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
-		"LINUX_ARM64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func CodeBuildRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.CodeBuildRunnerProvider",
-		"LINUX_X64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func (c *jsiiProxy_CodeBuildRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := c.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
-		panic(err)
-	}
-	var returns *[]*string
-
-	_jsii_.Invoke(
-		c,
-		"labelsFromProperties",
-		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

@@ -6,23 +6,18 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 )
 
-// Experimental.
 type RunnerImageBuilderProps struct {
 	// Image architecture.
 	// Default: Architecture.X86_64
 	//
-	// Experimental.
 	Architecture Architecture `field:"optional" json:"architecture" yaml:"architecture"`
 	// Options specific to AWS Image Builder.
 	//
 	// Only used when builderType is RunnerImageBuilderType.AWS_IMAGE_BUILDER.
-	// Experimental.
 	AwsImageBuilderOptions *AwsImageBuilderRunnerImageBuilderProps `field:"optional" json:"awsImageBuilderOptions" yaml:"awsImageBuilderOptions"`
 	// Base AMI from which runner AMIs will be built.
 	//
-	// This can be:
-	// - A string (AMI ID, Image Builder ARN, SSM parameter reference, or Marketplace product ID) - deprecated, use BaseImage static factory methods instead
-	// - A BaseImage instance created using static factory methods:
+	// This can be a BaseImage instance created using static factory methods:
 	//   - `BaseImage.fromAmiId('ami-12345')` - Use an AMI ID
 	//   - `BaseImage.fromString('arn:aws:imagebuilder:...')` - Use any string (ARN, AMI ID, etc.)
 	//   - `BaseImage.fromSsmParameter(parameter)` - Use an SSM parameter object
@@ -33,13 +28,10 @@ type RunnerImageBuilderProps struct {
 	// For example `BaseImage.fromImageBuilder(scope, 'ubuntu-server-22-lts-x86')` would always use the latest version of Ubuntu 22.04 in each build. If you want a specific version, you can pass the version as the third parameter.
 	// Default: latest Ubuntu 22.04 AMI for Os.LINUX_UBUNTU and Os.LINUX_UBUNTU_2204, Ubuntu 24.04 AMI for Os.LINUX_UBUNTU_2404, latest Amazon Linux 2 AMI for Os.LINUX_AMAZON_2, latest Windows Server 2022 AMI for Os.WINDOWS
 	//
-	// Experimental.
-	BaseAmi interface{} `field:"optional" json:"baseAmi" yaml:"baseAmi"`
+	BaseAmi BaseImage `field:"optional" json:"baseAmi" yaml:"baseAmi"`
 	// Base image from which Docker runner images will be built.
 	//
-	// This can be:
-	// - A string (ECR/ECR public image URI, DockerHub image, or Image Builder ARN) - deprecated, use BaseContainerImage static factory methods instead
-	// - A BaseContainerImage instance created using static factory methods:
+	// This can be a BaseContainerImage instance created using static factory methods:
 	//   - `BaseContainerImage.fromDockerHub('ubuntu', '22.04')` - Use DockerHub
 	//   - `BaseContainerImage.fromEcr(repo, 'latest')` - Use ECR (automatically grants permissions with CodeBuild)
 	//   - `BaseContainerImage.fromEcrPublic('lts', 'ubuntu', '22.04')` - Use ECR Public
@@ -48,28 +40,23 @@ type RunnerImageBuilderProps struct {
 	// When using private images from a different account or not on ECR, you may need to include additional setup commands with {@link dockerSetupCommands}.
 	// Default: public.ecr.aws/lts/ubuntu:22.04 for Os.LINUX_UBUNTU and Os.LINUX_UBUNTU_2204, public.ecr.aws/lts/ubuntu:24.04 for Os.LINUX_UBUNTU_2404, public.ecr.aws/amazonlinux/amazonlinux:2 for Os.LINUX_AMAZON_2, mcr.microsoft.com/windows/servercore:ltsc2019-amd64 for Os.WINDOWS
 	//
-	// Experimental.
-	BaseDockerImage interface{} `field:"optional" json:"baseDockerImage" yaml:"baseDockerImage"`
+	BaseDockerImage BaseContainerImage `field:"optional" json:"baseDockerImage" yaml:"baseDockerImage"`
 	// Default: CodeBuild for Linux Docker image, AWS Image Builder for Windows Docker image and any AMI.
 	//
-	// Experimental.
 	BuilderType RunnerImageBuilderType `field:"optional" json:"builderType" yaml:"builderType"`
 	// Options specific to CodeBuild image builder.
 	//
 	// Only used when builderType is RunnerImageBuilderType.CODE_BUILD.
-	// Experimental.
 	CodeBuildOptions *CodeBuildRunnerImageBuilderProps `field:"optional" json:"codeBuildOptions" yaml:"codeBuildOptions"`
 	// Components to install on the image.
 	// Default: none.
 	//
-	// Experimental.
 	Components *[]RunnerImageComponent `field:"optional" json:"components" yaml:"components"`
 	// Additional commands to run on the build host before starting the Docker runner image build.
 	//
 	// Use this to execute commands such as `docker login` or `aws ecr get-login-password` to pull private base images.
 	// Default: [].
 	//
-	// Experimental.
 	DockerSetupCommands *[]*string `field:"optional" json:"dockerSetupCommands" yaml:"dockerSetupCommands"`
 	// Removal policy for logs of image builds.
 	//
@@ -78,7 +65,6 @@ type RunnerImageBuilderProps struct {
 	// We try to not leave anything behind when removed. But sometimes a log staying behind is useful.
 	// Default: RemovalPolicy.DESTROY
 	//
-	// Experimental.
 	LogRemovalPolicy awscdk.RemovalPolicy `field:"optional" json:"logRemovalPolicy" yaml:"logRemovalPolicy"`
 	// The number of days log events are kept in CloudWatch Logs.
 	//
@@ -87,12 +73,10 @@ type RunnerImageBuilderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Default: logs.RetentionDays.ONE_MONTH
 	//
-	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
 	// Image OS.
 	// Default: OS.LINUX_UBUNTU
 	//
-	// Experimental.
 	Os Os `field:"optional" json:"os" yaml:"os"`
 	// Schedule the image to be rebuilt every given interval.
 	//
@@ -101,25 +85,20 @@ type RunnerImageBuilderProps struct {
 	// Set to zero to disable.
 	// Default: Duration.days(7)
 	//
-	// Experimental.
 	RebuildInterval awscdk.Duration `field:"optional" json:"rebuildInterval" yaml:"rebuildInterval"`
 	// Version of GitHub Runners to install.
 	// Default: latest version available.
 	//
-	// Experimental.
 	RunnerVersion RunnerVersion `field:"optional" json:"runnerVersion" yaml:"runnerVersion"`
 	// Security Groups to assign to this instance.
-	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Where to place the network interfaces within the VPC.
 	// Default: no subnet.
 	//
-	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
 	// VPC to build the image in.
 	// Default: no VPC.
 	//
-	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 	// Wait for image to finish building during deployment.
 	//
@@ -130,7 +109,6 @@ type RunnerImageBuilderProps struct {
 	// Disabling this option may also mean any changes to settings or components can take up to a week (default rebuild interval) to take effect.
 	// Default: true.
 	//
-	// Experimental.
 	WaitOnDeploy *bool `field:"optional" json:"waitOnDeploy" yaml:"waitOnDeploy"`
 }
 

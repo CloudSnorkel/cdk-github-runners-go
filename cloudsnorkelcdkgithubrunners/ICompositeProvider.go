@@ -13,7 +13,6 @@ import (
 // or log groups as they delegate to their sub-providers.
 //
 // Note that this interface cannot be implemented by external code. Use {@link CompositeProvider } factory methods.
-// Experimental.
 type ICompositeProvider interface {
 	constructs.IConstruct
 	// GitHub Actions labels used for this provider.
@@ -21,12 +20,10 @@ type ICompositeProvider interface {
 	// These labels are used to identify which provider should spawn a new on-demand runner. Every job sends a webhook with the labels it's looking for
 	// based on runs-on. We use match the labels from the webhook with the labels specified here. If all the labels specified here are present in the
 	// job's labels, this provider will be chosen and spawn a new runner.
-	// Experimental.
 	Labels() *[]*string
 	// All sub-providers contained in this composite provider.
 	//
 	// This is used to extract providers for metric filters and other operations.
-	// Experimental.
 	Providers() *[]IRunnerProvider
 }
 

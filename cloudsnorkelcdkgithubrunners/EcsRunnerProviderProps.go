@@ -8,14 +8,12 @@ import (
 )
 
 // Properties for EcsRunnerProvider.
-// Experimental.
 type EcsRunnerProviderProps struct {
 	// Add default labels based on OS and architecture of the runner.
 	//
 	// This will tell GitHub Runner to add default labels like `self-hosted`, `linux`, `x64`, and `arm64`.
 	// Default: true.
 	//
-	// Experimental.
 	DefaultLabels *bool `field:"optional" json:"defaultLabels" yaml:"defaultLabels"`
 	// The number of days log events are kept in CloudWatch Logs.
 	//
@@ -24,17 +22,7 @@ type EcsRunnerProviderProps struct {
 	// remove the retention policy, set the value to `INFINITE`.
 	// Default: logs.RetentionDays.ONE_MONTH
 	//
-	// Experimental.
 	LogRetention awslogs.RetentionDays `field:"optional" json:"logRetention" yaml:"logRetention"`
-	// Deprecated: use {@link retryOptions } on {@link GitHubRunners } instead.
-	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// Assign public IP to the runner task.
-	// Default: - ignored.
-	//
-	// Deprecated: ECS runner tasks use bridge networking, so they share the host instance's network interface and
-	// cannot get a public IP of their own. This property is ignored. Give the cluster instances internet access
-	// instead (a public subnet or a NAT gateway), and open an issue if you need `awsvpc` networking for ECS.
-	AssignPublicIp *bool `field:"optional" json:"assignPublicIp" yaml:"assignPublicIp"`
 	// Existing capacity provider to use.
 	//
 	// Make sure the AMI used by the capacity provider is compatible with ECS.
@@ -44,7 +32,6 @@ type EcsRunnerProviderProps struct {
 	// added when we can't confirm both.
 	// Default: new capacity provider.
 	//
-	// Experimental.
 	CapacityProvider awsecs.AsgCapacityProvider `field:"optional" json:"capacityProvider" yaml:"capacityProvider"`
 	// Existing ECS cluster to use.
 	//
@@ -53,14 +40,12 @@ type EcsRunnerProviderProps struct {
 	//
 	// Default: a new cluster.
 	//
-	// Experimental.
 	Cluster awsecs.Cluster `field:"optional" json:"cluster" yaml:"cluster"`
 	// The number of cpu units used by the task.
 	//
 	// 1024 units is 1 vCPU. Fractions of a vCPU are supported.
 	// Default: 1024.
 	//
-	// Experimental.
 	Cpu *float64 `field:"optional" json:"cpu" yaml:"cpu"`
 	// Support building and running Docker images by enabling Docker-in-Docker (dind) and the required privileged mode for the runner container.
 	//
@@ -72,7 +57,6 @@ type EcsRunnerProviderProps struct {
 	//
 	// Default: true.
 	//
-	// Experimental.
 	DockerInDocker *bool `field:"optional" json:"dockerInDocker" yaml:"dockerInDocker"`
 	// Number of GPUs to request for the runner task. When set, the task will be scheduled on GPU-capable instances.
 	//
@@ -84,7 +68,6 @@ type EcsRunnerProviderProps struct {
 	// an image component that installs the CUDA runtime into the image.
 	// Default: undefined (no GPU).
 	//
-	// Experimental.
 	Gpu *float64 `field:"optional" json:"gpu" yaml:"gpu"`
 	// GitHub Actions runner group name.
 	//
@@ -96,21 +79,18 @@ type EcsRunnerProviderProps struct {
 	// Users will still be able to trigger this runner with the correct labels. But the runner will only be able to run jobs from repos allowed to use the group.
 	// Default: undefined.
 	//
-	// Experimental.
 	Group *string `field:"optional" json:"group" yaml:"group"`
 	// Runner image builder used to build Docker images containing GitHub Runner and all requirements.
 	//
 	// The image builder determines the OS and architecture of the runner.
 	// Default: EcsRunnerProvider.imageBuilder()
 	//
-	// Experimental.
 	ImageBuilder IRunnerImageBuilder `field:"optional" json:"imageBuilder" yaml:"imageBuilder"`
 	// Instance type of ECS cluster instances.
 	//
 	// Only used when creating a new cluster.
 	// Default: m6i.large or m6g.large
 	//
-	// Experimental.
 	InstanceType awsec2.InstanceType `field:"optional" json:"instanceType" yaml:"instanceType"`
 	// GitHub Actions labels used for this provider.
 	//
@@ -119,61 +99,50 @@ type EcsRunnerProviderProps struct {
 	// job's labels, this provider will be chosen and spawn a new runner.
 	// Default: ['ecs'].
 	//
-	// Experimental.
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
 	// The maximum number of instances to run in the cluster.
 	//
 	// Only used when creating a new cluster.
 	// Default: 5.
 	//
-	// Experimental.
 	MaxInstances *float64 `field:"optional" json:"maxInstances" yaml:"maxInstances"`
 	// The amount (in MiB) of memory used by the task.
 	// Default: 3500, unless `memoryReservationMiB` is used and then it's undefined.
 	//
-	// Experimental.
 	MemoryLimitMiB *float64 `field:"optional" json:"memoryLimitMiB" yaml:"memoryLimitMiB"`
 	// The soft limit (in MiB) of memory to reserve for the container.
 	// Default: undefined.
 	//
-	// Experimental.
 	MemoryReservationMiB *float64 `field:"optional" json:"memoryReservationMiB" yaml:"memoryReservationMiB"`
 	// The minimum number of instances to run in the cluster.
 	//
 	// Only used when creating a new cluster.
 	// Default: 0.
 	//
-	// Experimental.
 	MinInstances *float64 `field:"optional" json:"minInstances" yaml:"minInstances"`
 	// ECS placement constraints to influence task placement.
 	//
 	// Example: [ecs.PlacementConstraint.memberOf('ecs-placement')]
 	// Default: undefined (no placement constraints).
 	//
-	// Experimental.
 	PlacementConstraints *[]awsecs.PlacementConstraint `field:"optional" json:"placementConstraints" yaml:"placementConstraints"`
 	// ECS placement strategies to influence task placement.
 	//
 	// Example: [ecs.PlacementStrategy.packedByCpu()]
 	// Default: undefined (no placement strategies).
 	//
-	// Experimental.
 	PlacementStrategies *[]awsecs.PlacementStrategy `field:"optional" json:"placementStrategies" yaml:"placementStrategies"`
 	// Security groups to assign to the task.
 	// Default: a new security group.
 	//
-	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Use spot capacity.
 	// Default: false (true if spotMaxPrice is specified).
 	//
-	// Experimental.
 	Spot *bool `field:"optional" json:"spot" yaml:"spot"`
 	// Maximum price for spot instances.
-	// Experimental.
 	SpotMaxPrice *string `field:"optional" json:"spotMaxPrice" yaml:"spotMaxPrice"`
 	// Options for runner instance storage volume.
-	// Experimental.
 	StorageOptions *StorageOptions `field:"optional" json:"storageOptions" yaml:"storageOptions"`
 	// Size of volume available for launched cluster instances.
 	//
@@ -182,12 +151,10 @@ type EcsRunnerProviderProps struct {
 	// Each instance can be used by multiple runners, so make sure there is enough space for all of them.
 	// Default: default size for AMI (usually 30GB for Linux and 50GB for Windows).
 	//
-	// Experimental.
 	StorageSize awscdk.Size `field:"optional" json:"storageSize" yaml:"storageSize"`
 	// Subnets to run the runners in.
 	// Default: ECS default.
 	//
-	// Experimental.
 	SubnetSelection *awsec2.SubnetSelection `field:"optional" json:"subnetSelection" yaml:"subnetSelection"`
 	// Additional tags to apply to launched runner tasks.
 	//
@@ -195,12 +162,10 @@ type EcsRunnerProviderProps struct {
 	// You may not override tags with the `GitHubRunners:` prefix.
 	// Default: no additional tags.
 	//
-	// Experimental.
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// VPC to launch the runners in.
 	// Default: default account VPC.
 	//
-	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }
 

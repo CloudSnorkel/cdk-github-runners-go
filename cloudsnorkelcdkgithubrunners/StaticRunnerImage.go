@@ -9,7 +9,6 @@ import (
 )
 
 // Helper class with methods to use static images that are built outside the context of this project.
-// Experimental.
 type StaticRunnerImage interface {
 }
 
@@ -18,7 +17,6 @@ type jsiiProxy_StaticRunnerImage struct {
 	_ byte // padding
 }
 
-// Experimental.
 func NewStaticRunnerImage() StaticRunnerImage {
 	_init_.Initialize()
 
@@ -33,7 +31,6 @@ func NewStaticRunnerImage() StaticRunnerImage {
 	return &j
 }
 
-// Experimental.
 func NewStaticRunnerImage_Override(s StaticRunnerImage) {
 	_init_.Initialize()
 
@@ -49,7 +46,6 @@ func NewStaticRunnerImage_Override(s StaticRunnerImage) {
 // The image must already have GitHub Actions runner installed. You are responsible to update it and remove it when done.
 //
 // We create a CodeBuild image builder behind the scenes to copy the image over to ECR. This helps avoid Docker Hub rate limits and prevent failures.
-// Experimental.
 func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, image *string, architecture Architecture, os Os) IRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -71,7 +67,6 @@ func StaticRunnerImage_FromDockerHub(scope constructs.Construct, id *string, ima
 // Create a builder (that doesn't actually build anything) from an existing image in an existing repository.
 //
 // The image must already have GitHub Actions runner installed. You are responsible to update it and remove it when done.
-// Experimental.
 func StaticRunnerImage_FromEcrRepository(repository awsecr.IRepository, tag *string, architecture Architecture, os Os) IRunnerImageBuilder {
 	_init_.Initialize()
 

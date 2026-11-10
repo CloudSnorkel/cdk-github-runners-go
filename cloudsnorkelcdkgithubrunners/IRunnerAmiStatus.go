@@ -5,13 +5,10 @@ import (
 )
 
 // AMI status returned from runner providers to be displayed as output of status function.
-// Experimental.
 type IRunnerAmiStatus interface {
 	// Log group name for the AMI builder where history of builds can be analyzed.
-	// Experimental.
 	AmiBuilderLogGroup() *string
 	// Id of launch template pointing to the latest AMI built by the AMI builder.
-	// Experimental.
 	LaunchTemplate() *string
 }
 

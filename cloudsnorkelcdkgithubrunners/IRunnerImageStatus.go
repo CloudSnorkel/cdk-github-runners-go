@@ -5,16 +5,12 @@ import (
 )
 
 // Image status returned from runner providers to be displayed in status.json.
-// Experimental.
 type IRunnerImageStatus interface {
 	// Log group name for the image builder where history of image builds can be analyzed.
-	// Experimental.
 	ImageBuilderLogGroup() *string
 	// Image repository where image builder pushes runner images.
-	// Experimental.
 	ImageRepository() *string
 	// Tag of image that should be used.
-	// Experimental.
 	ImageTag() *string
 }
 

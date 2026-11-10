@@ -17,57 +17,24 @@ import (
 // Creates a task definition with a single container that gets started for each job.
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
 type FargateRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
-	// Whether runner task will have a public IP.
-	// Deprecated: This field is internal and should not be accessed directly.
-	AssignPublicIp() *bool
 	// Cluster hosting the task hosting the runner.
-	// Experimental.
 	Cluster() awsecs.Cluster
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
-	// Container definition hosting the runner.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Container() awsecs.ContainerDefinition
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image loaded with GitHub Actions Runner and its prerequisites.
-	//
-	// The image is built by an image builder and is specific to Fargate tasks.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Image() *RunnerImage
 	// Labels associated with this provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
-	// Use spot pricing for Fargate tasks.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Spot() *bool
-	// Subnets used for hosting the runner task.
-	// Deprecated: This field is internal and should not be accessed directly.
-	SubnetSelection() *awsec2.SubnetSelection
-	// Fargate task hosting the runner.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Task() awsecs.FargateTaskDefinition
-	// VPC used for hosting the runner task.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Vpc() awsec2.IVpc
-	// Experimental.
-	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -77,7 +44,6 @@ type FargateRunnerProvider interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -85,16 +51,6 @@ type FargateRunnerProvider interface {
 type jsiiProxy_FargateRunnerProvider struct {
 	internal.Type__constructsConstruct
 	jsiiProxy_IRunnerProvider
-}
-
-func (j *jsiiProxy_FargateRunnerProvider) AssignPublicIp() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"assignPublicIp",
-		&returns,
-	)
-	return returns
 }
 
 func (j *jsiiProxy_FargateRunnerProvider) Cluster() awsecs.Cluster {
@@ -117,31 +73,11 @@ func (j *jsiiProxy_FargateRunnerProvider) Connections() awsec2.Connections {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunnerProvider) Container() awsecs.ContainerDefinition {
-	var returns awsecs.ContainerDefinition
-	_jsii_.Get(
-		j,
-		"container",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_FargateRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	var returns awsiam.IPrincipal
 	_jsii_.Get(
 		j,
 		"grantPrincipal",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunnerProvider) Image() *RunnerImage {
-	var returns *RunnerImage
-	_jsii_.Get(
-		j,
-		"image",
 		&returns,
 	)
 	return returns
@@ -177,48 +113,7 @@ func (j *jsiiProxy_FargateRunnerProvider) Node() constructs.Node {
 	return returns
 }
 
-func (j *jsiiProxy_FargateRunnerProvider) Spot() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"spot",
-		&returns,
-	)
-	return returns
-}
 
-func (j *jsiiProxy_FargateRunnerProvider) SubnetSelection() *awsec2.SubnetSelection {
-	var returns *awsec2.SubnetSelection
-	_jsii_.Get(
-		j,
-		"subnetSelection",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunnerProvider) Task() awsecs.FargateTaskDefinition {
-	var returns awsecs.FargateTaskDefinition
-	_jsii_.Get(
-		j,
-		"task",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_FargateRunnerProvider) Vpc() awsec2.IVpc {
-	var returns awsec2.IVpc
-	_jsii_.Get(
-		j,
-		"vpc",
-		&returns,
-	)
-	return returns
-}
-
-
-// Experimental.
 func NewFargateRunnerProvider(scope constructs.Construct, id *string, props *FargateRunnerProviderProps) FargateRunnerProvider {
 	_init_.Initialize()
 
@@ -236,7 +131,6 @@ func NewFargateRunnerProvider(scope constructs.Construct, id *string, props *Far
 	return &j
 }
 
-// Experimental.
 func NewFargateRunnerProvider_Override(f FargateRunnerProvider, scope constructs.Construct, id *string, props *FargateRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -262,7 +156,6 @@ func NewFargateRunnerProvider_Override(f FargateRunnerProvider, scope constructs
 //  * `RunnerImageComponent.githubCli()`
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.githubRunner()`
-// Experimental.
 func FargateRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -298,7 +191,6 @@ func FargateRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, 
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func FargateRunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -311,44 +203,6 @@ func FargateRunnerProvider_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.FargateRunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
-		&returns,
-	)
-
-	return returns
-}
-
-func FargateRunnerProvider_LINUX_ARM64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.FargateRunnerProvider",
-		"LINUX_ARM64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func FargateRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.FargateRunnerProvider",
-		"LINUX_X64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func (f *jsiiProxy_FargateRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := f.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
-		panic(err)
-	}
-	var returns *[]*string
-
-	_jsii_.Invoke(
-		f,
-		"labelsFromProperties",
-		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

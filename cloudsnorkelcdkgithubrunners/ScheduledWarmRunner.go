@@ -54,14 +54,11 @@ import (
 // });
 // ```.
 //
-// Experimental.
 type ScheduledWarmRunner interface {
 	constructs.Construct
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -71,7 +68,6 @@ type ScheduledWarmRunner interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -91,7 +87,6 @@ func (j *jsiiProxy_ScheduledWarmRunner) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewScheduledWarmRunner(scope constructs.Construct, id *string, props *ScheduledWarmRunnerProps) ScheduledWarmRunner {
 	_init_.Initialize()
 
@@ -109,7 +104,6 @@ func NewScheduledWarmRunner(scope constructs.Construct, id *string, props *Sched
 	return &j
 }
 
-// Experimental.
 func NewScheduledWarmRunner_Override(s ScheduledWarmRunner, scope constructs.Construct, id *string, props *ScheduledWarmRunnerProps) {
 	_init_.Initialize()
 
@@ -137,7 +131,6 @@ func NewScheduledWarmRunner_Override(s ScheduledWarmRunner, scope constructs.Con
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func ScheduledWarmRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 

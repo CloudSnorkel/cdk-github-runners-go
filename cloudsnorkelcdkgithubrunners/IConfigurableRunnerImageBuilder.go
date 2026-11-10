@@ -13,7 +13,6 @@ import (
 // The image can be configured by adding or removing components. The image builder can be configured by adding grants or allowing connections.
 //
 // An image can be a Docker image or AMI.
-// Experimental.
 type IConfigurableRunnerImageBuilder interface {
 	awsec2.IConnectable
 	awsiam.IGrantable
@@ -21,12 +20,10 @@ type IConfigurableRunnerImageBuilder interface {
 	// Add a component to the image builder.
 	//
 	// The component will be added to the end of the list of components.
-	// Experimental.
 	AddComponent(component RunnerImageComponent)
 	// Remove a component from the image builder.
 	//
 	// Removal is done by component name. Multiple components with the same name will all be removed.
-	// Experimental.
 	RemoveComponent(component RunnerImageComponent)
 }
 

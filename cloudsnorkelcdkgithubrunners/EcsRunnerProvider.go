@@ -22,36 +22,26 @@ import (
 // cluster should be equally trusted. See https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
 type EcsRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	// Capacity provider used to scale the cluster.
 	//
 	// Use capacityProvider.autoScalingGroup to access the auto scaling group. This can help set up custom scaling policies.
-	// Experimental.
 	CapacityProvider() awsecs.AsgCapacityProvider
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
 	// Labels associated with this provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
-	// Experimental.
-	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -61,7 +51,6 @@ type EcsRunnerProvider interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -132,7 +121,6 @@ func (j *jsiiProxy_EcsRunnerProvider) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewEcsRunnerProvider(scope constructs.Construct, id *string, props *EcsRunnerProviderProps) EcsRunnerProvider {
 	_init_.Initialize()
 
@@ -150,7 +138,6 @@ func NewEcsRunnerProvider(scope constructs.Construct, id *string, props *EcsRunn
 	return &j
 }
 
-// Experimental.
 func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Construct, id *string, props *EcsRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -177,7 +164,6 @@ func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Constru
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
-// Experimental.
 func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -213,7 +199,6 @@ func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, prop
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func EcsRunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -226,22 +211,6 @@ func EcsRunnerProvider_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.EcsRunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
-		&returns,
-	)
-
-	return returns
-}
-
-func (e *jsiiProxy_EcsRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := e.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
-		panic(err)
-	}
-	var returns *[]*string
-
-	_jsii_.Invoke(
-		e,
-		"labelsFromProperties",
-		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

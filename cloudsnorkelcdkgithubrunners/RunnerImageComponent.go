@@ -8,32 +8,26 @@ import (
 // Components are used to build runner images.
 //
 // They can run commands in the image, copy files into the image, and run some Docker commands.
-// Experimental.
 type RunnerImageComponent interface {
 	// Component name.
 	//
 	// Used to identify component in image build logs, and for {@link IConfigurableRunnerImageBuilder.removeComponent }
-	// Experimental.
 	Name() *string
 	// Returns assets to copy into the built image.
 	//
 	// Can be used to copy files into the image.
-	// Experimental.
 	GetAssets(_os Os, _architecture Architecture) *[]*RunnerImageAsset
 	// Returns commands to run to in built image.
 	//
 	// Can be used to install packages, setup build prerequisites, etc.
-	// Experimental.
 	GetCommands(_os Os, _architecture Architecture) *[]*string
 	// Returns Docker commands to run to in built image.
 	//
 	// Can be used to add commands like `VOLUME`, `ENTRYPOINT`, `CMD`, etc.
 	//
 	// Docker commands are added after assets and normal commands.
-	// Experimental.
 	GetDockerCommands(_os Os, _architecture Architecture) *[]*string
 	// Returns true if the image builder should be rebooted after this component is installed.
-	// Experimental.
 	ShouldReboot(_os Os, _architecture Architecture) *bool
 }
 
@@ -53,7 +47,6 @@ func (j *jsiiProxy_RunnerImageComponent) Name() *string {
 }
 
 
-// Experimental.
 func NewRunnerImageComponent_Override(r RunnerImageComponent) {
 	_init_.Initialize()
 
@@ -65,7 +58,6 @@ func NewRunnerImageComponent_Override(r RunnerImageComponent) {
 }
 
 // A component to install the AWS CLI.
-// Experimental.
 func RunnerImageComponent_AwsCli(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -82,7 +74,6 @@ func RunnerImageComponent_AwsCli(version *string) RunnerImageComponent {
 }
 
 // A component to install CloudWatch Agent for the runner so we can send logs.
-// Experimental.
 func RunnerImageComponent_CloudWatchAgent() RunnerImageComponent {
 	_init_.Initialize()
 
@@ -105,7 +96,6 @@ func RunnerImageComponent_CloudWatchAgent() RunnerImageComponent {
 // Use this to customize the image for the runner.
 //
 // **WARNING:** Docker commands are not guaranteed to be included before the next component.
-// Experimental.
 func RunnerImageComponent_Custom(props *RunnerImageComponentCustomProps) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -127,7 +117,6 @@ func RunnerImageComponent_Custom(props *RunnerImageComponentCustomProps) RunnerI
 // A component to install Docker.
 //
 // On Windows this sets up dockerd for Windows containers without Docker Desktop. If you need Linux containers on Windows, you'll need to install Docker Desktop which doesn't seem to play well with servers (PRs welcome).
-// Experimental.
 func RunnerImageComponent_Docker(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -143,23 +132,6 @@ func RunnerImageComponent_Docker(version *string) RunnerImageComponent {
 	return returns
 }
 
-// A component to install Docker-in-Docker.
-// Deprecated: use `docker()`.
-func RunnerImageComponent_DockerInDocker(version *string) RunnerImageComponent {
-	_init_.Initialize()
-
-	var returns RunnerImageComponent
-
-	_jsii_.StaticInvoke(
-		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
-		"dockerInDocker",
-		[]interface{}{version},
-		&returns,
-	)
-
-	return returns
-}
-
 // A component to add environment variables for jobs the runner executes.
 //
 // These variables only affect the jobs ran by the runner. They are not global. They do not affect other components.
@@ -167,7 +139,6 @@ func RunnerImageComponent_DockerInDocker(version *string) RunnerImageComponent {
 // It is not recommended to use this component to pass secrets. Instead, use GitHub Secrets or AWS Secrets Manager.
 //
 // Must be used after the {@link githubRunner} component.
-// Experimental.
 func RunnerImageComponent_EnvironmentVariables(vars *map[string]*string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -189,7 +160,6 @@ func RunnerImageComponent_EnvironmentVariables(vars *map[string]*string) RunnerI
 // A component to add a trusted certificate authority.
 //
 // This can be used to support GitHub Enterprise Server with self-signed certificate.
-// Experimental.
 func RunnerImageComponent_ExtraCertificates(source *string, name *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -209,7 +179,6 @@ func RunnerImageComponent_ExtraCertificates(source *string, name *string) Runner
 }
 
 // A component to install Git.
-// Experimental.
 func RunnerImageComponent_Git(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -226,7 +195,6 @@ func RunnerImageComponent_Git(version *string) RunnerImageComponent {
 }
 
 // A component to install the GitHub CLI.
-// Experimental.
 func RunnerImageComponent_GithubCli(version *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -245,7 +213,6 @@ func RunnerImageComponent_GithubCli(version *string) RunnerImageComponent {
 // A component to install the GitHub Actions Runner.
 //
 // This is the actual executable that connects to GitHub to ask for jobs and then execute them.
-// Experimental.
 func RunnerImageComponent_GithubRunner(runnerVersion RunnerVersion) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -272,7 +239,6 @@ func RunnerImageComponent_GithubRunner(runnerVersion RunnerVersion) RunnerImageC
 // environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
 //
 // Must be used after the {@link githubRunner} component.
-// Experimental.
 func RunnerImageComponent_JobCompletedHook(sourcePath *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -299,7 +265,6 @@ func RunnerImageComponent_JobCompletedHook(sourcePath *string) RunnerImageCompon
 // environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
 //
 // Must be used after the {@link githubRunner} component.
-// Experimental.
 func RunnerImageComponent_JobStartedHook(sourcePath *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -319,7 +284,6 @@ func RunnerImageComponent_JobStartedHook(sourcePath *string) RunnerImageComponen
 }
 
 // A component to set up the required Lambda entrypoint for Lambda runners.
-// Experimental.
 func RunnerImageComponent_LambdaEntrypoint() RunnerImageComponent {
 	_init_.Initialize()
 
@@ -336,7 +300,6 @@ func RunnerImageComponent_LambdaEntrypoint() RunnerImageComponent {
 }
 
 // A component to install the required packages for the runner.
-// Experimental.
 func RunnerImageComponent_RequiredPackages() RunnerImageComponent {
 	_init_.Initialize()
 
@@ -353,7 +316,6 @@ func RunnerImageComponent_RequiredPackages() RunnerImageComponent {
 }
 
 // A component to prepare the required runner user.
-// Experimental.
 func RunnerImageComponent_RunnerUser() RunnerImageComponent {
 	_init_.Initialize()
 

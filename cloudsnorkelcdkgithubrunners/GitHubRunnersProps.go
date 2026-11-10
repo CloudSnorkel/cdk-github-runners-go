@@ -7,14 +7,12 @@ import (
 )
 
 // Properties for GitHubRunners.
-// Experimental.
 type GitHubRunnersProps struct {
 	// Allow management functions to run in public subnets. Lambda Functions in a public subnet can NOT access the internet.
 	//
 	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	// Default: false.
 	//
-	// Experimental.
 	AllowPublicSubnet *bool `field:"optional" json:"allowPublicSubnet" yaml:"allowPublicSubnet"`
 	// Path to a certificate file (.pem or .crt) or a directory containing certificate files (.pem or .crt) required to trust GitHub Enterprise Server. Use this when GitHub Enterprise Server certificates are self-signed.
 	//
@@ -40,26 +38,22 @@ type GitHubRunnersProps struct {
 	//   }
 	// );
 	// ```.
-	// Experimental.
 	ExtraCertificates *string `field:"optional" json:"extraCertificates" yaml:"extraCertificates"`
 	// Time to wait before stopping a runner that remains idle.
 	//
 	// If the user cancelled the job, or if another runner stole it, this stops the runner to avoid wasting resources.
 	// Default: 5 minutes.
 	//
-	// Experimental.
 	IdleTimeout awscdk.Duration `field:"optional" json:"idleTimeout" yaml:"idleTimeout"`
 	// Logging options for the state machine that manages the runners.
 	// Default: no logs.
 	//
-	// Experimental.
 	LogOptions *LogOptions `field:"optional" json:"logOptions" yaml:"logOptions"`
 	// List of runner providers to use.
 	//
 	// At least one provider is required. Provider will be selected when its label matches the labels requested by the workflow job.
 	// Default: CodeBuild, Lambda and Fargate runners with all the defaults (no VPC or default account VPC).
 	//
-	// Experimental.
 	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
 	// Optional Lambda function to customize provider selection logic and label assignment.
 	//
@@ -77,7 +71,6 @@ type GitHubRunnersProps struct {
 	// **For reliable provider assignment based on job characteristics, consider using repo-level runner registration where you can control which runners are available for specific repositories. This information is also available while using the setup wizard.
 	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
 	//
-	// Experimental.
 	ProviderSelector awslambda.IFunction `field:"optional" json:"providerSelector" yaml:"providerSelector"`
 	// Whether to require the `self-hosted` label.
 	//
@@ -86,7 +79,6 @@ type GitHubRunnersProps struct {
 	// Be careful when setting this to `false`. Avoid setting up providers with generic label requirements like `linux` as they may match workflows that are not meant to run on self-hosted runners.
 	// Default: true.
 	//
-	// Experimental.
 	RequireSelfHostedLabel *bool `field:"optional" json:"requireSelfHostedLabel" yaml:"requireSelfHostedLabel"`
 	// Options to retry operation in case of failure like missing capacity, or API quota issues.
 	//
@@ -95,15 +87,7 @@ type GitHubRunnersProps struct {
 	// Retries use full jitter, so total time spent waiting is about half the sum of min(interval * backoffRate ^ attempt, maxDelay) over all attempts.
 	// Default: retry 210 times over a bit more than 24 hours.
 	//
-	// Experimental.
 	RetryOptions *ProviderRetryOptions `field:"optional" json:"retryOptions" yaml:"retryOptions"`
-	// Security group attached to all management functions.
-	//
-	// Use this with to provide access to GitHub Enterprise Server hosted inside a VPC.
-	//
-	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
-	// Deprecated: use {@link securityGroups } instead.
-	SecurityGroup awsec2.ISecurityGroup `field:"optional" json:"securityGroup" yaml:"securityGroup"`
 	// Security groups attached to all management functions.
 	//
 	// Use this to provide outbound access from management functions to GitHub Enterprise Server hosted inside a VPC.
@@ -111,21 +95,18 @@ type GitHubRunnersProps struct {
 	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	//
 	// **Note:** Defining inbound rules on this security group does nothing. This security group only controls outbound access FROM the management functions. To limit access TO the webhook or setup functions, use {@link webhookAccess} and {@link setupAccess} instead.
-	// Experimental.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Access configuration for the setup function.
 	//
 	// Once you finish the setup process, you can set this to `LambdaAccess.noAccess()` to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.
 	// Default: LambdaAccess.lambdaUrl()
 	//
-	// Experimental.
 	SetupAccess LambdaAccess `field:"optional" json:"setupAccess" yaml:"setupAccess"`
 	// Access configuration for the status function.
 	//
 	// This function returns a lot of sensitive information about the runner, so you should only allow access to it from trusted IPs, if at all.
 	// Default: LambdaAccess.noAccess()
 	//
-	// Experimental.
 	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
 	// VPC used for all management functions. Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
 	//
@@ -139,14 +120,12 @@ type GitHubRunnersProps struct {
 	// * CloudFormation (status function only)
 	// * EC2
 	// * ECR (status function only).
-	// Experimental.
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 	// VPC subnets used for all management functions.
 	//
 	// Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
 	//
 	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
-	// Experimental.
 	VpcSubnets *awsec2.SubnetSelection `field:"optional" json:"vpcSubnets" yaml:"vpcSubnets"`
 	// Access configuration for the webhook function.
 	//
@@ -157,7 +136,6 @@ type GitHubRunnersProps struct {
 	// *WARNING*: changing access type may change the URL. When the URL changes, you must update GitHub as well.
 	// Default: LambdaAccess.lambdaUrl()
 	//
-	// Experimental.
 	WebhookAccess LambdaAccess `field:"optional" json:"webhookAccess" yaml:"webhookAccess"`
 }
 

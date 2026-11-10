@@ -6,15 +6,11 @@ import (
 )
 
 // OS enum for an image.
-// Experimental.
 type Os interface {
-	// Experimental.
 	Name() *string
 	// Checks if the given OS is the same as this one.
-	// Experimental.
 	Is(os Os) *bool
 	// Checks if this OS is in a given list.
-	// Experimental.
 	IsIn(oses *[]Os) *bool
 }
 
@@ -33,17 +29,6 @@ func (j *jsiiProxy_Os) Name() *string {
 	return returns
 }
 
-
-func Os_LINUX() Os {
-	_init_.Initialize()
-	var returns Os
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.Os",
-		"LINUX",
-		&returns,
-	)
-	return returns
-}
 
 func Os_LINUX_AMAZON_2() Os {
 	_init_.Initialize()

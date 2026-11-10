@@ -4,10 +4,6 @@ package cloudsnorkelcdkgithubrunners
 
 // Building without runtime type checking enabled, so all the below just return nil
 
-func (c *jsiiProxy_CodeBuildRunnerProvider) validateLabelsFromPropertiesParameters(defaultLabel *string) error {
-	return nil
-}
-
 func validateCodeBuildRunnerProvider_ImageBuilderParameters(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) error {
 	return nil
 }

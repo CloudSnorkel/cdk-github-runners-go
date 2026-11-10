@@ -10,7 +10,6 @@ import (
 )
 
 // Secrets required for GitHub runners operation.
-// Experimental.
 type Secrets interface {
 	constructs.Construct
 	// Authentication secret for GitHub containing either app details or personal access token.
@@ -19,26 +18,20 @@ type Secrets interface {
 	// cancel jobs when the runner fails to start.
 	//
 	// This secret is meant to be edited by the user after being created.
-	// Experimental.
 	Github() awssecretsmanager.Secret
 	// GitHub app private key. Not needed when using personal access tokens.
 	//
 	// This secret is meant to be edited by the user after being created. It is separate than the main GitHub secret because inserting private keys into JSON is hard.
-	// Experimental.
 	GithubPrivateKey() awssecretsmanager.Secret
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
 	// Setup secret used to authenticate user for our setup wizard.
 	//
 	// Should be empty after setup has been completed.
-	// Experimental.
 	Setup() awssecretsmanager.Secret
 	// Webhook secret used to confirm events are coming from GitHub and nowhere else.
-	// Experimental.
 	Webhook() awssecretsmanager.Secret
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -48,7 +41,6 @@ type Secrets interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -108,7 +100,6 @@ func (j *jsiiProxy_Secrets) Webhook() awssecretsmanager.Secret {
 }
 
 
-// Experimental.
 func NewSecrets(scope constructs.Construct, id *string) Secrets {
 	_init_.Initialize()
 
@@ -126,7 +117,6 @@ func NewSecrets(scope constructs.Construct, id *string) Secrets {
 	return &j
 }
 
-// Experimental.
 func NewSecrets_Override(s Secrets, scope constructs.Construct, id *string) {
 	_init_.Initialize()
 
@@ -154,7 +144,6 @@ func NewSecrets_Override(s Secrets, scope constructs.Construct, id *string) {
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func Secrets_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 

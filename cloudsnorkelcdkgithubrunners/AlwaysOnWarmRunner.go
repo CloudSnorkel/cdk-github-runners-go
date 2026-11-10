@@ -35,14 +35,11 @@ import (
 // });
 // ```.
 //
-// Experimental.
 type AlwaysOnWarmRunner interface {
 	constructs.Construct
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -52,7 +49,6 @@ type AlwaysOnWarmRunner interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -72,7 +68,6 @@ func (j *jsiiProxy_AlwaysOnWarmRunner) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewAlwaysOnWarmRunner(scope constructs.Construct, id *string, props *AlwaysOnWarmRunnerProps) AlwaysOnWarmRunner {
 	_init_.Initialize()
 
@@ -90,7 +85,6 @@ func NewAlwaysOnWarmRunner(scope constructs.Construct, id *string, props *Always
 	return &j
 }
 
-// Experimental.
 func NewAlwaysOnWarmRunner_Override(a AlwaysOnWarmRunner, scope constructs.Construct, id *string, props *AlwaysOnWarmRunnerProps) {
 	_init_.Initialize()
 
@@ -118,7 +112,6 @@ func NewAlwaysOnWarmRunner_Override(a AlwaysOnWarmRunner, scope constructs.Const
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func AlwaysOnWarmRunner_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 

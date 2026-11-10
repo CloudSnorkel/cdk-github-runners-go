@@ -14,32 +14,23 @@ import (
 // GitHub Actions runner provider using EC2 to execute jobs.
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
 type Ec2RunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	constructs.IConstruct
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
 	// Labels associated with this provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
-	// Experimental.
-	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -49,7 +40,6 @@ type Ec2RunnerProvider interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -111,7 +101,6 @@ func (j *jsiiProxy_Ec2RunnerProvider) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewEc2RunnerProvider(scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) Ec2RunnerProvider {
 	_init_.Initialize()
 
@@ -129,7 +118,6 @@ func NewEc2RunnerProvider(scope constructs.Construct, id *string, props *Ec2Runn
 	return &j
 }
 
-// Experimental.
 func NewEc2RunnerProvider_Override(e Ec2RunnerProvider, scope constructs.Construct, id *string, props *Ec2RunnerProviderProps) {
 	_init_.Initialize()
 
@@ -157,7 +145,6 @@ func NewEc2RunnerProvider_Override(e Ec2RunnerProvider, scope constructs.Constru
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.docker()`
 //  * `RunnerImageComponent.githubRunner()`
-// Experimental.
 func Ec2RunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -193,7 +180,6 @@ func Ec2RunnerProvider_ImageBuilder(scope constructs.Construct, id *string, prop
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func Ec2RunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -206,22 +192,6 @@ func Ec2RunnerProvider_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.Ec2RunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
-		&returns,
-	)
-
-	return returns
-}
-
-func (e *jsiiProxy_Ec2RunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := e.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
-		panic(err)
-	}
-	var returns *[]*string
-
-	_jsii_.Invoke(
-		e,
-		"labelsFromProperties",
-		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

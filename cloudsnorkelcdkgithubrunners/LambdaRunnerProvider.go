@@ -20,39 +20,24 @@ import (
 // https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
 //
 // This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
-// Experimental.
 type LambdaRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
 	// The network connections associated with this resource.
-	// Experimental.
 	Connections() awsec2.Connections
 	// The function hosting the GitHub runner.
-	// Experimental.
 	Function() awslambda.Function
 	// Grant principal used to add permissions to the runner role.
-	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
-	// Docker image loaded with GitHub Actions Runner and its prerequisites.
-	//
-	// The image is built by an image builder and is specific to Lambda.
-	// Deprecated: This field is internal and should not be accessed directly.
-	Image() *RunnerImage
 	// Labels associated with this provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group where provided runners will save their logs.
 	//
 	// Note that this is not the job log, but the runner itself. It will not contain output from the GitHub Action but only metadata on its execution.
-	// Experimental.
 	LogGroup() awslogs.ILogGroup
 	// The tree node.
-	// Experimental.
 	Node() constructs.Node
-	// Experimental.
-	LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string
 	// Returns a string representation of this construct.
-	// Experimental.
 	ToString() *string
 	// Applies one or more mixins to this construct.
 	//
@@ -62,7 +47,6 @@ type LambdaRunnerProvider interface {
 	// constructs.
 	//
 	// Returns: This construct for chaining.
-	// Experimental.
 	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
@@ -102,16 +86,6 @@ func (j *jsiiProxy_LambdaRunnerProvider) GrantPrincipal() awsiam.IPrincipal {
 	return returns
 }
 
-func (j *jsiiProxy_LambdaRunnerProvider) Image() *RunnerImage {
-	var returns *RunnerImage
-	_jsii_.Get(
-		j,
-		"image",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_LambdaRunnerProvider) Labels() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
@@ -143,7 +117,6 @@ func (j *jsiiProxy_LambdaRunnerProvider) Node() constructs.Node {
 }
 
 
-// Experimental.
 func NewLambdaRunnerProvider(scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) LambdaRunnerProvider {
 	_init_.Initialize()
 
@@ -161,7 +134,6 @@ func NewLambdaRunnerProvider(scope constructs.Construct, id *string, props *Lamb
 	return &j
 }
 
-// Experimental.
 func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.Construct, id *string, props *LambdaRunnerProviderProps) {
 	_init_.Initialize()
 
@@ -188,7 +160,6 @@ func NewLambdaRunnerProvider_Override(l LambdaRunnerProvider, scope constructs.C
 //  * `RunnerImageComponent.awsCli()`
 //  * `RunnerImageComponent.githubRunner()`
 //  * `RunnerImageComponent.lambdaEntrypoint()`
-// Experimental.
 func LambdaRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 
@@ -224,7 +195,6 @@ func LambdaRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, p
 // this type-testing method instead.
 //
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Experimental.
 func LambdaRunnerProvider_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -237,44 +207,6 @@ func LambdaRunnerProvider_IsConstruct(x interface{}) *bool {
 		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProvider",
 		"isConstruct",
 		[]interface{}{x},
-		&returns,
-	)
-
-	return returns
-}
-
-func LambdaRunnerProvider_LINUX_ARM64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProvider",
-		"LINUX_ARM64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func LambdaRunnerProvider_LINUX_X64_DOCKERFILE_PATH() *string {
-	_init_.Initialize()
-	var returns *string
-	_jsii_.StaticGet(
-		"@cloudsnorkel/cdk-github-runners.LambdaRunnerProvider",
-		"LINUX_X64_DOCKERFILE_PATH",
-		&returns,
-	)
-	return returns
-}
-
-func (l *jsiiProxy_LambdaRunnerProvider) LabelsFromProperties(defaultLabel *string, propsLabel *string, propsLabels *[]*string) *[]*string {
-	if err := l.validateLabelsFromPropertiesParameters(defaultLabel); err != nil {
-		panic(err)
-	}
-	var returns *[]*string
-
-	_jsii_.Invoke(
-		l,
-		"labelsFromProperties",
-		[]interface{}{defaultLabel, propsLabel, propsLabels},
 		&returns,
 	)
 

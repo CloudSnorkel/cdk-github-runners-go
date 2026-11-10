@@ -5,34 +5,24 @@ import (
 )
 
 // Interface for runner image status used by status.json.
-// Experimental.
 type IRunnerProviderStatus interface {
 	// Details about AMI used by this runner provider.
-	// Experimental.
 	Ami() IRunnerAmiStatus
 	// CDK construct node path for this provider.
-	// Experimental.
 	ConstructPath() *string
 	// Details about Docker image used by this runner provider.
-	// Experimental.
 	Image() IRunnerImageStatus
 	// Labels associated with provider.
-	// Experimental.
 	Labels() *[]*string
 	// Log group for runners.
-	// Experimental.
 	LogGroup() *string
 	// Role attached to runners.
-	// Experimental.
 	RoleArn() *string
 	// Security groups attached to runners.
-	// Experimental.
 	SecurityGroups() *[]*string
 	// Runner provider type.
-	// Experimental.
 	Type() *string
 	// VPC where runners will be launched.
-	// Experimental.
 	VpcArn() *string
 }
 

@@ -11,10 +11,8 @@ import (
 // Represents a base image that is used to start from in EC2 Image Builder image builds.
 //
 // This class is adapted from AWS CDK's BaseImage class to support both string and object inputs.
-// Experimental.
 type BaseImage interface {
 	// The rendered base image to use.
-	// Experimental.
 	Image() *string
 }
 
@@ -34,7 +32,6 @@ func (j *jsiiProxy_BaseImage) Image() *string {
 }
 
 
-// Experimental.
 func NewBaseImage(image *string) BaseImage {
 	_init_.Initialize()
 
@@ -52,7 +49,6 @@ func NewBaseImage(image *string) BaseImage {
 	return &j
 }
 
-// Experimental.
 func NewBaseImage_Override(b BaseImage, image *string) {
 	_init_.Initialize()
 
@@ -64,7 +60,6 @@ func NewBaseImage_Override(b BaseImage, image *string) {
 }
 
 // The AMI ID to use as a base image in an image recipe.
-// Experimental.
 func BaseImage_FromAmiId(amiId *string) BaseImage {
 	_init_.Initialize()
 
@@ -88,7 +83,6 @@ func BaseImage_FromAmiId(amiId *string) BaseImage {
 // Uses AWS Deep Learning AMIs for Linux (Ubuntu, Amazon Linux 2, Amazon Linux 2023).
 // For Windows, subscribe to NVIDIA RTX Virtual Workstation in AWS Marketplace, then use
 // {@link fromMarketplaceProductId} with the product ID.
-// Experimental.
 func BaseImage_FromGpuBase(os Os, architecture Architecture) BaseImage {
 	_init_.Initialize()
 
@@ -110,7 +104,6 @@ func BaseImage_FromGpuBase(os Os, architecture Architecture) BaseImage {
 // An AWS-provided EC2 Image Builder image to use as a base image in an image recipe.
 //
 // This constructs an Image Builder ARN for AWS-provided images like `ubuntu-server-22-lts-x86/x.x.x`.
-// Experimental.
 func BaseImage_FromImageBuilder(scope constructs.Construct, resourceName *string, version *string) BaseImage {
 	_init_.Initialize()
 
@@ -130,7 +123,6 @@ func BaseImage_FromImageBuilder(scope constructs.Construct, resourceName *string
 }
 
 // The marketplace product ID for an AMI product to use as the base image in an image recipe.
-// Experimental.
 func BaseImage_FromMarketplaceProductId(productId *string) BaseImage {
 	_init_.Initialize()
 
@@ -150,7 +142,6 @@ func BaseImage_FromMarketplaceProductId(productId *string) BaseImage {
 }
 
 // The SSM parameter to use as the base image in an image recipe.
-// Experimental.
 func BaseImage_FromSsmParameter(parameter awsssm.IParameter) BaseImage {
 	_init_.Initialize()
 
@@ -170,7 +161,6 @@ func BaseImage_FromSsmParameter(parameter awsssm.IParameter) BaseImage {
 }
 
 // The parameter name for the SSM parameter to use as the base image in an image recipe.
-// Experimental.
 func BaseImage_FromSsmParameterName(parameterName *string) BaseImage {
 	_init_.Initialize()
 
@@ -193,7 +183,6 @@ func BaseImage_FromSsmParameterName(parameterName *string) BaseImage {
 //
 // This can be an EC2 Image Builder image ARN,
 // an SSM parameter, an AWS Marketplace product ID, or an AMI ID.
-// Experimental.
 func BaseImage_FromString(baseImageString *string) BaseImage {
 	_init_.Initialize()
 
