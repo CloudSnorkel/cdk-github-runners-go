@@ -299,6 +299,25 @@ func RunnerImageComponent_LambdaEntrypoint() RunnerImageComponent {
 	return returns
 }
 
+// A component to set up the required MicroVM entrypoint for Lambda MicroVM runners.
+//
+// Must be used *after* the {@link githubRunner} component.
+// Experimental.
+func RunnerImageComponent_MicroVmEntrypoint() RunnerImageComponent {
+	_init_.Initialize()
+
+	var returns RunnerImageComponent
+
+	_jsii_.StaticInvoke(
+		"@cloudsnorkel/cdk-github-runners.RunnerImageComponent",
+		"microVmEntrypoint",
+		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
 // A component to install the required packages for the runner.
 func RunnerImageComponent_RequiredPackages() RunnerImageComponent {
 	_init_.Initialize()

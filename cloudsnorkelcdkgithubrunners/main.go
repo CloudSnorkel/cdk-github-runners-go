@@ -98,6 +98,25 @@ func init() {
 		reflect.TypeOf((*CodeBuildRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.Compliance",
+		reflect.TypeOf((*Compliance)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "encrypt", GoMethod: "Encrypt"},
+			_jsii_.MemberMethod{JsiiMethod: "limitLambdaConcurrency", GoMethod: "LimitLambdaConcurrency"},
+		},
+		func() interface{} {
+			return &jsiiProxy_Compliance{}
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ComplianceEncryptionOptions",
+		reflect.TypeOf((*ComplianceEncryptionOptions)(nil)).Elem(),
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.ComplianceLambdaConcurrencyOptions",
+		reflect.TypeOf((*ComplianceLambdaConcurrencyOptions)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.CompositeProvider",
 		reflect.TypeOf((*CompositeProvider)(nil)).Elem(),
 		nil, // no members
@@ -357,6 +376,30 @@ func init() {
 	_jsii_.RegisterStruct(
 		"@cloudsnorkel/cdk-github-runners.LogOptions",
 		reflect.TypeOf((*LogOptions)(nil)).Elem(),
+	)
+	_jsii_.RegisterClass(
+		"@cloudsnorkel/cdk-github-runners.MicroVmRunnerProvider",
+		reflect.TypeOf((*MicroVmRunnerProvider)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "connections", GoGetter: "Connections"},
+			_jsii_.MemberProperty{JsiiProperty: "grantPrincipal", GoGetter: "GrantPrincipal"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberProperty{JsiiProperty: "logGroup", GoGetter: "LogGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberMethod{JsiiMethod: "with", GoMethod: "With"},
+		},
+		func() interface{} {
+			j := jsiiProxy_MicroVmRunnerProvider{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IRunnerProvider)
+			_jsii_.InitJsiiProxy(&j.Type__constructsIConstruct)
+			return &j
+		},
+	)
+	_jsii_.RegisterStruct(
+		"@cloudsnorkel/cdk-github-runners.MicroVmRunnerProviderProps",
+		reflect.TypeOf((*MicroVmRunnerProviderProps)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@cloudsnorkel/cdk-github-runners.Os",

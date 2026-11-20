@@ -39,6 +39,7 @@ Ephemeral (or on-demand) runners are the [recommended way by GitHub](https://doc
   * [Composite Providers](#composite-providers)
   * [Custom Provider Selection](#custom-provider-selection)
   * [Warm Runners](#warm-runners)
+  * [Compliance](#compliance)
 * [Examples](#examples)
 * [Architecture](#architecture)
 * [Troubleshooting](#troubleshooting)
@@ -58,24 +59,25 @@ The best way to browse API documentation is on [Constructs Hub](https://construc
 
 A runner provider creates compute resources on-demand and uses [actions/runner](https://github.com/actions/runner) to start a runner.
 
-|                  | EC2               | CodeBuild                  | Fargate        | ECS            | Lambda        |
-|------------------|-------------------|----------------------------|----------------|----------------|---------------|
-| **Time limit**   | Unlimited         | 36 hours (default 1 hour)  | Unlimited      | Unlimited      | 15 minutes    |
-| **vCPUs**        | Unlimited         | 2, 4, 8, or 72             | 0.25 to 4      | Unlimited      | 1 to 6        |
-| **RAM**          | Unlimited         | 3gb, 7gb, 15gb, or 145gb   | 512mb to 30gb  | Unlimited      | 128mb to 10gb |
-| **Storage**      | Unlimited         | 50gb to 824gb              | 20gb to 200gb  | Unlimited      | Up to 10gb    |
-| **Architecture** | x86_64, ARM64     | x86_64, ARM64              | x86_64, ARM64  | x86_64, ARM64  | x86_64, ARM64 |
-| **GPU**          | ✔                 | ✔                         | ❌              | ✔              | ❌           |
-| **sudo**         | ✔                 | ✔                         | ✔              | ✔              | ❌           |
-| **Docker**       | ✔                 | ✔ (Linux only)            | ❌              | ✔              | ❌           |
-| **Spot pricing** | ✔                 | ❌                         | ✔              | ✔              | ❌           |
-| **OS**           | Linux, Windows    | Linux, Windows             | Linux, Windows | Linux, Windows | Linux         |
+|                  | EC2               | CodeBuild                  | Fargate        | ECS            | Lambda        | Lambda MicroVM |
+|------------------|-------------------|----------------------------|----------------|----------------|---------------|----------------|
+| **Time limit**   | Unlimited         | 36 hours (default 1 hour)  | Unlimited      | Unlimited      | 15 minutes    | 8 hours (default 1 hour) |
+| **vCPUs**        | Unlimited         | 2, 4, 8, or 72             | 0.25 to 4      | Unlimited      | 1 to 6        | 0.25 to 4      |
+| **RAM**          | Unlimited         | 3gb, 7gb, 15gb, or 145gb   | 512mb to 30gb  | Unlimited      | 128mb to 10gb | 512mb to 8gb   |
+| **Storage**      | Unlimited         | 50gb to 824gb              | 20gb to 200gb  | Unlimited      | Up to 10gb    | Up to 10gb     |
+| **Architecture** | x86_64, ARM64     | x86_64, ARM64              | x86_64, ARM64  | x86_64, ARM64  | x86_64, ARM64 | x86_64, ARM64  |
+| **GPU**          | ✔                 | ✔                         | ❌              | ✔              | ❌           | ❌             |
+| **sudo**         | ✔                 | ✔                         | ✔              | ✔              | ❌           | ❌              |
+| **Docker**       | ✔                 | ✔ (Linux only)            | ❌              | ✔              | ❌           | ❌             |
+| **Spot pricing** | ✔                 | ❌                         | ✔              | ✔              | ❌           | ❌             |
+| **OS**           | Linux, Windows    | Linux, Windows             | Linux, Windows | Linux, Windows | Linux         | Linux          |
 
 The best provider to use mostly depends on your current infrastructure. When in doubt, CodeBuild is always a good choice. Execution history and logs are easy to view, and it has no restrictive limits unless you need to run for more than 8 hours.
 
 * EC2 is useful when you want runners to have complete access to the host
 * ECS is useful when you want to control the infrastructure, like leaving the runner host running for faster startups
 * Lambda is useful for short jobs that can work within time, size and readonly system constraints
+* Lambda MicroVM is useful when you want Lambda pricing and start-up time, but a real kernel, a writable disk and more than 15 minutes
 
 ### Job Isolation
 
@@ -563,6 +565,20 @@ new ScheduledWarmRunner(this, 'work hours warm', {
 
 See the [warm-runners example](examples/typescript/warm-runners/) for a complete setup.
 
+### Compliance
+
+Compliance frameworks like HIPAA, PCI DSS, and NIST 800-53 often ask for your own encryption keys and limited Lambda concurrency. `Compliance` applies those to everything this library creates in a scope, like a stack or a whole app. Settings of the closest scope win.
+
+```go
+Compliance.of(this).encrypt({ key, logs: logsKey });  // logs get their own key, everything else uses `key`
+Compliance.of(gpuProvider).encrypt({ storage: gpuKey });  // stricter key for one provider
+Compliance.of(this).limitLambdaConcurrency({ maxJobStarts: 50 });  // jobs you expect to start at once
+```
+
+Synth warns about runner resources that no scope covers, like image builders in another stack. The key needs to be in a stack that every other stack can use. Adding a key to an existing deployment rebuilds runner images.
+
+See the [compliance example](examples/typescript/compliance/) for a complete setup.
+
 ## Examples
 
 We provide comprehensive examples in the [`examples/`](examples/) folder to help you get started quickly:
@@ -591,6 +607,7 @@ We provide comprehensive examples in the [`examples/`](examples/) folder to help
 * **[IAM Permissions](examples/typescript/iam-permissions/)** - Grant AWS IAM permissions to runners (also available in [Python](examples/python/iam-permissions/))
 * **[Network Access](examples/typescript/network-access/)** - Configure network access with VPCs and security groups (also available in [Python](examples/python/network-access/))
 * **[Access Control](examples/typescript/access-control/)** - Configure access control for webhook and setup functions (also available in [Python](examples/python/access-control/))
+* **[Compliance](examples/typescript/compliance/)** - Encrypt with your own KMS keys, limit Lambda concurrency, and log API requests (also available in [Python](examples/python/compliance/))
 
 ### Customization
 

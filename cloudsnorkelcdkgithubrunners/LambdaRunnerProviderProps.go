@@ -75,8 +75,11 @@ type LambdaRunnerProviderProps struct {
 	// Default: Duration.minutes(15)
 	//
 	Timeout awscdk.Duration `field:"optional" json:"timeout" yaml:"timeout"`
-	// VPC to launch the runners in.
-	// Default: no VPC.
+	// VPC to send the runner's outbound traffic through.
+	//
+	// The network interfaces never get a public IP, so the subnets
+	// need a NAT gateway (or VPC endpoints) to reach GitHub, ECR and CloudWatch. Public subnets won't work.
+	// Default: no VPC, runners get public internet access.
 	//
 	Vpc awsec2.IVpc `field:"optional" json:"vpc" yaml:"vpc"`
 }

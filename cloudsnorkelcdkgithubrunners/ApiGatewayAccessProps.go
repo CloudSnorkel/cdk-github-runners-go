@@ -1,10 +1,19 @@
 package cloudsnorkelcdkgithubrunners
 
 import (
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsapigateway"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awslogs"
 )
 
 type ApiGatewayAccessProps struct {
+	// Log group for access logs, with one JSON line for each request.
+	//
+	// API Gateway can only write logs once the account has a CloudWatch Logs role. See
+	// https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html
+	// Default: no access logs.
+	//
+	AccessLogGroup awslogs.ILogGroup `field:"optional" json:"accessLogGroup" yaml:"accessLogGroup"`
 	// List of IP addresses in CIDR notation that are allowed to access the API Gateway.
 	//
 	// If not specified on public API Gateway, all IP addresses are allowed.
@@ -25,5 +34,11 @@ type ApiGatewayAccessProps struct {
 	//
 	// All endpoints will be allowed access, but only the first one will be used as the URL by the runner system for setting up the webhook, and as setup URL.
 	AllowedVpcEndpoints *[]awsec2.IVpcEndpoint `field:"optional" json:"allowedVpcEndpoints" yaml:"allowedVpcEndpoints"`
+	// Level of execution logs. API Gateway writes them to its own log group named `API-Gateway-Execution-Logs_{rest-api-id}/{stage}`.
+	//
+	// Like access logs, these need a CloudWatch Logs role in the account.
+	// Default: no execution logs.
+	//
+	LoggingLevel awsapigateway.MethodLoggingLevel `field:"optional" json:"loggingLevel" yaml:"loggingLevel"`
 }
 

@@ -117,6 +117,8 @@ type GitHubRunnersProps struct {
 	// * Secrets Manager
 	// * SQS
 	// * Step Functions
+	// * DynamoDB
+	// * Lambda (only with {@link providerSelector})
 	// * CloudFormation (status function only)
 	// * EC2
 	// * ECR (status function only).
