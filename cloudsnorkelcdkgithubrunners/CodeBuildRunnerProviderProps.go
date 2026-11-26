@@ -87,7 +87,7 @@ type CodeBuildRunnerProviderProps struct {
 	//
 	Labels *[]*string `field:"optional" json:"labels" yaml:"labels"`
 	// Security groups to assign to this instance.
-	// Default: a new security group, if {@link vpc } is used.
+	// Default: a new security group, if {@link CodeBuildRunnerProviderProps.vpc } is used
 	//
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Where to place the network interfaces within the VPC.

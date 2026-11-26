@@ -36,7 +36,7 @@ type EcsRunnerProviderProps struct {
 	// Existing ECS cluster to use.
 	//
 	// Jobs from all providers using the same cluster can share instances. Only share a cluster between providers whose jobs are equally trusted.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+	// See: https://ghr.cloudsnorkel.com/guide/security#job-isolation
 	//
 	// Default: a new cluster.
 	//
@@ -53,7 +53,7 @@ type EcsRunnerProviderProps struct {
 	// later. All jobs that can run on the same cluster should be equally trusted. Disable this if your jobs don't need Docker.
 	//
 	// Disabling Docker-in-Docker can also speed up runner provisioning as the runner doesn't have to wait for Docker to boot.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+	// See: https://ghr.cloudsnorkel.com/guide/security#job-isolation
 	//
 	// Default: true.
 	//

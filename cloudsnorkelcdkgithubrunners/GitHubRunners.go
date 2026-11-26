@@ -13,7 +13,7 @@ import (
 
 // Create all the required infrastructure to provide self-hosted GitHub runners.
 //
-// It creates a webhook, secrets, and a step function to orchestrate all runs. Secrets are not automatically filled. See README.md for instructions on how to setup GitHub integration.
+// It creates a webhook, secrets, and a step function to orchestrate all runs. Secrets are not automatically filled. See https://ghr.cloudsnorkel.com/guide/setup-github for instructions on how to setup GitHub integration.
 //
 // By default, this will create a runner provider of each available type with the defaults. This is good enough for the initial setup stage when you just want to get GitHub integration working.
 //
@@ -77,8 +77,8 @@ type GitHubRunners interface {
 	//   were runners stopped before getting a job?
 	// * **Management functions (orchestration)**: is GitHub reaching the webhook, and is any of our code failing?
 	//
-	// **WARNING:** this method calls {@link metricJobCompleted}, {@link metricStolenRunners}, {@link metricStoppedRunners} and
-	// {@link metricJobsMatchingMultipleProviders} which create metric filters. These resources may incur cost.
+	// **WARNING:** this method calls {@link GitHubRunners.metricJobCompleted}, {@link GitHubRunners.metricStolenRunners}, {@link GitHubRunners.metricStoppedRunners} and
+	// {@link GitHubRunners.metricJobsMatchingMultipleProviders} which create metric filters. These resources may incur cost.
 	//
 	// This dashboard is very basic. Pull requests and issues are welcome to improve it.
 	CreateDashboard(name *string) awscloudwatch.Dashboard
@@ -106,7 +106,7 @@ type GitHubRunners interface {
 	FailedImageBuildsTopic(scope constructs.Construct) awssns.Topic
 	// Metric for failed runner executions.
 	//
-	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link metricJobCompleted}.
+	// A failed runner usually means the runner failed to start and so a job was never executed. It doesn't necessarily mean the job was executed and failed. For that, see {@link GitHubRunners.metricJobCompleted}.
 	MetricFailed(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of GitHub Actions jobs completed.
 	//
@@ -119,7 +119,7 @@ type GitHubRunners interface {
 	// We start a runner from the first matching provider, but GitHub may give such a job a runner from any of them, including one started for
 	// another job. Stolen runner detection starts another runner for the job left behind, but the job itself may run on a provider you didn't
 	// expect. Anything over zero means some workflows ask for too few labels. Add labels to those jobs so they match only one provider. Use the
-	// "Jobs matching multiple providers" CloudWatch Logs Insights query created by {@link createLogsInsightsQueries} to find them.
+	// "Jobs matching multiple providers" CloudWatch Logs Insights query created by {@link GitHubRunners.createLogsInsightsQueries} to find them.
 	//
 	// Jobs routed by a provider selector are not counted, as the selector picks the provider.
 	//
@@ -131,7 +131,7 @@ type GitHubRunners interface {
 	// jobs may not have gotten a runner. You should use this metric to trigger an alarm.
 	//
 	// Only unhandled errors are counted here, as reported by Lambda itself. Errors that are handled and logged, like a webhook with a bad signature,
-	// are not failed invocations. Use the "Webhook errors" and "Orchestration errors" queries created by {@link createLogsInsightsQueries} to find
+	// are not failed invocations. Use the "Webhook errors" and "Orchestration errors" queries created by {@link GitHubRunners.createLogsInsightsQueries} to find
 	// those.
 	//
 	// Management functions created after this method is called are not included. Call it last if you use warm runners.
@@ -139,7 +139,7 @@ type GitHubRunners interface {
 	// Metric for the number of runners that were stolen by a job that shouldn't have been assigned to them.
 	//
 	// A high number here means your runners are shared with jobs you didn't mean to serve. Use the "Stolen runners"
-	// CloudWatch Logs Insights query created by {@link createLogsInsightsQueries} to see which repositories and jobs
+	// CloudWatch Logs Insights query created by {@link GitHubRunners.createLogsInsightsQueries} to see which repositories and jobs
 	// are taking them.
 	//
 	// This metric has two dimensions:
@@ -152,7 +152,7 @@ type GitHubRunners interface {
 	MetricStolenRunners(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the number of runners we stopped on purpose before they got a job.
 	//
-	// These step function executions end up as aborted and not failed, so they don't show up in {@link metricFailed}.
+	// These step function executions end up as aborted and not failed, so they don't show up in {@link GitHubRunners.metricFailed}.
 	//
 	// This metric has one dimension, `Reason`, which is the error the step function was stopped with:
 	//  * `IdleRunner`: the runner was idle for longer than its idle timeout and was reaped. This is usually a runner whose job was taken by
@@ -167,7 +167,7 @@ type GitHubRunners interface {
 	//
 	// A successful execution doesn't always mean a runner was started. It can be successful even without any label matches.
 	//
-	// A successful runner doesn't mean the job it executed was successful. For that, see {@link metricJobCompleted}.
+	// A successful runner doesn't mean the job it executed was successful. For that, see {@link GitHubRunners.metricJobCompleted}.
 	MetricSucceeded(props *awscloudwatch.MetricOptions) awscloudwatch.Metric
 	// Metric for the interval, in milliseconds, between the time the execution starts and the time it closes.
 	//

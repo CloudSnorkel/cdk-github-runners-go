@@ -69,7 +69,7 @@ type GitHubRunnersProps struct {
 	// **WARNING: Provider selection is not a guarantee that a specific provider will be assigned for the job. GitHub Actions may assign the job to any runner with matching labels. The provider selector only determines which provider's runner will be *created*, but GitHub Actions may route the job to any available runner with the required labels.**
 	//
 	// **For reliable provider assignment based on job characteristics, consider using repo-level runner registration where you can control which runners are available for specific repositories. This information is also available while using the setup wizard.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
+	// See: https://ghr.cloudsnorkel.com/guide/setup-github
 	//
 	ProviderSelector awslambda.IFunction `field:"optional" json:"providerSelector" yaml:"providerSelector"`
 	// Whether to require the `self-hosted` label.
@@ -94,18 +94,18 @@ type GitHubRunnersProps struct {
 	//
 	// **Note:** This only affects management functions that interact with GitHub. Lambda functions that help with runner image building and don't interact with GitHub are NOT affected by this setting.
 	//
-	// **Note:** Defining inbound rules on this security group does nothing. This security group only controls outbound access FROM the management functions. To limit access TO the webhook or setup functions, use {@link webhookAccess} and {@link setupAccess} instead.
+	// **Note:** Defining inbound rules on this security group does nothing. This security group only controls outbound access FROM the management functions. To limit access TO the webhook or setup functions, use {@link GitHubRunnersProps.webhookAccess} and {@link GitHubRunnersProps.setupAccess} instead.
 	SecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"securityGroups" yaml:"securityGroups"`
 	// Access configuration for the setup function.
 	//
-	// Once you finish the setup process, you can set this to `LambdaAccess.noAccess()` to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.
-	// Default: LambdaAccess.lambdaUrl()
+	// Once you finish the setup process, you can set this to {@link LambdaAccess.noAccess} to remove access to the setup function. You can also use `LambdaAccess.apiGateway({ allowedIps: ['my-ip/0']})` to limit access to your IP only.
+	// Default: {@link LambdaAccess.lambdaUrl }
 	//
 	SetupAccess LambdaAccess `field:"optional" json:"setupAccess" yaml:"setupAccess"`
 	// Access configuration for the status function.
 	//
 	// This function returns a lot of sensitive information about the runner, so you should only allow access to it from trusted IPs, if at all.
-	// Default: LambdaAccess.noAccess()
+	// Default: {@link LambdaAccess.noAccess }
 	//
 	StatusAccess LambdaAccess `field:"optional" json:"statusAccess" yaml:"statusAccess"`
 	// VPC used for all management functions. Use this with GitHub Enterprise Server hosted that's inaccessible from outside the VPC.
@@ -118,7 +118,7 @@ type GitHubRunnersProps struct {
 	// * SQS
 	// * Step Functions
 	// * DynamoDB
-	// * Lambda (only with {@link providerSelector})
+	// * Lambda (only with {@link GitHubRunnersProps.providerSelector})
 	// * CloudFormation (status function only)
 	// * EC2
 	// * ECR (status function only).
@@ -136,7 +136,7 @@ type GitHubRunnersProps struct {
 	// You can also set this to `LambdaAccess.apiGateway({allowedVpc: vpc, allowedIps: ['GHES.IP.ADDRESS/32']})` if your GitHub Enterprise Server is hosted in a VPC. This will create an API Gateway endpoint that's only accessible from within the VPC.
 	//
 	// *WARNING*: changing access type may change the URL. When the URL changes, you must update GitHub as well.
-	// Default: LambdaAccess.lambdaUrl()
+	// Default: {@link LambdaAccess.lambdaUrl }
 	//
 	WebhookAccess LambdaAccess `field:"optional" json:"webhookAccess" yaml:"webhookAccess"`
 }

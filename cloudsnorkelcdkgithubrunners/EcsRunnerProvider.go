@@ -19,9 +19,9 @@ import (
 // infrastructure to spin up.
 //
 // Jobs share instances, and by default run in privileged containers on Linux that can take over the instance. All jobs that can run on the same
-// cluster should be equally trusted. See https://github.com/CloudSnorkel/cdk-github-runners#job-isolation
+// cluster should be equally trusted. See https://ghr.cloudsnorkel.com/guide/security#job-isolation
 //
-// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
+// This construct is not meant to be used by itself. It should be passed in the {@link GitHubRunnersProps.providers } property for {@link GitHubRunners }.
 type EcsRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
@@ -152,18 +152,18 @@ func NewEcsRunnerProvider_Override(e EcsRunnerProvider, scope constructs.Constru
 //
 // You can customize the OS, architecture, VPC, subnet, security groups, etc. by passing in props.
 //
-// You can add components to the image builder by calling `imageBuilder.addComponent()`.
+// You can add components to the image builder by calling {@link IConfigurableRunnerImageBuilder.addComponent }.
 //
 // The default OS is Ubuntu running on x64 architecture.
 //
 // Included components:
-//  * `RunnerImageComponent.requiredPackages()`
-//  * `RunnerImageComponent.runnerUser()`
-//  * `RunnerImageComponent.git()`
-//  * `RunnerImageComponent.githubCli()`
-//  * `RunnerImageComponent.awsCli()`
-//  * `RunnerImageComponent.docker()`
-//  * `RunnerImageComponent.githubRunner()`
+//  * {@link RunnerImageComponent.requiredPackages}
+//  * {@link RunnerImageComponent.runnerUser}
+//  * {@link RunnerImageComponent.git}
+//  * {@link RunnerImageComponent.githubCli}
+//  * {@link RunnerImageComponent.awsCli}
+//  * {@link RunnerImageComponent.docker}
+//  * {@link RunnerImageComponent.githubRunner}
 func EcsRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 

@@ -138,7 +138,7 @@ func RunnerImageComponent_Docker(version *string) RunnerImageComponent {
 //
 // It is not recommended to use this component to pass secrets. Instead, use GitHub Secrets or AWS Secrets Manager.
 //
-// Must be used after the {@link githubRunner} component.
+// Must be used after the {@link RunnerImageComponent.githubRunner} component.
 func RunnerImageComponent_EnvironmentVariables(vars *map[string]*string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -238,7 +238,7 @@ func RunnerImageComponent_GithubRunner(runnerVersion RunnerVersion) RunnerImageC
 // [`ACTIONS_RUNNER_HOOK_JOB_COMPLETED`](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/run-scripts)
 // environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
 //
-// Must be used after the {@link githubRunner} component.
+// Must be used after the {@link RunnerImageComponent.githubRunner} component.
 func RunnerImageComponent_JobCompletedHook(sourcePath *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -264,7 +264,7 @@ func RunnerImageComponent_JobCompletedHook(sourcePath *string) RunnerImageCompon
 // [`ACTIONS_RUNNER_HOOK_JOB_STARTED`](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/run-scripts)
 // environment variable. GitHub passes job context to the script as environment variables such as `GITHUB_REPOSITORY` and `GITHUB_RUN_ID`.
 //
-// Must be used after the {@link githubRunner} component.
+// Must be used after the {@link RunnerImageComponent.githubRunner} component.
 func RunnerImageComponent_JobStartedHook(sourcePath *string) RunnerImageComponent {
 	_init_.Initialize()
 
@@ -301,7 +301,7 @@ func RunnerImageComponent_LambdaEntrypoint() RunnerImageComponent {
 
 // A component to set up the required MicroVM entrypoint for Lambda MicroVM runners.
 //
-// Must be used *after* the {@link githubRunner} component.
+// Must be used *after* the {@link RunnerImageComponent.githubRunner} component.
 // Experimental.
 func RunnerImageComponent_MicroVmEntrypoint() RunnerImageComponent {
 	_init_.Initialize()

@@ -18,7 +18,7 @@ type ProviderRetryOptions struct {
 	BackoffRate *float64 `field:"optional" json:"backoffRate" yaml:"backoffRate"`
 	// How much time to wait after first retryable failure.
 	//
-	// This interval will be multiplied by {@link backoffRate} each retry, up to {@link maxDelay}.
+	// This interval will be multiplied by {@link ProviderRetryOptions.backoffRate} each retry, up to {@link ProviderRetryOptions.maxDelay}.
 	// Default: 1 minute.
 	//
 	Interval awscdk.Duration `field:"optional" json:"interval" yaml:"interval"`

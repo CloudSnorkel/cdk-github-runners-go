@@ -16,7 +16,7 @@ import (
 //
 // Creates a project that gets started for each job.
 //
-// This construct is not meant to be used by itself. It should be passed in the providers property for GitHubRunners.
+// This construct is not meant to be used by itself. It should be passed in the {@link GitHubRunnersProps.providers } property for {@link GitHubRunners }.
 type CodeBuildRunnerProvider interface {
 	constructs.Construct
 	IRunnerProvider
@@ -147,18 +147,18 @@ func NewCodeBuildRunnerProvider_Override(c CodeBuildRunnerProvider, scope constr
 //
 // You can customize the OS, architecture, VPC, subnet, security groups, etc. by passing in props.
 //
-// You can add components to the image builder by calling `imageBuilder.addComponent()`.
+// You can add components to the image builder by calling {@link IConfigurableRunnerImageBuilder.addComponent }.
 //
 // The default OS is Ubuntu running on x64 architecture.
 //
 // Included components:
-//  * `RunnerImageComponent.requiredPackages()`
-//  * `RunnerImageComponent.runnerUser()`
-//  * `RunnerImageComponent.git()`
-//  * `RunnerImageComponent.githubCli()`
-//  * `RunnerImageComponent.awsCli()`
-//  * `RunnerImageComponent.docker()`
-//  * `RunnerImageComponent.githubRunner()`
+//  * {@link RunnerImageComponent.requiredPackages}
+//  * {@link RunnerImageComponent.runnerUser}
+//  * {@link RunnerImageComponent.git}
+//  * {@link RunnerImageComponent.githubCli}
+//  * {@link RunnerImageComponent.awsCli}
+//  * {@link RunnerImageComponent.docker}
+//  * {@link RunnerImageComponent.githubRunner}
 func CodeBuildRunnerProvider_ImageBuilder(scope constructs.Construct, id *string, props *RunnerImageBuilderProps) IConfigurableRunnerImageBuilder {
 	_init_.Initialize()
 

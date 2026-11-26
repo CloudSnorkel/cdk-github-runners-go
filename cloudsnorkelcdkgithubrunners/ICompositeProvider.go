@@ -9,7 +9,7 @@ import (
 
 // Interface for composite runner providers that combine multiple sub-providers.
 //
-// Unlike IRunnerProvider, composite providers do not have connections, grant capabilities,
+// Unlike {@link IRunnerProvider}, composite providers do not have connections, grant capabilities,
 // or log groups as they delegate to their sub-providers.
 //
 // Note that this interface cannot be implemented by external code. Use {@link CompositeProvider } factory methods.

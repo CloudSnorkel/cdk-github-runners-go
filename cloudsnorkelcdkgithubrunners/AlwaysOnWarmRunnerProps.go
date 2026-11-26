@@ -12,13 +12,13 @@ type AlwaysOnWarmRunnerProps struct {
 	// Warm runners bypass the provider selector — they always use
 	// this provider, regardless of job characteristics. Labels cannot be modified.
 	Provider interface{} `field:"required" json:"provider" yaml:"provider"`
-	// The GitHubRunners construct that owns the shared warm runner infrastructure.
+	// The {@link GitHubRunners} construct that owns the shared warm runner infrastructure.
 	Runners GitHubRunners `field:"required" json:"runners" yaml:"runners"`
 	// Registration level — must match how your runners are set up in GitHub.
 	//
 	// Choose
 	// 'org' for org-wide runners, 'repo' for repo-level. See the setup wizard for choosing repo vs org.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
+	// See: https://ghr.cloudsnorkel.com/guide/setup-github
 	//
 	// Default: 'repo'.
 	//

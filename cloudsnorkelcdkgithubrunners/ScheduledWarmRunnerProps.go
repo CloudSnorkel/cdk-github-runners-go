@@ -21,7 +21,7 @@ type ScheduledWarmRunnerProps struct {
 	// Warm runners bypass the provider selector — they always use
 	// this provider, regardless of job characteristics. Labels cannot be modified.
 	Provider interface{} `field:"required" json:"provider" yaml:"provider"`
-	// The GitHubRunners construct that owns the shared warm runner infrastructure.
+	// The {@link GitHubRunners} construct that owns the shared warm runner infrastructure.
 	Runners GitHubRunners `field:"required" json:"runners" yaml:"runners"`
 	// When to start filling the pool (e.g. start of business hours).
 	Schedule awsevents.Schedule `field:"required" json:"schedule" yaml:"schedule"`
@@ -29,7 +29,7 @@ type ScheduledWarmRunnerProps struct {
 	//
 	// Choose
 	// 'org' for org-wide runners, 'repo' for repo-level. See the setup wizard for choosing repo vs org.
-	// See: https://github.com/CloudSnorkel/cdk-github-runners/blob/main/SETUP_GITHUB.md
+	// See: https://ghr.cloudsnorkel.com/guide/setup-github
 	//
 	// Default: 'repo'.
 	//

@@ -22,7 +22,7 @@ type ApiGatewayAccessProps struct {
 	AllowedIps *[]*string `field:"optional" json:"allowedIps" yaml:"allowedIps"`
 	// List of security groups that are allowed to access the API Gateway.
 	//
-	// Only works for private API Gateways with {@link allowedVpc}.
+	// Only works for private API Gateways with {@link ApiGatewayAccessProps.allowedVpc}.
 	AllowedSecurityGroups *[]awsec2.ISecurityGroup `field:"optional" json:"allowedSecurityGroups" yaml:"allowedSecurityGroups"`
 	// Create a private API Gateway and allow access from the specified VPC.
 	AllowedVpc awsec2.IVpc `field:"optional" json:"allowedVpc" yaml:"allowedVpc"`
